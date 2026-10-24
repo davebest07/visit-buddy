@@ -1,0 +1,15 @@
+{
+  "name": "visit-buddy",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Visit Buddy — a voice-first app that helps you prepare for a doctor visit and understand it afterward.",
+  "scripts": {
+    "install:all": "npm install && npm --prefix client install",
+    "dev": "npm --prefix client run dev",
+    "build": "npm --prefix client run build",
+    "preview": "npm --prefix client run preview"
+  },
+  "engines": {
+    "node": ">=20.19"
+  }
+}

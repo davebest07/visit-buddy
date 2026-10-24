@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+
+# Secrets — never commit a real key
+.env
+.env.local
+.env.*.local
+
+# Visits are personal data and are created at runtime
+server/data/*.json
+
+# Editor and OS noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
