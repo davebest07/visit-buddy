@@ -4,7 +4,7 @@ import Button from './Button.jsx'
 // Top bar on every page: the wordmark on the left, Help on the right.
 export default function TopNav() {
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-background">
+    <header className="sticky top-0 z-40 border-b border-line bg-background print:hidden">
       <div className="vb-container flex min-h-tap items-center justify-between gap-4 py-2">
         <Link
           to="/"

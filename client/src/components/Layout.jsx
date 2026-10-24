@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import TopNav from './TopNav.jsx'
 import BottomNav from './BottomNav.jsx'
+import TestPanel from './TestPanel.jsx'
 
 // Shared page frame. `withTabs` adds the bottom tab bar used by app pages.
 // Padding at the bottom keeps content clear of the fixed tab bar.
@@ -18,6 +19,8 @@ export default function Layout({ withTabs = false }) {
       </main>
 
       {withTabs ? <BottomNav /> : null}
+
+      <TestPanel />
     </>
   )
 }
