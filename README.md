@@ -1,105 +1,102 @@
 # Visit Buddy
 
-A voice-first web app that helps you get ready for a doctor visit and understand it
-afterward. You say what worries you before the visit and what the doctor said after it;
-Visit Buddy turns that into questions, a plain-language summary, a to-do list and a
-medicine schedule.
+Visit Buddy helps you get ready for a doctor visit, and remember what happened after.
 
-**Visit Buddy organizes what you tell it. It does not give medical advice.** It never
-picks or changes a medicine or dose, and it never says anything is safe.
+Say what worries you before you go, and it turns that into a short, ordered list of
+questions to ask. Say what the doctor told you afterwards, and it turns that into a
+plain-language summary, a to-do list and a medicine schedule. Every line shows the exact
+words it came from, and anything unclear is marked "Not sure, ask your doctor or
+pharmacist".
 
-This is **Phase 3**: the AI is not connected. Every AI call goes through one mock
-service that can return success, a slow response, an uncertain result, an empty result
-and several errors, so every AI state can be built and tested. Phase 4 replaces the mock
-with real Gemini calls behind the server — see [Phase 4](#phase-4).
+**It does not give medical advice.** It organizes what you tell it. It never picks or
+changes a medicine or a dose, and it never says something is safe.
 
-## Install and run
+## Screens
 
-You need Node.js 20.19 or newer.
+- **Landing** — what the app does, how it works, and the promise it makes.
+- **Home** — start a visit before or after, and see the last visit you saved.
+- **Before a visit** — speak or type your worries, then edit, print or copy the questions.
+- **After a visit** — record or type what the doctor said, then check the summary, to-dos
+  and medicines before approving.
+- **Visit detail** — the saved visit, with checkable to-dos, a medicine schedule, the
+  transcript and "Ask about this visit".
+- **History** — every visit, newest first, with search.
+- **Settings** — text size, high contrast, and delete all data.
+- **Help** — what the app does and does not do, and when to call a doctor.
+
+## Run it
+
+You need Node.js 20.19 or newer. No API keys are needed.
 
 ```bash
-npm run install:all   # installs the root and the client
-npm run dev           # starts the client at http://localhost:5173
+npm run install:all
+npm run dev
 ```
 
-The server (port 3001) is added in stage 6; until then `npm run dev` starts the client
-only.
+Then open **http://localhost:5173**. The client runs on 5173 and the API on 3001;
+`npm run dev` starts both.
 
-## URL parameters
+Other scripts:
 
-| Parameter | What it does |
+| Command | What it does |
 |---|---|
-| `?ai=success` | AI returns normally after about 2.5 seconds |
-| `?ai=slow` | AI takes about 14 seconds |
-| `?ai=uncertain` | AI result with unsure lines flagged |
-| `?ai=empty` | AI returns nothing usable |
-| `?ai=error` | AI is unavailable |
-| `?ai=timeout` | AI gives up after 10 seconds |
-| `?ai=ratelimit` | Too many requests |
-| `?testing=1` | Small test panel in the corner, for usability sessions |
+| `npm run build` | Production build of the client |
+| `npm start` | Run the API only |
 
-The `?ai=` value wins over the mode chosen in Settings.
+## Try the AI states
 
-## Folder layout
+The AI is mocked for now, but it produces every real state a connected AI would. Add a
+parameter to the URL or use the testing panel.
+
+| Parameter | Result |
+|---|---|
+| `?ai=success` | Normal answer after about 2.5 seconds |
+| `?ai=slow` | Answer after about 14 seconds, so Cancel appears |
+| `?ai=uncertain` | Lines that were hard to hear are highlighted |
+| `?ai=empty` | Nothing usable comes back |
+| `?ai=error` | "Visit Buddy is paused right now" |
+| `?ai=timeout` | Gives up after 10 seconds |
+| `?ai=ratelimit` | "Too many requests, please wait a minute" |
+| `?testing=1` | Small panel for usability sessions |
+
+The `?ai=` value wins over the saved setting.
+
+## How it works
+
+Everything AI lives in one file: `client/src/services/aiService.js`. Components never
+contain sample AI data. The file exports `buildQuestions`, `transcribe`, `summarizeVisit`,
+`flagUncertain` and `askAboutVisit`, all of which accept an `AbortSignal`, so Cancel really
+stops the request.
+
+To connect a real model later, replace the inside of those five functions with calls to
+`server/routes/ai.js` and keep the shapes the same. That route is the only place a key
+would be read, from `.env`. There are no keys in this repository.
+
+## Project layout
 
 ```
 visit-buddy/
-  package.json              root scripts (dev, install:all)
-  client/                   the React app (Vite + Tailwind + React Router)
-    index.html              loads the fonts and the app
-    vite.config.js          dev server on 5173, proxies /api to 3001
-    tailwind.config.js      maps Tailwind names to the design tokens
+  package.json          root scripts (dev, install:all, build)
+  client/               React app (Vite, Tailwind, React Router)
     src/
-      main.jsx              mounts the app inside the router
-      App.jsx               the routes
-      styles/tokens.css     every colour, size, space and radius (single source of truth)
-      styles/index.css      base styles, text sizes, focus ring, container
-      pages/                one file per screen
-  server/                   the Express API (stage 6) and .env.example
+      App.jsx           routes
+      pages/            one file per screen
+      components/       Button, Card, AIShell, EditableList, MedRow, navigation, ...
+      services/         aiService.js (AI) and api.js (server calls)
+      context/          SettingsContext (text size, contrast, AI mode)
+      hooks/            useUndo
+      styles/           tokens.css (all colours, type, spacing) + base styles
+  server/
+    index.js            Express app on port 3001
+    routes/             visits.js (JSON storage), ai.js (Phase 4 stub)
+    data/visits.json    created at runtime, never committed
 ```
 
-## Design tokens
+## Data
 
-All colour, type, spacing and shape values live in
-`client/src/styles/tokens.css` and are exposed to Tailwind in
-`client/tailwind.config.js`. Components use the Tailwind names (`bg-surface`,
-`text-hero`, `border-line`) and never hard-code a value.
+Visits are saved as JSON on the computer running the app. Only text is stored; audio is
+never uploaded or saved. "Delete all my data" in Settings empties the store.
 
-- Text is based on 20px, not 16px. The Text size control multiplies that by 1, 1.2
-  or 1.4.
-- Spacing uses the 4 / 8 / 16 / 24 / 32 scale, which in Tailwind is `1`, `2`, `4`,
-  `6` and `8`. Those five classes are remapped to exact pixels in
-  `tailwind.config.js`, because the 20px root font would otherwise turn `p-4` into
-  20px instead of 16px.
-- Between whole sections, `.vb-section` uses `--vb-section-gap`, a multiple of the
-  32px step, so page rhythm scales with the viewport but stays on the grid.
-- There is one `LANDING ONLY` group of two tokens (an editorial display size and one
-  lime closing block). They let the public Landing page borrow the layout rhythm of
-  the Mission Control visual reference while the app screens stay on the calm
-  palette the brief requires.
+## Built by
 
-## The mock AI service
-
-`client/src/services/aiService.js` (stage 3) is the only file allowed to produce AI
-results. Components never import sample data directly. It exports `buildQuestions`,
-`transcribe`, `summarizeVisit`, `flagUncertain` and `askAboutVisit`, and it honours an
-`AbortSignal`. Every returned line carries a `quote` copied word for word from the
-user's input.
-
-## Phase 4
-
-Replace `aiService.js` with real calls to `server/routes/ai.js`, which holds the only
-place a Gemini key is read (from `.env`). No key is ever in the client, and none is in
-this repo.
-
-## Stage plan
-
-| Stage | Status |
-|---|---|
-| 1. Scaffold, tokens, fonts, routing | done |
-| 2. Base components, Landing, Help | done |
-| 3. Mock AI service, AIShell, TestPanel | next |
-| 4. Before-a-visit flow | |
-| 5. After-a-visit flow | |
-| 6. Backend and connected screens | |
-| 7. Accessibility pass, README, test script | |
+David Soboma Bestman and Caleb Nwego for CMPS 4200 (HCI).
