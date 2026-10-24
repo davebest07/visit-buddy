@@ -14,9 +14,9 @@ const routes = [
 
 export default function Placeholder({ title, stage, children }) {
   return (
-    <main className="vb-container py-8">
+    <div className="vb-container py-8">
       <p className="text-small font-bold uppercase tracking-wide text-accent">
-        Stage 1 scaffold
+        Placeholder
       </p>
 
       <h1 className="mt-2 text-hero font-bold">{title}</h1>
@@ -43,6 +43,6 @@ export default function Placeholder({ title, stage, children }) {
           ))}
         </ul>
       </nav>
-    </main>
+    </div>
   )
 }

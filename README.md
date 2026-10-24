@@ -68,7 +68,11 @@ All colour, type, spacing and shape values live in
 - Text is based on 20px, not 16px. The Text size control multiplies that by 1, 1.2
   or 1.4.
 - Spacing uses the 4 / 8 / 16 / 24 / 32 scale, which in Tailwind is `1`, `2`, `4`,
-  `6` and `8`.
+  `6` and `8`. Those five classes are remapped to exact pixels in
+  `tailwind.config.js`, because the 20px root font would otherwise turn `p-4` into
+  20px instead of 16px.
+- Between whole sections, `.vb-section` uses `--vb-section-gap`, a multiple of the
+  32px step, so page rhythm scales with the viewport but stays on the grid.
 - There is one `LANDING ONLY` group of two tokens (an editorial display size and one
   lime closing block). They let the public Landing page borrow the layout rhythm of
   the Mission Control visual reference while the app screens stay on the calm
@@ -93,8 +97,8 @@ this repo.
 | Stage | Status |
 |---|---|
 | 1. Scaffold, tokens, fonts, routing | done |
-| 2. Base components, Landing, Help | next |
-| 3. Mock AI service, AIShell, TestPanel | |
+| 2. Base components, Landing, Help | done |
+| 3. Mock AI service, AIShell, TestPanel | next |
 | 4. Before-a-visit flow | |
 | 5. After-a-visit flow | |
 | 6. Backend and connected screens | |
