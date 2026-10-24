@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
+import Layout from './components/Layout.jsx'
 import Landing from './pages/Landing.jsx'
 import Home from './pages/Home.jsx'
 import Before from './pages/Before.jsx'
@@ -11,15 +12,21 @@ import Help from './pages/Help.jsx'
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<Landing />} />
-      <Route path="/help" element={<Help />} />
+      {/* Public pages: top bar only. */}
+      <Route element={<Layout />}>
+        <Route path="/" element={<Landing />} />
+        <Route path="/help" element={<Help />} />
+      </Route>
 
-      <Route path="/app" element={<Home />} />
-      <Route path="/app/before" element={<Before />} />
-      <Route path="/app/after" element={<After />} />
-      <Route path="/app/visits/:id" element={<VisitDetail />} />
-      <Route path="/app/history" element={<History />} />
-      <Route path="/app/settings" element={<Settings />} />
+      {/* App pages: top bar plus the bottom tab bar. */}
+      <Route element={<Layout withTabs />}>
+        <Route path="/app" element={<Home />} />
+        <Route path="/app/before" element={<Before />} />
+        <Route path="/app/after" element={<After />} />
+        <Route path="/app/visits/:id" element={<VisitDetail />} />
+        <Route path="/app/history" element={<History />} />
+        <Route path="/app/settings" element={<Settings />} />
+      </Route>
 
       {/* Unknown URL: send people back to the start. */}
       <Route path="*" element={<Navigate to="/" replace />} />
