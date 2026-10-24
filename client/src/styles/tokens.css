@@ -1,0 +1,80 @@
+/* ---------------------------------------------------------------------------
+   Visit Buddy design tokens  (brief section 3)
+
+   This file is the single source of truth for colour, type, space and shape.
+   Components must not hard-code values; they use these variables or the
+   matching Tailwind class (e.g. bg-surface, text-muted, text-hero).
+
+   Two tokens are marked LANDING ONLY. They exist so the public Landing page
+   can borrow the editorial rhythm of the Mission Control reference (one big
+   closing colour block) without changing the calm palette of the app itself.
+--------------------------------------------------------------------------- */
+
+:root {
+  /* --- Colour (brief table) --- */
+  --vb-background: #f8faf9;
+  --vb-surface: #ffffff;
+  --vb-text: #14232b;
+  --vb-muted: #4a5b63;
+  --vb-accent: #0b6e75;
+  --vb-error: #b3261e;
+  --vb-success: #1e7b45;
+  --vb-uncertain-bg: #fff4d6;
+  --vb-uncertain-text: #6b4500;
+
+  /* Derived colours: built from the tokens above, so they follow high contrast
+     mode automatically. A thin border has to come from somewhere; deriving it
+     keeps the brief's "no extra colours" rule. */
+  --vb-line: color-mix(in srgb, var(--vb-text) 14%, #ffffff);
+  --vb-accent-soft: color-mix(in srgb, var(--vb-accent) 8%, #ffffff);
+
+  /* LANDING ONLY: one high-impact closing block (Mission Control pacing).
+     #D9FF62 with --vb-text on top is ~17:1 contrast. */
+  --vb-highlight: #d9ff62;
+
+  /* --- Type --- */
+  --vb-font: 'Atkinson Hyperlegible', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+
+  /* Five sizes, base 20px (see html rule in index.css). rem keeps them tied
+     to the Text size control. */
+  --vb-text-small: 0.8rem;
+  --vb-text-body: 1rem;
+  --vb-text-subhead: 1.2rem;
+  --vb-text-heading: 1.6rem;
+  --vb-text-hero: 2.2rem;
+
+  /* LANDING ONLY: editorial display size. Still rem underneath, so it grows
+     with the Text size control instead of fighting it. */
+  --vb-text-display: clamp(2.2rem, 5.4vw, 4.2rem);
+
+  /* --- Space: 4 / 8 / 16 / 24 / 32 px.
+     In Tailwind that is spacing 1 / 2 / 4 / 6 / 8 — use only those. --- */
+  --vb-space-1: 4px;
+  --vb-space-2: 8px;
+  --vb-space-3: 16px;
+  --vb-space-4: 24px;
+  --vb-space-5: 32px;
+
+  /* --- Shape --- */
+  --vb-radius: 12px;
+  --vb-tap: 56px; /* minimum height of anything tappable */
+  --vb-focus-width: 3px;
+
+  /* --- Layout --- */
+  --vb-container: 1200px;
+  --vb-gutter: clamp(16px, 4vw, 48px);
+
+  /* --- Motion --- */
+  --vb-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --vb-duration-fast: 160ms;
+  --vb-duration: 240ms;
+  --vb-duration-slow: 600ms;
+}
+
+/* High contrast mode (Settings page). Same structure, stricter colours. */
+:root[data-contrast='high'] {
+  --vb-background: #ffffff;
+  --vb-text: #000000;
+  --vb-accent: #004e54;
+  --vb-muted: #1c1c1c;
+}

@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Base text is 20px, not the browser default 16px (brief section 3).
+     Text size control = 1x / 1.2x / 1.4x on top of that. */
+  html {
+    font-size: 125%;
+  }
+
+  html[data-text-scale='large'] {
+    font-size: 150%;
+  }
+
+  html[data-text-scale='extra-large'] {
+    font-size: 175%;
+  }
+
+  body {
+    @apply bg-background font-sans text-body text-ink antialiased;
+    min-height: 100dvh;
+  }
+
+  /* A visible 3px focus ring on everything interactive. */
+  :focus-visible {
+    outline: var(--vb-focus-width) solid var(--vb-accent);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* The one page container. Keeps gutters and max width identical everywhere. */
+  .vb-container {
+    width: 100%;
+    max-width: var(--vb-container);
+    margin-inline: auto;
+    padding-inline: var(--vb-gutter);
+  }
+}
