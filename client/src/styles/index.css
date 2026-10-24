@@ -48,4 +48,37 @@
     margin-inline: auto;
     padding-inline: var(--vb-gutter);
   }
+
+  /* Vertical breathing room between whole sections (not between components). */
+  .vb-section {
+    padding-block: var(--vb-section-gap);
+  }
+
+  /* Skip link: off-screen until a keyboard user tabs to it. */
+  .vb-skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 50;
+    padding: 16px 24px;
+    border-radius: var(--vb-radius);
+    background: var(--vb-surface);
+    color: var(--vb-text);
+  }
+
+  .vb-skip-link:focus {
+    left: var(--vb-gutter);
+    top: 16px;
+  }
+
+  /* Very soft accent wash behind the hero, built from the accent token. */
+  .vb-hero-wash {
+    background:
+      radial-gradient(
+        60% 80% at 85% 0%,
+        color-mix(in srgb, var(--vb-accent) 10%, transparent),
+        transparent 70%
+      ),
+      linear-gradient(180deg, var(--vb-surface), var(--vb-background));
+  }
 }

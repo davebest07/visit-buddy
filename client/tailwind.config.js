@@ -11,6 +11,7 @@ export default {
         muted: 'var(--vb-muted)',
         accent: 'var(--vb-accent)',
         'accent-soft': 'var(--vb-accent-soft)',
+        'accent-strong': 'var(--vb-accent-strong)',
         error: 'var(--vb-error)',
         success: 'var(--vb-success)',
         line: 'var(--vb-line)',
@@ -29,10 +30,23 @@ export default {
         subhead: ['var(--vb-text-subhead)', { lineHeight: '1.35' }],
         heading: ['var(--vb-text-heading)', { lineHeight: '1.25' }],
         hero: ['var(--vb-text-hero)', { lineHeight: '1.1' }],
-        display: ['var(--vb-text-display)', { lineHeight: '1.02', letterSpacing: '-0.02em' }],
+        display: ['var(--vb-text-display)', { lineHeight: '1.05', letterSpacing: '-0.02em' }],
+      },
+      // The brief's spacing scale is 4 / 8 / 16 / 24 / 32 px. These overrides
+      // keep Tailwind's 1 / 2 / 4 / 6 / 8 classes on exactly those values,
+      // even though the root font is 20px instead of 16px.
+      spacing: {
+        1: '4px',
+        2: '8px',
+        4: '16px',
+        6: '24px',
+        8: '32px',
       },
       borderRadius: {
         DEFAULT: 'var(--vb-radius)',
+      },
+      boxShadow: {
+        calm: 'var(--vb-shadow)',
       },
       minHeight: {
         tap: 'var(--vb-tap)',

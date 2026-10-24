@@ -27,6 +27,7 @@
      keeps the brief's "no extra colours" rule. */
   --vb-line: color-mix(in srgb, var(--vb-text) 14%, #ffffff);
   --vb-accent-soft: color-mix(in srgb, var(--vb-accent) 8%, #ffffff);
+  --vb-accent-strong: color-mix(in srgb, var(--vb-accent) 80%, #000000);
 
   /* LANDING ONLY: one high-impact closing block (Mission Control pacing).
      #D9FF62 with --vb-text on top is ~17:1 contrast. */
@@ -45,7 +46,7 @@
 
   /* LANDING ONLY: editorial display size. Still rem underneath, so it grows
      with the Text size control instead of fighting it. */
-  --vb-text-display: clamp(2.2rem, 5.4vw, 4.2rem);
+  --vb-text-display: clamp(2.2rem, 4.4vw, 3.6rem);
 
   /* --- Space: 4 / 8 / 16 / 24 / 32 px.
      In Tailwind that is spacing 1 / 2 / 4 / 6 / 8 — use only those. --- */
@@ -63,6 +64,12 @@
   /* --- Layout --- */
   --vb-container: 1200px;
   --vb-gutter: clamp(16px, 4vw, 48px);
+  /* Page rhythm only (between whole sections), kept on the 32px grid.
+     Component spacing uses the 4/8/16/24/32 scale below. */
+  --vb-section-gap: clamp(64px, 7vw, 112px);
+
+  /* --- Depth: one soft shadow, built from the text colour --- */
+  --vb-shadow: 0 10px 30px color-mix(in srgb, var(--vb-text) 10%, transparent);
 
   /* --- Motion --- */
   --vb-ease: cubic-bezier(0.22, 1, 0.36, 1);
