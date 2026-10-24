@@ -2,12 +2,23 @@
   "name": "visit-buddy",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "description": "Visit Buddy — a voice-first app that helps you prepare for a doctor visit and understand it afterward.",
   "scripts": {
     "install:all": "npm install && npm --prefix client install",
-    "dev": "npm --prefix client run dev",
+    "dev": "concurrently -k -n server,client -c blue,green \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:server": "node --env-file-if-exists=.env --watch server/index.js",
+    "dev:client": "npm --prefix client run dev",
     "build": "npm --prefix client run build",
-    "preview": "npm --prefix client run preview"
+    "preview": "npm --prefix client run preview",
+    "start": "node --env-file-if-exists=.env server/index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
   },
   "engines": {
     "node": ">=20.19"
