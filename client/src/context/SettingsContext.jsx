@@ -15,7 +15,8 @@ export const AI_MODES = [
   'ratelimit',
 ]
 
-const STORAGE_KEY = 'visit-buddy:settings'
+export const SETTINGS_STORAGE_KEY = 'visit-buddy:settings'
+const STORAGE_KEY = SETTINGS_STORAGE_KEY
 
 const DEFAULTS = {
   textScale: 'normal',
