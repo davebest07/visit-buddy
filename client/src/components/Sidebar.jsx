@@ -20,8 +20,8 @@ export const NAV = [
 
 export function Brand() {
   return (
-    <NavLink to="/app" className="flex items-center gap-3 rounded-xl">
-      <span className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl bg-[linear-gradient(160deg,#12968a,#0b5c55)] text-paper shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_6px_16px_rgba(29,78,216,0.28)]">
+    <NavLink to="/" className="flex items-center gap-3 rounded-xl transition-opacity duration-200 hover:opacity-80">
+      <span className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl bg-[linear-gradient(160deg,#12968a,#0b5c55)] text-paper shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_6px_16px_rgba(11,92,85,0.3)]">
         <HeartPulse size={22} strokeWidth={2} aria-hidden="true" />
       </span>
       <span>
@@ -58,7 +58,7 @@ export function NavList({ onNavigate }) {
                   {isActive ? (
                     <motion.span
                       layoutId={reduce ? undefined : 'sidebar-active'}
-                      className="absolute inset-0 rounded-[14px] border border-white/80 bg-primary-soft shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_6px_16px_rgba(37,99,235,0.12)]"
+                      className="absolute inset-0 rounded-[14px] border border-white/80 bg-primary-soft shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_6px_16px_rgba(11,92,85,0.12)]"
                       transition={{ type: 'spring', stiffness: 420, damping: 36 }}
                     />
                   ) : null}
