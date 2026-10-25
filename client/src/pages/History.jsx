@@ -49,7 +49,6 @@ export default function History() {
   return (
     <div className="vb-container max-w-4xl pt-10">
       <header>
-        <p className="vb-eyebrow text-ember">History</p>
         <h1 className="mt-4 text-hero font-bold">Every visit, newest first.</h1>
       </header>
 
@@ -112,9 +111,9 @@ export default function History() {
             <li key={visit.id} className="border-b border-line">
               <Link
                 to={`/app/visits/${visit.id}`}
-                className="group flex items-center gap-6 py-6 transition-colors duration-fast hover:text-evergreen"
+                className="group flex items-center gap-6 py-6 transition-colors duration-fast hover:text-primary"
               >
-                <span className="w-24 shrink-0 text-small font-bold uppercase tracking-[0.12em] text-ember">
+                <span className="w-24 shrink-0 text-small font-bold uppercase tracking-[0.12em] text-accent">
                   {formatDate(visit.createdAt)}
                 </span>
                 <span className="min-w-0 flex-1">

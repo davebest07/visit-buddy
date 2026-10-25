@@ -24,9 +24,8 @@ export default function Settings() {
   }
 
   return (
-    <div className="vb-container max-w-3xl pt-10">
+    <div className="vb-container ml-0 max-w-3xl pt-10">
       <header>
-        <p className="vb-eyebrow text-ember">Settings</p>
         <h1 className="mt-4 text-hero font-bold">Make it easier to read.</h1>
       </header>
 
@@ -48,7 +47,7 @@ export default function Settings() {
                   onChange={(event) => setContrast(event.target.checked ? 'high' : 'normal')}
                   className="peer sr-only"
                 />
-                <span className="h-8 w-14 rounded-full bg-line transition-colors duration-fast peer-checked:bg-evergreen" />
+                <span className="h-8 w-14 rounded-full bg-line transition-colors duration-fast peer-checked:bg-primary" />
                 <span className="absolute left-1 top-1 h-6 w-6 rounded-full bg-surface shadow-soft transition-transform duration-fast peer-checked:translate-x-6" />
               </span>
             </label>

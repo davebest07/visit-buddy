@@ -141,7 +141,6 @@ export default function After() {
   return (
     <div className="vb-container max-w-5xl pt-10">
       <header>
-        <p className="vb-eyebrow text-ember">After a visit</p>
         <h1 className="mt-4 max-w-[18ch] text-hero font-bold">What did the doctor say?</h1>
         <p className="mt-3 max-w-measure text-body text-muted">
           Record or type what you remember. You will see a plain summary, a to-do list and a
@@ -190,20 +189,20 @@ export default function After() {
           </div>
 
           <aside className="border-t border-line bg-surface-2 p-6 md:p-8 lg:col-span-5 lg:border-l lg:border-t-0">
-            <p className="text-small font-bold uppercase tracking-[0.14em] text-ember">
+            <p className="text-small font-bold uppercase tracking-[0.14em] text-accent">
               How it behaves
             </p>
             <ul className="mt-4 space-y-4 text-body">
               <li className="flex gap-3">
-                <span aria-hidden="true" className="text-evergreen">✦</span>
+                <span aria-hidden="true" className="text-primary">✦</span>
                 Every line carries the words it came from.
               </li>
               <li className="flex gap-3">
-                <span aria-hidden="true" className="text-evergreen">✦</span>
+                <span aria-hidden="true" className="text-primary">✦</span>
                 Anything unclear says "ask your doctor or pharmacist".
               </li>
               <li className="flex gap-3">
-                <span aria-hidden="true" className="text-evergreen">✦</span>
+                <span aria-hidden="true" className="text-primary">✦</span>
                 Nothing is saved until you approve it.
               </li>
             </ul>
@@ -231,7 +230,7 @@ export default function After() {
           >
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>
-                <p className="vb-eyebrow text-ember">Step 03</p>
+                <p className="vb-eyebrow text-accent">Step 03</p>
                 <h2 className="mt-3 text-hero font-bold">Check this before you save</h2>
               </div>
               <p className="max-w-[32ch] text-small text-muted">
@@ -287,7 +286,7 @@ export default function After() {
                   )}
 
                   {result.flags.length > 0 ? (
-                    <div className="mt-8 rounded-card bg-sand p-6">
+                    <div className="mt-8 rounded-card bg-tint-sky p-6">
                       <h3 className="text-subhead font-bold">Needs checking</h3>
                       <ul className="mt-3 space-y-2">
                         {result.flags.map((flag) => (
@@ -316,7 +315,7 @@ export default function After() {
                           checked={Boolean(todo.done)}
                           onChange={(event) => updateTodo(index, { done: event.target.checked })}
                           id={`todo-done-${index}`}
-                          className="mt-2 h-6 w-6 shrink-0 accent-evergreen"
+                          className="mt-2 h-6 w-6 shrink-0 accent-primary"
                         />
                         <div className="min-w-0 flex-1">
                           <label htmlFor={`todo-text-${index}`} className="sr-only">
@@ -363,8 +362,8 @@ export default function After() {
               ) : null}
             </div>
 
-            <div className="mt-10 rounded-xl bg-night p-6 text-cream md:p-8">
-              <p className="text-small font-bold uppercase tracking-[0.14em] text-ember-bright">
+            <div className="mt-10 rounded-xl bg-navy p-6 text-paper md:p-8">
+              <p className="text-small font-bold uppercase tracking-[0.14em] text-accent-bright">
                 Final step
               </p>
               <h3 className="mt-2 font-display text-heading font-semibold">
@@ -381,21 +380,21 @@ export default function After() {
                   type="button"
                   onClick={handleUndo}
                   disabled={!canUndo}
-                  className="min-h-tap text-small font-bold text-cream-muted underline underline-offset-4 disabled:opacity-50"
+                  className="min-h-tap text-small font-bold text-paper-muted underline underline-offset-4 disabled:opacity-50"
                 >
                   Undo
                 </button>
                 <button
                   type="button"
                   onClick={run}
-                  className="min-h-tap text-small font-bold text-cream-muted underline underline-offset-4"
+                  className="min-h-tap text-small font-bold text-paper-muted underline underline-offset-4"
                 >
                   Regenerate
                 </button>
                 <button
                   type="button"
                   onClick={reset}
-                  className="min-h-tap text-small font-bold text-cream-muted underline underline-offset-4"
+                  className="min-h-tap text-small font-bold text-paper-muted underline underline-offset-4"
                 >
                   Reject this result
                 </button>

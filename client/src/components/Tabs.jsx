@@ -46,13 +46,13 @@ export default function Tabs({ tabs, value, onChange, label, className = '' }) {
             onClick={() => onChange(tab.id)}
             onKeyDown={(event) => move(event, index)}
             className={`relative min-h-tap rounded-full px-4 text-body font-bold transition-colors duration-fast ${
-              active ? 'text-cream' : 'text-muted hover:text-ink'
+              active ? 'text-paper' : 'text-muted hover:text-ink'
             }`}
           >
             {active ? (
               <motion.span
                 layoutId={reduce ? undefined : pillId}
-                className="absolute inset-0 rounded-full bg-evergreen"
+                className="absolute inset-0 rounded-full bg-primary"
                 transition={{ type: 'spring', stiffness: 380, damping: 32 }}
               />
             ) : null}

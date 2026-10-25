@@ -12,14 +12,11 @@ import Help from './pages/Help.jsx'
 export default function App() {
   return (
     <Routes>
-      {/* Public pages: top bar only. */}
+      {/* Layout picks the shell: sidebar for app + help, marketing bar for the landing page. */}
       <Route element={<Layout />}>
         <Route path="/" element={<Landing />} />
         <Route path="/help" element={<Help />} />
-      </Route>
 
-      {/* App pages: top bar plus the bottom tab bar. */}
-      <Route element={<Layout withTabs />}>
         <Route path="/app" element={<Home />} />
         <Route path="/app/before" element={<Before />} />
         <Route path="/app/after" element={<After />} />

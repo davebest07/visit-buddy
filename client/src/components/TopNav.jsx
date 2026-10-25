@@ -12,7 +12,7 @@ export default function TopNav() {
           <Link to="/" className="flex items-center gap-2 rounded-full">
             <span
               aria-hidden="true"
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-evergreen font-display text-subhead font-semibold text-cream"
+              className="flex h-8 w-8 items-center justify-center rounded-full bg-primary font-display text-subhead font-semibold text-paper"
             >
               v
             </span>
@@ -24,7 +24,7 @@ export default function TopNav() {
           <nav aria-label="Site" className="flex items-center gap-1">
             <NavLink
               to="/help"
-              className="flex min-h-tap items-center rounded-full px-3 text-small font-bold text-muted transition-colors duration-fast hover:text-evergreen"
+              className="flex min-h-tap items-center rounded-full px-3 text-small font-bold text-muted transition-colors duration-fast hover:text-primary"
             >
               Help
             </NavLink>

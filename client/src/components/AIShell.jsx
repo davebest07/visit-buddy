@@ -140,7 +140,7 @@ export default function AIShell({
   if (status === 'loading') {
     return (
       <section aria-live="polite" aria-busy="true" className="rounded-card bg-surface-2 p-6 md:p-8">
-        <p className="text-small font-bold uppercase tracking-[0.14em] text-ember">Checking</p>
+        <p className="text-small font-bold uppercase tracking-[0.14em] text-accent">Checking</p>
         <h2 className="mt-2 font-display text-heading font-semibold">{loadingTitle}</h2>
 
         <LoadingSteps steps={steps} elapsed={elapsed} />
@@ -203,7 +203,7 @@ export default function AIShell({
   return (
     <section>
       {status === 'uncertain' ? (
-        <p className="mb-6 flex gap-3 rounded-card bg-sand p-4 text-small font-bold">
+        <p className="mb-6 flex gap-3 rounded-card bg-tint-sky p-4 text-small font-bold">
           <span aria-hidden="true">!</span>
           Some lines were hard to hear. Check the highlighted lines before you save.
         </p>

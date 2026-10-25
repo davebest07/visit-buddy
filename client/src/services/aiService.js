@@ -30,7 +30,7 @@ export const SAMPLE_CONCERNS =
   "My knee has been hurting for two weeks, I get dizzy when I stand up, and I'm not sure my morning pill is working."
 
 export const SAMPLE_TRANSCRIPT =
-  "The doctor said my knee pain is probably from wear and to try gentle stretching twice a day. She started me on Bellaprin, one tablet every morning with food. I should keep taking my night pill, Norvelan, the same as before. She wants blood work done before the next visit in six weeks, and to call if the dizziness gets worse. I think she said ten milligrams for the Bellaprin but I didn't catch it clearly."
+  "The doctor said my knee pain is probably from wear and to try gentle stretching twice a day. She started me on Bellaprin, one tablet every morning with food. I should keep taking my navy pill, Norvelan, the same as before. She wants blood work done before the next visit in six weeks, and to call if the dizziness gets worse. I think she said ten milligrams for the Bellaprin but I didn't catch it clearly."
 
 export const SAMPLE_QUESTIONS = [
   'What should I know about my knee pain?',
@@ -238,9 +238,9 @@ const SAMPLE_VISIT = {
     {
       name: 'Norvelan',
       dose: null,
-      time: 'night',
+      time: 'navy',
       note: 'same as before',
-      quote: 'keep taking my night pill, Norvelan, the same as before',
+      quote: 'keep taking my navy pill, Norvelan, the same as before',
       needsCheck: false,
     },
   ],
@@ -339,7 +339,7 @@ const ANSWERS = [
   {
     match: ['medicine', 'medication', 'pill', 'dose', 'bellaprin', 'norvelan'],
     answer:
-      'You were started on Bellaprin, one tablet every morning with food. Keep taking Norvelan at night, the same as before. The dose of Bellaprin was not clear, so ask your doctor or pharmacist.',
+      'You were started on Bellaprin, one tablet every morning with food. Keep taking Norvelan at navy, the same as before. The dose of Bellaprin was not clear, so ask your doctor or pharmacist.',
     quote: 'She started me on Bellaprin, one tablet every morning with food.',
   },
   {

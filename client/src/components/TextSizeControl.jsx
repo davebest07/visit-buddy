@@ -30,15 +30,15 @@ export default function TextSizeControl() {
                 onChange={() => setTextScale(value)}
                 className="peer sr-only"
               />
-              <span className="relative flex min-h-tap items-center justify-center rounded-full px-2 text-small font-bold peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-evergreen">
+              <span className="relative flex min-h-tap items-center justify-center rounded-full px-2 text-small font-bold peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-primary">
                 {checked ? (
                   <motion.span
                     layoutId={reduce ? undefined : id}
-                    className="absolute inset-0 rounded-full bg-evergreen"
+                    className="absolute inset-0 rounded-full bg-primary"
                     transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                   />
                 ) : null}
-                <span className={`relative z-10 ${checked ? 'text-cream' : 'text-muted'}`}>
+                <span className={`relative z-10 ${checked ? 'text-paper' : 'text-muted'}`}>
                   {LABELS[value]}
                 </span>
               </span>

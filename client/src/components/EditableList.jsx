@@ -28,7 +28,7 @@ export default function EditableList({ items, onChange, label = 'Question' }) {
           <div className="flex gap-4 md:gap-6">
             <span
               aria-hidden="true"
-              className="pt-1 font-display text-subhead text-ember"
+              className="pt-1 font-display text-subhead text-accent"
             >
               {String(index + 1).padStart(2, '0')}
             </span>

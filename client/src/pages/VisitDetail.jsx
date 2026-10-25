@@ -51,7 +51,7 @@ function visitAsText(visit) {
 function Section({ label, children }) {
   return (
     <section className="mt-12">
-      <p className="text-small font-bold uppercase tracking-[0.14em] text-ember">{label}</p>
+      <p className="text-small font-bold uppercase tracking-[0.14em] text-accent">{label}</p>
       <div className="mt-4">{children}</div>
     </section>
   )
@@ -149,7 +149,7 @@ export default function VisitDetail() {
           It may have been deleted, or the little server is not running.
         </p>
         <p className="mt-6">
-          <Link to="/app/history" className="font-bold text-evergreen underline underline-offset-4">
+          <Link to="/app/history" className="font-bold text-primary underline underline-offset-4">
             Back to History
           </Link>
         </p>
@@ -160,9 +160,6 @@ export default function VisitDetail() {
   return (
     <div className="vb-container max-w-4xl pt-10">
       <header className="border-b border-line pb-8">
-        <p className="vb-eyebrow text-ember">
-          {visit.type === 'before' ? 'Before a visit' : 'After a visit'}
-        </p>
         <h1 className="mt-4 font-display text-display font-semibold">{formatDate(visit.createdAt)}</h1>
 
         <div className="mt-6 flex flex-wrap gap-2 print:hidden">
@@ -201,7 +198,7 @@ export default function VisitDetail() {
           <ol className="grid gap-3">
             {visit.questions.map((item, index) => (
               <li key={index} className="flex gap-4 border-t border-line pt-3 text-body">
-                <span className="font-display text-subhead text-ember">
+                <span className="font-display text-subhead text-accent">
                   {String(index + 1).padStart(2, '0')}
                 </span>
                 <span>{item}</span>
@@ -236,7 +233,7 @@ export default function VisitDetail() {
                   type="checkbox"
                   checked={Boolean(todo.done)}
                   onChange={() => toggleTodo(index)}
-                  className="mt-2 h-6 w-6 shrink-0 accent-evergreen"
+                  className="mt-2 h-6 w-6 shrink-0 accent-primary"
                 />
                 <label
                   htmlFor={`todo-${index}`}
@@ -278,8 +275,8 @@ export default function VisitDetail() {
       ) : null}
 
       {visit.transcript ? (
-        <section className="mt-12 rounded-xl bg-night p-6 text-cream md:p-8">
-          <p className="text-small font-bold uppercase tracking-[0.14em] text-ember-bright">
+        <section className="mt-12 rounded-xl bg-navy p-6 text-paper md:p-8">
+          <p className="text-small font-bold uppercase tracking-[0.14em] text-accent-bright">
             Ask about this visit
           </p>
           <h2 className="mt-3 font-display text-heading font-semibold">
@@ -292,21 +289,21 @@ export default function VisitDetail() {
                 key={example}
                 type="button"
                 onClick={() => setQuestion(example)}
-                className="min-h-tap rounded-full border border-white/20 px-4 py-2 text-left text-small text-cream transition-colors duration-fast hover:border-cream"
+                className="min-h-tap rounded-full border border-white/20 px-4 py-2 text-left text-small text-paper transition-colors duration-fast hover:border-paper"
               >
                 {example}
               </button>
             ))}
           </div>
 
-          <label htmlFor="ask" className="mt-5 block text-small font-bold text-cream-muted">
+          <label htmlFor="ask" className="mt-5 block text-small font-bold text-paper-muted">
             Your question
           </label>
           <input
             id="ask"
             value={question}
             onChange={(event) => setQuestion(event.target.value)}
-            className="mt-2 w-full rounded-full border border-white/20 bg-white/5 px-5 py-3 text-body text-cream placeholder:text-cream-muted"
+            className="mt-2 w-full rounded-full border border-white/20 bg-white/5 px-5 py-3 text-body text-paper placeholder:text-paper-muted"
           />
 
           <div className="mt-4">
@@ -333,7 +330,7 @@ export default function VisitDetail() {
               >
                 {ask.data?.answer ? (
                   <div className="rounded-card border border-white/15 bg-white/5 p-5">
-                    <p className="text-body text-cream">{ask.data.answer}</p>
+                    <p className="text-body text-paper">{ask.data.answer}</p>
                     <QuoteLine quote={ask.data.quote} />
                   </div>
                 ) : null}

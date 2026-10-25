@@ -17,7 +17,7 @@ export default function QuoteLine({ quote, tone = 'light' }) {
         aria-expanded={open}
         aria-controls={panelId}
         className={`min-h-tap py-1 text-small font-bold underline underline-offset-4 ${
-          isDark ? 'text-cream-muted hover:text-cream' : 'text-evergreen hover:text-evergreen-deep'
+          isDark ? 'text-paper-muted hover:text-paper' : 'text-primary hover:text-primary-deep'
         }`}
       >
         {open ? 'Hide the words' : 'Quote'}
@@ -27,7 +27,7 @@ export default function QuoteLine({ quote, tone = 'light' }) {
         <blockquote
           id={panelId}
           className={`mt-2 border-l-2 pl-4 text-small ${
-            isDark ? 'border-ember-bright text-cream-muted' : 'border-ember text-muted'
+            isDark ? 'border-accent-bright text-paper-muted' : 'border-accent text-muted'
           }`}
         >
           “{quote}”

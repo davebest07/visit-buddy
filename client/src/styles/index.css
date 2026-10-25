@@ -1,4 +1,4 @@
-@tailwind base;
+﻿@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -25,13 +25,13 @@
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--vb-ember-bright) 35%, transparent);
+    background: color-mix(in srgb, var(--vb-accent-bright) 35%, transparent);
     color: var(--vb-text);
   }
 
   /* A visible 3px focus ring on everything interactive. */
   :focus-visible {
-    outline: var(--vb-focus-width) solid var(--vb-evergreen);
+    outline: var(--vb-focus-width) solid var(--vb-primary);
     outline-offset: 3px;
   }
 
@@ -91,24 +91,24 @@
   }
 
   /* Night sections: warm paper grain over deep ink. */
-  .vb-night-field {
+  .vb-navy-field {
     position: relative;
     isolation: isolate;
     background:
       radial-gradient(
         70% 90% at 78% 8%,
-        color-mix(in srgb, var(--vb-evergreen) 42%, transparent),
+        color-mix(in srgb, var(--vb-primary) 42%, transparent),
         transparent 62%
       ),
       radial-gradient(
         50% 70% at 12% 92%,
-        color-mix(in srgb, var(--vb-ember-bright) 22%, transparent),
+        color-mix(in srgb, var(--vb-accent-bright) 22%, transparent),
         transparent 64%
       ),
-      linear-gradient(165deg, var(--vb-night) 0%, var(--vb-night-2) 60%, var(--vb-night) 100%);
+      linear-gradient(165deg, var(--vb-navy) 0%, var(--vb-navy-2) 60%, var(--vb-navy) 100%);
   }
 
-  .vb-night-field::after {
+  .vb-navy-field::after {
     content: '';
     position: absolute;
     inset: 0;
@@ -126,9 +126,9 @@
     filter: blur(60px);
     opacity: 0.75;
     background:
-      radial-gradient(closest-side at 30% 35%, #1d7a6e 0%, transparent 100%),
-      radial-gradient(closest-side at 70% 25%, #2a4f7a 0%, transparent 100%),
-      radial-gradient(closest-side at 60% 75%, #b35a2a 0%, transparent 100%);
+      radial-gradient(closest-side at 30% 35%, #1d4ed8 0%, transparent 100%),
+      radial-gradient(closest-side at 70% 25%, #0891b2 0%, transparent 100%),
+      radial-gradient(closest-side at 60% 75%, #7c3aed 0%, transparent 100%);
     animation: drift 22s ease-in-out infinite;
   }
 

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, useReducedMotion } from 'motion/react'
-import Reveal from '../components/Reveal.jsx'
+import { ArrowRight, ClipboardList, FileText, Mic } from 'lucide-react'
 import { listVisits } from '../services/api.js'
 
 function summaryLine(visit) {
@@ -9,10 +8,35 @@ function summaryLine(visit) {
   return visit.summary?.[0]?.text || 'A saved visit'
 }
 
+function ActionCard({ to, icon: Icon, tint, title, description, cta }) {
+  return (
+    <Link
+      to={to}
+      className="group flex h-full flex-col rounded-card border border-line bg-surface p-6 shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:border-primary hover:shadow-lift md:p-8"
+    >
+      <span className={`flex h-12 w-12 items-center justify-center rounded-xl ${tint}`}>
+        <Icon size={24} strokeWidth={1.8} aria-hidden="true" />
+      </span>
+
+      <h2 className="mt-5 text-heading font-bold">{title}</h2>
+      <p className="mt-2 max-w-[34ch] text-body text-muted">{description}</p>
+
+      <span className="mt-6 flex items-center gap-2 text-body font-bold text-primary">
+        {cta}
+        <ArrowRight
+          size={20}
+          strokeWidth={2}
+          aria-hidden="true"
+          className="transition-transform duration-200 group-hover:translate-x-1"
+        />
+      </span>
+    </Link>
+  )
+}
+
 export default function Home() {
   const [recent, setRecent] = useState(null)
   const [state, setState] = useState('loading')
-  const reduce = useReducedMotion()
 
   useEffect(() => {
     let active = true
@@ -34,81 +58,47 @@ export default function Home() {
   const greeting = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening'
 
   return (
-    <div className="vb-container pt-10">
-      <header className="grid items-end gap-6 lg:grid-cols-12">
-        <div className="lg:col-span-7">
-          <p className="vb-eyebrow text-ember">{greeting}</p>
-          <h1 className="mt-4 text-hero font-bold">What would you like to do?</h1>
-        </div>
-        <p className="max-w-[38ch] text-body text-muted lg:col-span-5">
-          Two ways in. Both take about a minute, and you can change every word before it is
-          saved.
-        </p>
+    <div className="vb-container pt-8 md:pt-10">
+      <header className="max-w-2xl">
+        <p className="text-small font-bold uppercase tracking-[0.14em] text-accent">{greeting}</p>
+        <h1 className="mt-3 text-hero font-bold">What would you like to do?</h1>
+        <p className="mt-3 text-body text-muted">Let&rsquo;s make your next doctor visit easier.</p>
       </header>
 
-      <div className="mt-10 grid gap-4 lg:grid-cols-12">
-        <Reveal className="lg:col-span-7" y={20}>
-          <Link
-            to="/app/before"
-            className="group relative flex h-full flex-col justify-between overflow-hidden rounded-xl bg-sage p-8 transition-transform duration-calm hover:-translate-y-1"
-          >
-            <div>
-              <span className="font-display text-hero text-evergreen">01</span>
-              <h2 className="mt-4 text-heading font-bold">Before a visit</h2>
-              <p className="mt-2 max-w-[38ch] text-body text-muted">
-                Turn what worries you into questions to ask the doctor.
-              </p>
-            </div>
+      <div className="mt-8 grid gap-4 md:grid-cols-2">
+        <ActionCard
+          to="/app/before"
+          icon={ClipboardList}
+          tint="bg-primary-soft text-primary"
+          title="Before a visit"
+          description="Turn what worries you into questions to ask your doctor."
+          cta="Get prepared"
+        />
 
-            <span className="mt-8 inline-flex items-center gap-2 text-body font-bold text-evergreen">
-              Start
-              <motion.span
-                aria-hidden="true"
-                className="inline-block"
-                initial={false}
-                whileHover={reduce ? undefined : { x: 4 }}
-              >
-                →
-              </motion.span>
-            </span>
-          </Link>
-        </Reveal>
-
-        <Reveal className="lg:col-span-5" y={20} delay={0.08}>
-          <Link
-            to="/app/after"
-            className="group flex h-full flex-col justify-between rounded-xl bg-night p-8 text-cream transition-transform duration-calm hover:-translate-y-1"
-          >
-            <div>
-              <span className="font-display text-hero text-ember-bright">02</span>
-              <h2 className="mt-4 text-heading font-bold">After a visit</h2>
-              <p className="mt-2 text-body text-cream-muted">
-                Turn what the doctor said into a summary, to-dos and medicines.
-              </p>
-            </div>
-
-            <span className="mt-8 inline-flex items-center gap-2 text-body font-bold text-cream">
-              Start
-              <span aria-hidden="true">→</span>
-            </span>
-          </Link>
-        </Reveal>
+        <ActionCard
+          to="/app/after"
+          icon={Mic}
+          tint="bg-tint-sky text-medical-cyan"
+          title="After a visit"
+          description="Turn what the doctor said into a summary, to-dos, and medicines."
+          cta="Summarize a visit"
+        />
       </div>
 
-      <section className="mt-14">
+      <section className="mt-10">
         <div className="flex flex-wrap items-baseline justify-between gap-4">
-          <h2 className="text-subhead font-bold">Your last visit</h2>
+          <h2 className="text-subhead font-bold">Your recent visit</h2>
           <Link
             to="/app/history"
-            className="flex min-h-tap items-center text-small font-bold text-evergreen underline underline-offset-4"
+            className="flex min-h-tap items-center text-small font-bold text-primary underline underline-offset-4"
           >
-            All visits
+            View all visits
           </Link>
         </div>
 
         {state === 'loading' ? (
           <p className="mt-4 text-body text-muted" aria-live="polite">
-            Loading your visits…
+            Loading your visits...
           </p>
         ) : null}
 
@@ -120,7 +110,10 @@ export default function Home() {
         ) : null}
 
         {state === 'ready' && !recent ? (
-          <div className="mt-4 rounded-card border border-dashed border-line bg-surface-2 p-8">
+          <div className="mt-4 flex items-center gap-4 rounded-card border border-dashed border-line bg-surface-2 p-6">
+            <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-surface text-muted">
+              <FileText size={24} strokeWidth={1.8} aria-hidden="true" />
+            </span>
             <p className="text-body text-muted">
               Nothing saved yet. Start with a visit, and it will show up here.
             </p>
@@ -130,21 +123,33 @@ export default function Home() {
         {recent ? (
           <Link
             to={`/app/visits/${recent.id}`}
-            className="mt-4 flex items-center justify-between gap-6 rounded-card border border-line bg-surface p-6 shadow-soft transition-colors duration-calm hover:border-evergreen"
+            className="group mt-4 flex items-center gap-5 rounded-card border border-line bg-surface p-6 shadow-soft transition-colors duration-200 hover:border-primary"
           >
-            <div className="min-w-0">
-              <p className="text-small font-bold uppercase tracking-[0.12em] text-ember">
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary-soft text-primary">
+              <FileText size={24} strokeWidth={1.8} aria-hidden="true" />
+            </span>
+
+            <span className="min-w-0 flex-1">
+              <span className="block text-small font-bold uppercase tracking-[0.12em] text-muted">
                 {new Date(recent.createdAt).toLocaleDateString(undefined, {
                   month: 'long',
                   day: 'numeric',
                   year: 'numeric',
                 })}
-              </p>
-              <p className="mt-2 truncate text-subhead font-bold">{summaryLine(recent)}</p>
-            </div>
-            <span aria-hidden="true" className="text-heading text-muted">
-              →
+                {' · '}
+                {recent.type === 'before' ? 'Before a visit' : 'After a visit'}
+              </span>
+              <span className="mt-1 block truncate text-subhead font-bold text-ink">
+                {summaryLine(recent)}
+              </span>
             </span>
+
+            <ArrowRight
+              size={22}
+              strokeWidth={2}
+              aria-hidden="true"
+              className="shrink-0 text-muted transition-transform duration-200 group-hover:translate-x-1"
+            />
           </Link>
         ) : null}
       </section>

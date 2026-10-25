@@ -1,12 +1,12 @@
 import Magnetic from './Magnetic.jsx'
 
 const VARIANTS = {
-  primary: 'bg-evergreen text-cream shadow-soft hover:bg-evergreen-deep hover:shadow-lift',
-  ember: 'bg-ember text-cream shadow-soft hover:bg-ember-bright hover:text-night',
-  secondary: 'border border-line bg-surface text-ink hover:border-evergreen hover:text-evergreen',
-  quiet: 'text-evergreen underline decoration-2 underline-offset-4 hover:text-evergreen-deep',
-  onDark: 'bg-cream text-night hover:bg-white',
-  ghostDark: 'border border-white/25 bg-transparent text-cream hover:border-cream',
+  primary: 'bg-primary text-paper shadow-soft hover:bg-primary-deep hover:shadow-lift',
+  accent: 'bg-accent text-paper shadow-soft hover:bg-accent-bright hover:text-navy',
+  secondary: 'border border-line bg-surface text-ink hover:border-primary hover:text-primary',
+  quiet: 'text-primary underline decoration-2 underline-offset-4 hover:text-primary-deep',
+  onDark: 'bg-paper text-navy hover:bg-white',
+  ghostDark: 'border border-white/25 bg-transparent text-paper hover:border-paper',
   danger: 'bg-error text-white hover:opacity-90',
 }
 

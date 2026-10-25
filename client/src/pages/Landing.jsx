@@ -85,7 +85,7 @@ function FaqItem({ question, answer }) {
           aria-hidden="true"
           animate={{ rotate: open ? 45 : 0 }}
           transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-          className="text-heading font-bold text-ember"
+          className="text-heading font-bold text-accent"
         >
           +
         </motion.span>
@@ -115,7 +115,7 @@ export default function Landing() {
   return (
     <>
       {/* ---------------------------------------------------------------- Hero */}
-      <section className="vb-night-field relative isolate overflow-hidden">
+      <section className="vb-navy-field relative isolate overflow-hidden">
         <div aria-hidden="true" className="vb-aurora" />
         <div aria-hidden="true" className="vb-aurora vb-aurora-slow" />
 
@@ -126,20 +126,20 @@ export default function Landing() {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="lg:col-span-7"
           >
-            <p className="vb-eyebrow text-ember-bright">For the visit, and for after</p>
+            <p className="vb-eyebrow text-accent-bright">For the visit, and for after</p>
 
-            <h1 className="mt-6 font-display text-mega font-semibold text-cream">
-              Remember <em className="italic text-ember-bright">everything</em> your doctor
+            <h1 className="mt-6 font-display text-mega font-semibold text-paper">
+              Remember <em className="italic text-accent-bright">everything</em> your doctor
               said.
             </h1>
 
-            <p className="mt-6 max-w-[46ch] text-subhead text-cream-muted">
+            <p className="mt-6 max-w-[46ch] text-subhead text-paper-muted">
               Say what worries you before you go. Say what the doctor told you after. Visit
               Buddy turns both into short, plain lists you can actually use.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Button as={Link} to="/app" variant="ember" magnetic>
+              <Button as={Link} to="/app" variant="accent" magnetic>
                 Try the demo
               </Button>
               <Button as="a" href="#how" variant="ghostDark">
@@ -147,7 +147,7 @@ export default function Landing() {
               </Button>
             </div>
 
-            <p className="mt-6 text-small text-cream-muted">
+            <p className="mt-6 text-small text-paper-muted">
               Demo only. Please do not enter real personal or medical information.
             </p>
           </motion.div>
@@ -160,10 +160,10 @@ export default function Landing() {
           >
             <div className="rounded-xl border border-white/15 bg-white/[0.06] p-6 shadow-lift backdrop-blur-xl">
               <div className="flex items-center justify-between gap-4">
-                <p className="text-small font-bold uppercase tracking-[0.14em] text-cream-muted">
+                <p className="text-small font-bold uppercase tracking-[0.14em] text-paper-muted">
                   Before a visit
                 </p>
-                <span className="rounded-full bg-ember-bright/15 px-3 py-1 text-small font-bold text-ember-bright">
+                <span className="rounded-full bg-accent-bright/15 px-3 py-1 text-small font-bold text-accent-bright">
                   Example
                 </span>
               </div>
@@ -171,17 +171,17 @@ export default function Landing() {
               <ol className="mt-6 space-y-5">
                 {EXAMPLE_QUESTIONS.map((question, index) => (
                   <li key={question} className="flex gap-4">
-                    <span className="font-display text-subhead text-ember-bright">
+                    <span className="font-display text-subhead text-accent-bright">
                       0{index + 1}
                     </span>
-                    <span className="text-body text-cream">{question}</span>
+                    <span className="text-body text-paper">{question}</span>
                   </li>
                 ))}
               </ol>
 
               <div className="mt-6 flex items-center justify-between gap-4 border-t border-white/10 pt-5">
-                <p className="text-small text-cream-muted">Every line shows its words.</p>
-                <span className="rounded-full border border-white/20 px-3 py-1 text-small font-bold text-cream">
+                <p className="text-small text-paper-muted">Every line shows its words.</p>
+                <span className="rounded-full border border-white/20 px-3 py-1 text-small font-bold text-paper">
                   Editable
                 </span>
               </div>
@@ -194,7 +194,7 @@ export default function Landing() {
       <section id="how" className="scroll-mt-32 border-b border-line">
         <div className="vb-container vb-section">
           <Reveal>
-            <p className="vb-eyebrow text-ember">01 — How it works</p>
+            <p className="vb-eyebrow text-accent">01 — How it works</p>
             <h2 className="mt-4 max-w-[24ch] font-display text-display font-semibold">
               Three steps. No jargon.
             </h2>
@@ -204,7 +204,7 @@ export default function Landing() {
             {STEPS.map((step, index) => (
               <Reveal as="li" key={step.number} delay={index * 0.08}>
                 <div className="border-t-2 border-ink pt-4">
-                  <span className="font-display text-heading text-ember">{step.number}</span>
+                  <span className="font-display text-heading text-accent">{step.number}</span>
                   <h3 className="mt-3 text-subhead font-bold">{step.title}</h3>
                   <p className="mt-2 text-body text-muted">{step.text}</p>
                 </div>
@@ -218,7 +218,7 @@ export default function Landing() {
       <section className="bg-surface-2">
         <div className="vb-container vb-section">
           <Reveal>
-            <p className="vb-eyebrow text-ember">02 — What you get</p>
+            <p className="vb-eyebrow text-accent">02 — What you get</p>
             <h2 className="mt-4 max-w-[24ch] font-display text-display font-semibold">
               Five things you leave with.
             </h2>
@@ -243,7 +243,7 @@ export default function Landing() {
             </Reveal>
 
             <Reveal className="md:col-span-2" delay={0.1}>
-              <Card tone="sand" className="h-full">
+              <Card tone="tint-sky" className="h-full">
                 <h3 className="text-subhead font-bold">A plain-language summary</h3>
                 <p className="mt-2 text-body text-muted">
                   Short sentences. No medical jargon.
@@ -252,7 +252,7 @@ export default function Landing() {
             </Reveal>
 
             <Reveal className="md:col-span-2" delay={0.05}>
-              <Card tone="tint" className="h-full">
+              <Card tone="tint-blue" className="h-full">
                 <h3 className="text-subhead font-bold">A to-do list</h3>
                 <p className="mt-2 text-body text-muted">
                   Stretches, blood work, call-backs. Tick them off as you go.
@@ -261,10 +261,10 @@ export default function Landing() {
             </Reveal>
 
             <Reveal className="md:col-span-2" delay={0.1}>
-              <Card tone="mist" className="h-full">
+              <Card tone="tint-slate" className="h-full">
                 <h3 className="text-subhead font-bold">A medicine schedule</h3>
                 <p className="mt-2 text-body text-muted">
-                  Morning, noon, evening, night. Blank where you were not told.
+                  Morning, noon, evening, navy. Blank where you were not told.
                 </p>
               </Card>
             </Reveal>
@@ -282,11 +282,11 @@ export default function Landing() {
       </section>
 
       {/* ------------------------------------------------------------ Promise */}
-      <section className="vb-night-field">
+      <section className="vb-navy-field">
         <div className="vb-container vb-section">
           <Reveal>
-            <p className="vb-eyebrow text-ember-bright">03 — Our promise</p>
-            <h2 className="mt-4 max-w-[20ch] font-display text-display font-semibold text-cream">
+            <p className="vb-eyebrow text-accent-bright">03 — Our promise</p>
+            <h2 className="mt-4 max-w-[20ch] font-display text-display font-semibold text-paper">
               You stay in charge.
             </h2>
           </Reveal>
@@ -295,12 +295,12 @@ export default function Landing() {
             {PROMISES.map((promise, index) => (
               <Reveal as="li" key={promise.title} delay={index * 0.06}>
                 <div className="flex gap-4 border-t border-white/15 pt-5">
-                  <span aria-hidden="true" className="mt-1 text-ember-bright">
+                  <span aria-hidden="true" className="mt-1 text-accent-bright">
                     ✦
                   </span>
                   <div>
-                    <h3 className="text-subhead font-bold text-cream">{promise.title}</h3>
-                    <p className="mt-1 text-body text-cream-muted">{promise.text}</p>
+                    <h3 className="text-subhead font-bold text-paper">{promise.title}</h3>
+                    <p className="mt-1 text-body text-paper-muted">{promise.text}</p>
                   </div>
                 </div>
               </Reveal>
@@ -313,7 +313,7 @@ export default function Landing() {
       <section className="border-b border-line">
         <div className="vb-container vb-section">
           <Reveal>
-            <p className="vb-eyebrow text-ember">Who it is for</p>
+            <p className="vb-eyebrow text-accent">Who it is for</p>
             <h2 className="mt-4 max-w-[26ch] font-display text-display font-semibold">
               Built for people who are tired, worried, or both.
             </h2>
@@ -323,7 +323,7 @@ export default function Landing() {
             {PERSONAS.map((persona, index) => (
               <Reveal as="li" key={persona.name} delay={index * 0.06}>
                 <Card className="h-full p-8">
-                  <p className="text-small font-bold uppercase tracking-[0.14em] text-ember">
+                  <p className="text-small font-bold uppercase tracking-[0.14em] text-accent">
                     {persona.role}
                   </p>
                   <h3 className="mt-3 font-display text-heading font-semibold">{persona.name}</h3>
@@ -340,7 +340,7 @@ export default function Landing() {
         <div className="vb-container vb-section">
           <div className="grid gap-10 lg:grid-cols-12">
             <Reveal className="lg:col-span-4">
-              <p className="vb-eyebrow text-ember">Questions</p>
+              <p className="vb-eyebrow text-accent">Questions</p>
               <h2 className="mt-4 font-display text-display font-semibold">
                 Four things people ask.
               </h2>
@@ -358,14 +358,14 @@ export default function Landing() {
       </section>
 
       {/* ------------------------------------------------------------ Closing */}
-      <section className="bg-evergreen-deep text-cream">
+      <section className="bg-primary-deep text-paper">
         <div className="vb-container vb-section">
           <Reveal>
-            <p className="vb-eyebrow text-cream-muted">Start here</p>
+            <p className="vb-eyebrow text-paper-muted">Start here</p>
             <h2 className="mt-5 max-w-[22ch] font-display text-mega font-semibold">
               Start with the one thing that worries you.
             </h2>
-            <p className="mt-6 max-w-[44ch] text-subhead text-cream-muted">
+            <p className="mt-6 max-w-[44ch] text-subhead text-paper-muted">
               It takes about a minute, and you can change every word.
             </p>
             <div className="mt-8">
@@ -389,13 +389,13 @@ export default function Landing() {
           <nav aria-label="Footer" className="flex gap-6">
             <Link
               to="/help"
-              className="flex min-h-tap items-center text-small font-bold text-ink hover:text-evergreen"
+              className="flex min-h-tap items-center text-small font-bold text-ink hover:text-primary"
             >
               Help
             </Link>
             <Link
               to="/app"
-              className="flex min-h-tap items-center text-small font-bold text-ink hover:text-evergreen"
+              className="flex min-h-tap items-center text-small font-bold text-ink hover:text-primary"
             >
               Try the demo
             </Link>

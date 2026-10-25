@@ -19,10 +19,9 @@ const DOES_NOT = [
 
 export default function Help() {
   return (
-    <div className="vb-container max-w-4xl pt-10">
+    <div className="vb-container ml-0 max-w-4xl pt-10">
       <Reveal>
-        <p className="vb-eyebrow text-ember">Help</p>
-        <h1 className="mt-4 max-w-[20ch] font-display text-display font-semibold">
+        <h1 className="mt-3 max-w-[20ch] font-display text-display font-semibold">
           What Visit Buddy does, and what it does not.
         </h1>
         <p className="mt-6 max-w-measure text-subhead font-bold">
@@ -71,18 +70,18 @@ export default function Help() {
 
       <Reveal delay={0.05}>
         <section aria-labelledby="emergency" className="mt-14">
-          <div className="rounded-xl bg-night p-8 text-cream">
+          <div className="rounded-xl bg-navy p-8 text-paper">
             <h2 id="emergency" className="font-display text-heading font-semibold">
               If this might be an emergency, get help now
             </h2>
 
-            <p className="mt-3 max-w-measure text-body text-cream-muted">
+            <p className="mt-3 max-w-measure text-body text-paper-muted">
               Call 911, or your local emergency number, if you have chest pain, trouble
               breathing, sudden weakness or numbness, a sudden very bad headache, or you feel
               faint. Do not wait for an app.
             </p>
 
-            <p className="mt-4 max-w-measure text-body text-cream-muted">
+            <p className="mt-4 max-w-measure text-body text-paper-muted">
               For anything else that is getting worse, call your doctor's office. If you are
               not sure, call your doctor or your pharmacist and ask. That list is not complete
               — if something feels very wrong, get help.
@@ -118,7 +117,7 @@ export default function Help() {
       </Reveal>
 
       <p className="mt-12 border-t border-line pt-6 text-body">
-        <Link to="/app" className="font-bold text-evergreen underline underline-offset-4">
+        <Link to="/app" className="font-bold text-primary underline underline-offset-4">
           Go to the app
         </Link>
       </p>

@@ -1,9 +1,9 @@
 /* ---------------------------------------------------------------------------
-   Visit Buddy design tokens — "Ember & Evergreen"
+   Visit Buddy design tokens — Medical Blue
 
-   Warm paper surfaces, deep evergreen, one ember accent, and cinematic night
-   sections. Typography is a serif display (marketing) over Atkinson
-   Hyperlegible (everything people read to make decisions).
+   Primary #2563EB, deep navy #14213D, light blue #E8F2FF, cyan #0891B2.
+   Atkinson Hyperlegible for every interface word, with a serif display face
+   reserved for the marketing page.
 
    Accessibility rules this file must keep:
    - 20px base text, five sizes, Text size control multiplies the root
@@ -13,41 +13,43 @@
 
 :root {
   /* --- Surfaces --- */
-  --vb-canvas: #f2ede4;
-  --vb-surface: #fffdf8;
-  --vb-surface-2: #faf6ee;
-  --vb-night: #0a1312;
-  --vb-night-2: #121e1c;
+  --vb-canvas: #f7fafc;
+  --vb-surface: #ffffff;
+  --vb-surface-2: #f1f5f9;
+  --vb-navy: #14213d;
+  --vb-navy-2: #1b2b4d;
+  --vb-sidebar: #f7faff;
+  --vb-sidebar-line: #e3eaf3;
 
   /* --- Ink --- */
-  --vb-text: #0f1a18;
-  --vb-muted: #525e5a;
-  --vb-line: color-mix(in srgb, var(--vb-text) 12%, var(--vb-canvas));
+  --vb-text: #14213d;
+  --vb-muted: #475569;
+  --vb-line: #e2e8f0;
 
   /* --- Brand --- */
-  --vb-evergreen: #0b5c55;
-  --vb-evergreen-deep: #073b37;
-  --vb-ember: #a8481a;
-  --vb-ember-bright: #e07a45;
-  --vb-cream: #f8f2e7;
-  --vb-cream-muted: #d8d2c6;
+  --vb-primary: #2563eb;
+  --vb-primary-deep: #1d4ed8;
+  --vb-primary-soft: #e8f2ff;
+  --vb-primary-strong: #1e40af;
+  --vb-accent: #1d4ed8;
+  --vb-accent-bright: #7dd3fc;
+  --vb-cyan: #0891b2;
+  --vb-paper: #f8fafc;
+  --vb-paper-muted: #cbd5e1;
 
   /* --- Soft tints --- */
-  --vb-sage: #e3ede5;
-  --vb-sand: #f5e6d5;
-  --vb-mist: #e5edf0;
+  --vb-tint-blue: #e8f2ff;
+  --vb-tint-sky: #e0f2fe;
+  --vb-tint-slate: #f1f5f9;
 
-  /* --- Semantic (unchanged values, kept AA) --- */
+  /* --- Semantic --- */
   --vb-error: #b3261e;
   --vb-success: #1e7b45;
   --vb-uncertain-bg: #fff4d6;
   --vb-uncertain-text: #6b4500;
 
-  /* Derived interaction colours */
-  --vb-evergreen-soft: color-mix(in srgb, var(--vb-evergreen) 10%, var(--vb-surface));
-  --vb-evergreen-strong: color-mix(in srgb, var(--vb-evergreen) 82%, #000000);
-  --vb-accent-soft: var(--vb-evergreen-soft);
-  --vb-accent-strong: var(--vb-evergreen-strong);
+  --vb-accent-soft: var(--vb-primary-soft);
+  --vb-accent-strong: var(--vb-primary-strong);
 
   /* --- Type --- */
   --vb-font: 'Atkinson Hyperlegible', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
@@ -81,10 +83,10 @@
   --vb-section-gap: clamp(64px, 8vw, 128px);
 
   /* --- Depth --- */
-  --vb-shadow: 0 1px 2px color-mix(in srgb, var(--vb-text) 6%, transparent),
-    0 18px 40px color-mix(in srgb, var(--vb-text) 9%, transparent);
-  --vb-shadow-lift: 0 2px 4px color-mix(in srgb, var(--vb-text) 8%, transparent),
-    0 28px 60px color-mix(in srgb, var(--vb-text) 14%, transparent);
+  --vb-shadow: 0 1px 2px color-mix(in srgb, var(--vb-navy) 6%, transparent),
+    0 12px 32px color-mix(in srgb, var(--vb-navy) 7%, transparent);
+  --vb-shadow-lift: 0 2px 4px color-mix(in srgb, var(--vb-navy) 8%, transparent),
+    0 24px 56px color-mix(in srgb, var(--vb-navy) 12%, transparent);
 
   /* --- Motion --- */
   --vb-ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -99,16 +101,20 @@
   --vb-canvas: #ffffff;
   --vb-surface: #ffffff;
   --vb-surface-2: #ffffff;
+  --vb-sidebar: #ffffff;
   --vb-text: #000000;
   --vb-muted: #1c1c1c;
-  --vb-evergreen: #004e54;
-  --vb-ember: #7a3300;
-  --vb-night: #000000;
-  --vb-night-2: #000000;
-  --vb-cream: #ffffff;
-  --vb-cream-muted: #e6e6e6;
-  --vb-sage: #ffffff;
-  --vb-sand: #ffffff;
-  --vb-mist: #ffffff;
+  --vb-primary: #004e54;
+  --vb-primary-deep: #003b40;
+  --vb-primary-soft: #ffffff;
+  --vb-accent: #004e54;
+  --vb-accent-bright: #005f6b;
+  --vb-navy: #000000;
+  --vb-navy-2: #000000;
+  --vb-paper: #ffffff;
+  --vb-paper-muted: #e6e6e6;
+  --vb-tint-blue: #ffffff;
+  --vb-tint-sky: #ffffff;
+  --vb-tint-slate: #ffffff;
   --vb-line: #000000;
 }

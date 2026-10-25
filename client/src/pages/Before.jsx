@@ -98,7 +98,6 @@ export default function Before() {
   return (
     <div className="vb-container max-w-5xl pt-10">
       <header>
-        <p className="vb-eyebrow text-ember">Before a visit</p>
         <h1 className="mt-4 max-w-[18ch] text-hero font-bold">What is worrying you?</h1>
         <p className="mt-3 max-w-measure text-body text-muted">
           Say it in your own words. One or two sentences is enough. You will get a short list of
@@ -115,9 +114,9 @@ export default function Before() {
               key={label}
               className={`flex items-center gap-2 rounded-full border px-4 py-2 ${
                 active
-                  ? 'border-evergreen bg-evergreen text-cream'
+                  ? 'border-primary bg-primary text-paper'
                   : done
-                    ? 'border-line bg-evergreen-soft text-evergreen'
+                    ? 'border-line bg-primary-soft text-primary'
                     : 'border-line bg-surface text-muted'
               }`}
             >
@@ -165,7 +164,7 @@ export default function Before() {
                     key={example}
                     type="button"
                     onClick={() => setConcerns(example)}
-                    className="min-h-tap rounded-full border border-line bg-surface px-4 py-2 text-left text-small text-ink transition-colors duration-fast hover:border-evergreen hover:text-evergreen"
+                    className="min-h-tap rounded-full border border-line bg-surface px-4 py-2 text-left text-small text-ink transition-colors duration-fast hover:border-primary hover:text-primary"
                   >
                     {example}
                   </button>
@@ -181,20 +180,20 @@ export default function Before() {
           </div>
 
           <aside className="border-t border-line bg-surface-2 p-6 md:p-8 lg:col-span-5 lg:border-l lg:border-t-0">
-            <p className="text-small font-bold uppercase tracking-[0.14em] text-ember">
+            <p className="text-small font-bold uppercase tracking-[0.14em] text-accent">
               What you will get
             </p>
             <ul className="mt-4 space-y-4">
               <li className="flex gap-3 text-body">
-                <span aria-hidden="true" className="text-evergreen">✦</span>
+                <span aria-hidden="true" className="text-primary">✦</span>
                 A short, ordered list of questions.
               </li>
               <li className="flex gap-3 text-body">
-                <span aria-hidden="true" className="text-evergreen">✦</span>
+                <span aria-hidden="true" className="text-primary">✦</span>
                 The exact words each question came from.
               </li>
               <li className="flex gap-3 text-body">
-                <span aria-hidden="true" className="text-evergreen">✦</span>
+                <span aria-hidden="true" className="text-primary">✦</span>
                 Nothing saved until you tap Save.
               </li>
             </ul>
@@ -224,7 +223,7 @@ export default function Before() {
               <>
                 <div className="flex flex-wrap items-end justify-between gap-4">
                   <div>
-                    <p className="vb-eyebrow text-ember">Step 03</p>
+                    <p className="vb-eyebrow text-accent">Step 03</p>
                     <h2 className="mt-3 text-hero font-bold">Your questions</h2>
                   </div>
                   <p className="max-w-[34ch] text-small text-muted">

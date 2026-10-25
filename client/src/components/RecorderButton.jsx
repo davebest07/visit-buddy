@@ -89,7 +89,7 @@ export default function RecorderButton({ onAudio, label = 'Record' }) {
         className={`flex min-h-tap items-center gap-3 rounded-full border px-6 py-2 text-body font-bold transition-colors duration-fast ${
           recording
             ? 'border-error bg-error text-white'
-            : 'border-evergreen bg-transparent text-evergreen hover:bg-evergreen-soft'
+            : 'border-primary bg-transparent text-primary hover:bg-primary-soft'
         }`}
       >
         <span aria-hidden="true" className={recording ? 'animate-pulse' : ''}>

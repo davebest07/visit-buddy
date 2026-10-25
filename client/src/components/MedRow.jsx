@@ -2,7 +2,7 @@ import QuoteLine from './QuoteLine.jsx'
 
 const SLOTS = ['Morning', 'Noon', 'Evening', 'Night']
 
-// One medicine: a row for morning, noon, evening and night. Missing details
+// One medicine: a row for morning, noon, evening and navy. Missing details
 // stay blank, never guessed.
 export default function MedRow({ med, onChange }) {
   const isActive = (slot) => (med.time ?? '').toLowerCase().includes(slot.toLowerCase())
@@ -51,7 +51,7 @@ export default function MedRow({ med, onChange }) {
               key={slot}
               className={`rounded border p-3 text-small ${
                 active
-                  ? 'border-evergreen bg-evergreen-soft font-bold text-ink'
+                  ? 'border-primary bg-primary-soft font-bold text-ink'
                   : 'border-line text-muted'
               }`}
             >
