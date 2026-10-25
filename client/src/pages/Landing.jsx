@@ -227,7 +227,7 @@ export default function Landing() {
           <Reveal>
             <p className="vb-eyebrow text-primary">01 — How it works</p>
             <h2 className="mt-4 max-w-[24ch] font-display text-display font-semibold">
-              Three steps. No jargon.
+              Three steps.
             </h2>
           </Reveal>
 
