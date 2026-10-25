@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
    Visit Buddy design tokens — Medical Blue
 
-   Primary #2563EB, deep navy #14213D, light blue #E8F2FF, cyan #0891B2.
+   Primary #0B5C55, deep evergreen #073B36, pale mint #E6F2EF, teal #0D9488.
    Atkinson Hyperlegible for every interface word, with a serif display face
    reserved for the marketing page.
 
@@ -13,34 +13,34 @@
 
 :root {
   /* --- Surfaces --- */
-  --vb-canvas: #f7fafc;
+  --vb-canvas: #f7faf8;
   --vb-surface: #ffffff;
-  --vb-surface-2: #f1f5f9;
-  --vb-navy: #14213d;
-  --vb-navy-2: #1b2b4d;
-  --vb-sidebar: #f7faff;
-  --vb-sidebar-line: #e3eaf3;
+  --vb-surface-2: #f1f6f3;
+  --vb-navy: #0a201c;
+  --vb-navy-2: #12352f;
+  --vb-sidebar: #f7fbf9;
+  --vb-sidebar-line: #e1ede8;
 
   /* --- Ink --- */
-  --vb-text: #14213d;
-  --vb-muted: #475569;
-  --vb-line: #e2e8f0;
+  --vb-text: #0a201c;
+  --vb-muted: #45574f;
+  --vb-line: #e2eae6;
 
   /* --- Brand --- */
-  --vb-primary: #2563eb;
-  --vb-primary-deep: #1d4ed8;
-  --vb-primary-soft: #e8f2ff;
-  --vb-primary-strong: #1e40af;
-  --vb-accent: #1d4ed8;
-  --vb-accent-bright: #7dd3fc;
-  --vb-cyan: #0891b2;
-  --vb-paper: #f8fafc;
-  --vb-paper-muted: #cbd5e1;
+  --vb-primary: #0b5c55;
+  --vb-primary-deep: #08423d;
+  --vb-primary-soft: #e6f2ef;
+  --vb-primary-strong: #06332f;
+  --vb-accent: #0b5c55;
+  --vb-accent-bright: #5eead4;
+  --vb-cyan: #0d9488;
+  --vb-paper: #f8faf9;
+  --vb-paper-muted: #c7d6d1;
 
   /* --- Soft tints --- */
-  --vb-tint-blue: #e8f2ff;
-  --vb-tint-sky: #e0f2fe;
-  --vb-tint-slate: #f1f5f9;
+  --vb-tint-blue: #e6f2ef;
+  --vb-tint-sky: #e0f2ee;
+  --vb-tint-slate: #f1f6f3;
 
   /* --- Semantic --- */
   --vb-error: #b3261e;

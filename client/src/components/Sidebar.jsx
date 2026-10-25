@@ -21,7 +21,7 @@ export const NAV = [
 export function Brand() {
   return (
     <NavLink to="/app" className="flex items-center gap-3 rounded-xl">
-      <span className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl bg-[linear-gradient(160deg,#3b82f6,#1d4ed8)] text-paper shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_6px_16px_rgba(29,78,216,0.28)]">
+      <span className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl bg-[linear-gradient(160deg,#12968a,#0b5c55)] text-paper shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_6px_16px_rgba(29,78,216,0.28)]">
         <HeartPulse size={22} strokeWidth={2} aria-hidden="true" />
       </span>
       <span>

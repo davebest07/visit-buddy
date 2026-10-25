@@ -313,7 +313,7 @@ export default function Landing() {
       {/* ------------------------------------------------------------ Promise */}
       <section className="vb-container vb-section">
         <Reveal>
-          <div className="relative overflow-hidden rounded-xl bg-[linear-gradient(135deg,#2563eb_0%,#0891b2_100%)] p-4 shadow-lift md:p-6">
+          <div className="relative overflow-hidden rounded-xl bg-[linear-gradient(135deg,#0b5c55_0%,#0d9488_100%)] p-4 shadow-lift md:p-6">
             <div className="vb-aurora opacity-30" aria-hidden="true" />
 
             <div className="vb-glass-strong rounded-xl p-6 md:p-10">
@@ -391,21 +391,21 @@ export default function Landing() {
       </section>
 
       {/* ------------------------------------------------------------ Closing */}
-      <section className="bg-[linear-gradient(135deg,#1d4ed8_0%,#0891b2_100%)] text-white">
+      <section className="bg-[linear-gradient(135deg,#073b36_0%,#0b5c55_100%)] text-white">
         <div className="vb-container vb-section">
           <Reveal>
-            <p className="text-small font-bold uppercase tracking-[0.14em] text-white/80">
+            <p className="text-small font-bold uppercase tracking-[0.14em] text-white/90">
               Start here
             </p>
             <h2 className="mt-5 max-w-[22ch] font-display text-mega font-semibold text-white">
               Start with the one thing that worries you.
             </h2>
-            <p className="mt-6 max-w-[44ch] text-subhead text-white/85">
+            <p className="mt-6 max-w-[44ch] text-subhead text-white/90">
               It takes about a minute, and you can change every word.
             </p>
             <div className="mt-8">
               <Button as={Link} to="/app" variant="glassLight" size="lg" magnetic>
-                Try the demo
+                Get Started
               </Button>
             </div>
           </Reveal>
