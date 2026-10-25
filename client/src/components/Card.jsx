@@ -1,8 +1,18 @@
-// A plain surface panel. No shadows by default: the brief keeps the UI flat
-// and quiet, and borders do the work.
-export default function Card({ as: Tag = 'div', className = '', children, ...props }) {
+// A panel. `tone` picks one of the soft tints from the healthcare-dashboard
+// reference; the default keeps a plain white surface for reading-heavy content.
+const TONES = {
+  surface: 'border-line bg-surface',
+  mint: 'border-mint bg-mint',
+  peach: 'border-peach bg-peach',
+  sky: 'border-sky bg-sky',
+}
+
+export default function Card({ as: Tag = 'div', tone = 'surface', className = '', children, ...props }) {
   return (
-    <Tag className={`rounded border border-line bg-surface p-6 ${className}`} {...props}>
+    <Tag
+      className={`rounded-card border p-6 shadow-soft ${TONES[tone] ?? TONES.surface} ${className}`}
+      {...props}
+    >
       {children}
     </Tag>
   )

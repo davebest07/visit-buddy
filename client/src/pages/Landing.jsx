@@ -191,9 +191,12 @@ export default function Landing() {
           </h2>
 
           <ul className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {GETS.map((item) => (
+            {GETS.map((item, index) => (
               <li key={item.title}>
-                <Card className="h-full">
+                <Card
+                  tone={['mint', 'peach', 'sky'][index % 3]}
+                  className="h-full"
+                >
                   <h3 className="text-subhead font-bold">{item.title}</h3>
                   <p className="mt-2 text-body text-muted">{item.text}</p>
                 </Card>
@@ -276,7 +279,7 @@ export default function Landing() {
       </section>
 
       {/* Closing call to action */}
-      <section className="bg-highlight">
+      <section className="bg-charcoal text-charcoal-text">
         <div className="vb-container vb-section">
           <h2 className="max-w-measure text-hero font-bold">
             Start with the one thing that worries you.
@@ -285,7 +288,7 @@ export default function Landing() {
             It takes about a minute, and you can change every word.
           </p>
           <div className="mt-6">
-            <Button as={Link} to="/app" variant="inverse">
+            <Button as={Link} to="/app" variant="onDark">
               Try the demo
             </Button>
           </div>

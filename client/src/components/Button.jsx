@@ -5,6 +5,7 @@ const VARIANTS = {
   secondary: 'border border-line bg-surface text-ink hover:border-accent hover:text-accent',
   quiet: 'text-accent underline underline-offset-4 hover:text-accent-strong',
   inverse: 'bg-ink text-surface hover:bg-accent',
+  onDark: 'bg-charcoal-text text-charcoal hover:bg-surface',
   danger: 'bg-error text-white hover:opacity-90',
 }
 

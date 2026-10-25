@@ -40,7 +40,8 @@ export default function Home() {
         <Card
           as={Link}
           to="/app/before"
-          className="block min-h-tap p-6 hover:border-accent hover:bg-accent-soft"
+          tone="mint"
+          className="block min-h-tap p-6 hover:border-accent"
         >
           <h2 className="text-heading font-bold">Before a visit</h2>
           <p className="mt-2 text-body text-muted">
@@ -51,7 +52,8 @@ export default function Home() {
         <Card
           as={Link}
           to="/app/after"
-          className="block min-h-tap p-6 hover:border-accent hover:bg-accent-soft"
+          tone="peach"
+          className="block min-h-tap p-6 hover:border-accent"
         >
           <h2 className="text-heading font-bold">After a visit</h2>
           <p className="mt-2 text-body text-muted">
@@ -82,8 +84,11 @@ export default function Home() {
       ) : null}
 
       {recent ? (
-        <Card as={Link} to={`/app/visits/${recent.id}`} className="mt-2 block hover:border-accent">
-          <p className="text-small text-muted">
+        <Link
+          to={`/app/visits/${recent.id}`}
+          className="mt-2 block rounded-card bg-charcoal p-6 text-charcoal-text shadow-soft hover:bg-ink"
+        >
+          <p className="text-small">
             {new Date(recent.createdAt).toLocaleDateString(undefined, {
               month: 'long',
               day: 'numeric',
@@ -91,7 +96,7 @@ export default function Home() {
             })}
           </p>
           <p className="mt-1 text-subhead font-bold">{summaryLine(recent)}</p>
-        </Card>
+        </Link>
       ) : null}
     </div>
   )

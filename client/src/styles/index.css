@@ -75,8 +75,13 @@
   .vb-hero-wash {
     background:
       radial-gradient(
-        60% 80% at 85% 0%,
-        color-mix(in srgb, var(--vb-accent) 10%, transparent),
+        55% 70% at 82% 0%,
+        color-mix(in srgb, var(--vb-peach) 85%, transparent),
+        transparent 72%
+      ),
+      radial-gradient(
+        45% 60% at 8% 100%,
+        color-mix(in srgb, var(--vb-mint) 70%, transparent),
         transparent 70%
       ),
       linear-gradient(180deg, var(--vb-surface), var(--vb-background));

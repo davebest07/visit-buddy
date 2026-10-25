@@ -5,14 +5,14 @@
    Components must not hard-code values; they use these variables or the
    matching Tailwind class (e.g. bg-surface, text-muted, text-hero).
 
-   Two tokens are marked LANDING ONLY. They exist so the public Landing page
-   can borrow the editorial rhythm of the Mission Control reference (one big
-   closing colour block) without changing the calm palette of the app itself.
+   Palette: the healthcare-dashboard reference (cream page, pastel cards, one
+   dark contrast panel) applied to the brief's accessible base: 20px text,
+   56px targets, calm teal accent, and the same contrast checks.
 --------------------------------------------------------------------------- */
 
 :root {
-  /* --- Colour (brief table) --- */
-  --vb-background: #f8faf9;
+  /* --- Colour --- */
+  --vb-background: #f7f3ec;
   --vb-surface: #ffffff;
   --vb-text: #14232b;
   --vb-muted: #4a5b63;
@@ -22,16 +22,20 @@
   --vb-uncertain-bg: #fff4d6;
   --vb-uncertain-text: #6b4500;
 
-  /* Derived colours: built from the tokens above, so they follow high contrast
-     mode automatically. A thin border has to come from somewhere; deriving it
-     keeps the brief's "no extra colours" rule. */
-  --vb-line: color-mix(in srgb, var(--vb-text) 14%, #ffffff);
-  --vb-accent-soft: color-mix(in srgb, var(--vb-accent) 8%, #ffffff);
-  --vb-accent-strong: color-mix(in srgb, var(--vb-accent) 80%, #000000);
+  /* Soft tints for cards, from the dashboard reference. All use --vb-text on
+     top, so they stay above 13:1 contrast. */
+  --vb-mint: #e8f2ec;
+  --vb-peach: #faede3;
+  --vb-sky: #eaf1fa;
 
-  /* LANDING ONLY: one high-impact closing block (Mission Control pacing).
-     #D9FF62 with --vb-text on top is ~17:1 contrast. */
-  --vb-highlight: #d9ff62;
+  /* The one high-impact dark block. Cream text on this is ~15:1. */
+  --vb-charcoal: #1b2228;
+  --vb-charcoal-text: #f7f4ee;
+
+  /* Derived colours, so they follow high contrast mode automatically. */
+  --vb-line: color-mix(in srgb, var(--vb-text) 12%, var(--vb-background));
+  --vb-accent-soft: color-mix(in srgb, var(--vb-accent) 8%, var(--vb-surface));
+  --vb-accent-strong: color-mix(in srgb, var(--vb-accent) 80%, #000000);
 
   /* --- Type --- */
   --vb-font: 'Atkinson Hyperlegible', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
@@ -44,8 +48,8 @@
   --vb-text-heading: 1.6rem;
   --vb-text-hero: 2.2rem;
 
-  /* LANDING ONLY: editorial display size. Still rem underneath, so it grows
-     with the Text size control instead of fighting it. */
+  /* Editorial display size. Still rem underneath, so it grows with the Text
+     size control instead of fighting it. */
   --vb-text-display: clamp(2.2rem, 4.4vw, 3.6rem);
 
   /* --- Space: 4 / 8 / 16 / 24 / 32 px.
@@ -57,7 +61,8 @@
   --vb-space-5: 32px;
 
   /* --- Shape --- */
-  --vb-radius: 12px;
+  --vb-radius: 12px; /* controls: buttons, inputs */
+  --vb-radius-card: 20px; /* panels: cards, sections */
   --vb-tap: 56px; /* minimum height of anything tappable */
   --vb-focus-width: 3px;
 
@@ -65,11 +70,11 @@
   --vb-container: 1200px;
   --vb-gutter: clamp(16px, 4vw, 48px);
   /* Page rhythm only (between whole sections), kept on the 32px grid.
-     Component spacing uses the 4/8/16/24/32 scale below. */
+     Component spacing uses the 4/8/16/24/32 scale above. */
   --vb-section-gap: clamp(64px, 7vw, 112px);
 
   /* --- Depth: one soft shadow, built from the text colour --- */
-  --vb-shadow: 0 10px 30px color-mix(in srgb, var(--vb-text) 10%, transparent);
+  --vb-shadow: 0 14px 34px color-mix(in srgb, var(--vb-text) 8%, transparent);
 
   /* --- Motion --- */
   --vb-ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -84,4 +89,10 @@
   --vb-text: #000000;
   --vb-accent: #004e54;
   --vb-muted: #1c1c1c;
+  --vb-mint: #ffffff;
+  --vb-peach: #ffffff;
+  --vb-sky: #ffffff;
+  --vb-charcoal: #000000;
+  --vb-charcoal-text: #ffffff;
+  --vb-line: #000000;
 }

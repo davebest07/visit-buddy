@@ -19,7 +19,11 @@ export default {
           DEFAULT: 'var(--vb-uncertain-bg)',
           ink: 'var(--vb-uncertain-text)',
         },
-        highlight: 'var(--vb-highlight)',
+        mint: 'var(--vb-mint)',
+        peach: 'var(--vb-peach)',
+        sky: 'var(--vb-sky)',
+        charcoal: 'var(--vb-charcoal)',
+        'charcoal-text': 'var(--vb-charcoal-text)',
       },
       fontFamily: {
         sans: ['var(--vb-font)'],
@@ -44,9 +48,11 @@ export default {
       },
       borderRadius: {
         DEFAULT: 'var(--vb-radius)',
+        card: 'var(--vb-radius-card)',
       },
       boxShadow: {
         calm: 'var(--vb-shadow)',
+        soft: 'var(--vb-shadow)',
       },
       minHeight: {
         tap: 'var(--vb-tap)',
