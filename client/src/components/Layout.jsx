@@ -49,6 +49,7 @@ export default function Layout() {
   if (!shell) {
     return (
       <>
+        <div className="vb-ambient" aria-hidden="true" />
         {skipLink}
         <TopNav />
         {content}
@@ -59,13 +60,14 @@ export default function Layout() {
 
   return (
     <>
+      <div className="vb-ambient" aria-hidden="true" />
       {skipLink}
       <Sidebar />
 
       <div className="lg:pl-[272px]">
         <MobileNav />
 
-        <header className="sticky top-0 z-30 hidden border-b border-line bg-canvas/85 backdrop-blur print:hidden lg:block">
+        <header className="sticky top-0 z-30 hidden border-b border-white/70 bg-white/65 backdrop-blur-xl print:hidden lg:block">
           <div className="vb-container flex min-h-tap items-center justify-between gap-4 py-2">
             <p className="text-small font-bold uppercase tracking-[0.14em] text-muted">{title}</p>
 

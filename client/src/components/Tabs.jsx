@@ -27,7 +27,7 @@ export default function Tabs({ tabs, value, onChange, label, className = '' }) {
     <div
       role="tablist"
       aria-label={label}
-      className={`inline-flex max-w-full flex-wrap gap-1 rounded-full border border-line bg-surface-2 p-1 ${className}`}
+      className={`vb-glass inline-flex max-w-full flex-wrap gap-1 rounded-full p-1 ${className}`}
     >
       {tabs.map((tab, index) => {
         const active = tab.id === value

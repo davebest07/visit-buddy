@@ -1,4 +1,4 @@
-﻿@tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -25,7 +25,7 @@
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--vb-accent-bright) 35%, transparent);
+    background: color-mix(in srgb, var(--vb-primary) 22%, transparent);
     color: var(--vb-text);
   }
 
@@ -90,58 +90,154 @@
     top: 16px;
   }
 
-  /* Night sections: warm paper grain over deep ink. */
-  .vb-navy-field {
+  /* -------------------------------------------------------------------------
+     Liquid glass material. Tiers share four layers: tinted translucency,
+     blur + saturation, an inner top highlight, and a soft ambient shadow.
+     Text always sits on the tint, never directly on the blur.
+  ------------------------------------------------------------------------- */
+  .vb-glass,
+  .vb-glass-strong {
     position: relative;
     isolation: isolate;
-    background:
-      radial-gradient(
-        70% 90% at 78% 8%,
-        color-mix(in srgb, var(--vb-primary) 42%, transparent),
-        transparent 62%
-      ),
-      radial-gradient(
-        50% 70% at 12% 92%,
-        color-mix(in srgb, var(--vb-accent-bright) 22%, transparent),
-        transparent 64%
-      ),
-      linear-gradient(165deg, var(--vb-navy) 0%, var(--vb-navy-2) 60%, var(--vb-navy) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.62));
+    backdrop-filter: blur(16px) saturate(150%);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      inset 0 -1px 0 rgba(20, 33, 61, 0.04),
+      0 10px 28px rgba(20, 33, 61, 0.09);
   }
 
-  .vb-navy-field::after {
+  /* Fine specular sweep across the top-left edge. */
+  .vb-glass::before,
+  .vb-glass-strong::before {
     content: '';
     position: absolute;
     inset: 0;
     z-index: -1;
-    opacity: 0.5;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.65) 0%,
+      rgba(255, 255, 255, 0) 44%
+    );
+    opacity: 0.55;
     pointer-events: none;
   }
 
-  /* Soft aurora blobs for the hero. Pure CSS, disabled with reduced motion. */
-  .vb-aurora {
+  .vb-glass-strong {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(246, 250, 255, 0.78));
+    backdrop-filter: blur(24px) saturate(170%);
+    -webkit-backdrop-filter: blur(24px) saturate(170%);
+    box-shadow:
+      inset 0 1px 0 #ffffff,
+      inset 0 -1px 0 rgba(20, 33, 61, 0.05),
+      0 18px 44px rgba(20, 33, 61, 0.12);
+  }
+
+  /* Expressive blue glass: landing CTAs and hero chips. */
+  .vb-glass-blue {
+    position: relative;
+    isolation: isolate;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.34);
+    background: linear-gradient(180deg, rgba(59, 130, 246, 0.94), rgba(29, 78, 216, 0.92));
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.42),
+      inset 0 -2px 6px rgba(10, 30, 80, 0.28),
+      0 14px 34px rgba(29, 78, 216, 0.32);
+  }
+
+  .vb-glass-blue::before {
+    content: '';
     position: absolute;
-    inset: -20%;
+    inset: 0;
     z-index: -1;
-    filter: blur(60px);
-    opacity: 0.75;
+    border-radius: inherit;
+    background: linear-gradient(
+      118deg,
+      rgba(255, 255, 255, 0.5) 0%,
+      rgba(255, 255, 255, 0.06) 42%,
+      transparent 60%
+    );
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  /* Ambient light field behind the product, so glass has something to refract. */
+  .vb-ambient {
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    pointer-events: none;
+    overflow: hidden;
     background:
-      radial-gradient(closest-side at 30% 35%, #1d4ed8 0%, transparent 100%),
-      radial-gradient(closest-side at 70% 25%, #0891b2 0%, transparent 100%),
-      radial-gradient(closest-side at 60% 75%, #7c3aed 0%, transparent 100%);
-    animation: drift 22s ease-in-out infinite;
+      radial-gradient(42% 38% at 78% 6%, rgba(37, 99, 235, 0.13), transparent 70%),
+      radial-gradient(38% 34% at 12% 88%, rgba(8, 145, 178, 0.1), transparent 72%),
+      linear-gradient(180deg, #fbfdff 0%, #f7fafc 42%, #f4f8fd 100%);
   }
 
-  .vb-aurora-slow {
-    animation-duration: 32s;
-    animation-direction: reverse;
-    opacity: 0.5;
+  .vb-ambient::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    opacity: 0.6;
   }
 
-  .vb-glass {
-    background: color-mix(in srgb, var(--vb-surface) 86%, transparent);
-    backdrop-filter: blur(18px) saturate(1.2);
-    -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  /* Glass button surfaces. Size and spacing stay on the component. */
+  .vb-btn-glass {
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.34);
+    background: linear-gradient(180deg, rgba(59, 130, 246, 0.94), rgba(29, 78, 216, 0.94));
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.45),
+      inset 0 -2px 6px rgba(10, 30, 80, 0.25),
+      0 10px 26px rgba(29, 78, 216, 0.28);
+  }
+
+  .vb-btn-glass:hover {
+    background: linear-gradient(180deg, rgba(75, 143, 250, 0.96), rgba(37, 99, 235, 0.96));
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.55),
+      inset 0 -2px 6px rgba(10, 30, 80, 0.25),
+      0 16px 36px rgba(29, 78, 216, 0.36);
+  }
+
+  .vb-btn-glasslight {
+    color: var(--vb-text);
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(255, 255, 255, 0.82));
+    backdrop-filter: blur(16px) saturate(150%);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+    box-shadow:
+      inset 0 1px 0 #ffffff,
+      inset 0 -1px 0 rgba(20, 33, 61, 0.05),
+      0 12px 30px rgba(10, 30, 80, 0.22);
+  }
+
+  .vb-btn-secondary {
+    color: var(--vb-text);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(232, 242, 255, 0.68));
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    box-shadow:
+      inset 0 1px 0 #ffffff,
+      0 8px 20px rgba(20, 33, 61, 0.08);
+  }
+
+  .vb-btn-secondary:hover {
+    background: linear-gradient(180deg, #ffffff, rgba(232, 242, 255, 0.9));
+  }
+
+  .vb-btn-ghost:hover {
+    background: rgba(37, 99, 235, 0.08);
   }
 
   .vb-hairline {
@@ -166,6 +262,80 @@
     background: currentColor;
     opacity: 0.55;
   }
+
+  /* Landing hero light field. */
+  .vb-hero-light {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background:
+      radial-gradient(52% 46% at 76% 4%, rgba(37, 99, 235, 0.16), transparent 70%),
+      radial-gradient(42% 40% at 8% 82%, rgba(8, 145, 178, 0.14), transparent 72%),
+      linear-gradient(180deg, #ffffff 0%, #f4f9ff 55%, #f7fafc 100%);
+  }
+
+  .vb-hero-light::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    width: 46rem;
+    height: 46rem;
+    left: -18rem;
+    top: -22rem;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.18), transparent 62%);
+    filter: blur(40px);
+    animation: drift 26s ease-in-out infinite;
+  }
+
+  .vb-aurora {
+    position: absolute;
+    inset: -25%;
+    z-index: -1;
+    filter: blur(70px);
+    opacity: 0.5;
+    background:
+      radial-gradient(closest-side at 30% 35%, #2563eb 0%, transparent 100%),
+      radial-gradient(closest-side at 72% 28%, #0891b2 0%, transparent 100%),
+      radial-gradient(closest-side at 60% 78%, #7c3aed 0%, transparent 100%);
+    animation: drift 28s ease-in-out infinite;
+  }
+}
+
+/* Browsers without backdrop blur get an opaque, still-elegant surface. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .vb-glass,
+  .vb-glass-strong {
+    background: #ffffff;
+  }
+
+  .vb-btn-glass {
+    background: #1d4ed8;
+  }
+
+  .vb-btn-secondary {
+    background: #f6faff;
+  }
+}
+
+/* Ask for less transparency: everything becomes comfortably opaque. */
+@media (prefers-reduced-transparency: reduce) {
+  .vb-glass,
+  .vb-glass-strong,
+  .vb-btn-secondary,
+  .vb-btn-glasslight {
+    background: #ffffff;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+:root[data-contrast='high'] .vb-glass,
+:root[data-contrast='high'] .vb-glass-strong,
+:root[data-contrast='high'] .vb-btn-secondary {
+  background: #ffffff;
+  backdrop-filter: none;
+  border-color: #000000;
 }
 
 @media print {

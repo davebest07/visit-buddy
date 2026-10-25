@@ -21,7 +21,7 @@ function ActionCard({ to, icon: Icon, tint, title, description, cta }) {
       <h2 className="mt-5 text-heading font-bold">{title}</h2>
       <p className="mt-2 max-w-[34ch] text-body text-muted">{description}</p>
 
-      <span className="mt-6 flex items-center gap-2 text-body font-bold text-primary">
+      <span className="mt-auto flex w-fit items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-body font-bold text-paper shadow-soft transition-colors duration-200 group-hover:bg-primary-deep">
         {cta}
         <ArrowRight
           size={20}

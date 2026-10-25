@@ -8,7 +8,7 @@ export default function TopNav() {
   return (
     <header className="sticky top-0 z-50 print:hidden">
       <div className="vb-container pt-4">
-        <div className="vb-glass flex items-center justify-between gap-4 rounded-full border border-line px-4 py-2 shadow-soft">
+        <div className="vb-glass-strong flex items-center justify-between gap-4 rounded-full px-4 py-2">
           <Link to="/" className="flex items-center gap-2 rounded-full">
             <span
               aria-hidden="true"
@@ -30,7 +30,7 @@ export default function TopNav() {
             </NavLink>
 
             {inApp ? null : (
-              <Button as={Link} to="/app" size="sm" className="hidden sm:inline-flex">
+              <Button as={Link} to="/app" size="sm" variant="glass" className="hidden sm:inline-flex">
                 Try the demo
               </Button>
             )}

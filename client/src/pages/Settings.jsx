@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Card from '../components/Card.jsx'
+import StatefulButton from '../components/StatefulButton.jsx'
 import TextSizeControl from '../components/TextSizeControl.jsx'
 import { useSettings } from '../context/SettingsContext.jsx'
 import { deleteAllVisits } from '../services/api.js'
@@ -66,14 +67,17 @@ export default function Settings() {
 
           {confirming ? (
             <div className="mt-5 flex flex-wrap gap-2">
-              <button
-                type="button"
+              <StatefulButton
                 onClick={handleDeleteAll}
-                disabled={working}
-                className="min-h-tap rounded-full bg-error px-6 py-2 text-body font-bold text-white"
+                variant="danger"
+                state={
+                  working ? 'loading' : message === 'All visits were deleted.' ? 'success' : 'idle'
+                }
+                loadingLabel="Deleting…"
+                successLabel="Deleted"
               >
-                {working ? 'Deleting…' : 'Yes, delete everything'}
-              </button>
+                Yes, delete everything
+              </StatefulButton>
               <button
                 type="button"
                 onClick={() => setConfirming(false)}

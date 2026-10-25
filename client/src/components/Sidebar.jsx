@@ -21,7 +21,7 @@ export const NAV = [
 export function Brand() {
   return (
     <NavLink to="/app" className="flex items-center gap-3 rounded-xl">
-      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-paper">
+      <span className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl bg-[linear-gradient(160deg,#3b82f6,#1d4ed8)] text-paper shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_6px_16px_rgba(29,78,216,0.28)]">
         <HeartPulse size={22} strokeWidth={2} aria-hidden="true" />
       </span>
       <span>
@@ -49,7 +49,7 @@ export function NavList({ onNavigate }) {
               onClick={onNavigate}
               className={({ isActive }) =>
                 `relative flex min-h-tap items-center gap-3 rounded-[14px] px-4 text-body font-bold transition-colors duration-200 ${
-                  isActive ? 'text-primary' : 'text-ink hover:bg-surface-2 hover:text-primary'
+                  isActive ? 'text-primary' : 'text-ink hover:bg-white/70 hover:text-primary'
                 }`
               }
             >
@@ -58,7 +58,7 @@ export function NavList({ onNavigate }) {
                   {isActive ? (
                     <motion.span
                       layoutId={reduce ? undefined : 'sidebar-active'}
-                      className="absolute inset-0 rounded-[14px] bg-primary-soft"
+                      className="absolute inset-0 rounded-[14px] border border-white/80 bg-primary-soft shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_6px_16px_rgba(37,99,235,0.12)]"
                       transition={{ type: 'spring', stiffness: 420, damping: 36 }}
                     />
                   ) : null}
@@ -87,12 +87,12 @@ export function NavList({ onNavigate }) {
 
 export default function Sidebar() {
   return (
-    <aside className="fixed inset-y-0 left-0 z-40 hidden w-[272px] flex-col border-r border-sidebar-line bg-sidebar lg:flex print:hidden">
+    <aside className="fixed inset-y-0 left-0 z-40 hidden w-[272px] flex-col border-r border-white/70 bg-white/62 backdrop-blur-2xl lg:flex print:hidden">
       <div className="px-6 py-6">
         <Brand />
       </div>
 
-      <div className="mx-6 border-t border-sidebar-line" />
+      <div className="mx-6 border-t border-white/70" />
 
       <nav aria-label="Main" className="mt-4 flex-1 overflow-y-auto px-3">
         <p className="px-4 pb-2 text-small font-bold uppercase tracking-[0.14em] text-muted">
@@ -101,14 +101,14 @@ export default function Sidebar() {
         <NavList />
       </nav>
 
-      <div className="border-t border-sidebar-line p-3">
+      <div className="border-t border-white/70 p-3">
         <NavLink
           to="/help"
           className={({ isActive }) =>
             `flex min-h-tap items-center gap-3 rounded-[14px] px-4 text-body font-bold transition-colors duration-200 ${
               isActive
                 ? 'bg-primary-soft text-primary'
-                : 'text-muted hover:bg-surface-2 hover:text-primary'
+                : 'text-muted hover:bg-white/70 hover:text-primary'
             }`
           }
         >

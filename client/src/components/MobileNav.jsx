@@ -59,7 +59,7 @@ export default function MobileNav() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-line bg-canvas/90 backdrop-blur lg:hidden print:hidden">
+      <header className="sticky top-0 z-40 border-b border-white/70 bg-white/65 backdrop-blur-xl lg:hidden print:hidden">
         <div className="flex min-h-tap items-center justify-between gap-3 px-4 py-2">
           <button
             ref={menuRef}
