@@ -1,13 +1,13 @@
 import { NavLink } from 'react-router-dom'
+import { motion, useReducedMotion } from 'motion/react'
 
-// Simple line icons, drawn inline so we do not add an icon library.
 const iconProps = {
-  width: 24,
-  height: 24,
+  width: 22,
+  height: 22,
   viewBox: '0 0 24 24',
   fill: 'none',
   stroke: 'currentColor',
-  strokeWidth: 2,
+  strokeWidth: 1.8,
   strokeLinecap: 'round',
   strokeLinejoin: 'round',
   'aria-hidden': true,
@@ -57,30 +57,40 @@ const ITEMS = [
   { to: '/app/settings', label: 'Settings', icon: 'settings' },
 ]
 
-// Bottom tab bar for the app pages. The active tab is marked three ways:
-// colour, bold weight and an underline, so colour is never the only signal.
+// A floating dock. Active tab: pill, colour, bold weight and underline, so the
+// state never depends on colour alone.
 export default function BottomNav() {
+  const reduce = useReducedMotion()
+
   return (
-    <nav
-      aria-label="Main"
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface print:hidden"
-    >
-      <ul className="vb-container flex">
+    <nav aria-label="Main" className="fixed inset-x-0 bottom-3 z-50 px-2 print:hidden">
+      <ul className="vb-glass mx-auto flex w-fit items-center gap-1 rounded-full border border-line p-1 shadow-lift">
         {ITEMS.map((item) => (
-          <li key={item.to} className="flex-1">
+          <li key={item.to}>
             <NavLink
               to={item.to}
               end={item.end}
-              className={({ isActive }) =>
-                `flex min-h-tap flex-col items-center justify-center gap-1 px-1 py-2 text-small transition-colors duration-fast ${
-                  isActive ? 'font-bold text-accent' : 'text-muted hover:text-ink'
-                }`
-              }
+              className="relative flex min-h-tap min-w-tap flex-col items-center justify-center gap-1 rounded-full px-3 py-1 text-small font-bold"
             >
               {({ isActive }) => (
                 <>
-                  {ICONS[item.icon]}
-                  <span className={isActive ? 'underline underline-offset-4' : undefined}>
+                  {isActive ? (
+                    <motion.span
+                      layoutId={reduce ? undefined : 'dock-active'}
+                      className="absolute inset-0 rounded-full border border-line bg-evergreen-soft"
+                      transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                    />
+                  ) : null}
+                  <span className={`relative ${isActive ? 'text-evergreen' : 'text-muted'}`}>
+                    {ICONS[item.icon]}
+                  </span>
+                  <span
+                    className={`relative ${
+                      isActive
+                        ? 'text-evergreen underline underline-offset-4'
+                        : 'text-muted'
+                    }`}
+                  >
                     {item.label}
                   </span>
                 </>

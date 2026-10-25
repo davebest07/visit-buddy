@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import Button from '../components/Button.jsx'
 import Card from '../components/Card.jsx'
+import Reveal from '../components/Reveal.jsx'
 
 const EXAMPLE_QUESTIONS = [
   'How long will this take to get better?',
@@ -12,7 +15,7 @@ const STEPS = [
   {
     number: '01',
     title: 'Say what worries you',
-    text: 'Type it or speak it. One sentence is enough. You get a short, ordered list of questions to ask.',
+    text: 'Type it or speak it. One sentence is enough, and you get a short, ordered list of questions to ask.',
   },
   {
     number: '02',
@@ -22,20 +25,12 @@ const STEPS = [
   {
     number: '03',
     title: 'Tell us what the doctor said',
-    text: 'You get a plain summary, a to-do list and a medicine schedule, each line shown next to the words it came from.',
+    text: 'You get a plain summary, a to-do list and a medicine schedule, each line beside the words it came from.',
   },
 ]
 
-const GETS = [
-  { title: 'Questions for the doctor', text: 'The things you meant to ask, in a useful order.' },
-  { title: 'A plain-language summary', text: 'Short sentences. No medical jargon.' },
-  { title: 'A to-do list', text: 'Stretches, blood work, call-backs. Tick them off as you go.' },
-  { title: 'A medicine schedule', text: 'Morning, noon, evening, night. Blank where you were not told.' },
-  { title: 'Something to share', text: 'Copy or print a visit to send to family.' },
-]
-
 const PROMISES = [
-  { title: 'You see where it came from', text: 'Every line has the exact words it was made from.' },
+  { title: 'You see where it came from', text: 'Every line carries the exact words it was made from.' },
   { title: 'You approve everything', text: 'Nothing is saved until you tap Approve and save.' },
   {
     title: 'It never gives medical advice',
@@ -45,15 +40,9 @@ const PROMISES = [
 ]
 
 const PERSONAS = [
-  {
-    name: 'Harold, 72',
-    text: 'Lives alone. Needs big text and to be able to talk instead of type.',
-  },
-  {
-    name: 'Denise, 45',
-    text: 'Helps her mother with appointments. Wants to share the summary afterwards.',
-  },
-  { name: 'Marcus, 29', text: 'New to all of this. Needs plain words and a clear next step.' },
+  { name: 'Harold, 72', role: 'Lives alone', text: 'Needs big text and to be able to talk instead of type.' },
+  { name: 'Denise, 45', role: 'Helps her mother', text: 'Wants the summary afterwards, in words she can forward.' },
+  { name: 'Marcus, 29', role: 'New to all this', text: 'Needs plain words and one clear next step.' },
 ]
 
 const FAQS = [
@@ -79,227 +68,320 @@ const FAQS = [
   },
 ]
 
-function Check() {
+function FaqItem({ question, answer }) {
+  const [open, setOpen] = useState(false)
+  const reduce = useReducedMotion()
+
   return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      className="h-6 w-6 shrink-0 text-success"
-    >
-      <path d="m4 12 5 5L20 6" />
-    </svg>
+    <div className="border-t border-line">
+      <button
+        type="button"
+        aria-expanded={open}
+        onClick={() => setOpen((current) => !current)}
+        className="flex min-h-tap w-full items-center justify-between gap-6 py-6 text-left"
+      >
+        <span className="text-subhead font-bold">{question}</span>
+        <motion.span
+          aria-hidden="true"
+          animate={{ rotate: open ? 45 : 0 }}
+          transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+          className="text-heading font-bold text-ember"
+        >
+          +
+        </motion.span>
+      </button>
+
+      <AnimatePresence initial={false}>
+        {open ? (
+          <motion.div
+            key="answer"
+            initial={reduce ? false : { height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={reduce ? undefined : { height: 0, opacity: 0 }}
+            transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden"
+          >
+            <p className="max-w-measure pb-6 text-body text-muted">{answer}</p>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+    </div>
   )
 }
 
 export default function Landing() {
+  const reduce = useReducedMotion()
+
   return (
     <>
-      {/* Hero */}
-      <section className="vb-hero-wash">
-        <div className="vb-container vb-section grid gap-8 lg:grid-cols-12 lg:items-center">
-          <div className="lg:col-span-7">
-            <p className="text-small font-bold uppercase tracking-widest text-accent">
-              For the visit, and for after
-            </p>
+      {/* ---------------------------------------------------------------- Hero */}
+      <section className="vb-night-field relative isolate overflow-hidden">
+        <div aria-hidden="true" className="vb-aurora" />
+        <div aria-hidden="true" className="vb-aurora vb-aurora-slow" />
 
-            <h1 className="mt-4 text-display font-bold">
-              Remember everything your doctor said.
+        <div className="vb-container relative grid gap-8 pb-20 pt-12 lg:grid-cols-12 lg:items-center lg:pb-28 lg:pt-16">
+          <motion.div
+            initial={reduce ? false : { opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-7"
+          >
+            <p className="vb-eyebrow text-ember-bright">For the visit, and for after</p>
+
+            <h1 className="mt-6 font-display text-mega font-semibold text-cream">
+              Remember <em className="italic text-ember-bright">everything</em> your doctor
+              said.
             </h1>
 
-            <p className="mt-4 max-w-measure text-subhead text-muted">
+            <p className="mt-6 max-w-[46ch] text-subhead text-cream-muted">
               Say what worries you before you go. Say what the doctor told you after. Visit
               Buddy turns both into short, plain lists you can actually use.
             </p>
 
-            <div className="mt-6 flex flex-wrap items-center gap-4">
-              <Button as={Link} to="/app">
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <Button as={Link} to="/app" variant="ember" magnetic>
                 Try the demo
               </Button>
-              <Button as="a" href="#how" variant="quiet">
+              <Button as="a" href="#how" variant="ghostDark">
                 See how it works
               </Button>
             </div>
 
-            <p className="mt-4 text-small text-muted">
+            <p className="mt-6 text-small text-cream-muted">
               Demo only. Please do not enter real personal or medical information.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="lg:col-span-5">
-            <Card className="shadow-calm">
+          <motion.div
+            initial={reduce ? false : { opacity: 0, y: 32, rotate: -1.5 }}
+            animate={{ opacity: 1, y: 0, rotate: 0 }}
+            transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="relative lg:col-span-5"
+          >
+            <div className="rounded-xl border border-white/15 bg-white/[0.06] p-6 shadow-lift backdrop-blur-xl">
               <div className="flex items-center justify-between gap-4">
-                <h2 className="text-subhead font-bold">Before a visit</h2>
-                <span className="rounded bg-accent-soft px-2 py-1 text-small font-bold text-accent">
+                <p className="text-small font-bold uppercase tracking-[0.14em] text-cream-muted">
+                  Before a visit
+                </p>
+                <span className="rounded-full bg-ember-bright/15 px-3 py-1 text-small font-bold text-ember-bright">
                   Example
                 </span>
               </div>
 
-              <ol className="mt-4 space-y-4">
+              <ol className="mt-6 space-y-5">
                 {EXAMPLE_QUESTIONS.map((question, index) => (
                   <li key={question} className="flex gap-4">
-                    <span className="text-small font-bold text-accent">
-                      {String(index + 1).padStart(2, '0')}
+                    <span className="font-display text-subhead text-ember-bright">
+                      0{index + 1}
                     </span>
-                    <span className="text-body">{question}</span>
+                    <span className="text-body text-cream">{question}</span>
                   </li>
                 ))}
               </ol>
 
-              <p className="mt-4 border-t border-line pt-4 text-small text-muted">
-                You can edit every line before you save it.
-              </p>
-            </Card>
-          </div>
+              <div className="mt-6 flex items-center justify-between gap-4 border-t border-white/10 pt-5">
+                <p className="text-small text-cream-muted">Every line shows its words.</p>
+                <span className="rounded-full border border-white/20 px-3 py-1 text-small font-bold text-cream">
+                  Editable
+                </span>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* How it works */}
-      <section id="how" className="border-t border-line">
+      {/* ------------------------------------------------------- How it works */}
+      <section id="how" className="scroll-mt-32 border-b border-line">
         <div className="vb-container vb-section">
-          <p className="text-small font-bold uppercase tracking-widest text-accent">
-            1 — How it works
-          </p>
-          <h2 className="mt-2 max-w-measure text-hero font-bold">Three steps. No jargon.</h2>
+          <Reveal>
+            <p className="vb-eyebrow text-ember">01 — How it works</p>
+            <h2 className="mt-4 max-w-[24ch] font-display text-display font-semibold">
+              Three steps. No jargon.
+            </h2>
+          </Reveal>
 
-          <ol className="mt-8 grid gap-8 md:grid-cols-3">
-            {STEPS.map((step) => (
-              <li key={step.number} className="border-t-2 border-accent pt-4">
-                <span className="text-small font-bold text-accent">{step.number}</span>
-                <h3 className="mt-2 text-subhead font-bold">{step.title}</h3>
-                <p className="mt-2 text-body text-muted">{step.text}</p>
-              </li>
+          <ol className="mt-12 grid gap-8 md:grid-cols-3">
+            {STEPS.map((step, index) => (
+              <Reveal as="li" key={step.number} delay={index * 0.08}>
+                <div className="border-t-2 border-ink pt-4">
+                  <span className="font-display text-heading text-ember">{step.number}</span>
+                  <h3 className="mt-3 text-subhead font-bold">{step.title}</h3>
+                  <p className="mt-2 text-body text-muted">{step.text}</p>
+                </div>
+              </Reveal>
             ))}
           </ol>
         </div>
       </section>
 
-      {/* What you get */}
-      <section className="border-y border-line bg-surface">
+      {/* ------------------------------------------------------- What you get */}
+      <section className="bg-surface-2">
         <div className="vb-container vb-section">
-          <p className="text-small font-bold uppercase tracking-widest text-accent">
-            2 — What you get
-          </p>
-          <h2 className="mt-2 max-w-measure text-hero font-bold">
-            Five things you leave with.
-          </h2>
+          <Reveal>
+            <p className="vb-eyebrow text-ember">02 — What you get</p>
+            <h2 className="mt-4 max-w-[24ch] font-display text-display font-semibold">
+              Five things you leave with.
+            </h2>
+          </Reveal>
 
-          <ul className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {GETS.map((item, index) => (
-              <li key={item.title}>
-                <Card
-                  tone={['mint', 'peach', 'sky'][index % 3]}
-                  className="h-full"
-                >
-                  <h3 className="text-subhead font-bold">{item.title}</h3>
-                  <p className="mt-2 text-body text-muted">{item.text}</p>
-                </Card>
-              </li>
-            ))}
-          </ul>
+          <div className="mt-12 grid gap-4 md:grid-cols-6">
+            <Reveal className="md:col-span-4" delay={0.05}>
+              <Card tone="paper" className="h-full p-8">
+                <h3 className="font-display text-heading font-semibold">Questions for the doctor</h3>
+                <p className="mt-2 max-w-[42ch] text-body text-muted">
+                  The things you meant to ask, in a useful order, with the worry behind each one.
+                </p>
+                <ol className="mt-6 space-y-3 border-t border-line pt-6">
+                  {EXAMPLE_QUESTIONS.map((question, index) => (
+                    <li key={question} className="flex gap-3 text-body">
+                      <span className="font-display text-muted">0{index + 1}</span>
+                      <span>{question}</span>
+                    </li>
+                  ))}
+                </ol>
+              </Card>
+            </Reveal>
+
+            <Reveal className="md:col-span-2" delay={0.1}>
+              <Card tone="sand" className="h-full">
+                <h3 className="text-subhead font-bold">A plain-language summary</h3>
+                <p className="mt-2 text-body text-muted">
+                  Short sentences. No medical jargon.
+                </p>
+              </Card>
+            </Reveal>
+
+            <Reveal className="md:col-span-2" delay={0.05}>
+              <Card tone="tint" className="h-full">
+                <h3 className="text-subhead font-bold">A to-do list</h3>
+                <p className="mt-2 text-body text-muted">
+                  Stretches, blood work, call-backs. Tick them off as you go.
+                </p>
+              </Card>
+            </Reveal>
+
+            <Reveal className="md:col-span-2" delay={0.1}>
+              <Card tone="mist" className="h-full">
+                <h3 className="text-subhead font-bold">A medicine schedule</h3>
+                <p className="mt-2 text-body text-muted">
+                  Morning, noon, evening, night. Blank where you were not told.
+                </p>
+              </Card>
+            </Reveal>
+
+            <Reveal className="md:col-span-2" delay={0.15}>
+              <Card tone="paper" className="h-full">
+                <h3 className="text-subhead font-bold">Something to share</h3>
+                <p className="mt-2 text-body text-muted">
+                  Copy or print a visit to send to family.
+                </p>
+              </Card>
+            </Reveal>
+          </div>
         </div>
       </section>
 
-      {/* Our promise */}
-      <section className="bg-accent-soft">
+      {/* ------------------------------------------------------------ Promise */}
+      <section className="vb-night-field">
         <div className="vb-container vb-section">
-          <p className="text-small font-bold uppercase tracking-widest text-accent">
-            3 — Our promise
-          </p>
-          <h2 className="mt-2 max-w-measure text-hero font-bold">You stay in charge.</h2>
+          <Reveal>
+            <p className="vb-eyebrow text-ember-bright">03 — Our promise</p>
+            <h2 className="mt-4 max-w-[20ch] font-display text-display font-semibold text-cream">
+              You stay in charge.
+            </h2>
+          </Reveal>
 
-          <ul className="mt-8 grid gap-8 md:grid-cols-2">
-            {PROMISES.map((promise) => (
-              <li key={promise.title} className="flex gap-4">
-                <Check />
-                <div>
-                  <h3 className="text-subhead font-bold">{promise.title}</h3>
-                  <p className="mt-1 text-body text-muted">{promise.text}</p>
+          <ul className="mt-12 grid gap-x-12 gap-y-10 md:grid-cols-2">
+            {PROMISES.map((promise, index) => (
+              <Reveal as="li" key={promise.title} delay={index * 0.06}>
+                <div className="flex gap-4 border-t border-white/15 pt-5">
+                  <span aria-hidden="true" className="mt-1 text-ember-bright">
+                    ✦
+                  </span>
+                  <div>
+                    <h3 className="text-subhead font-bold text-cream">{promise.title}</h3>
+                    <p className="mt-1 text-body text-cream-muted">{promise.text}</p>
+                  </div>
                 </div>
-              </li>
+              </Reveal>
             ))}
           </ul>
         </div>
       </section>
 
-      {/* Who it is for */}
-      <section className="border-t border-line">
+      {/* ----------------------------------------------------------- Personas */}
+      <section className="border-b border-line">
         <div className="vb-container vb-section">
-          <p className="text-small font-bold uppercase tracking-widest text-accent">
-            Who it is for
-          </p>
-          <h2 className="mt-2 max-w-measure text-hero font-bold">
-            Built for people who are tired, worried, or both.
-          </h2>
+          <Reveal>
+            <p className="vb-eyebrow text-ember">Who it is for</p>
+            <h2 className="mt-4 max-w-[26ch] font-display text-display font-semibold">
+              Built for people who are tired, worried, or both.
+            </h2>
+          </Reveal>
 
-          <ul className="mt-8 grid gap-4 md:grid-cols-3">
-            {PERSONAS.map((persona) => (
-              <li key={persona.name}>
-                <Card className="h-full">
-                  <h3 className="text-subhead font-bold">{persona.name}</h3>
+          <ul className="mt-12 grid gap-4 md:grid-cols-3">
+            {PERSONAS.map((persona, index) => (
+              <Reveal as="li" key={persona.name} delay={index * 0.06}>
+                <Card className="h-full p-8">
+                  <p className="text-small font-bold uppercase tracking-[0.14em] text-ember">
+                    {persona.role}
+                  </p>
+                  <h3 className="mt-3 font-display text-heading font-semibold">{persona.name}</h3>
                   <p className="mt-2 text-body text-muted">{persona.text}</p>
                 </Card>
-              </li>
+              </Reveal>
             ))}
           </ul>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="border-t border-line">
+      {/* ---------------------------------------------------------------- FAQ */}
+      <section>
         <div className="vb-container vb-section">
-          <p className="text-small font-bold uppercase tracking-widest text-accent">
-            Questions
-          </p>
-          <h2 className="mt-2 text-hero font-bold">Four things people ask.</h2>
+          <div className="grid gap-10 lg:grid-cols-12">
+            <Reveal className="lg:col-span-4">
+              <p className="vb-eyebrow text-ember">Questions</p>
+              <h2 className="mt-4 font-display text-display font-semibold">
+                Four things people ask.
+              </h2>
+            </Reveal>
 
-          <div className="mt-8 max-w-measure">
-            {FAQS.map((faq) => (
-              <details key={faq.question} className="group border-t border-line last:border-b">
-                <summary className="flex min-h-tap cursor-pointer list-none items-center justify-between gap-4 py-4 text-subhead font-bold">
-                  {faq.question}
-                  <span
-                    aria-hidden="true"
-                    className="text-heading text-accent transition-transform duration-calm group-open:rotate-45"
-                  >
-                    +
-                  </span>
-                </summary>
-                <p className="pb-4 text-body text-muted">{faq.answer}</p>
-              </details>
-            ))}
+            <Reveal className="lg:col-span-8" delay={0.08}>
+              <div className="border-b border-line">
+                {FAQS.map((faq) => (
+                  <FaqItem key={faq.question} question={faq.question} answer={faq.answer} />
+                ))}
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Closing call to action */}
-      <section className="bg-charcoal text-charcoal-text">
+      {/* ------------------------------------------------------------ Closing */}
+      <section className="bg-evergreen-deep text-cream">
         <div className="vb-container vb-section">
-          <h2 className="max-w-measure text-hero font-bold">
-            Start with the one thing that worries you.
-          </h2>
-          <p className="mt-4 max-w-measure text-subhead">
-            It takes about a minute, and you can change every word.
-          </p>
-          <div className="mt-6">
-            <Button as={Link} to="/app" variant="onDark">
-              Try the demo
-            </Button>
-          </div>
+          <Reveal>
+            <p className="vb-eyebrow text-cream-muted">Start here</p>
+            <h2 className="mt-5 max-w-[22ch] font-display text-mega font-semibold">
+              Start with the one thing that worries you.
+            </h2>
+            <p className="mt-6 max-w-[44ch] text-subhead text-cream-muted">
+              It takes about a minute, and you can change every word.
+            </p>
+            <div className="mt-8">
+              <Button as={Link} to="/app" variant="onDark" magnetic>
+                Try the demo
+              </Button>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       <footer className="border-t border-line bg-surface">
-        <div className="vb-container flex flex-col gap-4 py-8 md:flex-row md:items-start md:justify-between">
+        <div className="vb-container flex flex-col gap-8 py-12 md:flex-row md:items-start md:justify-between">
           <div>
-            <p className="text-subhead font-bold">Visit Buddy</p>
-            <p className="mt-2 max-w-measure text-small text-muted">
+            <p className="font-display text-heading font-semibold">Visit Buddy</p>
+            <p className="mt-3 max-w-measure text-small text-muted">
               Visit Buddy organizes what you tell it. It does not give medical advice.
             </p>
           </div>
@@ -307,20 +389,20 @@ export default function Landing() {
           <nav aria-label="Footer" className="flex gap-6">
             <Link
               to="/help"
-              className="flex min-h-tap items-center text-body font-bold text-ink hover:text-accent"
+              className="flex min-h-tap items-center text-small font-bold text-ink hover:text-evergreen"
             >
               Help
             </Link>
             <Link
               to="/app"
-              className="flex min-h-tap items-center text-body font-bold text-ink hover:text-accent"
+              className="flex min-h-tap items-center text-small font-bold text-ink hover:text-evergreen"
             >
               Try the demo
             </Link>
           </nav>
         </div>
 
-        <div className="vb-container pb-8">
+        <div className="vb-container pb-10">
           <p className="max-w-measure text-small text-muted">
             Privacy: this demo keeps your visits on this computer and never stores audio.
             Please do not enter real personal or medical information. Built by David Soboma

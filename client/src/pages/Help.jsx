@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import Reveal from '../components/Reveal.jsx'
 
 const DOES = [
   'Turns what worries you into a short list of questions to ask.',
@@ -18,93 +19,106 @@ const DOES_NOT = [
 
 export default function Help() {
   return (
-    <div className="vb-container vb-section max-w-3xl">
-      <p className="text-small font-bold uppercase tracking-widest text-accent">Help</p>
+    <div className="vb-container max-w-4xl pt-10">
+      <Reveal>
+        <p className="vb-eyebrow text-ember">Help</p>
+        <h1 className="mt-4 max-w-[20ch] font-display text-display font-semibold">
+          What Visit Buddy does, and what it does not.
+        </h1>
+        <p className="mt-6 max-w-measure text-subhead font-bold">
+          Visit Buddy organizes what you tell it. It does not give medical advice.
+        </p>
+      </Reveal>
 
-      <h1 className="mt-2 text-display font-bold">
-        What Visit Buddy does, and what it does not.
-      </h1>
-
-      <p className="mt-6 text-subhead font-bold">
-        Visit Buddy organizes what you tell it. It does not give medical advice.
-      </p>
-
-      <section aria-labelledby="does" className="mt-8">
-        <h2 id="does" className="text-hero font-bold">
-          What it does
-        </h2>
-        <ul className="mt-4 space-y-2">
-          {DOES.map((item) => (
-            <li key={item} className="flex gap-4 text-body">
-              <span aria-hidden="true" className="font-bold text-success">
-                ✓
-              </span>
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section aria-labelledby="does-not" className="mt-8">
-        <h2 id="does-not" className="text-hero font-bold">
-          What it does not do
-        </h2>
-        <ul className="mt-4 space-y-2">
-          {DOES_NOT.map((item) => (
-            <li key={item} className="flex gap-4 text-body">
-              <span aria-hidden="true" className="font-bold text-error">
-                ✕
-              </span>
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section aria-labelledby="emergency" className="mt-8">
-        <div className="rounded border-2 border-error bg-surface p-6">
-          <h2 id="emergency" className="text-subhead font-bold text-error">
-            If this might be an emergency, get help now
+      <Reveal delay={0.05}>
+        <section aria-labelledby="does" className="mt-12 grid gap-6 md:grid-cols-2">
+          <h2 id="does" className="text-heading font-bold md:col-span-2">
+            What it does
           </h2>
+          <ul className="grid gap-3 md:col-span-2">
+            {DOES.map((item) => (
+              <li
+                key={item}
+                className="flex gap-4 rounded-card border border-line bg-surface p-4 text-body"
+              >
+                <span aria-hidden="true" className="font-bold text-success">
+                  ✓
+                </span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </Reveal>
 
-          <p className="mt-2 text-body">
-            Call 911, or your local emergency number, if you have chest pain, trouble
-            breathing, sudden weakness or numbness, a sudden very bad headache, or you feel
-            faint. Do not wait for an app.
-          </p>
+      <Reveal delay={0.05}>
+        <section aria-labelledby="does-not" className="mt-14">
+          <h2 id="does-not" className="text-heading font-bold">
+            What it does not do
+          </h2>
+          <ul className="mt-4 grid gap-3">
+            {DOES_NOT.map((item) => (
+              <li key={item} className="flex gap-4 border-t border-line py-3 text-body">
+                <span aria-hidden="true" className="font-bold text-error">
+                  ✕
+                </span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </Reveal>
 
-          <p className="mt-4 text-body">
-            For anything else that is getting worse, call your doctor's office. If you are not
-            sure, call your doctor or your pharmacist and ask. That list is not complete — if
-            something feels very wrong, get help.
-          </p>
-        </div>
-      </section>
+      <Reveal delay={0.05}>
+        <section aria-labelledby="emergency" className="mt-14">
+          <div className="rounded-xl bg-night p-8 text-cream">
+            <h2 id="emergency" className="font-display text-heading font-semibold">
+              If this might be an emergency, get help now
+            </h2>
 
-      <section aria-labelledby="questions" className="mt-8">
-        <h2 id="questions" className="text-hero font-bold">
-          Questions about a visit
-        </h2>
-        <p className="mt-2 max-w-measure text-body text-muted">
-          Use "Ask about this visit" on a saved visit. It answers only from what is written
-          there, and it shows the line it used. If the answer is not in that visit, it says so
-          instead of guessing.
-        </p>
-      </section>
+            <p className="mt-3 max-w-measure text-body text-cream-muted">
+              Call 911, or your local emergency number, if you have chest pain, trouble
+              breathing, sudden weakness or numbness, a sudden very bad headache, or you feel
+              faint. Do not wait for an app.
+            </p>
 
-      <section aria-labelledby="privacy" className="mt-8">
-        <h2 id="privacy" className="text-hero font-bold">
-          Your information
-        </h2>
-        <p className="mt-2 max-w-measure text-body text-muted">
-          This is a demonstration. Visits are stored on the computer running the demo, and
-          audio is never saved. You can remove everything from Settings with "Delete all my
-          data". Please do not enter real personal or medical information.
-        </p>
-      </section>
+            <p className="mt-4 max-w-measure text-body text-cream-muted">
+              For anything else that is getting worse, call your doctor's office. If you are
+              not sure, call your doctor or your pharmacist and ask. That list is not complete
+              — if something feels very wrong, get help.
+            </p>
+          </div>
+        </section>
+      </Reveal>
 
-      <p className="mt-8 border-t border-line pt-6 text-body">
-        <Link to="/app" className="font-bold text-accent underline underline-offset-4">
+      <Reveal delay={0.05}>
+        <section aria-labelledby="questions" className="mt-14 grid gap-6 md:grid-cols-2">
+          <div>
+            <h2 id="questions" className="text-heading font-bold">
+              Questions about a visit
+            </h2>
+            <p className="mt-3 text-body text-muted">
+              Use "Ask about this visit" on a saved visit. It answers only from what is written
+              there, and it shows the line it used. If the answer is not in that visit, it says
+              so instead of guessing.
+            </p>
+          </div>
+
+          <div>
+            <h2 id="privacy" className="text-heading font-bold">
+              Your information
+            </h2>
+            <p className="mt-3 text-body text-muted">
+              This is a demonstration. Visits are stored on the computer running the demo, and
+              audio is never saved. You can remove everything from Settings with "Delete all my
+              data". Please do not enter real personal or medical information.
+            </p>
+          </div>
+        </section>
+      </Reveal>
+
+      <p className="mt-12 border-t border-line pt-6 text-body">
+        <Link to="/app" className="font-bold text-evergreen underline underline-offset-4">
           Go to the app
         </Link>
       </p>

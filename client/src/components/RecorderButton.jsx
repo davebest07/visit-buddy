@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
-// Browser recording with the failures people actually hit (brief section 9).
-// Audio never leaves this component: the page passes the blob to the mock.
+// Browser recording with the failures people actually hit. Audio never leaves
+// this component: the page passes the blob to the mock service.
 export default function RecorderButton({ onAudio, label = 'Record' }) {
   const [recording, setRecording] = useState(false)
   const [seconds, setSeconds] = useState(0)
@@ -86,10 +86,10 @@ export default function RecorderButton({ onAudio, label = 'Record' }) {
       <button
         type="button"
         onClick={recording ? stop : start}
-        className={`flex min-h-tap items-center gap-2 rounded px-6 py-2 text-body font-bold transition-colors duration-fast ${
+        className={`flex min-h-tap items-center gap-3 rounded-full border px-6 py-2 text-body font-bold transition-colors duration-fast ${
           recording
-            ? 'bg-error text-white hover:opacity-90'
-            : 'border border-accent bg-surface text-accent hover:bg-accent-soft'
+            ? 'border-error bg-error text-white'
+            : 'border-evergreen bg-transparent text-evergreen hover:bg-evergreen-soft'
         }`}
       >
         <span aria-hidden="true" className={recording ? 'animate-pulse' : ''}>

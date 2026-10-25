@@ -1,11 +1,13 @@
 import { useId, useState } from 'react'
 
-// Every AI line can show the exact words it came from (brief section 7).
-export default function QuoteLine({ quote }) {
+// Every AI line can show the exact words it came from.
+export default function QuoteLine({ quote, tone = 'light' }) {
   const [open, setOpen] = useState(false)
   const panelId = useId()
 
   if (!quote) return null
+
+  const isDark = tone === 'dark'
 
   return (
     <div>
@@ -14,7 +16,9 @@ export default function QuoteLine({ quote }) {
         onClick={() => setOpen((current) => !current)}
         aria-expanded={open}
         aria-controls={panelId}
-        className="min-h-tap py-1 text-small font-bold text-accent underline underline-offset-4"
+        className={`min-h-tap py-1 text-small font-bold underline underline-offset-4 ${
+          isDark ? 'text-cream-muted hover:text-cream' : 'text-evergreen hover:text-evergreen-deep'
+        }`}
       >
         {open ? 'Hide the words' : 'Quote'}
       </button>
@@ -22,7 +26,9 @@ export default function QuoteLine({ quote }) {
       {open ? (
         <blockquote
           id={panelId}
-          className="mt-2 border-l-4 border-accent pl-4 text-small text-muted"
+          className={`mt-2 border-l-2 pl-4 text-small ${
+            isDark ? 'border-ember-bright text-cream-muted' : 'border-ember text-muted'
+          }`}
         >
           “{quote}”
         </blockquote>

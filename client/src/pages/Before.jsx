@@ -37,7 +37,6 @@ export default function Before() {
   const request = useCallback((signal) => buildQuestions(concerns, { signal }), [concerns])
   const { status, data, error, elapsed, run, cancel, reset } = useAICall(request)
 
-  // A fresh result replaces the list and clears the undo history.
   useEffect(() => {
     if (Array.isArray(data)) resetQuestions(data.map((question) => ({ ...question })))
   }, [data, resetQuestions])
@@ -94,73 +93,122 @@ export default function Before() {
   }
 
   const busy = transcribing || status === 'loading'
+  const step = status === 'empty' ? 1 : status === 'loading' ? 2 : 3
 
   return (
-    <div className="vb-container py-8">
-      <p className="text-small font-bold uppercase tracking-widest text-accent">Before a visit</p>
-      <h1 className="mt-2 text-hero font-bold">What is worrying you?</h1>
-      <p className="mt-2 max-w-measure text-body text-muted">
-        Say it in your own words. One or two sentences is enough. You will get a short list of
-        questions to ask the doctor.
-      </p>
-
-      <Card className="mt-6">
-        <label htmlFor="concerns" className="text-subhead font-bold">
-          Your worries
-        </label>
-        <p id="concerns-help" className="mt-1 text-small text-muted">
-          Type here, or use the record button.
+    <div className="vb-container max-w-5xl pt-10">
+      <header>
+        <p className="vb-eyebrow text-ember">Before a visit</p>
+        <h1 className="mt-4 max-w-[18ch] text-hero font-bold">What is worrying you?</h1>
+        <p className="mt-3 max-w-measure text-body text-muted">
+          Say it in your own words. One or two sentences is enough. You will get a short list of
+          questions to ask the doctor.
         </p>
+      </header>
 
-        <textarea
-          id="concerns"
-          aria-describedby="concerns-help"
-          value={concerns}
-          onChange={(event) => setConcerns(event.target.value)}
-          rows={4}
-          placeholder="For example: my knee has been hurting for two weeks."
-          className="mt-2 w-full rounded border border-line bg-background p-4 text-body text-ink"
-        />
+      <ol className="mt-8 flex flex-wrap gap-2 text-small font-bold" aria-label="Steps">
+        {['Your words', 'Checking', 'Your questions'].map((label, index) => {
+          const active = step === index + 1
+          const done = step > index + 1
+          return (
+            <li
+              key={label}
+              className={`flex items-center gap-2 rounded-full border px-4 py-2 ${
+                active
+                  ? 'border-evergreen bg-evergreen text-cream'
+                  : done
+                    ? 'border-line bg-evergreen-soft text-evergreen'
+                    : 'border-line bg-surface text-muted'
+              }`}
+            >
+              <span className="font-display">{done ? '✓' : `0${index + 1}`}</span>
+              {label}
+            </li>
+          )
+        })}
+      </ol>
 
-        <div className="mt-4 flex flex-wrap items-center gap-4">
-          <RecorderButton onAudio={handleAudio} label="Record my worries" />
-          {transcribing ? (
-            <span className="text-small text-muted" aria-live="polite">
-              Turning your recording into words…
-            </span>
-          ) : null}
-        </div>
+      <Card className="mt-6 overflow-hidden p-0">
+        <div className="grid lg:grid-cols-12">
+          <div className="p-6 md:p-8 lg:col-span-7">
+            <label htmlFor="concerns" className="text-subhead font-bold">
+              Your worries
+            </label>
+            <p id="concerns-help" className="mt-1 text-small text-muted">
+              Type here, or use the record button.
+            </p>
 
-        <div className="mt-4">
-          <p className="text-small font-bold text-muted">Or try one of these</p>
-          <div className="mt-2 flex flex-wrap gap-2">
-            {EXAMPLES.map((example) => (
-              <button
-                key={example}
-                type="button"
-                onClick={() => setConcerns(example)}
-                className="min-h-tap rounded border border-line bg-surface px-4 py-2 text-left text-small text-ink hover:border-accent hover:bg-accent-soft"
-              >
-                {example}
-              </button>
-            ))}
+            <textarea
+              id="concerns"
+              aria-describedby="concerns-help"
+              value={concerns}
+              onChange={(event) => setConcerns(event.target.value)}
+              rows={5}
+              placeholder="For example: my knee has been hurting for two weeks."
+              className="mt-3 w-full resize-y rounded-card border border-line bg-canvas p-4 text-body text-ink placeholder:text-muted"
+            />
+
+            <div className="mt-4 flex flex-wrap items-center gap-4">
+              <RecorderButton onAudio={handleAudio} label="Record my worries" />
+              {transcribing ? (
+                <span className="text-small text-muted" aria-live="polite">
+                  Turning your recording into words…
+                </span>
+              ) : null}
+            </div>
+
+            <div className="mt-5">
+              <p className="text-small font-bold text-muted">Or try one of these</p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {EXAMPLES.map((example) => (
+                  <button
+                    key={example}
+                    type="button"
+                    onClick={() => setConcerns(example)}
+                    className="min-h-tap rounded-full border border-line bg-surface px-4 py-2 text-left text-small text-ink transition-colors duration-fast hover:border-evergreen hover:text-evergreen"
+                  >
+                    {example}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-6">
+              <Button onClick={run} disabled={!concerns.trim() || busy} magnetic>
+                {busy ? 'Working…' : 'Get my questions'}
+              </Button>
+            </div>
           </div>
-        </div>
 
-        <p className="mt-4 text-small text-muted">
-          <strong className="text-ink">Demo only.</strong> Please do not enter real personal or
-          medical information.
-        </p>
+          <aside className="border-t border-line bg-surface-2 p-6 md:p-8 lg:col-span-5 lg:border-l lg:border-t-0">
+            <p className="text-small font-bold uppercase tracking-[0.14em] text-ember">
+              What you will get
+            </p>
+            <ul className="mt-4 space-y-4">
+              <li className="flex gap-3 text-body">
+                <span aria-hidden="true" className="text-evergreen">✦</span>
+                A short, ordered list of questions.
+              </li>
+              <li className="flex gap-3 text-body">
+                <span aria-hidden="true" className="text-evergreen">✦</span>
+                The exact words each question came from.
+              </li>
+              <li className="flex gap-3 text-body">
+                <span aria-hidden="true" className="text-evergreen">✦</span>
+                Nothing saved until you tap Save.
+              </li>
+            </ul>
 
-        <div className="mt-6">
-          <Button onClick={run} disabled={!concerns.trim() || busy}>
-            {busy ? 'Working…' : 'Get my questions'}
-          </Button>
+            <p className="mt-6 rounded-card border border-line bg-surface p-4 text-small text-muted">
+              <strong className="text-ink">Demo only.</strong> Please do not enter real personal
+              or medical information.
+            </p>
+          </aside>
         </div>
       </Card>
 
       {status !== 'empty' ? (
-        <div className="mt-8">
+        <div className="mt-10">
           <AIShell
             status={status}
             error={error}
@@ -174,17 +222,22 @@ export default function Before() {
           >
             {questions?.length ? (
               <>
-                <h2 className="text-hero font-bold">Your questions</h2>
-                <p className="mt-2 max-w-measure text-body text-muted">
-                  Edit any line. Nothing is saved until you tap Save.
-                </p>
+                <div className="flex flex-wrap items-end justify-between gap-4">
+                  <div>
+                    <p className="vb-eyebrow text-ember">Step 03</p>
+                    <h2 className="mt-3 text-hero font-bold">Your questions</h2>
+                  </div>
+                  <p className="max-w-[34ch] text-small text-muted">
+                    Edit any line. Nothing is saved until you tap Save.
+                  </p>
+                </div>
 
-                <div className="mt-4">
+                <div className="mt-6">
                   <EditableList items={questions} onChange={setQuestions} label="Question" />
                 </div>
 
-                <div className="mt-6 flex flex-wrap gap-2">
-                  <Button onClick={handleSave} disabled={saving}>
+                <div className="mt-8 flex flex-wrap gap-2 border-t border-line pt-6">
+                  <Button onClick={handleSave} disabled={saving} magnetic>
                     {saving ? 'Saving…' : 'Save'}
                   </Button>
                   <Button variant="secondary" onClick={() => window.print()}>

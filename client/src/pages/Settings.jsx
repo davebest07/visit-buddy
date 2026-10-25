@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Card from '../components/Card.jsx'
 import TextSizeControl from '../components/TextSizeControl.jsx'
 import { useSettings } from '../context/SettingsContext.jsx'
 import { deleteAllVisits } from '../services/api.js'
@@ -23,50 +24,61 @@ export default function Settings() {
   }
 
   return (
-    <div className="vb-container py-8">
-      <h1 className="text-hero font-bold">Settings</h1>
+    <div className="vb-container max-w-3xl pt-10">
+      <header>
+        <p className="vb-eyebrow text-ember">Settings</p>
+        <h1 className="mt-4 text-hero font-bold">Make it easier to read.</h1>
+      </header>
 
-      <div className="mt-8 grid max-w-measure gap-8">
-        <TextSizeControl />
+      <div className="mt-8 grid gap-4">
+        <Card className="p-6 md:p-8">
+          <TextSizeControl />
+        </Card>
 
-        <fieldset>
-          <legend className="text-small font-bold text-ink">Contrast</legend>
+        <Card className="p-6 md:p-8">
+          <fieldset>
+            <legend className="text-subhead font-bold">Contrast</legend>
 
-          <label className="mt-2 flex min-h-tap cursor-pointer items-center gap-4">
-            <input
-              type="checkbox"
-              checked={contrast === 'high'}
-              onChange={(event) => setContrast(event.target.checked ? 'high' : 'normal')}
-              className="h-6 w-6 accent-accent"
-            />
-            <span className="text-body">High contrast</span>
-          </label>
+            <label className="mt-4 flex min-h-tap cursor-pointer items-center justify-between gap-4">
+              <span className="text-body">High contrast</span>
+              <span className="relative inline-flex">
+                <input
+                  type="checkbox"
+                  checked={contrast === 'high'}
+                  onChange={(event) => setContrast(event.target.checked ? 'high' : 'normal')}
+                  className="peer sr-only"
+                />
+                <span className="h-8 w-14 rounded-full bg-line transition-colors duration-fast peer-checked:bg-evergreen" />
+                <span className="absolute left-1 top-1 h-6 w-6 rounded-full bg-surface shadow-soft transition-transform duration-fast peer-checked:translate-x-6" />
+              </span>
+            </label>
 
-          <p className="mt-2 text-small text-muted">
-            Turns the page pure white with black text and a darker accent.
-          </p>
-        </fieldset>
+            <p className="mt-3 text-small text-muted">
+              Turns the page pure white with black text and a darker accent.
+            </p>
+          </fieldset>
+        </Card>
 
-        <section className="border-t border-line pt-6">
+        <Card className="p-6 md:p-8">
           <h2 className="text-subhead font-bold">Your data</h2>
           <p className="mt-2 text-body text-muted">
             Visits are saved on this computer. Deleting is permanent.
           </p>
 
           {confirming ? (
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-5 flex flex-wrap gap-2">
               <button
                 type="button"
                 onClick={handleDeleteAll}
                 disabled={working}
-                className="min-h-tap rounded bg-error px-6 py-2 text-body font-bold text-white"
+                className="min-h-tap rounded-full bg-error px-6 py-2 text-body font-bold text-white"
               >
                 {working ? 'Deleting…' : 'Yes, delete everything'}
               </button>
               <button
                 type="button"
                 onClick={() => setConfirming(false)}
-                className="min-h-tap rounded border border-line px-6 py-2 text-body font-bold"
+                className="min-h-tap rounded-full border border-line px-6 py-2 text-body font-bold"
               >
                 Cancel
               </button>
@@ -75,7 +87,7 @@ export default function Settings() {
             <button
               type="button"
               onClick={() => setConfirming(true)}
-              className="mt-4 min-h-tap rounded border-2 border-error px-6 py-2 text-body font-bold text-error"
+              className="mt-5 min-h-tap rounded-full border-2 border-error px-6 py-2 text-body font-bold text-error"
             >
               Delete all my data
             </button>
@@ -86,7 +98,7 @@ export default function Settings() {
               {message}
             </p>
           ) : null}
-        </section>
+        </Card>
       </div>
     </div>
   )

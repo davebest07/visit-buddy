@@ -3,7 +3,7 @@ const SECONDS_PER_STEP = 1.9
 
 export default function LoadingSteps({ steps, elapsed }) {
   return (
-    <ol className="mt-4 space-y-2">
+    <ol className="mt-6 space-y-4">
       {steps.map((label, index) => {
         const done = elapsed >= (index + 1) * SECONDS_PER_STEP
         const active = !done && elapsed >= index * SECONDS_PER_STEP
@@ -12,11 +12,11 @@ export default function LoadingSteps({ steps, elapsed }) {
           <li key={label} className="flex items-center gap-4 text-body">
             <span
               aria-hidden="true"
-              className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-small font-bold ${
+              className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border text-small font-bold transition-colors duration-calm ${
                 done
-                  ? 'border-success bg-success text-white'
+                  ? 'border-evergreen bg-evergreen text-cream'
                   : active
-                    ? 'border-accent text-accent'
+                    ? 'border-evergreen text-evergreen'
                     : 'border-line text-muted'
               }`}
             >
@@ -25,9 +25,7 @@ export default function LoadingSteps({ steps, elapsed }) {
 
             <span className={done ? 'text-muted' : 'text-ink'}>{label}</span>
 
-            <span className="sr-only">
-              {done ? 'done' : active ? 'in progress' : 'waiting'}
-            </span>
+            <span className="sr-only">{done ? 'done' : active ? 'in progress' : 'waiting'}</span>
           </li>
         )
       })}

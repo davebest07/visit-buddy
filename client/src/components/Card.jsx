@@ -1,16 +1,19 @@
-// A panel. `tone` picks one of the soft tints from the healthcare-dashboard
-// reference; the default keeps a plain white surface for reading-heavy content.
+// Panels. Four tones, one geometry, so every screen belongs to the same family.
 const TONES = {
-  surface: 'border-line bg-surface',
-  mint: 'border-mint bg-mint',
-  peach: 'border-peach bg-peach',
-  sky: 'border-sky bg-sky',
+  paper: 'border-line bg-surface',
+  tint: 'border-transparent bg-sage',
+  sand: 'border-transparent bg-sand',
+  mist: 'border-transparent bg-mist',
+  night: 'border-white/10 bg-night-2 text-cream',
+  glass: 'border-white/15 bg-white/5 text-cream backdrop-blur-xl',
 }
 
-export default function Card({ as: Tag = 'div', tone = 'surface', className = '', children, ...props }) {
+export default function Card({ as: Tag = 'div', tone = 'paper', className = '', children, ...props }) {
   return (
     <Tag
-      className={`rounded-card border p-6 shadow-soft ${TONES[tone] ?? TONES.surface} ${className}`}
+      className={`rounded-card border p-6 ${
+        tone === 'night' || tone === 'glass' ? '' : 'shadow-soft'
+      } ${TONES[tone] ?? TONES.paper} ${className}`}
       {...props}
     >
       {children}

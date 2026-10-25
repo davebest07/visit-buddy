@@ -13,7 +13,6 @@ const EXAMPLE_QUESTIONS = ['What did she say about my knee?', 'When is my next v
 
 function formatDate(value) {
   return new Date(value).toLocaleDateString(undefined, {
-    weekday: 'long',
     month: 'long',
     day: 'numeric',
     year: 'numeric',
@@ -47,6 +46,15 @@ function visitAsText(visit) {
   }
   if (visit.transcript) lines.push('What the doctor said', visit.transcript)
   return lines.join('\n')
+}
+
+function Section({ label, children }) {
+  return (
+    <section className="mt-12">
+      <p className="text-small font-bold uppercase tracking-[0.14em] text-ember">{label}</p>
+      <div className="mt-4">{children}</div>
+    </section>
+  )
 }
 
 export default function VisitDetail() {
@@ -125,7 +133,7 @@ export default function VisitDetail() {
 
   if (state === 'loading') {
     return (
-      <div className="vb-container py-8">
+      <div className="vb-container pt-10">
         <p className="text-body text-muted" aria-live="polite">
           Opening this visit…
         </p>
@@ -135,13 +143,13 @@ export default function VisitDetail() {
 
   if (state === 'error' || !visit) {
     return (
-      <div className="vb-container py-8">
+      <div className="vb-container pt-10">
         <h1 className="text-hero font-bold">That visit is not here</h1>
-        <p className="mt-2 text-body text-muted">
+        <p className="mt-3 text-body text-muted">
           It may have been deleted, or the little server is not running.
         </p>
         <p className="mt-6">
-          <Link to="/app/history" className="font-bold text-accent underline underline-offset-4">
+          <Link to="/app/history" className="font-bold text-evergreen underline underline-offset-4">
             Back to History
           </Link>
         </p>
@@ -150,39 +158,64 @@ export default function VisitDetail() {
   }
 
   return (
-    <div className="vb-container py-8">
-      <p className="text-small font-bold uppercase tracking-widest text-accent">
-        {visit.type === 'before' ? 'Before a visit' : 'After a visit'}
-      </p>
-      <h1 className="mt-2 text-hero font-bold">{formatDate(visit.createdAt)}</h1>
+    <div className="vb-container max-w-4xl pt-10">
+      <header className="border-b border-line pb-8">
+        <p className="vb-eyebrow text-ember">
+          {visit.type === 'before' ? 'Before a visit' : 'After a visit'}
+        </p>
+        <h1 className="mt-4 font-display text-display font-semibold">{formatDate(visit.createdAt)}</h1>
+
+        <div className="mt-6 flex flex-wrap gap-2 print:hidden">
+          <Button variant="secondary" size="sm" onClick={handleCopy}>
+            Copy
+          </Button>
+          <Button variant="secondary" size="sm" onClick={() => window.print()}>
+            Print
+          </Button>
+
+          {confirming ? (
+            <>
+              <Button variant="danger" size="sm" onClick={handleDelete}>
+                Yes, delete this visit
+              </Button>
+              <Button variant="quiet" size="sm" onClick={() => setConfirming(false)}>
+                Cancel
+              </Button>
+            </>
+          ) : (
+            <Button variant="quiet" size="sm" onClick={() => setConfirming(true)}>
+              Delete
+            </Button>
+          )}
+        </div>
+      </header>
 
       {visit.concerns ? (
-        <Card className="mt-6">
-          <h2 className="text-subhead font-bold">What was worrying you</h2>
-          <p className="mt-2 text-body">{visit.concerns}</p>
-        </Card>
+        <Section label="What was worrying you">
+          <p className="max-w-measure text-body">{visit.concerns}</p>
+        </Section>
       ) : null}
 
       {visit.questions?.length ? (
-        <section className="mt-8">
-          <h2 className="text-heading font-bold">Your questions</h2>
-          <ol className="mt-4 space-y-2">
-            {visit.questions.map((question, index) => (
-              <li key={index} className="flex gap-4 text-body">
-                <span className="font-bold text-accent">{index + 1}</span>
-                <span>{question}</span>
+        <Section label="Your questions">
+          <ol className="grid gap-3">
+            {visit.questions.map((item, index) => (
+              <li key={index} className="flex gap-4 border-t border-line pt-3 text-body">
+                <span className="font-display text-subhead text-ember">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span>{item}</span>
               </li>
             ))}
           </ol>
-        </section>
+        </Section>
       ) : null}
 
       {visit.summary?.length ? (
-        <section className="mt-8">
-          <h2 className="text-heading font-bold">Summary</h2>
-          <ul className="mt-4 space-y-4">
+        <Section label="Summary">
+          <ul className="grid gap-4">
             {visit.summary.map((line, index) => (
-              <li key={index}>
+              <li key={index} className="rounded-card border border-line bg-surface p-5">
                 <FlaggedLine flagged={line.flagged}>
                   <p className="text-body">{line.text}</p>
                   <QuoteLine quote={line.quote} />
@@ -190,13 +223,12 @@ export default function VisitDetail() {
               </li>
             ))}
           </ul>
-        </section>
+        </Section>
       ) : null}
 
       {visit.todos?.length ? (
-        <section className="mt-8">
-          <h2 className="text-heading font-bold">To-do</h2>
-          <ul className="mt-4 space-y-2">
+        <Section label="To-do">
+          <ul className="grid gap-3">
             {visit.todos.map((todo, index) => (
               <li key={index} className="flex items-start gap-4">
                 <input
@@ -204,7 +236,7 @@ export default function VisitDetail() {
                   type="checkbox"
                   checked={Boolean(todo.done)}
                   onChange={() => toggleTodo(index)}
-                  className="mt-2 h-6 w-6 shrink-0 accent-accent"
+                  className="mt-2 h-6 w-6 shrink-0 accent-evergreen"
                 />
                 <label
                   htmlFor={`todo-${index}`}
@@ -215,13 +247,12 @@ export default function VisitDetail() {
               </li>
             ))}
           </ul>
-        </section>
+        </Section>
       ) : null}
 
       {visit.meds?.length ? (
-        <section className="mt-8">
-          <h2 className="text-heading font-bold">Medicines</h2>
-          <ul className="mt-4 space-y-4">
+        <Section label="Medicines">
+          <ul className="grid gap-4">
             {visit.meds.map((med, index) => (
               <li key={index}>
                 <FlaggedLine flagged={med.needsCheck}>
@@ -235,50 +266,55 @@ export default function VisitDetail() {
               </li>
             ))}
           </ul>
-        </section>
+        </Section>
       ) : null}
 
       {visit.transcript ? (
-        <section className="mt-8">
-          <h2 className="text-heading font-bold">What the doctor said</h2>
-          <p className="mt-2 max-w-measure rounded border border-line bg-surface p-4 text-body text-muted">
+        <Section label="What the doctor said">
+          <p className="max-w-measure rounded-card border border-line bg-surface-2 p-6 text-body text-muted">
             {visit.transcript}
           </p>
-        </section>
+        </Section>
       ) : null}
 
       {visit.transcript ? (
-        <section className="mt-8">
-          <h2 className="text-heading font-bold">Ask about this visit</h2>
-          <p className="mt-2 max-w-measure text-body text-muted">
-            It answers only from the words above, and shows the line it used.
+        <section className="mt-12 rounded-xl bg-night p-6 text-cream md:p-8">
+          <p className="text-small font-bold uppercase tracking-[0.14em] text-ember-bright">
+            Ask about this visit
           </p>
+          <h2 className="mt-3 font-display text-heading font-semibold">
+            Answers only from these words.
+          </h2>
 
-          <div className="mt-4 flex flex-wrap gap-2">
+          <div className="mt-5 flex flex-wrap gap-2">
             {EXAMPLE_QUESTIONS.map((example) => (
               <button
                 key={example}
                 type="button"
                 onClick={() => setQuestion(example)}
-                className="min-h-tap rounded border border-line bg-surface px-4 py-2 text-left text-small hover:border-accent hover:bg-accent-soft"
+                className="min-h-tap rounded-full border border-white/20 px-4 py-2 text-left text-small text-cream transition-colors duration-fast hover:border-cream"
               >
                 {example}
               </button>
             ))}
           </div>
 
-          <label htmlFor="ask" className="mt-4 block text-small font-bold">
+          <label htmlFor="ask" className="mt-5 block text-small font-bold text-cream-muted">
             Your question
           </label>
           <input
             id="ask"
             value={question}
             onChange={(event) => setQuestion(event.target.value)}
-            className="mt-2 w-full rounded border border-line bg-surface p-4 text-body"
+            className="mt-2 w-full rounded-full border border-white/20 bg-white/5 px-5 py-3 text-body text-cream placeholder:text-cream-muted"
           />
 
           <div className="mt-4">
-            <Button onClick={ask.run} disabled={!question.trim() || ask.status === 'loading'}>
+            <Button
+              onClick={ask.run}
+              disabled={!question.trim() || ask.status === 'loading'}
+              variant="onDark"
+            >
               {ask.status === 'loading' ? 'Asking…' : 'Ask'}
             </Button>
           </div>
@@ -296,40 +332,16 @@ export default function VisitDetail() {
                 onReset={ask.reset}
               >
                 {ask.data?.answer ? (
-                  <Card>
-                    <p className="text-body">{ask.data.answer}</p>
+                  <div className="rounded-card border border-white/15 bg-white/5 p-5">
+                    <p className="text-body text-cream">{ask.data.answer}</p>
                     <QuoteLine quote={ask.data.quote} />
-                  </Card>
+                  </div>
                 ) : null}
               </AIShell>
             </div>
           ) : null}
         </section>
       ) : null}
-
-      <div className="mt-8 flex flex-wrap gap-2 border-t border-line pt-6 print:hidden">
-        <Button variant="secondary" onClick={handleCopy}>
-          Copy
-        </Button>
-        <Button variant="secondary" onClick={() => window.print()}>
-          Print
-        </Button>
-
-        {confirming ? (
-          <>
-            <Button variant="danger" onClick={handleDelete}>
-              Yes, delete this visit
-            </Button>
-            <Button variant="quiet" onClick={() => setConfirming(false)}>
-              Cancel
-            </Button>
-          </>
-        ) : (
-          <Button variant="quiet" onClick={() => setConfirming(true)}>
-            Delete
-          </Button>
-        )}
-      </div>
 
       <Toast message={toast} />
     </div>

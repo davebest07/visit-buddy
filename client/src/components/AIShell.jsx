@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import Button from './Button.jsx'
 import LoadingSteps from './LoadingSteps.jsx'
 
-// Plain-language messages for each kind of failure (brief section 6).
 const MESSAGES = {
   unavailable: 'Visit Buddy is paused right now.',
   timeout: 'This is taking too long.',
@@ -130,9 +129,9 @@ export default function AIShell({
       <section>
         {emptyState}
 
-        <p className="mt-4 rounded border border-line bg-surface p-4 text-small text-muted">
-          <strong className="text-ink">Demo only.</strong> Please do not enter real personal
-          or medical information.
+        <p className="mt-4 rounded-card border border-line bg-surface p-4 text-small text-muted">
+          <strong className="text-ink">Demo only.</strong> Please do not enter real personal or
+          medical information.
         </p>
       </section>
     )
@@ -140,12 +139,13 @@ export default function AIShell({
 
   if (status === 'loading') {
     return (
-      <section aria-live="polite" aria-busy="true">
-        <h2 className="text-subhead font-bold">{loadingTitle}</h2>
+      <section aria-live="polite" aria-busy="true" className="rounded-card bg-surface-2 p-6 md:p-8">
+        <p className="text-small font-bold uppercase tracking-[0.14em] text-ember">Checking</p>
+        <h2 className="mt-2 font-display text-heading font-semibold">{loadingTitle}</h2>
 
         <LoadingSteps steps={steps} elapsed={elapsed} />
 
-        <p className="mt-4 text-small text-muted" aria-live="polite">
+        <p className="mt-6 text-small text-muted" aria-live="polite">
           {elapsed} second{elapsed === 1 ? '' : 's'}. Your words are kept.
         </p>
 
@@ -168,7 +168,7 @@ export default function AIShell({
     const message = error?.kind === 'empty' ? MESSAGES.empty : MESSAGES[kind] ?? MESSAGES.unavailable
 
     return (
-      <section role="alert">
+      <section role="alert" className="rounded-card border-l-4 border-error bg-surface p-6 md:p-8">
         <h2 className="text-subhead font-bold text-error">{message}</h2>
 
         <p className="mt-2 max-w-measure text-body text-muted">
@@ -177,7 +177,7 @@ export default function AIShell({
             : 'The text you entered is still here. Nothing was saved.'}
         </p>
 
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="mt-5 flex flex-wrap gap-2">
           {onRetry ? (
             <Button onClick={onRetry} variant="secondary">
               Retry
@@ -203,7 +203,7 @@ export default function AIShell({
   return (
     <section>
       {status === 'uncertain' ? (
-        <p className="mb-4 flex gap-2 rounded border-2 border-uncertain bg-uncertain p-4 text-small font-bold text-uncertain-ink">
+        <p className="mb-6 flex gap-3 rounded-card bg-sand p-4 text-small font-bold">
           <span aria-hidden="true">!</span>
           Some lines were hard to hear. Check the highlighted lines before you save.
         </p>

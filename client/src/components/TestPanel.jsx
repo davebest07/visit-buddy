@@ -60,21 +60,21 @@ export default function TestPanel() {
   return (
     <aside
       aria-label="Test panel"
-      className="fixed bottom-2 right-2 z-50 w-64 rounded border-2 border-accent bg-surface p-4 text-small shadow-calm print:hidden"
+      className="fixed bottom-4 right-4 z-50 w-64 rounded-card border border-white/15 bg-night p-4 text-small text-cream shadow-lift print:hidden"
     >
       <p className="font-bold">Testing panel</p>
 
-      <label htmlFor="ai-mode" className="mt-2 block font-bold">
+      <label htmlFor="ai-mode" className="mt-3 block font-bold text-cream-muted">
         AI mode
       </label>
       <select
         id="ai-mode"
         value={aiMode}
         onChange={(event) => setAiMode(event.target.value)}
-        className="mt-1 w-full rounded border border-line bg-background p-2"
+        className="mt-1 w-full rounded border border-white/20 bg-white/5 p-2 text-cream"
       >
         {AI_MODES.map((mode) => (
-          <option key={mode} value={mode}>
+          <option key={mode} value={mode} className="text-ink">
             {mode}
           </option>
         ))}
@@ -84,21 +84,21 @@ export default function TestPanel() {
         <button
           type="button"
           onClick={resetData}
-          className="rounded border border-line bg-background px-2 py-2 text-left font-bold"
+          className="rounded border border-white/20 px-2 py-2 text-left font-bold hover:border-cream"
         >
           Reset demo data
         </button>
         <button
           type="button"
           onClick={loadSample}
-          className="rounded border border-line bg-background px-2 py-2 text-left font-bold"
+          className="rounded border border-white/20 px-2 py-2 text-left font-bold hover:border-cream"
         >
           Load sample visit
         </button>
       </div>
 
-      {message ? <p className="mt-2 text-muted">{message}</p> : null}
-      <p className="mt-2 text-muted">The url ?ai= wins over this menu.</p>
+      {message ? <p className="mt-2 text-cream-muted">{message}</p> : null}
+      <p className="mt-2 text-cream-muted">?ai= wins over this menu.</p>
     </aside>
   )
 }

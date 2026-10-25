@@ -1,15 +1,23 @@
-// A short message at the bottom of the screen, announced politely to screen
-// readers. The caller decides when it appears and when it disappears.
-export default function Toast({ message, className = '' }) {
-  if (!message) return null
+import { AnimatePresence, motion } from 'motion/react'
 
+// Short message above the dock. Announced politely to screen readers.
+export default function Toast({ message, className = '' }) {
   return (
-    <div
-      role="status"
-      aria-live="polite"
-      className={`fixed inset-x-4 bottom-24 z-50 mx-auto max-w-md rounded bg-ink px-6 py-4 text-body text-surface shadow-calm ${className}`}
-    >
-      {message}
-    </div>
+    <AnimatePresence>
+      {message ? (
+        <motion.div
+          key="toast"
+          role="status"
+          aria-live="polite"
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 14 }}
+          transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+          className={`fixed inset-x-4 bottom-28 z-50 mx-auto w-fit max-w-md rounded-full bg-night px-6 py-3 text-body text-cream shadow-lift ${className}`}
+        >
+          {message}
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
   )
 }

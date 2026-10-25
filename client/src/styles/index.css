@@ -7,6 +7,7 @@
      Text size control = 1x / 1.2x / 1.4x on top of that. */
   html {
     font-size: 125%;
+    scroll-behavior: smooth;
   }
 
   html[data-text-scale='large'] {
@@ -18,17 +19,37 @@
   }
 
   body {
-    @apply bg-background font-sans text-body text-ink antialiased;
+    @apply bg-canvas font-sans text-body text-ink antialiased;
     min-height: 100dvh;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--vb-ember-bright) 35%, transparent);
+    color: var(--vb-text);
   }
 
   /* A visible 3px focus ring on everything interactive. */
   :focus-visible {
-    outline: var(--vb-focus-width) solid var(--vb-accent);
+    outline: var(--vb-focus-width) solid var(--vb-evergreen);
     outline-offset: 3px;
   }
 
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
   @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
     *,
     *::before,
     *::after {
@@ -41,7 +62,6 @@
 }
 
 @layer components {
-  /* The one page container. Keeps gutters and max width identical everywhere. */
   .vb-container {
     width: 100%;
     max-width: var(--vb-container);
@@ -49,7 +69,6 @@
     padding-inline: var(--vb-gutter);
   }
 
-  /* Vertical breathing room between whole sections (not between components). */
   .vb-section {
     padding-block: var(--vb-section-gap);
   }
@@ -59,7 +78,7 @@
     position: absolute;
     left: -9999px;
     top: 0;
-    z-index: 50;
+    z-index: 60;
     padding: 16px 24px;
     border-radius: var(--vb-radius);
     background: var(--vb-surface);
@@ -71,19 +90,90 @@
     top: 16px;
   }
 
-  /* Very soft accent wash behind the hero, built from the accent token. */
-  .vb-hero-wash {
+  /* Night sections: warm paper grain over deep ink. */
+  .vb-night-field {
+    position: relative;
+    isolation: isolate;
     background:
       radial-gradient(
-        55% 70% at 82% 0%,
-        color-mix(in srgb, var(--vb-peach) 85%, transparent),
-        transparent 72%
+        70% 90% at 78% 8%,
+        color-mix(in srgb, var(--vb-evergreen) 42%, transparent),
+        transparent 62%
       ),
       radial-gradient(
-        45% 60% at 8% 100%,
-        color-mix(in srgb, var(--vb-mint) 70%, transparent),
-        transparent 70%
+        50% 70% at 12% 92%,
+        color-mix(in srgb, var(--vb-ember-bright) 22%, transparent),
+        transparent 64%
       ),
-      linear-gradient(180deg, var(--vb-surface), var(--vb-background));
+      linear-gradient(165deg, var(--vb-night) 0%, var(--vb-night-2) 60%, var(--vb-night) 100%);
+  }
+
+  .vb-night-field::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.5;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  /* Soft aurora blobs for the hero. Pure CSS, disabled with reduced motion. */
+  .vb-aurora {
+    position: absolute;
+    inset: -20%;
+    z-index: -1;
+    filter: blur(60px);
+    opacity: 0.75;
+    background:
+      radial-gradient(closest-side at 30% 35%, #1d7a6e 0%, transparent 100%),
+      radial-gradient(closest-side at 70% 25%, #2a4f7a 0%, transparent 100%),
+      radial-gradient(closest-side at 60% 75%, #b35a2a 0%, transparent 100%);
+    animation: drift 22s ease-in-out infinite;
+  }
+
+  .vb-aurora-slow {
+    animation-duration: 32s;
+    animation-direction: reverse;
+    opacity: 0.5;
+  }
+
+  .vb-glass {
+    background: color-mix(in srgb, var(--vb-surface) 86%, transparent);
+    backdrop-filter: blur(18px) saturate(1.2);
+    -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  }
+
+  .vb-hairline {
+    border-top: 1px solid var(--vb-line);
+  }
+
+  /* Editorial eyebrows: small caps with a leading rule. */
+  .vb-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: var(--vb-text-small);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .vb-eyebrow::before {
+    content: '';
+    width: 28px;
+    height: 2px;
+    background: currentColor;
+    opacity: 0.55;
+  }
+}
+
+@media print {
+  .print\:hidden {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff;
   }
 }
