@@ -5,6 +5,9 @@ import { Check, PenLine } from 'lucide-react'
 import Button from '../components/Button.jsx'
 import Card from '../components/Card.jsx'
 import Reveal from '../components/Reveal.jsx'
+import { FlipWords } from '../components/ui/FlipWords.jsx'
+
+const WORDS = ['prepared.', 'confident.', 'informed.', 'supported.']
 
 const EXAMPLE_QUESTIONS = [
   'How long will this take to get better?',
@@ -124,23 +127,33 @@ export default function Landing() {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="lg:col-span-7"
           >
-            <p className="vb-eyebrow text-primary">For the visit, and for after</p>
+            <p className="vb-eyebrow text-primary">Your health. Your voice.</p>
 
-            <h1 className="mt-6 font-display text-mega font-semibold text-navy">
-              Remember <em className="italic text-primary">everything</em> your doctor said.
+            <h1 className="mt-6 font-display text-[clamp(2.2rem,4.8vw,4.2rem)] font-semibold leading-[1.04] text-navy">
+              <span className="sr-only">
+                Feel more prepared, confident, informed, and supported.
+              </span>
+
+              <span aria-hidden="true" className="block">
+                <span className="block">Feel more</span>
+                <span className="mt-1 flex items-baseline">
+                  <span className="inline-flex min-w-[10ch]">
+                    <FlipWords words={WORDS} duration={3200} className="px-0" />
+                  </span>
+                </span>
+              </span>
             </h1>
 
             <p className="mt-6 max-w-[44ch] text-subhead text-muted">
-              Say what worries you before you go. Say what the doctor told you after. Visit
-              Buddy turns both into short, plain lists you can actually use.
+              Make every doctor&rsquo;s visit easier to prepare for, understand, and remember.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Button as={Link} to="/app" variant="glass" size="lg" magnetic>
-                Try the demo
+              <Button as={Link} to="/app" variant="glass" size="lg" magnetic className="w-full sm:w-auto">
+                Get Started
               </Button>
-              <Button as="a" href="#how" variant="secondary" size="lg">
-                See how it works
+              <Button as="a" href="#how" variant="secondary" size="lg" className="w-full sm:w-auto">
+                See How It Works
               </Button>
             </div>
 

@@ -31,7 +31,7 @@ export default function TopNav() {
 
             {inApp ? null : (
               <Button as={Link} to="/app" size="sm" variant="glass" className="hidden sm:inline-flex">
-                Try the demo
+                Get Started
               </Button>
             )}
           </nav>
