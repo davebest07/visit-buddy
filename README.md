@@ -21,7 +21,7 @@ changes a medicine or a dose, and it never says something is safe.
 - **Visit detail** — the saved visit, with checkable to-dos, a medicine schedule, the
   transcript and "Ask about this visit".
 - **History** — every visit, newest first, with search.
-- **Settings** — text size, high contrast, and delete all data.
+- **Settings** — text size, light/dark appearance, high contrast, and delete all data.
 - **Help** — what the app does and does not do, and when to call a doctor.
 
 ## Run it
@@ -42,6 +42,23 @@ Other scripts:
 |---|---|
 | `npm run build` | Production build of the client |
 | `npm start` | Run the API only |
+
+## Light and dark
+
+The app ships both, and follows the device until you choose otherwise. Settings →
+Appearance offers **System**, **Light** and **Dark**; the sun/moon button in the header
+switches between light and dark in one tap. The choice is saved with the other settings,
+and a small script in `index.html` applies it before the first paint, so a dark-mode user
+never sees a white flash.
+
+Every colour is a token in `client/src/styles/tokens.css`: the light palette lives in
+`:root`, and `:root[data-theme='dark']` overrides it. `--vb-primary` is the accent used for
+text, icons and borders; `--vb-primary-solid` is the fill used under `text-paper`. They are
+the same in light mode and diverge in dark mode, because a teal bright enough to read on a
+black canvas is too bright to hold white label text. Glass surfaces, the sticky bars and
+the ambient backdrop read their gradients from tokens too, so they never need a
+theme-specific class. Every text/background pair in the dark palette passes WCAG AA, and
+printing always forces the light palette.
 
 ## Try the AI states
 

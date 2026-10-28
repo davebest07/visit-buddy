@@ -114,7 +114,7 @@ export default function Before() {
               key={label}
               className={`flex items-center gap-2 rounded-full border px-4 py-2 ${
                 active
-                  ? 'border-primary bg-primary text-paper'
+                  ? 'border-primary bg-primary-solid text-paper'
                   : done
                     ? 'border-line bg-primary-soft text-primary'
                     : 'border-line bg-surface text-muted'

@@ -3,7 +3,7 @@ import Magnetic from './Magnetic.jsx'
 const VARIANTS = {
   glass: 'vb-btn-glass',
   glassLight: 'vb-btn-glasslight',
-  primary: 'bg-primary text-paper shadow-soft hover:bg-primary-deep',
+  primary: 'bg-primary-solid text-paper shadow-soft hover:bg-primary-solid-hover',
   secondary: 'vb-btn-secondary',
   quiet: 'text-primary underline decoration-2 underline-offset-4 hover:text-primary-deep',
   ghost: 'text-muted vb-btn-ghost hover:text-primary',

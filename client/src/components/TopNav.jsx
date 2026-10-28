@@ -1,5 +1,6 @@
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import Button from './Button.jsx'
+import { ThemeToggle } from './ThemeControl.jsx'
 
 // Floating glass bar. Wordmark in the display serif, navigation kept quiet.
 export default function TopNav() {
@@ -12,7 +13,7 @@ export default function TopNav() {
           <Link to="/" className="flex items-center gap-2 rounded-full">
             <span
               aria-hidden="true"
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-primary font-display text-subhead font-semibold text-paper"
+              className="flex h-8 w-8 items-center justify-center rounded-full bg-primary-solid font-display text-subhead font-semibold text-paper"
             >
               v
             </span>
@@ -22,6 +23,8 @@ export default function TopNav() {
           </Link>
 
           <nav aria-label="Site" className="flex items-center gap-1">
+            <ThemeToggle className="border-0 bg-transparent hover:bg-primary-soft" />
+
             <NavLink
               to="/help"
               className="flex min-h-tap items-center rounded-full px-3 text-small font-bold text-muted transition-colors duration-fast hover:text-primary"

@@ -52,7 +52,7 @@ export default function Tabs({ tabs, value, onChange, label, className = '' }) {
             {active ? (
               <motion.span
                 layoutId={reduce ? undefined : pillId}
-                className="absolute inset-0 rounded-full bg-primary"
+                className="absolute inset-0 rounded-full bg-primary-solid"
                 transition={{ type: 'spring', stiffness: 380, damping: 32 }}
               />
             ) : null}

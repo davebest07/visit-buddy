@@ -129,7 +129,7 @@ export default function Landing() {
           >
             <p className="vb-eyebrow text-primary">Your health. Your voice.</p>
 
-            <h1 className="mt-6 font-display text-[clamp(2.2rem,4.8vw,4.2rem)] font-semibold leading-[1.04] text-navy">
+            <h1 className="mt-6 font-display text-[clamp(2.2rem,4.8vw,4.2rem)] font-semibold leading-[1.04] text-ink">
               <span className="sr-only">
                 Feel more prepared, confident, informed, and supported.
               </span>
@@ -215,7 +215,7 @@ export default function Landing() {
             </div>
 
             <div className="vb-glass absolute -bottom-6 left-8 z-10 hidden rounded-full px-4 py-2 lg:block">
-              <span className="text-small font-bold text-navy">Nothing saved yet</span>
+              <span className="text-small font-bold text-ink">Nothing saved yet</span>
             </div>
           </motion.div>
         </div>
@@ -318,7 +318,7 @@ export default function Landing() {
 
             <div className="vb-glass-strong rounded-xl p-6 md:p-10">
               <p className="vb-eyebrow text-primary">03 — Our promise</p>
-              <h2 className="mt-4 max-w-[20ch] font-display text-display font-semibold text-navy">
+              <h2 className="mt-4 max-w-[20ch] font-display text-display font-semibold text-ink">
                 You stay in charge.
               </h2>
 

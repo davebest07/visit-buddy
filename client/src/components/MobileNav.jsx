@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { Menu, X } from 'lucide-react'
 import { Brand, NavList } from './Sidebar.jsx'
+import { ThemeToggle } from './ThemeControl.jsx'
 
 // Mobile shell: a compact top bar plus an accessible slide-in drawer.
 export default function MobileNav() {
@@ -59,7 +60,7 @@ export default function MobileNav() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-white/70 bg-white/65 backdrop-blur-xl lg:hidden print:hidden">
+      <header className="sticky top-0 z-40 border-b border-chrome-line bg-chrome backdrop-blur-xl lg:hidden print:hidden">
         <div className="flex min-h-tap items-center justify-between gap-3 px-4 py-2">
           <button
             ref={menuRef}
@@ -76,9 +77,12 @@ export default function MobileNav() {
             Visit Buddy
           </Link>
 
-          <Link to="/help" className="text-small font-bold text-muted">
-            Help
-          </Link>
+          <div className="flex items-center gap-2">
+            <ThemeToggle className="border-0 bg-transparent" />
+            <Link to="/help" className="text-small font-bold text-muted">
+              Help
+            </Link>
+          </div>
         </div>
       </header>
 
@@ -95,7 +99,7 @@ export default function MobileNav() {
               type="button"
               aria-label="Close navigation menu"
               onClick={() => setOpen(false)}
-              className="absolute inset-0 bg-navy/40"
+              className="absolute inset-0 bg-scrim"
             />
 
             <motion.nav

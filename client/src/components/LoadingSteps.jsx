@@ -14,7 +14,7 @@ export default function LoadingSteps({ steps, elapsed }) {
               aria-hidden="true"
               className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border text-small font-bold transition-colors duration-calm ${
                 done
-                  ? 'border-primary bg-primary text-paper'
+                  ? 'border-primary bg-primary-solid text-paper'
                   : active
                     ? 'border-primary text-primary'
                     : 'border-line text-muted'

@@ -1,10 +1,12 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
-// The three settings the brief asks for, plus the list of valid AI modes so the
-// URL parameter can be checked before it is trusted.
+// The settings the brief asks for, plus the list of valid AI modes so the URL
+// parameter can be checked before it is trusted.
 export const TEXT_SCALES = ['normal', 'large', 'extra-large']
 export const CONTRASTS = ['normal', 'high']
+// 'system' follows the device; light and dark override it.
+export const THEMES = ['system', 'light', 'dark']
 export const AI_MODES = [
   'success',
   'slow',
@@ -18,9 +20,12 @@ export const AI_MODES = [
 export const SETTINGS_STORAGE_KEY = 'visit-buddy:settings'
 const STORAGE_KEY = SETTINGS_STORAGE_KEY
 
+const DARK_QUERY = '(prefers-color-scheme: dark)'
+
 const DEFAULTS = {
   textScale: 'normal',
   contrast: 'normal',
+  theme: 'system',
   aiMode: 'success',
 }
 
@@ -35,6 +40,7 @@ function readStoredSettings() {
     return {
       textScale: TEXT_SCALES.includes(saved.textScale) ? saved.textScale : DEFAULTS.textScale,
       contrast: CONTRASTS.includes(saved.contrast) ? saved.contrast : DEFAULTS.contrast,
+      theme: THEMES.includes(saved.theme) ? saved.theme : DEFAULTS.theme,
       aiMode: AI_MODES.includes(saved.aiMode) ? saved.aiMode : DEFAULTS.aiMode,
     }
   } catch {
@@ -42,29 +48,74 @@ function readStoredSettings() {
   }
 }
 
+// matchMedia is missing in a few embedded browsers, and older Safari only has
+// the deprecated addListener API. Both are handled so the toggle still works.
+function systemPrefersDark() {
+  try {
+    return window.matchMedia(DARK_QUERY).matches
+  } catch {
+    return false
+  }
+}
+
+function resolveTheme(theme) {
+  if (theme === 'dark' || theme === 'light') return theme
+  return systemPrefersDark() ? 'dark' : 'light'
+}
+
 const SettingsContext = createContext(null)
 
 export function SettingsProvider({ children }) {
   const [searchParams] = useSearchParams()
   const [settings, setSettings] = useState(readStoredSettings)
+  const [resolvedTheme, setResolvedTheme] = useState(() => resolveTheme(settings.theme))
 
   // ?ai= wins over the saved setting, so a demo link can force a state.
   const urlMode = searchParams.get('ai')
   const resolvedAiMode = AI_MODES.includes(urlMode) ? urlMode : settings.aiMode
 
+  // When the choice is "system", follow the device live — a user switching
+  // their OS to dark mode should not have to reload the page.
+  useEffect(() => {
+    setResolvedTheme(resolveTheme(settings.theme))
+
+    if (settings.theme !== 'system') return undefined
+
+    let query
+    try {
+      query = window.matchMedia(DARK_QUERY)
+    } catch {
+      return undefined
+    }
+
+    const onChange = (event) => setResolvedTheme(event.matches ? 'dark' : 'light')
+    if (query.addEventListener) {
+      query.addEventListener('change', onChange)
+      return () => query.removeEventListener('change', onChange)
+    }
+
+    query.addListener(onChange)
+    return () => query.removeListener(onChange)
+  }, [settings.theme])
+
   // Settings are written onto <html> as data attributes; tokens.css and
-  // index.css read them to change text size and contrast.
+  // index.css read them to change text size, contrast and theme.
   useEffect(() => {
     const root = document.documentElement
     root.dataset.textScale = settings.textScale
     root.dataset.contrast = settings.contrast
+    root.dataset.theme = resolvedTheme
+
+    // Matches the browser chrome (mobile address bar) to the page.
+    const meta = document.querySelector('meta[name="theme-color"]')
+    if (meta) meta.setAttribute('content', resolvedTheme === 'dark' ? '#0a1513' : '#f7faf8')
 
     try {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(settings))
     } catch {
       // Saving is a nice-to-have; the app still works without it.
     }
-  }, [settings])
+  }, [settings, resolvedTheme])
 
   const setTextScale = useCallback((textScale) => {
     setSettings((current) => ({ ...current, textScale }))
@@ -72,6 +123,10 @@ export function SettingsProvider({ children }) {
 
   const setContrast = useCallback((contrast) => {
     setSettings((current) => ({ ...current, contrast }))
+  }, [])
+
+  const setTheme = useCallback((theme) => {
+    setSettings((current) => ({ ...current, theme }))
   }, [])
 
   const setAiMode = useCallback((aiMode) => {
@@ -82,13 +137,16 @@ export function SettingsProvider({ children }) {
     () => ({
       textScale: settings.textScale,
       contrast: settings.contrast,
+      theme: settings.theme,
+      resolvedTheme,
       aiMode: settings.aiMode,
       resolvedAiMode,
       setTextScale,
       setContrast,
+      setTheme,
       setAiMode,
     }),
-    [settings, resolvedAiMode, setTextScale, setContrast, setAiMode],
+    [settings, resolvedTheme, resolvedAiMode, setTextScale, setContrast, setTheme, setAiMode],
   )
 
   return <SettingsContext.Provider value={value}>{children}</SettingsContext.Provider>

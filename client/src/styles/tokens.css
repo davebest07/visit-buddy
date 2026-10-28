@@ -12,6 +12,9 @@
 --------------------------------------------------------------------------- */
 
 :root {
+  /* Tells the browser which way to paint native form controls and scrollbars. */
+  color-scheme: light;
+
   /* --- Surfaces --- */
   --vb-canvas: #f7faf8;
   --vb-surface: #ffffff;
@@ -50,6 +53,50 @@
 
   --vb-accent-soft: var(--vb-primary-soft);
   --vb-accent-strong: var(--vb-primary-strong);
+
+  /* --- Filled brand ---------------------------------------------------------
+     `--vb-primary` is the accent/ink colour: teal text, icons and borders on
+     the canvas. `--vb-primary-solid` is the fill used where a surface carries
+     `text-paper`. They are equal in light mode and diverge in dark mode, where
+     a bright accent is readable but a bright fill would not hold white text. */
+  --vb-primary-solid: #0b5c55;
+  --vb-primary-solid-hover: #08423d;
+
+  /* --- Chrome: bars, drawers, nav hover ------------------------------------ */
+  --vb-chrome: rgba(255, 255, 255, 0.65);
+  --vb-sidebar-chrome: rgba(255, 255, 255, 0.62);
+  --vb-chrome-line: rgba(255, 255, 255, 0.7);
+  --vb-chrome-line-strong: rgba(255, 255, 255, 0.8);
+  --vb-hover: rgba(255, 255, 255, 0.7);
+  --vb-scrim: rgba(10, 32, 28, 0.4);
+  /* Toggle knob. White on a pale track in light mode; a light grey in dark
+     mode, where a surface-coloured knob would disappear into the track. */
+  --vb-knob: #ffffff;
+
+  /* --- Glass material ------------------------------------------------------ */
+  --vb-glass-edge: rgba(255, 255, 255, 0.72);
+  --vb-glass-top: rgba(255, 255, 255, 0.82);
+  --vb-glass-bottom: rgba(255, 255, 255, 0.62);
+  --vb-glass-strong-top: rgba(255, 255, 255, 0.92);
+  --vb-glass-strong-bottom: rgba(246, 250, 255, 0.78);
+  --vb-glass-sheen: rgba(255, 255, 255, 0.65);
+  --vb-glass-hairline: rgba(20, 33, 61, 0.04);
+  --vb-glass-shadow: rgba(20, 33, 61, 0.09);
+
+  /* --- Secondary button ---------------------------------------------------- */
+  --vb-btn2-edge: rgba(255, 255, 255, 0.9);
+  --vb-btn2-top: rgba(255, 255, 255, 0.86);
+  --vb-btn2-bottom: rgba(232, 242, 255, 0.68);
+
+  /* --- Backdrops ----------------------------------------------------------- */
+  --vb-ambient-bg:
+    radial-gradient(42% 38% at 78% 6%, rgba(11, 92, 85, 0.14), transparent 70%),
+    radial-gradient(38% 34% at 12% 88%, rgba(13, 148, 136, 0.12), transparent 72%),
+    linear-gradient(180deg, #fbfdff 0%, #f7fafc 42%, #f4f8fd 100%);
+  --vb-hero-bg:
+    radial-gradient(52% 46% at 76% 4%, rgba(11, 92, 85, 0.15), transparent 70%),
+    radial-gradient(42% 40% at 8% 82%, rgba(13, 148, 136, 0.13), transparent 72%),
+    linear-gradient(180deg, #ffffff 0%, #f3fbf7 55%, #f7faf8 100%);
 
   /* --- Type --- */
   --vb-font: 'Atkinson Hyperlegible', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
@@ -117,4 +164,119 @@
   --vb-tint-sky: #ffffff;
   --vb-tint-slate: #ffffff;
   --vb-line: #000000;
+}
+
+/* ---------------------------------------------------------------------------
+   Dark mode (Settings page, or the sun/moon toggle in the header).
+
+   The canvas drops to a near-black evergreen, surfaces lift slightly, and ink
+   flips to a warm off-white. The accent brightens because a deep teal that
+   reads well on white is unreadable on black; the filled brand colour stays
+   dark so `text-paper` on a solid button still passes AA.
+--------------------------------------------------------------------------- */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  /* --- Surfaces --- */
+  --vb-canvas: #0a1513;
+  --vb-surface: #10201d;
+  --vb-surface-2: #162824;
+  --vb-navy: #04120f;
+  --vb-navy-2: #0a211c;
+  --vb-sidebar: #0c1a17;
+  --vb-sidebar-line: #1d302b;
+
+  /* --- Ink --- */
+  --vb-text: #eaf4f0;
+  --vb-muted: #a9bdb6;
+  --vb-line: #24352f;
+
+  /* --- Brand --- */
+  --vb-primary: #5eead4;
+  --vb-primary-deep: #99f6e4;
+  --vb-primary-soft: #14332e;
+  --vb-primary-strong: #ccfbf1;
+  --vb-primary-solid: #0f766e;
+  --vb-primary-solid-hover: #0b5c55;
+  --vb-accent: #5eead4;
+  --vb-accent-bright: #99f6e4;
+  --vb-cyan: #2dd4bf;
+  --vb-paper: #f8faf9;
+  --vb-paper-muted: #b9ccc6;
+
+  /* --- Soft tints --- */
+  --vb-tint-blue: #12312c;
+  --vb-tint-sky: #103029;
+  --vb-tint-slate: #142522;
+
+  /* --- Semantic --- */
+  --vb-error: #f2b8b5;
+  --vb-success: #34d399;
+  --vb-uncertain-bg: #3a2d0a;
+  --vb-uncertain-text: #ffd68a;
+
+  --vb-accent-soft: var(--vb-primary-soft);
+  --vb-accent-strong: var(--vb-primary-strong);
+
+  /* --- Chrome --- */
+  --vb-chrome: rgba(10, 21, 19, 0.72);
+  --vb-sidebar-chrome: rgba(9, 19, 17, 0.78);
+  --vb-chrome-line: rgba(255, 255, 255, 0.1);
+  --vb-chrome-line-strong: rgba(255, 255, 255, 0.16);
+  --vb-hover: rgba(255, 255, 255, 0.08);
+  --vb-scrim: rgba(0, 0, 0, 0.6);
+  --vb-knob: #cfded9;
+
+  /* --- Glass material --- */
+  --vb-glass-edge: rgba(255, 255, 255, 0.1);
+  --vb-glass-top: rgba(24, 44, 39, 0.82);
+  --vb-glass-bottom: rgba(14, 30, 26, 0.72);
+  --vb-glass-strong-top: rgba(20, 38, 34, 0.94);
+  --vb-glass-strong-bottom: rgba(12, 26, 22, 0.88);
+  --vb-glass-sheen: rgba(255, 255, 255, 0.08);
+  --vb-glass-hairline: rgba(0, 0, 0, 0.35);
+  --vb-glass-shadow: rgba(0, 0, 0, 0.45);
+
+  /* --- Secondary button --- */
+  --vb-btn2-edge: rgba(255, 255, 255, 0.14);
+  --vb-btn2-top: rgba(255, 255, 255, 0.07);
+  --vb-btn2-bottom: rgba(255, 255, 255, 0.03);
+
+  /* --- Backdrops --- */
+  --vb-ambient-bg:
+    radial-gradient(42% 38% at 78% 6%, rgba(13, 148, 136, 0.18), transparent 70%),
+    radial-gradient(38% 34% at 12% 88%, rgba(94, 234, 212, 0.08), transparent 72%),
+    linear-gradient(180deg, #08120f 0%, #0a1513 42%, #0b1a16 100%);
+  --vb-hero-bg:
+    radial-gradient(52% 46% at 76% 4%, rgba(45, 212, 191, 0.14), transparent 70%),
+    radial-gradient(42% 40% at 8% 82%, rgba(13, 148, 136, 0.12), transparent 72%),
+    linear-gradient(180deg, #0c1a16 0%, #0a1513 55%, #08120f 100%);
+
+  /* Shadows read as darkness, so they deepen against the dark canvas. */
+  --vb-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px rgba(0, 0, 0, 0.45);
+  --vb-shadow-lift: 0 2px 4px rgba(0, 0, 0, 0.45), 0 24px 56px rgba(0, 0, 0, 0.55);
+}
+
+/* High contrast while dark: pure black canvas, pure white ink. */
+:root[data-theme='dark'][data-contrast='high'] {
+  --vb-canvas: #000000;
+  --vb-surface: #000000;
+  --vb-surface-2: #000000;
+  --vb-sidebar: #000000;
+  --vb-text: #ffffff;
+  --vb-muted: #e6e6e6;
+  --vb-line: #ffffff;
+  --vb-primary: #7ffced;
+  --vb-primary-deep: #ccfbf1;
+  --vb-primary-soft: #000000;
+  --vb-primary-strong: #ffffff;
+  --vb-primary-solid: #0f766e;
+  --vb-navy: #000000;
+  --vb-navy-2: #000000;
+  --vb-paper: #ffffff;
+  --vb-paper-muted: #e6e6e6;
+  --vb-tint-blue: #000000;
+  --vb-tint-sky: #000000;
+  --vb-tint-slate: #000000;
+  --vb-knob: #ffffff;
 }

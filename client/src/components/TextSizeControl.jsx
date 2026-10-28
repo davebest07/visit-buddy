@@ -34,7 +34,7 @@ export default function TextSizeControl() {
                 {checked ? (
                   <motion.span
                     layoutId={reduce ? undefined : id}
-                    className="absolute inset-0 rounded-full bg-primary"
+                    className="absolute inset-0 rounded-full bg-primary-solid"
                     transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                   />
                 ) : null}

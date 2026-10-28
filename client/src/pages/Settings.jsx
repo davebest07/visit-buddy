@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Card from '../components/Card.jsx'
 import StatefulButton from '../components/StatefulButton.jsx'
 import TextSizeControl from '../components/TextSizeControl.jsx'
+import ThemeControl from '../components/ThemeControl.jsx'
 import { useSettings } from '../context/SettingsContext.jsx'
 import { deleteAllVisits } from '../services/api.js'
 
@@ -36,6 +37,10 @@ export default function Settings() {
         </Card>
 
         <Card className="p-6 md:p-8">
+          <ThemeControl />
+        </Card>
+
+        <Card className="p-6 md:p-8">
           <fieldset>
             <legend className="text-subhead font-bold">Contrast</legend>
 
@@ -48,8 +53,8 @@ export default function Settings() {
                   onChange={(event) => setContrast(event.target.checked ? 'high' : 'normal')}
                   className="peer sr-only"
                 />
-                <span className="h-8 w-14 rounded-full bg-line transition-colors duration-fast peer-checked:bg-primary" />
-                <span className="absolute left-1 top-1 h-6 w-6 rounded-full bg-surface shadow-soft transition-transform duration-fast peer-checked:translate-x-6" />
+                <span className="h-8 w-14 rounded-full bg-line transition-colors duration-fast peer-checked:bg-primary-solid" />
+                <span className="absolute left-1 top-1 h-6 w-6 rounded-full bg-knob shadow-soft transition-transform duration-fast peer-checked:translate-x-6" />
               </span>
             </label>
 

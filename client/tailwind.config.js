@@ -16,6 +16,18 @@ export default {
         'primary-deep': 'var(--vb-primary-deep)',
         'primary-soft': 'var(--vb-primary-soft)',
         'primary-strong': 'var(--vb-primary-strong)',
+        // Filled brand: identical to primary in light mode, deliberately darker
+        // in dark mode so white label text still passes WCAG AA.
+        'primary-solid': 'var(--vb-primary-solid)',
+        'primary-solid-hover': 'var(--vb-primary-solid-hover)',
+        // Theme-aware chrome for sticky bars, the drawer and nav hover states.
+        chrome: 'var(--vb-chrome)',
+        'sidebar-chrome': 'var(--vb-sidebar-chrome)',
+        'chrome-line': 'var(--vb-chrome-line)',
+        'chrome-line-strong': 'var(--vb-chrome-line-strong)',
+        'hover-surface': 'var(--vb-hover)',
+        scrim: 'var(--vb-scrim)',
+        knob: 'var(--vb-knob)',
         accent: 'var(--vb-accent)',
         'accent-bright': 'var(--vb-accent-bright)',
         'accent-soft': 'var(--vb-accent-soft)',

@@ -6,6 +6,7 @@ import Sidebar from './Sidebar.jsx'
 import MobileNav from './MobileNav.jsx'
 import TopNav from './TopNav.jsx'
 import TestPanel from './TestPanel.jsx'
+import { ThemeToggle } from './ThemeControl.jsx'
 
 const TITLES = {
   '/app': 'Home',
@@ -67,11 +68,12 @@ export default function Layout() {
       <div className="lg:pl-[272px]">
         <MobileNav />
 
-        <header className="sticky top-0 z-30 hidden border-b border-white/70 bg-white/65 backdrop-blur-xl print:hidden lg:block">
+        <header className="sticky top-0 z-30 hidden border-b border-chrome-line bg-chrome backdrop-blur-xl print:hidden lg:block">
           <div className="vb-container flex min-h-tap items-center justify-between gap-4 py-2">
             <p className="text-small font-bold uppercase tracking-[0.14em] text-muted">{title}</p>
 
             <nav aria-label="Page tools" className="flex items-center gap-1">
+              <ThemeToggle className="border-0 bg-transparent" />
               <Link
                 to="/app/settings"
                 className="flex min-h-tap items-center gap-2 rounded-full px-3 text-small font-bold text-muted transition-colors duration-fast hover:text-primary"

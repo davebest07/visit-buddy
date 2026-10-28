@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-text-scale="normal" data-contrast="normal">
+<html lang="en" data-text-scale="normal" data-contrast="normal" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,6 +9,30 @@
       content="Visit Buddy helps you get ready for a doctor visit and understand it afterward. It organizes what you tell it. It does not give medical advice."
     />
     <title>Visit Buddy</title>
+
+    <!--
+      Set the theme before the first paint. React reads the same key, but if we
+      waited for it the page would flash light for a frame on a dark device.
+      Keep this storage key in sync with SETTINGS_STORAGE_KEY in SettingsContext.
+    -->
+    <script>
+      ;(function () {
+        var theme = 'light'
+        try {
+          var saved = JSON.parse(window.localStorage.getItem('visit-buddy:settings') || '{}')
+          if (saved.theme === 'dark' || saved.theme === 'light') {
+            theme = saved.theme
+          } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            theme = 'dark'
+          }
+        } catch (error) {
+          theme = 'light'
+        }
+        document.documentElement.dataset.theme = theme
+        var meta = document.querySelector('meta[name="theme-color"]')
+        if (meta) meta.setAttribute('content', theme === 'dark' ? '#0a1513' : '#f7faf8')
+      })()
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- Atkinson Hyperlegible for everything readable; Fraunces for display type. -->
