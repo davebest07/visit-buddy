@@ -11,7 +11,7 @@ dist-ssr/
 .env.*.local
 
 # Visits are personal data and are created at runtime
-server/data/*.json
+server/data/
 
 # Editor and OS noise
 .DS_Store
