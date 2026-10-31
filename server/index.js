@@ -32,6 +32,10 @@ app.use((error, req, res, next) => {
   res.status(500).json({ error: 'Something went wrong on the server.' })
 })
 
-app.listen(PORT, () => {
-  console.log(`Visit Buddy server listening on http://localhost:${PORT}`)
+// Listen on this computer only. Without a host, Node accepts connections from
+// every network interface, so anyone on the same Wi-Fi could read the visits.
+const HOST = process.env.HOST || '127.0.0.1'
+
+app.listen(PORT, HOST, () => {
+  console.log(`Visit Buddy server listening on http://${HOST}:${PORT}`)
 })
