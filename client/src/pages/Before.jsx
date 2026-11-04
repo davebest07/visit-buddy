@@ -10,12 +10,6 @@ import useUndo from '../hooks/useUndo.js'
 import { buildQuestions, transcribe } from '../services/aiService.js'
 import { createVisit } from '../services/api.js'
 
-const EXAMPLES = [
-  'My knee has been hurting for two weeks.',
-  'I get dizzy when I stand up.',
-  "I'm not sure my morning pill is working.",
-]
-
 const STEPS = ['Listening', 'Writing it in plain words', 'Checking each line against what you said']
 
 export default function Before() {
@@ -71,7 +65,12 @@ export default function Before() {
       const created = await createVisit({
         type: 'before',
         concerns,
-        questions: questions.map((question) => question.text),
+        // Keep the words each question came from, so a saved visit shows its
+        // provenance the same way a saved summary does.
+        questions: questions.map((question) => ({
+          text: question.text,
+          quote: question.quote ?? null,
+        })),
         approved: true,
       })
       navigate(`/app/visits/${created.id}`)
@@ -93,7 +92,9 @@ export default function Before() {
   }
 
   const busy = transcribing || status === 'loading'
-  const step = status === 'empty' ? 1 : status === 'loading' ? 2 : 3
+  // On an error no questions exist, so the indicator must not claim the last
+  // step is done.
+  const step = status === 'loading' ? 2 : status === 'success' || status === 'uncertain' ? 3 : 1
 
   return (
     <div className="vb-container max-w-5xl pt-10">
@@ -157,22 +158,6 @@ export default function Before() {
             </div>
 
             <div className="mt-5">
-              <p className="text-small font-bold text-muted">Or try one of these</p>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {EXAMPLES.map((example) => (
-                  <button
-                    key={example}
-                    type="button"
-                    onClick={() => setConcerns(example)}
-                    className="min-h-tap rounded-full border border-line bg-surface px-4 py-2 text-left text-small text-ink transition-colors duration-fast hover:border-primary hover:text-primary"
-                  >
-                    {example}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="mt-6">
               <Button onClick={run} disabled={!concerns.trim() || busy} magnetic>
                 {busy ? 'Working…' : 'Get my questions'}
               </Button>
@@ -199,8 +184,9 @@ export default function Before() {
             </ul>
 
             <p className="mt-6 rounded-card border border-line bg-surface p-4 text-small text-muted">
-              <strong className="text-ink">Demo only.</strong> Please do not enter real personal
-              or medical information.
+              <strong className="text-ink">Where it goes.</strong> What you type or say is sent to
+              Google's Gemini API to write the questions. Nothing is saved on this device until
+              you tap Save.
             </p>
           </aside>
         </div>

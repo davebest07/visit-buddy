@@ -10,7 +10,7 @@ import RecorderButton from '../components/RecorderButton.jsx'
 import Tabs from '../components/Tabs.jsx'
 import Toast from '../components/Toast.jsx'
 import useUndo from '../hooks/useUndo.js'
-import { SAMPLE_TRANSCRIPT, summarizeVisit, transcribe } from '../services/aiService.js'
+import { summarizeVisit, transcribe } from '../services/aiService.js'
 import { createVisit } from '../services/api.js'
 
 const STEPS = ['Listening', 'Writing it in plain words', 'Checking each line against what you said']
@@ -170,9 +170,6 @@ export default function After() {
 
             <div className="mt-4 flex flex-wrap items-center gap-4">
               <RecorderButton onAudio={handleAudio} label="Record the visit" />
-              <Button variant="quiet" size="sm" onClick={() => setTranscript(SAMPLE_TRANSCRIPT)}>
-                Use the sample conversation
-              </Button>
             </div>
 
             {transcribing ? (
@@ -208,8 +205,8 @@ export default function After() {
             </ul>
 
             <p className="mt-6 rounded-card border border-line bg-surface p-4 text-small text-muted">
-              <strong className="text-ink">Demo only.</strong> Please do not enter real personal
-              or medical information.
+              <strong className="text-ink">Where it goes.</strong> Your words go to Google's Gemini
+              API to be written up. The visit is saved on this device, recordings are not kept.
             </p>
           </aside>
         </div>

@@ -10,6 +10,7 @@
     "dev:server": "node --env-file-if-exists=.env --watch server/index.js",
     "dev:client": "npm --prefix client run dev",
     "build": "npm --prefix client run build",
+    "test": "node --test server/services/grounding.test.js",
     "preview": "npm --prefix client run preview",
     "start": "node --env-file-if-exists=.env server/index.js"
   },

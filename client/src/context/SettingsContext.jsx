@@ -1,21 +1,11 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
 
-// The settings the brief asks for, plus the list of valid AI modes so the URL
-// parameter can be checked before it is trusted.
+// The appearance settings. The AI itself is no longer mocked, so there is no
+// "pretend the AI failed" switch to persist any more.
 export const TEXT_SCALES = ['normal', 'large', 'extra-large']
 export const CONTRASTS = ['normal', 'high']
 // 'system' follows the device; light and dark override it.
 export const THEMES = ['system', 'light', 'dark']
-export const AI_MODES = [
-  'success',
-  'slow',
-  'uncertain',
-  'empty',
-  'error',
-  'timeout',
-  'ratelimit',
-]
 
 export const SETTINGS_STORAGE_KEY = 'visit-buddy:settings'
 const STORAGE_KEY = SETTINGS_STORAGE_KEY
@@ -26,7 +16,6 @@ const DEFAULTS = {
   textScale: 'normal',
   contrast: 'normal',
   theme: 'system',
-  aiMode: 'success',
 }
 
 // localStorage can throw (private mode, disabled storage). Never let that
@@ -41,7 +30,6 @@ function readStoredSettings() {
       textScale: TEXT_SCALES.includes(saved.textScale) ? saved.textScale : DEFAULTS.textScale,
       contrast: CONTRASTS.includes(saved.contrast) ? saved.contrast : DEFAULTS.contrast,
       theme: THEMES.includes(saved.theme) ? saved.theme : DEFAULTS.theme,
-      aiMode: AI_MODES.includes(saved.aiMode) ? saved.aiMode : DEFAULTS.aiMode,
     }
   } catch {
     return DEFAULTS
@@ -66,13 +54,8 @@ function resolveTheme(theme) {
 const SettingsContext = createContext(null)
 
 export function SettingsProvider({ children }) {
-  const [searchParams] = useSearchParams()
   const [settings, setSettings] = useState(readStoredSettings)
   const [resolvedTheme, setResolvedTheme] = useState(() => resolveTheme(settings.theme))
-
-  // ?ai= wins over the saved setting, so a demo link can force a state.
-  const urlMode = searchParams.get('ai')
-  const resolvedAiMode = AI_MODES.includes(urlMode) ? urlMode : settings.aiMode
 
   // When the choice is "system", follow the device live — a user switching
   // their OS to dark mode should not have to reload the page.
@@ -129,24 +112,17 @@ export function SettingsProvider({ children }) {
     setSettings((current) => ({ ...current, theme }))
   }, [])
 
-  const setAiMode = useCallback((aiMode) => {
-    setSettings((current) => ({ ...current, aiMode }))
-  }, [])
-
   const value = useMemo(
     () => ({
       textScale: settings.textScale,
       contrast: settings.contrast,
       theme: settings.theme,
       resolvedTheme,
-      aiMode: settings.aiMode,
-      resolvedAiMode,
       setTextScale,
       setContrast,
       setTheme,
-      setAiMode,
     }),
-    [settings, resolvedTheme, resolvedAiMode, setTextScale, setContrast, setTheme, setAiMode],
+    [settings, resolvedTheme, setTextScale, setContrast, setTheme],
   )
 
   return <SettingsContext.Provider value={value}>{children}</SettingsContext.Provider>

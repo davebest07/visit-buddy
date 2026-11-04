@@ -116,7 +116,7 @@ export default function Sidebar() {
           Help &amp; support
         </NavLink>
 
-        <p className="px-4 pt-3 text-small text-muted">Demo build · CMPS 4200</p>
+        <p className="px-4 pt-3 text-small text-muted">CMPS 4200 · HCI project</p>
       </div>
     </aside>
   )

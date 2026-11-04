@@ -58,12 +58,12 @@ const FAQS = [
   {
     question: 'Do I need an account?',
     answer:
-      'No. There is no sign-in in this demo. Your visits stay on this computer, and the demo stores text only, never audio.',
+      'No. There is no sign-in. Your visits stay on this device, and only text is stored — recordings are never saved.',
   },
   {
     question: 'What happens to my recording?',
     answer:
-      'This demo does not send your recording anywhere, and it does not save it. Only the text you approve is kept.',
+      'It is sent to Google\'s Gemini API to be turned into words, then it is not kept. Only the text you approve is saved on this device.',
   },
   {
     question: 'Can I share a visit with family?',
@@ -158,7 +158,8 @@ export default function Landing() {
             </div>
 
             <p className="mt-6 text-small text-muted">
-              Demo only. Please do not enter real personal or medical information.
+              Your words are sent to Google's Gemini API to write the questions. Visits are saved
+              only on this device.
             </p>
           </motion.div>
 
@@ -432,15 +433,15 @@ export default function Landing() {
               to="/app"
               className="flex min-h-tap items-center text-small font-bold text-ink hover:text-primary"
             >
-              Try the demo
+              Try it
             </Link>
           </nav>
         </div>
 
         <div className="vb-container pb-10">
           <p className="max-w-measure text-small text-muted">
-            Privacy: this demo keeps your visits on this computer and never stores audio.
-            Please do not enter real personal or medical information. Built by David Soboma
+            Privacy: your visits are stored on this device and recordings are never saved. What
+            you type or say is sent to Google's Gemini API to be organised. Built by David Soboma
             Bestman and Caleb Nwego for CMPS 4200.
           </p>
         </div>

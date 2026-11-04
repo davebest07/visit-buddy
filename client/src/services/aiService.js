@@ -1,397 +1,110 @@
-import { SETTINGS_STORAGE_KEY } from '../context/SettingsContext.jsx'
-
 /*
- * Visit Buddy mock AI service.
+ * Visit Buddy AI client.
  *
- * This is the ONLY file allowed to produce AI results. Components call these
- * five functions and never import sample data themselves.
+ * The browser never holds a key and never talks to a model directly. Every
+ * call goes to the server, which owns the key and the prompts.
  *
- * Phase 3: everything below is fake but behaves like the real thing, including
- * the delay, the failure modes and the AbortSignal. Phase 4 replaces the insides
- * of each function with a fetch to the server; the exported shapes stay the same.
+ * The exported shapes are unchanged from Phase 3, so the pages do not care
+ * whether an answer came from a mock or a live model:
+ *   buildQuestions  -> [{ text, quote }]
+ *   transcribe      -> "text"
+ *   summarizeVisit  -> { status, summary, todos, meds, flags }
+ *   askAboutVisit   -> { found, answer, quote }
+ *
+ * Every function accepts an AbortSignal, so Cancel really stops the request.
  */
 
-// ASSUMED, replace with measured values in Phase 4.
-const DELAYS = {
-  success: 2500,
-  slow: 14000,
-  uncertain: 2500,
-  empty: 2500,
-  timeout: 10000,
-  ratelimit: 600,
-  error: 600,
-  transcribe: 1800,
-  ask: 1800,
-}
-
-const MODES = ['success', 'slow', 'uncertain', 'empty', 'error', 'timeout', 'ratelimit']
-
-export const SAMPLE_CONCERNS =
-  "My knee has been hurting for two weeks, I get dizzy when I stand up, and I'm not sure my morning pill is working."
-
-export const SAMPLE_TRANSCRIPT =
-  "The doctor said my knee pain is probably from wear and to try gentle stretching twice a day. She started me on Bellaprin, one tablet every morning with food. I should keep taking my night pill, Norvelan, the same as before. She wants blood work done before the next visit in six weeks, and to call if the dizziness gets worse. I think she said ten milligrams for the Bellaprin but I didn't catch it clearly."
-
-export const SAMPLE_QUESTIONS = [
-  'What should I know about my knee pain?',
-  'Is dizziness when standing something to worry about?',
-  'Is my morning pill still right for me?',
-]
-
 export class AIError extends Error {
-  constructor(kind) {
-    super(kind)
+  constructor(kind, message) {
+    super(message || kind)
     this.name = 'AIError'
     this.kind = kind
   }
 }
 
-function currentMode() {
-  // The URL wins over the saved setting so a demo link can force a state.
-  const fromUrl = new URLSearchParams(window.location.search).get('ai')
-  if (MODES.includes(fromUrl)) return fromUrl
+const BASE = '/api/ai'
 
+async function readError(response) {
   try {
-    const saved = JSON.parse(window.localStorage.getItem(SETTINGS_STORAGE_KEY) || '{}')
-    if (MODES.includes(saved.aiMode)) return saved.aiMode
+    const data = await response.json()
+    if (data?.kind) return new AIError(data.kind, data.error)
+    return new AIError('unavailable', data?.error)
   } catch {
-    // Ignore broken storage and fall through to the default.
+    return new AIError('unavailable', 'The server could not be reached.')
+  }
+}
+
+async function postJson(path, body, signal) {
+  let response
+  try {
+    response = await fetch(BASE + path, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+      signal,
+    })
+  } catch (error) {
+    // Abort is a normal outcome (the user pressed Cancel); let it through.
+    if (error?.name === 'AbortError') throw error
+    throw new AIError('unavailable', 'Could not reach the server. Is it running?')
   }
 
-  return 'success'
+  if (!response.ok) throw await readError(response)
+  return response.json()
 }
 
-function abortError() {
-  return new DOMException('The request was cancelled.', 'AbortError')
+// AI-1: what worries you -> questions to ask the doctor
+export async function buildQuestions(concerns, { signal } = {}) {
+  const data = await postJson('/questions', { concerns }, signal)
+  return Array.isArray(data?.questions) ? data.questions : []
 }
 
-// A delay that stops the moment the user cancels.
-function wait(ms, signal) {
-  return new Promise((resolve, reject) => {
-    if (signal?.aborted) {
-      reject(abortError())
-      return
-    }
-
-    const timer = setTimeout(() => {
-      signal?.removeEventListener('abort', onAbort)
-      resolve()
-    }, ms)
-
-    function onAbort() {
-      clearTimeout(timer)
-      reject(abortError())
-    }
-
-    signal?.addEventListener('abort', onAbort, { once: true })
-  })
-}
-
-// Regenerate returns a different phrasing on every second call.
-const callCounts = new Map()
-function nextVariant(key) {
-  const count = callCounts.get(key) ?? 0
-  callCounts.set(key, count + 1)
-  return count % 2
-}
-
-function failIfBroken(mode) {
-  if (mode === 'error') throw new AIError('unavailable')
-  if (mode === 'timeout') throw new AIError('timeout')
-  if (mode === 'ratelimit') throw new AIError('ratelimit')
-}
-
-// ---------------------------------------------------------------------------
-// AI-1: concerns -> questions
-// ---------------------------------------------------------------------------
-
-const SAMPLE_QUESTION_SETS = [
-  [
-    {
-      text: 'How long can knee pain like mine last, and what could be causing it?',
-      quote: 'My knee has been hurting for two weeks',
-    },
-    { text: 'Why do I feel dizzy when I stand up?', quote: 'I get dizzy when I stand up' },
-    {
-      text: 'Is my morning pill still the right one for me?',
-      quote: "I'm not sure my morning pill is working",
-    },
-    {
-      text: 'What signs should make me call you before my next visit?',
-      quote: null,
-    },
-  ],
-  [
-    {
-      text: 'What could be causing the knee pain I have had for two weeks?',
-      quote: 'My knee has been hurting for two weeks',
-    },
-    {
-      text: 'Is my morning pill still the right one for me?',
-      quote: "I'm not sure my morning pill is working",
-    },
-    { text: 'What makes me dizzy when I stand up?', quote: 'I get dizzy when I stand up' },
-    {
-      text: 'When should I call you instead of waiting for my next visit?',
-      quote: null,
-    },
-  ],
-]
-
-// If someone types something other than the sample, build questions from their
-// own sentences so the quotes still match what they wrote.
-function questionsFromText(text) {
-  const sentences = text
-    .split(/(?<=[.!?])\s+/)
-    .map((sentence) => sentence.trim())
-    .filter(Boolean)
-    .slice(0, 4)
-
-  return sentences.map((sentence) => ({
-    text: `What can you tell me about: ${sentence.replace(/[.!?]+$/, '')}?`,
-    quote: sentence,
-  }))
-}
-
-export async function buildQuestions(text, { signal } = {}) {
-  const mode = currentMode()
-  await wait(DELAYS[mode] ?? DELAYS.success, signal)
-  failIfBroken(mode)
-
-  if (mode === 'empty') return []
-
-  const variant = nextVariant('questions')
-  const looksLikeSample = /knee/i.test(text) && /dizzy/i.test(text)
-
-  if (!looksLikeSample) {
-    const generated = questionsFromText(text)
-    if (generated.length === 0) return []
-    return generated
+// AI-2: a recording -> what was said.
+// The blob is uploaded as-is; the server forwards it to the model.
+export async function transcribe(audio, { signal } = {}) {
+  if (!audio || typeof audio === 'string') {
+    throw new AIError('invalid', 'There is no recording to turn into words.')
   }
 
-  return SAMPLE_QUESTION_SETS[variant].map((question) => ({ ...question }))
-}
-
-// ---------------------------------------------------------------------------
-// AI-2: speech -> text
-// ---------------------------------------------------------------------------
-
-export async function transcribe(audioBlobOrText, { signal } = {}) {
-  const mode = currentMode()
-
-  if (typeof audioBlobOrText === 'string') {
-    return audioBlobOrText.trim()
+  let response
+  try {
+    response = await fetch(`${BASE}/transcribe`, {
+      method: 'POST',
+      headers: { 'Content-Type': audio.type || 'audio/webm' },
+      body: audio,
+      signal,
+    })
+  } catch (error) {
+    if (error?.name === 'AbortError') throw error
+    throw new AIError('unavailable', 'Could not reach the server. Is it running?')
   }
 
-  await wait(DELAYS.transcribe, signal)
-  failIfBroken(mode)
+  if (!response.ok) throw await readError(response)
 
-  if (mode === 'empty') return ''
-  return SAMPLE_TRANSCRIPT
+  const data = await response.json()
+  return typeof data?.text === 'string' ? data.text : ''
 }
 
-// ---------------------------------------------------------------------------
-// AI-3: transcript -> summary, to-dos and medicines
-// ---------------------------------------------------------------------------
-
-const SAMPLE_VISIT = {
-  status: 'success',
-  summary: [
-    {
-      text: 'Your knee pain is probably from wear.',
-      quote: 'my knee pain is probably from wear',
-    },
-    {
-      text: 'Gentle stretching twice a day may help.',
-      quote: 'try gentle stretching twice a day',
-    },
-    {
-      text: 'You need blood work before your next visit in six weeks.',
-      quote: 'blood work done before the next visit in six weeks',
-    },
-  ],
-  todos: [
-    {
-      text: 'Do gentle knee stretches twice a day',
-      done: false,
-      quote: 'try gentle stretching twice a day',
-    },
-    {
-      text: 'Get blood work before the next visit in six weeks',
-      done: false,
-      quote: 'blood work done before the next visit in six weeks',
-    },
-    {
-      text: 'Call the clinic if the dizziness gets worse',
-      done: false,
-      quote: 'call if the dizziness gets worse',
-    },
-  ],
-  meds: [
-    {
-      name: 'Bellaprin',
-      dose: '10 mg',
-      time: 'morning, with food',
-      quote: 'Bellaprin, one tablet every morning with food',
-      needsCheck: true,
-    },
-    {
-      name: 'Norvelan',
-      dose: null,
-      time: 'night',
-      note: 'same as before',
-      quote: 'keep taking my night pill, Norvelan, the same as before',
-      needsCheck: false,
-    },
-  ],
-  flags: [
-    {
-      line: 'Bellaprin dose',
-      reason: 'The dose was not clear in what you said. Ask your doctor or pharmacist.',
-      quote: 'ten milligrams for the Bellaprin',
-    },
-  ],
-}
-
-const SAMPLE_VISIT_VARIANT = {
-  ...SAMPLE_VISIT,
-  summary: [
-    {
-      text: 'Your knee pain is probably caused by wear.',
-      quote: 'my knee pain is probably from wear',
-    },
-    {
-      text: 'You should try gentle stretching twice a day.',
-      quote: 'try gentle stretching twice a day',
-    },
-    {
-      text: 'Blood work is needed before the next visit, in six weeks.',
-      quote: 'blood work done before the next visit in six weeks',
-    },
-  ],
-}
-
+// AI-3: what the doctor said -> summary, to-dos, medicines, things to check
 export async function summarizeVisit(transcript, { signal } = {}) {
-  const mode = currentMode()
-  await wait(DELAYS[mode] ?? DELAYS.success, signal)
-  failIfBroken(mode)
+  const data = await postJson('/summarize', { transcript }, signal)
 
-  if (mode === 'empty') {
-    return { status: 'empty', summary: [], todos: [], meds: [], flags: [] }
-  }
-
-  const variant = nextVariant('summarize')
-  const base = variant === 0 ? SAMPLE_VISIT : SAMPLE_VISIT_VARIANT
-
-  const result = {
-    status: 'success',
-    summary: base.summary.map((line) => ({ ...line })),
-    todos: SAMPLE_VISIT.todos.map((todo) => ({ ...todo })),
-    meds: SAMPLE_VISIT.meds.map((med) => ({ ...med })),
-    flags: SAMPLE_VISIT.flags.map((flag) => ({ ...flag })),
-  }
-
-  if (mode === 'uncertain') {
-    result.meds[0] = {
-      ...result.meds[0],
-      dose: null,
-      needsCheck: true,
-      flagged: true,
-      note: 'The dose was not clear',
-    }
-    result.flags = [
-      {
-        line: 'Bellaprin dose',
-        reason: 'I could not hear the dose clearly. Ask your doctor or pharmacist.',
-        quote: "I think she said ten milligrams for the Bellaprin but I didn't catch it clearly.",
-      },
-      {
-        line: 'Knee stretching',
-        reason: 'I could not tell how long to stretch for. Ask your doctor or pharmacist.',
-        quote: 'try gentle stretching twice a day',
-      },
-    ]
-    result.summary[1] = { ...result.summary[1], flagged: true }
-  }
-
-  return result
-}
-
-// ---------------------------------------------------------------------------
-// AI-4: uncertain lines
-// ---------------------------------------------------------------------------
-
-export async function flagUncertain(transcript, { signal } = {}) {
-  const mode = currentMode()
-  await wait(Math.min(DELAYS[mode] ?? DELAYS.success, 1200), signal)
-  failIfBroken(mode)
-
-  if (mode === 'empty') return []
-
-  return SAMPLE_VISIT.flags.map((flag) => ({ ...flag }))
-}
-
-// ---------------------------------------------------------------------------
-// AI-5: ask about one visit
-// ---------------------------------------------------------------------------
-
-const ANSWERS = [
-  {
-    match: ['medicine', 'medication', 'pill', 'dose', 'bellaprin', 'norvelan'],
-    answer:
-      'You were started on Bellaprin, one tablet every morning with food. Keep taking Norvelan at night, the same as before. The dose of Bellaprin was not clear, so ask your doctor or pharmacist.',
-    quote: 'She started me on Bellaprin, one tablet every morning with food.',
-  },
-  {
-    match: ['knee', 'pain', 'stretch'],
-    answer: 'Your knee pain is probably from wear. Try gentle stretching twice a day.',
-    quote: 'my knee pain is probably from wear',
-  },
-  {
-    match: ['blood', 'test', 'lab', 'work'],
-    answer: 'You need blood work done before your next visit, in six weeks.',
-    quote: 'blood work done before the next visit in six weeks',
-  },
-  {
-    match: ['dizzy', 'dizziness', 'faint'],
-    answer: 'Call the clinic if the dizziness gets worse.',
-    quote: 'call if the dizziness gets worse',
-  },
-  {
-    match: ['next', 'follow', 'again', 'weeks'],
-    answer: 'Your next visit is in six weeks.',
-    quote: 'before the next visit in six weeks',
-  },
-]
-
-const NOT_FOUND = {
-  found: false,
-  answer:
-    'I could not find that in this visit. Ask your doctor or pharmacist if you are not sure.',
-  quote: null,
-}
-
-export async function askAboutVisit(transcript, question, { signal } = {}) {
-  const mode = currentMode()
-  await wait(DELAYS.ask, signal)
-  failIfBroken(mode)
-
-  if (mode === 'empty') {
-    return { found: false, answer: '', quote: null }
-  }
-
-  const asked = String(question || '').toLowerCase()
-  const match = ANSWERS.find((entry) => entry.match.some((word) => asked.includes(word)))
-
-  if (!match) return { ...NOT_FOUND }
-
-  const variant = nextVariant('ask')
   return {
-    found: true,
-    answer:
-      variant === 0
-        ? match.answer
-        : match.answer.replace('You ', 'The doctor said you ').replace('Your ', 'The doctor said your '),
-    quote: match.quote,
+    status: data?.status === 'empty' ? 'empty' : 'success',
+    summary: Array.isArray(data?.summary) ? data.summary : [],
+    todos: Array.isArray(data?.todos) ? data.todos : [],
+    meds: Array.isArray(data?.meds) ? data.meds : [],
+    flags: Array.isArray(data?.flags) ? data.flags : [],
+  }
+}
+
+// AI-4: ask about one visit
+export async function askAboutVisit(transcript, question, { signal } = {}) {
+  const data = await postJson('/ask', { transcript, question }, signal)
+
+  return {
+    found: Boolean(data?.found),
+    answer: typeof data?.answer === 'string' ? data.answer : '',
+    quote: typeof data?.quote === 'string' && data.quote ? data.quote : null,
   }
 }
