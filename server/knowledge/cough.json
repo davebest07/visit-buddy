@@ -1,0 +1,466 @@
+{
+  "topic": "cough",
+  "chunks": [
+    {
+      "id": "cough-01",
+      "topic": "cough",
+      "category": "onset",
+      "use": "interview",
+      "question": "When did the cough start?",
+      "keywords": [
+        "cough",
+        "coughing",
+        "phlegm",
+        "mucus",
+        "sputum",
+        "throat",
+        "wheeze",
+        "wheezing",
+        "chesty",
+        "cold",
+        "congestion"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Today",
+        "In the last few days",
+        "A few weeks ago",
+        "Months ago or longer"
+      ]
+    },
+    {
+      "id": "cough-02",
+      "topic": "cough",
+      "category": "history",
+      "use": "interview",
+      "question": "Did it begin with a cold or flu, or on its own?",
+      "keywords": [
+        "cough",
+        "coughing",
+        "phlegm",
+        "mucus",
+        "sputum",
+        "throat",
+        "wheeze",
+        "wheezing",
+        "chesty",
+        "cold",
+        "congestion",
+        "flu",
+        "virus"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "After a cold or flu",
+        "On its own",
+        "Not sure"
+      ]
+    },
+    {
+      "id": "cough-03",
+      "topic": "cough",
+      "category": "character",
+      "use": "interview",
+      "question": "Is the cough dry, or do you bring up phlegm?",
+      "keywords": [
+        "cough",
+        "coughing",
+        "phlegm",
+        "mucus",
+        "sputum",
+        "throat",
+        "wheeze",
+        "wheezing",
+        "chesty",
+        "cold",
+        "congestion",
+        "dry"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Dry",
+        "Brings up phlegm",
+        "Both"
+      ]
+    },
+    {
+      "id": "cough-04",
+      "topic": "cough",
+      "category": "character",
+      "use": "interview",
+      "question": "If you bring up phlegm, what colour is it?",
+      "keywords": [
+        "cough",
+        "coughing",
+        "phlegm",
+        "mucus",
+        "sputum",
+        "throat",
+        "wheeze",
+        "wheezing",
+        "chesty",
+        "cold",
+        "congestion",
+        "colour",
+        "color"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Clear or white",
+        "Yellow or green",
+        "It has blood in it",
+        "No phlegm"
+      ]
+    },
+    {
+      "id": "cough-05",
+      "topic": "cough",
+      "category": "timing",
+      "use": "interview",
+      "question": "Is the cough worse at night, in the morning, or with exercise?",
+      "keywords": [
+        "cough",
+        "coughing",
+        "phlegm",
+        "mucus",
+        "sputum",
+        "throat",
+        "wheeze",
+        "wheezing",
+        "chesty",
+        "cold",
+        "congestion",
+        "night",
+        "morning",
+        "exercise"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "At night",
+        "In the morning",
+        "With exercise",
+        "No pattern"
+      ]
+    },
+    {
+      "id": "cough-06",
+      "topic": "cough",
+      "category": "triggers/relief",
+      "use": "interview",
+      "question": "Does anything set it off, like cold air, dust, smoke, or lying down?",
+      "keywords": [
+        "cough",
+        "coughing",
+        "phlegm",
+        "mucus",
+        "sputum",
+        "throat",
+        "wheeze",
+        "wheezing",
+        "chesty",
+        "cold",
+        "congestion",
+        "air",
+        "dust",
+        "smoke",
+        "lying"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Cold air",
+        "Dust or smoke",
+        "Lying down",
+        "Nothing I've noticed"
+      ]
+    },
+    {
+      "id": "cough-07",
+      "topic": "cough",
+      "category": "related symptoms",
+      "use": "interview",
+      "question": "Have you also had a fever, wheezing, or a sore throat?",
+      "keywords": [
+        "cough",
+        "coughing",
+        "phlegm",
+        "mucus",
+        "sputum",
+        "throat",
+        "wheeze",
+        "wheezing",
+        "chesty",
+        "cold",
+        "congestion",
+        "fever",
+        "sore throat"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Fever",
+        "Wheezing",
+        "Sore throat",
+        "No, nothing else"
+      ]
+    },
+    {
+      "id": "cough-08",
+      "topic": "cough",
+      "category": "related symptoms",
+      "use": "interview",
+      "question": "Do you get heartburn or a sour taste in your mouth?",
+      "keywords": [
+        "cough",
+        "coughing",
+        "phlegm",
+        "mucus",
+        "sputum",
+        "throat",
+        "wheeze",
+        "wheezing",
+        "chesty",
+        "cold",
+        "congestion",
+        "heartburn",
+        "sour",
+        "reflux"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Yes",
+        "No"
+      ]
+    },
+    {
+      "id": "cough-09",
+      "topic": "cough",
+      "category": "severity",
+      "use": "interview",
+      "question": "How much is the cough bothering you overall?",
+      "keywords": [
+        "cough",
+        "coughing",
+        "phlegm",
+        "mucus",
+        "sputum",
+        "throat",
+        "wheeze",
+        "wheezing",
+        "chesty",
+        "cold",
+        "congestion"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Mild",
+        "Medium",
+        "Bad",
+        "Very bad"
+      ]
+    },
+    {
+      "id": "cough-10",
+      "topic": "cough",
+      "category": "impact on daily life",
+      "use": "interview",
+      "question": "Is the cough keeping you or others awake, or getting in the way of work?",
+      "keywords": [
+        "cough",
+        "coughing",
+        "phlegm",
+        "mucus",
+        "sputum",
+        "throat",
+        "wheeze",
+        "wheezing",
+        "chesty",
+        "cold",
+        "congestion",
+        "sleep",
+        "awake",
+        "work"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Not much",
+        "Some things are harder",
+        "I've had to stop some things"
+      ]
+    },
+    {
+      "id": "cough-11",
+      "topic": "cough",
+      "category": "history",
+      "use": "interview",
+      "question": "Do you smoke or vape now, or did you in the past?",
+      "keywords": [
+        "cough",
+        "coughing",
+        "phlegm",
+        "mucus",
+        "sputum",
+        "throat",
+        "wheeze",
+        "wheezing",
+        "chesty",
+        "cold",
+        "congestion",
+        "smoke",
+        "smoking",
+        "vape"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Never",
+        "In the past",
+        "Yes, now"
+      ]
+    },
+    {
+      "id": "cough-12",
+      "topic": "cough",
+      "category": "medicines",
+      "use": "interview",
+      "question": "Have you started any new medicine in the months before the cough began?",
+      "keywords": [
+        "cough",
+        "coughing",
+        "phlegm",
+        "mucus",
+        "sputum",
+        "throat",
+        "wheeze",
+        "wheezing",
+        "chesty",
+        "cold",
+        "congestion",
+        "new",
+        "started"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "No",
+        "Yes",
+        "Not sure"
+      ]
+    },
+    {
+      "id": "cough-13",
+      "topic": "cough",
+      "category": "medicines",
+      "use": "interview",
+      "question": "What have you tried for the cough so far?",
+      "keywords": [
+        "cough",
+        "coughing",
+        "phlegm",
+        "mucus",
+        "sputum",
+        "throat",
+        "wheeze",
+        "wheezing",
+        "chesty",
+        "cold",
+        "congestion",
+        "syrup",
+        "lozenge",
+        "tried"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Nothing",
+        "Cough syrup",
+        "Honey or warm drinks",
+        "Something else"
+      ]
+    },
+    {
+      "id": "cough-14",
+      "topic": "cough",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "What would help you find out more about my cough?",
+      "keywords": [
+        "cough",
+        "coughing",
+        "phlegm",
+        "mucus",
+        "sputum",
+        "throat",
+        "wheeze",
+        "wheezing",
+        "chesty",
+        "cold",
+        "congestion"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "cough-15",
+      "topic": "cough",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "How long should I expect the cough to last before checking back with you?",
+      "keywords": [
+        "cough",
+        "coughing",
+        "phlegm",
+        "mucus",
+        "sputum",
+        "throat",
+        "wheeze",
+        "wheezing",
+        "chesty",
+        "cold",
+        "congestion",
+        "how long",
+        "check back"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    }
+  ]
+}

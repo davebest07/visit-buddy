@@ -1,0 +1,441 @@
+{
+  "topic": "tiredness",
+  "chunks": [
+    {
+      "id": "tiredness-01",
+      "topic": "tiredness",
+      "category": "onset",
+      "use": "interview",
+      "question": "When did you start feeling more tired than usual?",
+      "keywords": [
+        "tired",
+        "tiredness",
+        "fatigue",
+        "fatigued",
+        "exhausted",
+        "exhaustion",
+        "energy",
+        "no energy",
+        "worn out",
+        "weak",
+        "sluggish",
+        "drained"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Today",
+        "In the last few days",
+        "A few weeks ago",
+        "Months ago or longer"
+      ]
+    },
+    {
+      "id": "tiredness-02",
+      "topic": "tiredness",
+      "category": "character",
+      "use": "interview",
+      "question": "Is it more sleepiness, weakness in your body, or feeling mentally drained?",
+      "keywords": [
+        "tired",
+        "tiredness",
+        "fatigue",
+        "fatigued",
+        "exhausted",
+        "exhaustion",
+        "energy",
+        "no energy",
+        "worn out",
+        "weak",
+        "sluggish",
+        "drained",
+        "sleepy"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Sleepy",
+        "Physically weak",
+        "Mentally drained",
+        "All of these"
+      ]
+    },
+    {
+      "id": "tiredness-03",
+      "topic": "tiredness",
+      "category": "timing",
+      "use": "interview",
+      "question": "Is it there all day, or worse at certain times?",
+      "keywords": [
+        "tired",
+        "tiredness",
+        "fatigue",
+        "fatigued",
+        "exhausted",
+        "exhaustion",
+        "energy",
+        "no energy",
+        "worn out",
+        "weak",
+        "sluggish",
+        "drained",
+        "all day",
+        "afternoon"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "All day",
+        "Mornings",
+        "Afternoons",
+        "Evenings"
+      ]
+    },
+    {
+      "id": "tiredness-04",
+      "topic": "tiredness",
+      "category": "triggers/relief",
+      "use": "interview",
+      "question": "Does rest or a good night's sleep help?",
+      "keywords": [
+        "tired",
+        "tiredness",
+        "fatigue",
+        "fatigued",
+        "exhausted",
+        "exhaustion",
+        "energy",
+        "no energy",
+        "worn out",
+        "weak",
+        "sluggish",
+        "drained",
+        "rest",
+        "sleep"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Yes, it helps",
+        "A little",
+        "Not at all"
+      ]
+    },
+    {
+      "id": "tiredness-05",
+      "topic": "tiredness",
+      "category": "severity",
+      "use": "interview",
+      "question": "How much is the tiredness holding you back?",
+      "keywords": [
+        "tired",
+        "tiredness",
+        "fatigue",
+        "fatigued",
+        "exhausted",
+        "exhaustion",
+        "energy",
+        "no energy",
+        "worn out",
+        "weak",
+        "sluggish",
+        "drained"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "A little",
+        "Quite a bit",
+        "A lot"
+      ]
+    },
+    {
+      "id": "tiredness-06",
+      "topic": "tiredness",
+      "category": "related symptoms",
+      "use": "interview",
+      "question": "Have you noticed other changes, like in weight, appetite, or mood?",
+      "keywords": [
+        "tired",
+        "tiredness",
+        "fatigue",
+        "fatigued",
+        "exhausted",
+        "exhaustion",
+        "energy",
+        "no energy",
+        "worn out",
+        "weak",
+        "sluggish",
+        "drained",
+        "weight",
+        "appetite",
+        "mood"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Weight",
+        "Appetite",
+        "Mood",
+        "No other changes"
+      ]
+    },
+    {
+      "id": "tiredness-07",
+      "topic": "tiredness",
+      "category": "related symptoms",
+      "use": "interview",
+      "question": "How have you been sleeping lately?",
+      "keywords": [
+        "tired",
+        "tiredness",
+        "fatigue",
+        "fatigued",
+        "exhausted",
+        "exhaustion",
+        "energy",
+        "no energy",
+        "worn out",
+        "weak",
+        "sluggish",
+        "drained",
+        "sleep",
+        "sleeping"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Well",
+        "Trouble falling asleep",
+        "Waking up a lot",
+        "Sleeping a lot more"
+      ]
+    },
+    {
+      "id": "tiredness-08",
+      "topic": "tiredness",
+      "category": "impact on daily life",
+      "use": "interview",
+      "question": "Which daily tasks have become harder because of it?",
+      "keywords": [
+        "tired",
+        "tiredness",
+        "fatigue",
+        "fatigued",
+        "exhausted",
+        "exhaustion",
+        "energy",
+        "no energy",
+        "worn out",
+        "weak",
+        "sluggish",
+        "drained",
+        "tasks",
+        "work",
+        "chores"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Not much",
+        "Some things are harder",
+        "I've had to stop some things"
+      ]
+    },
+    {
+      "id": "tiredness-09",
+      "topic": "tiredness",
+      "category": "history",
+      "use": "interview",
+      "question": "Has anything changed in your life recently, like work, stress, or caring for someone?",
+      "keywords": [
+        "tired",
+        "tiredness",
+        "fatigue",
+        "fatigued",
+        "exhausted",
+        "exhaustion",
+        "energy",
+        "no energy",
+        "worn out",
+        "weak",
+        "sluggish",
+        "drained",
+        "stress",
+        "work",
+        "caring",
+        "change"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Work",
+        "Stress",
+        "Caring for someone",
+        "Nothing changed"
+      ]
+    },
+    {
+      "id": "tiredness-10",
+      "topic": "tiredness",
+      "category": "history",
+      "use": "interview",
+      "question": "Have you been ill recently, even with something minor like a cold?",
+      "keywords": [
+        "tired",
+        "tiredness",
+        "fatigue",
+        "fatigued",
+        "exhausted",
+        "exhaustion",
+        "energy",
+        "no energy",
+        "worn out",
+        "weak",
+        "sluggish",
+        "drained",
+        "ill",
+        "sick",
+        "cold",
+        "flu"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Yes",
+        "No"
+      ]
+    },
+    {
+      "id": "tiredness-11",
+      "topic": "tiredness",
+      "category": "medicines",
+      "use": "interview",
+      "question": "Have you started, stopped, or changed any medicines or supplements?",
+      "keywords": [
+        "tired",
+        "tiredness",
+        "fatigue",
+        "fatigued",
+        "exhausted",
+        "exhaustion",
+        "energy",
+        "no energy",
+        "worn out",
+        "weak",
+        "sluggish",
+        "drained",
+        "supplement",
+        "started"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "No changes",
+        "Yes",
+        "Not sure"
+      ]
+    },
+    {
+      "id": "tiredness-12",
+      "topic": "tiredness",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "What would help you understand why I feel this tired?",
+      "keywords": [
+        "tired",
+        "tiredness",
+        "fatigue",
+        "fatigued",
+        "exhausted",
+        "exhaustion",
+        "energy",
+        "no energy",
+        "worn out",
+        "weak",
+        "sluggish",
+        "drained"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "tiredness-13",
+      "topic": "tiredness",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "Are there any tests that would help, and what would they look for?",
+      "keywords": [
+        "tired",
+        "tiredness",
+        "fatigue",
+        "fatigued",
+        "exhausted",
+        "exhaustion",
+        "energy",
+        "no energy",
+        "worn out",
+        "weak",
+        "sluggish",
+        "drained",
+        "test",
+        "blood"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "tiredness-14",
+      "topic": "tiredness",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "What should I keep track of before our next visit?",
+      "keywords": [
+        "tired",
+        "tiredness",
+        "fatigue",
+        "fatigued",
+        "exhausted",
+        "exhaustion",
+        "energy",
+        "no energy",
+        "worn out",
+        "weak",
+        "sluggish",
+        "drained",
+        "track"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    }
+  ]
+}

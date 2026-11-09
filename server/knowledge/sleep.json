@@ -1,0 +1,471 @@
+{
+  "topic": "sleep",
+  "chunks": [
+    {
+      "id": "sleep-01",
+      "topic": "sleep",
+      "category": "onset",
+      "use": "interview",
+      "question": "When did your sleep problems start?",
+      "keywords": [
+        "sleep",
+        "sleeping",
+        "insomnia",
+        "awake",
+        "can't sleep",
+        "cannot sleep",
+        "wake up",
+        "waking",
+        "snoring",
+        "snore",
+        "nap",
+        "naps",
+        "night",
+        "restless"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Today",
+        "In the last few days",
+        "A few weeks ago",
+        "Months ago or longer"
+      ]
+    },
+    {
+      "id": "sleep-02",
+      "topic": "sleep",
+      "category": "character",
+      "use": "interview",
+      "question": "Is the trouble falling asleep, staying asleep, or waking too early?",
+      "keywords": [
+        "sleep",
+        "sleeping",
+        "insomnia",
+        "awake",
+        "can't sleep",
+        "cannot sleep",
+        "wake up",
+        "waking",
+        "snoring",
+        "snore",
+        "nap",
+        "naps",
+        "night",
+        "restless",
+        "falling",
+        "staying",
+        "early"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Falling asleep",
+        "Staying asleep",
+        "Waking too early",
+        "All of these"
+      ]
+    },
+    {
+      "id": "sleep-03",
+      "topic": "sleep",
+      "category": "timing",
+      "use": "interview",
+      "question": "What time do you usually go to bed and get up?",
+      "keywords": [
+        "sleep",
+        "sleeping",
+        "insomnia",
+        "awake",
+        "can't sleep",
+        "cannot sleep",
+        "wake up",
+        "waking",
+        "snoring",
+        "snore",
+        "nap",
+        "naps",
+        "night",
+        "restless",
+        "bedtime",
+        "wake"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Mornings",
+        "Evenings",
+        "At night",
+        "No pattern"
+      ]
+    },
+    {
+      "id": "sleep-04",
+      "topic": "sleep",
+      "category": "duration",
+      "use": "interview",
+      "question": "How many hours of sleep do you get on a typical night?",
+      "keywords": [
+        "sleep",
+        "sleeping",
+        "insomnia",
+        "awake",
+        "can't sleep",
+        "cannot sleep",
+        "wake up",
+        "waking",
+        "snoring",
+        "snore",
+        "nap",
+        "naps",
+        "night",
+        "restless",
+        "hours"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Less than 5",
+        "5–6",
+        "7–8",
+        "More than 8"
+      ]
+    },
+    {
+      "id": "sleep-05",
+      "topic": "sleep",
+      "category": "triggers/relief",
+      "use": "interview",
+      "question": "What happens before bed: screens, caffeine, alcohol, or late meals?",
+      "keywords": [
+        "sleep",
+        "sleeping",
+        "insomnia",
+        "awake",
+        "can't sleep",
+        "cannot sleep",
+        "wake up",
+        "waking",
+        "snoring",
+        "snore",
+        "nap",
+        "naps",
+        "night",
+        "restless",
+        "screens",
+        "caffeine",
+        "coffee",
+        "alcohol",
+        "meals"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Screens",
+        "Caffeine",
+        "Alcohol",
+        "Late meals"
+      ]
+    },
+    {
+      "id": "sleep-06",
+      "topic": "sleep",
+      "category": "related symptoms",
+      "use": "interview",
+      "question": "Has anyone told you that you snore loudly or stop breathing for a moment while asleep?",
+      "keywords": [
+        "sleep",
+        "sleeping",
+        "insomnia",
+        "awake",
+        "can't sleep",
+        "cannot sleep",
+        "wake up",
+        "waking",
+        "snoring",
+        "snore",
+        "nap",
+        "naps",
+        "night",
+        "restless",
+        "breathing"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Yes",
+        "No",
+        "I sleep alone"
+      ]
+    },
+    {
+      "id": "sleep-07",
+      "topic": "sleep",
+      "category": "related symptoms",
+      "use": "interview",
+      "question": "Do you feel sleepy during the day, for example nodding off while reading or watching TV?",
+      "keywords": [
+        "sleep",
+        "sleeping",
+        "insomnia",
+        "awake",
+        "can't sleep",
+        "cannot sleep",
+        "wake up",
+        "waking",
+        "snoring",
+        "snore",
+        "nap",
+        "naps",
+        "night",
+        "restless",
+        "daytime",
+        "sleepy",
+        "nodding"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Often",
+        "Sometimes",
+        "Rarely"
+      ]
+    },
+    {
+      "id": "sleep-08",
+      "topic": "sleep",
+      "category": "related symptoms",
+      "use": "interview",
+      "question": "Do pain, needing the bathroom, or worries wake you up?",
+      "keywords": [
+        "sleep",
+        "sleeping",
+        "insomnia",
+        "awake",
+        "can't sleep",
+        "cannot sleep",
+        "wake up",
+        "waking",
+        "snoring",
+        "snore",
+        "nap",
+        "naps",
+        "night",
+        "restless",
+        "pain",
+        "bathroom",
+        "worry"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Pain",
+        "Needing the bathroom",
+        "Worries",
+        "Nothing in particular"
+      ]
+    },
+    {
+      "id": "sleep-09",
+      "topic": "sleep",
+      "category": "impact on daily life",
+      "use": "interview",
+      "question": "How is poor sleep affecting your day: mood, focus, or driving?",
+      "keywords": [
+        "sleep",
+        "sleeping",
+        "insomnia",
+        "awake",
+        "can't sleep",
+        "cannot sleep",
+        "wake up",
+        "waking",
+        "snoring",
+        "snore",
+        "nap",
+        "naps",
+        "night",
+        "restless",
+        "mood",
+        "focus",
+        "driving"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Not much",
+        "Some things are harder",
+        "I've had to stop some things"
+      ]
+    },
+    {
+      "id": "sleep-10",
+      "topic": "sleep",
+      "category": "history",
+      "use": "interview",
+      "question": "Have you had sleep problems before, and what helped then?",
+      "keywords": [
+        "sleep",
+        "sleeping",
+        "insomnia",
+        "awake",
+        "can't sleep",
+        "cannot sleep",
+        "wake up",
+        "waking",
+        "snoring",
+        "snore",
+        "nap",
+        "naps",
+        "night",
+        "restless"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "This is the first time",
+        "It has happened before"
+      ]
+    },
+    {
+      "id": "sleep-11",
+      "topic": "sleep",
+      "category": "medicines",
+      "use": "interview",
+      "question": "Do you take anything to help you sleep, or any medicine in the evening?",
+      "keywords": [
+        "sleep",
+        "sleeping",
+        "insomnia",
+        "awake",
+        "can't sleep",
+        "cannot sleep",
+        "wake up",
+        "waking",
+        "snoring",
+        "snore",
+        "nap",
+        "naps",
+        "night",
+        "restless",
+        "sleeping pill",
+        "melatonin",
+        "evening"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Nothing",
+        "Something from the store",
+        "A prescription",
+        "Not sure"
+      ]
+    },
+    {
+      "id": "sleep-12",
+      "topic": "sleep",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "Would a sleep diary help, and what should I write in it?",
+      "keywords": [
+        "sleep",
+        "sleeping",
+        "insomnia",
+        "awake",
+        "can't sleep",
+        "cannot sleep",
+        "wake up",
+        "waking",
+        "snoring",
+        "snore",
+        "nap",
+        "naps",
+        "night",
+        "restless",
+        "diary",
+        "track"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "sleep-13",
+      "topic": "sleep",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "What would you like to know about my sleep to understand it better?",
+      "keywords": [
+        "sleep",
+        "sleeping",
+        "insomnia",
+        "awake",
+        "can't sleep",
+        "cannot sleep",
+        "wake up",
+        "waking",
+        "snoring",
+        "snore",
+        "nap",
+        "naps",
+        "night",
+        "restless"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "sleep-14",
+      "topic": "sleep",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "Which habit changes would you like me to try first, and how will we know if they help?",
+      "keywords": [
+        "sleep",
+        "sleeping",
+        "insomnia",
+        "awake",
+        "can't sleep",
+        "cannot sleep",
+        "wake up",
+        "waking",
+        "snoring",
+        "snore",
+        "nap",
+        "naps",
+        "night",
+        "restless",
+        "habits"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    }
+  ]
+}

@@ -1,0 +1,404 @@
+{
+  "topic": "preparing for any visit",
+  "chunks": [
+    {
+      "id": "preparing-01",
+      "topic": "preparing for any visit",
+      "category": "goals for the visit",
+      "use": "interview",
+      "question": "What are the one or two things you most want to get out of this visit?",
+      "keywords": [
+        "visit",
+        "appointment",
+        "doctor",
+        "check-up",
+        "checkup",
+        "follow-up",
+        "questions",
+        "test",
+        "tests",
+        "results",
+        "referral",
+        "specialist",
+        "next steps",
+        "most",
+        "want"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      },
+      "replies": [
+        "Understand what's going on",
+        "Know what to do next",
+        "Feel better day to day"
+      ]
+    },
+    {
+      "id": "preparing-02",
+      "topic": "preparing for any visit",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "What do you think is going on, and what are the next steps?",
+      "keywords": [
+        "visit",
+        "appointment",
+        "doctor",
+        "check-up",
+        "checkup",
+        "follow-up",
+        "questions",
+        "test",
+        "tests",
+        "results",
+        "referral",
+        "specialist",
+        "next steps"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "preparing-03",
+      "topic": "preparing for any visit",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "What is this test for, and when will I get the results?",
+      "keywords": [
+        "visit",
+        "appointment",
+        "doctor",
+        "check-up",
+        "checkup",
+        "follow-up",
+        "questions",
+        "test",
+        "tests",
+        "results",
+        "referral",
+        "specialist",
+        "next steps"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "preparing-04",
+      "topic": "preparing for any visit",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "Who will tell me the results, and what happens if I don't hear back?",
+      "keywords": [
+        "visit",
+        "appointment",
+        "doctor",
+        "check-up",
+        "checkup",
+        "follow-up",
+        "questions",
+        "test",
+        "tests",
+        "results",
+        "referral",
+        "specialist",
+        "next steps",
+        "hear back"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "preparing-05",
+      "topic": "preparing for any visit",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "What are my options, and what are the benefits and risks of each one?",
+      "keywords": [
+        "visit",
+        "appointment",
+        "doctor",
+        "check-up",
+        "checkup",
+        "follow-up",
+        "questions",
+        "test",
+        "tests",
+        "results",
+        "referral",
+        "specialist",
+        "next steps",
+        "options",
+        "risks",
+        "benefits"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "preparing-06",
+      "topic": "preparing for any visit",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "What happens if I wait and see?",
+      "keywords": [
+        "visit",
+        "appointment",
+        "doctor",
+        "check-up",
+        "checkup",
+        "follow-up",
+        "questions",
+        "test",
+        "tests",
+        "results",
+        "referral",
+        "specialist",
+        "next steps",
+        "wait"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "preparing-07",
+      "topic": "preparing for any visit",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "When should I come back, and what should I watch for in the meantime?",
+      "keywords": [
+        "visit",
+        "appointment",
+        "doctor",
+        "check-up",
+        "checkup",
+        "follow-up",
+        "questions",
+        "test",
+        "tests",
+        "results",
+        "referral",
+        "specialist",
+        "next steps",
+        "come back"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "preparing-08",
+      "topic": "preparing for any visit",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "Can you write down the main points of today's visit for me?",
+      "keywords": [
+        "visit",
+        "appointment",
+        "doctor",
+        "check-up",
+        "checkup",
+        "follow-up",
+        "questions",
+        "test",
+        "tests",
+        "results",
+        "referral",
+        "specialist",
+        "next steps",
+        "write down"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "preparing-09",
+      "topic": "preparing for any visit",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "Who should I contact if I have questions after I leave?",
+      "keywords": [
+        "visit",
+        "appointment",
+        "doctor",
+        "check-up",
+        "checkup",
+        "follow-up",
+        "questions",
+        "test",
+        "tests",
+        "results",
+        "referral",
+        "specialist",
+        "next steps",
+        "contact"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "preparing-10",
+      "topic": "preparing for any visit",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "Is there anything I can read to learn more?",
+      "keywords": [
+        "visit",
+        "appointment",
+        "doctor",
+        "check-up",
+        "checkup",
+        "follow-up",
+        "questions",
+        "test",
+        "tests",
+        "results",
+        "referral",
+        "specialist",
+        "next steps",
+        "read",
+        "learn"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "preparing-11",
+      "topic": "preparing for any visit",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "Do I need to see a specialist, and if so, why?",
+      "keywords": [
+        "visit",
+        "appointment",
+        "doctor",
+        "check-up",
+        "checkup",
+        "follow-up",
+        "questions",
+        "test",
+        "tests",
+        "results",
+        "referral",
+        "specialist",
+        "next steps"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "preparing-12",
+      "topic": "preparing for any visit",
+      "category": "history",
+      "use": "interview",
+      "question": "Have there been any changes in your health since your last visit?",
+      "keywords": [
+        "visit",
+        "appointment",
+        "doctor",
+        "check-up",
+        "checkup",
+        "follow-up",
+        "questions",
+        "test",
+        "tests",
+        "results",
+        "referral",
+        "specialist",
+        "next steps",
+        "changes",
+        "last visit"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Yes",
+        "No"
+      ]
+    },
+    {
+      "id": "preparing-13",
+      "topic": "preparing for any visit",
+      "category": "history",
+      "use": "interview",
+      "question": "Has a close family member had any health conditions you'd like the doctor to know about?",
+      "keywords": [
+        "visit",
+        "appointment",
+        "doctor",
+        "check-up",
+        "checkup",
+        "follow-up",
+        "questions",
+        "test",
+        "tests",
+        "results",
+        "referral",
+        "specialist",
+        "next steps",
+        "family"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Yes",
+        "No",
+        "Not sure"
+      ]
+    },
+    {
+      "id": "preparing-14",
+      "topic": "preparing for any visit",
+      "category": "medicines",
+      "use": "interview",
+      "question": "Did you bring a list of your medicines, or the bottles themselves?",
+      "keywords": [
+        "visit",
+        "appointment",
+        "doctor",
+        "check-up",
+        "checkup",
+        "follow-up",
+        "questions",
+        "test",
+        "tests",
+        "results",
+        "referral",
+        "specialist",
+        "next steps",
+        "list",
+        "bottles"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Yes",
+        "Not yet"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,588 @@
+{
+  "topic": "stomach pain",
+  "chunks": [
+    {
+      "id": "stomach-pain-01",
+      "topic": "stomach pain",
+      "category": "onset",
+      "use": "interview",
+      "question": "When did the stomach pain start?",
+      "keywords": [
+        "stomach",
+        "belly",
+        "tummy",
+        "abdomen",
+        "abdominal",
+        "gut",
+        "nausea",
+        "nauseous",
+        "cramps",
+        "cramping",
+        "bloating",
+        "bloated",
+        "heartburn",
+        "indigestion",
+        "diarrhea",
+        "constipation",
+        "vomiting"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Today",
+        "In the last few days",
+        "A few weeks ago",
+        "Months ago or longer"
+      ]
+    },
+    {
+      "id": "stomach-pain-02",
+      "topic": "stomach pain",
+      "category": "location",
+      "use": "interview",
+      "question": "Where is the pain: upper or lower belly, the middle, or one side?",
+      "keywords": [
+        "stomach",
+        "belly",
+        "tummy",
+        "abdomen",
+        "abdominal",
+        "gut",
+        "nausea",
+        "nauseous",
+        "cramps",
+        "cramping",
+        "bloating",
+        "bloated",
+        "heartburn",
+        "indigestion",
+        "diarrhea",
+        "constipation",
+        "vomiting",
+        "upper",
+        "lower",
+        "middle",
+        "side"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Upper belly",
+        "Lower belly",
+        "Around the middle",
+        "One side"
+      ]
+    },
+    {
+      "id": "stomach-pain-03",
+      "topic": "stomach pain",
+      "category": "character",
+      "use": "interview",
+      "question": "What does it feel like: cramping, burning, dull, or sharp?",
+      "keywords": [
+        "stomach",
+        "belly",
+        "tummy",
+        "abdomen",
+        "abdominal",
+        "gut",
+        "nausea",
+        "nauseous",
+        "cramps",
+        "cramping",
+        "bloating",
+        "bloated",
+        "heartburn",
+        "indigestion",
+        "diarrhea",
+        "constipation",
+        "vomiting",
+        "burning",
+        "dull",
+        "sharp"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Cramping",
+        "Burning",
+        "Dull ache",
+        "Sharp"
+      ]
+    },
+    {
+      "id": "stomach-pain-04",
+      "topic": "stomach pain",
+      "category": "duration",
+      "use": "interview",
+      "question": "Does it come and go, or is it there all the time?",
+      "keywords": [
+        "stomach",
+        "belly",
+        "tummy",
+        "abdomen",
+        "abdominal",
+        "gut",
+        "nausea",
+        "nauseous",
+        "cramps",
+        "cramping",
+        "bloating",
+        "bloated",
+        "heartburn",
+        "indigestion",
+        "diarrhea",
+        "constipation",
+        "vomiting",
+        "comes and goes",
+        "constant"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "It comes and goes",
+        "It's there all the time"
+      ]
+    },
+    {
+      "id": "stomach-pain-05",
+      "topic": "stomach pain",
+      "category": "triggers/relief",
+      "use": "interview",
+      "question": "Is it linked to eating: before meals, after meals, or certain foods?",
+      "keywords": [
+        "stomach",
+        "belly",
+        "tummy",
+        "abdomen",
+        "abdominal",
+        "gut",
+        "nausea",
+        "nauseous",
+        "cramps",
+        "cramping",
+        "bloating",
+        "bloated",
+        "heartburn",
+        "indigestion",
+        "diarrhea",
+        "constipation",
+        "vomiting",
+        "eating",
+        "meals",
+        "food",
+        "foods"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Before meals",
+        "After meals",
+        "Certain foods",
+        "No link to food"
+      ]
+    },
+    {
+      "id": "stomach-pain-06",
+      "topic": "stomach pain",
+      "category": "triggers/relief",
+      "use": "interview",
+      "question": "Does anything ease it, like eating, passing wind, or a bowel movement?",
+      "keywords": [
+        "stomach",
+        "belly",
+        "tummy",
+        "abdomen",
+        "abdominal",
+        "gut",
+        "nausea",
+        "nauseous",
+        "cramps",
+        "cramping",
+        "bloating",
+        "bloated",
+        "heartburn",
+        "indigestion",
+        "diarrhea",
+        "constipation",
+        "vomiting",
+        "ease",
+        "relief"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Nothing I've noticed"
+      ]
+    },
+    {
+      "id": "stomach-pain-07",
+      "topic": "stomach pain",
+      "category": "timing",
+      "use": "interview",
+      "question": "Is it worse at a particular time, such as at night or in the morning?",
+      "keywords": [
+        "stomach",
+        "belly",
+        "tummy",
+        "abdomen",
+        "abdominal",
+        "gut",
+        "nausea",
+        "nauseous",
+        "cramps",
+        "cramping",
+        "bloating",
+        "bloated",
+        "heartburn",
+        "indigestion",
+        "diarrhea",
+        "constipation",
+        "vomiting",
+        "night",
+        "morning"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Mornings",
+        "Evenings",
+        "At night",
+        "No pattern"
+      ]
+    },
+    {
+      "id": "stomach-pain-08",
+      "topic": "stomach pain",
+      "category": "severity",
+      "use": "interview",
+      "question": "How bad is the pain at its worst?",
+      "keywords": [
+        "stomach",
+        "belly",
+        "tummy",
+        "abdomen",
+        "abdominal",
+        "gut",
+        "nausea",
+        "nauseous",
+        "cramps",
+        "cramping",
+        "bloating",
+        "bloated",
+        "heartburn",
+        "indigestion",
+        "diarrhea",
+        "constipation",
+        "vomiting"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Mild",
+        "Medium",
+        "Bad",
+        "Very bad"
+      ]
+    },
+    {
+      "id": "stomach-pain-09",
+      "topic": "stomach pain",
+      "category": "related symptoms",
+      "use": "interview",
+      "question": "Have you had nausea, vomiting, heartburn, or bloating?",
+      "keywords": [
+        "stomach",
+        "belly",
+        "tummy",
+        "abdomen",
+        "abdominal",
+        "gut",
+        "nausea",
+        "nauseous",
+        "cramps",
+        "cramping",
+        "bloating",
+        "bloated",
+        "heartburn",
+        "indigestion",
+        "diarrhea",
+        "constipation",
+        "vomiting"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Nausea",
+        "Vomiting",
+        "Heartburn",
+        "Bloating"
+      ]
+    },
+    {
+      "id": "stomach-pain-10",
+      "topic": "stomach pain",
+      "category": "related symptoms",
+      "use": "interview",
+      "question": "Have your bowel movements changed, such as diarrhea, constipation, or a different colour?",
+      "keywords": [
+        "stomach",
+        "belly",
+        "tummy",
+        "abdomen",
+        "abdominal",
+        "gut",
+        "nausea",
+        "nauseous",
+        "cramps",
+        "cramping",
+        "bloating",
+        "bloated",
+        "heartburn",
+        "indigestion",
+        "diarrhea",
+        "constipation",
+        "vomiting",
+        "bowel",
+        "stool"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Diarrhea",
+        "Constipation",
+        "Different colour",
+        "No change"
+      ]
+    },
+    {
+      "id": "stomach-pain-11",
+      "topic": "stomach pain",
+      "category": "related symptoms",
+      "use": "interview",
+      "question": "Have you noticed a change in your appetite or weight?",
+      "keywords": [
+        "stomach",
+        "belly",
+        "tummy",
+        "abdomen",
+        "abdominal",
+        "gut",
+        "nausea",
+        "nauseous",
+        "cramps",
+        "cramping",
+        "bloating",
+        "bloated",
+        "heartburn",
+        "indigestion",
+        "diarrhea",
+        "constipation",
+        "vomiting",
+        "appetite",
+        "weight"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Eating less",
+        "Eating more",
+        "Weight changed",
+        "No change"
+      ]
+    },
+    {
+      "id": "stomach-pain-12",
+      "topic": "stomach pain",
+      "category": "impact on daily life",
+      "use": "interview",
+      "question": "Is the stomach pain affecting your eating, sleep, or work?",
+      "keywords": [
+        "stomach",
+        "belly",
+        "tummy",
+        "abdomen",
+        "abdominal",
+        "gut",
+        "nausea",
+        "nauseous",
+        "cramps",
+        "cramping",
+        "bloating",
+        "bloated",
+        "heartburn",
+        "indigestion",
+        "diarrhea",
+        "constipation",
+        "vomiting",
+        "eating",
+        "sleep",
+        "work"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Not much",
+        "Some things are harder",
+        "I've had to stop some things"
+      ]
+    },
+    {
+      "id": "stomach-pain-13",
+      "topic": "stomach pain",
+      "category": "medicines",
+      "use": "interview",
+      "question": "What have you taken for it, and have you started any new medicine or supplement lately?",
+      "keywords": [
+        "stomach",
+        "belly",
+        "tummy",
+        "abdomen",
+        "abdominal",
+        "gut",
+        "nausea",
+        "nauseous",
+        "cramps",
+        "cramping",
+        "bloating",
+        "bloated",
+        "heartburn",
+        "indigestion",
+        "diarrhea",
+        "constipation",
+        "vomiting",
+        "antacid",
+        "supplement",
+        "new"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Nothing",
+        "Something from the store",
+        "A new prescription",
+        "Not sure"
+      ]
+    },
+    {
+      "id": "stomach-pain-14",
+      "topic": "stomach pain",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "What would help you understand my stomach symptoms?",
+      "keywords": [
+        "stomach",
+        "belly",
+        "tummy",
+        "abdomen",
+        "abdominal",
+        "gut",
+        "nausea",
+        "nauseous",
+        "cramps",
+        "cramping",
+        "bloating",
+        "bloated",
+        "heartburn",
+        "indigestion",
+        "diarrhea",
+        "constipation",
+        "vomiting"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "stomach-pain-15",
+      "topic": "stomach pain",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "Should I keep notes on what I eat and when the pain comes?",
+      "keywords": [
+        "stomach",
+        "belly",
+        "tummy",
+        "abdomen",
+        "abdominal",
+        "gut",
+        "nausea",
+        "nauseous",
+        "cramps",
+        "cramping",
+        "bloating",
+        "bloated",
+        "heartburn",
+        "indigestion",
+        "diarrhea",
+        "constipation",
+        "vomiting",
+        "food diary",
+        "notes",
+        "track"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "stomach-pain-16",
+      "topic": "stomach pain",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "What changes should make me call you or get help sooner?",
+      "keywords": [
+        "stomach",
+        "belly",
+        "tummy",
+        "abdomen",
+        "abdominal",
+        "gut",
+        "nausea",
+        "nauseous",
+        "cramps",
+        "cramping",
+        "bloating",
+        "bloated",
+        "heartburn",
+        "indigestion",
+        "diarrhea",
+        "constipation",
+        "vomiting",
+        "call"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    }
+  ]
+}

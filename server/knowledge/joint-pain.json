@@ -1,0 +1,630 @@
+{
+  "topic": "joint pain",
+  "chunks": [
+    {
+      "id": "joint-pain-01",
+      "topic": "joint pain",
+      "category": "onset",
+      "use": "interview",
+      "question": "When did the joint pain start, and did it begin suddenly or slowly?",
+      "keywords": [
+        "joint",
+        "joints",
+        "knee",
+        "knees",
+        "hip",
+        "hips",
+        "shoulder",
+        "elbow",
+        "wrist",
+        "ankle",
+        "finger",
+        "fingers",
+        "toe",
+        "stiff",
+        "stiffness",
+        "swollen",
+        "swelling",
+        "ache",
+        "achy",
+        "sudden",
+        "slowly",
+        "gradual"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Suddenly",
+        "Slowly over time",
+        "Not sure"
+      ]
+    },
+    {
+      "id": "joint-pain-02",
+      "topic": "joint pain",
+      "category": "location",
+      "use": "interview",
+      "question": "Which joints hurt? Is it one side or both?",
+      "keywords": [
+        "joint",
+        "joints",
+        "knee",
+        "knees",
+        "hip",
+        "hips",
+        "shoulder",
+        "elbow",
+        "wrist",
+        "ankle",
+        "finger",
+        "fingers",
+        "toe",
+        "stiff",
+        "stiffness",
+        "swollen",
+        "swelling",
+        "ache",
+        "achy",
+        "side",
+        "both",
+        "left",
+        "right"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "One joint",
+        "Several joints",
+        "Both sides",
+        "One side"
+      ]
+    },
+    {
+      "id": "joint-pain-03",
+      "topic": "joint pain",
+      "category": "history",
+      "use": "interview",
+      "question": "Did it start after an injury, a fall, or a new activity?",
+      "keywords": [
+        "joint",
+        "joints",
+        "knee",
+        "knees",
+        "hip",
+        "hips",
+        "shoulder",
+        "elbow",
+        "wrist",
+        "ankle",
+        "finger",
+        "fingers",
+        "toe",
+        "stiff",
+        "stiffness",
+        "swollen",
+        "swelling",
+        "ache",
+        "achy",
+        "injury",
+        "fall",
+        "twist",
+        "sport",
+        "exercise"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "After an injury",
+        "After a new activity",
+        "No, nothing like that"
+      ]
+    },
+    {
+      "id": "joint-pain-04",
+      "topic": "joint pain",
+      "category": "character",
+      "use": "interview",
+      "question": "What does the pain feel like: aching, sharp, burning, or throbbing?",
+      "keywords": [
+        "joint",
+        "joints",
+        "knee",
+        "knees",
+        "hip",
+        "hips",
+        "shoulder",
+        "elbow",
+        "wrist",
+        "ankle",
+        "finger",
+        "fingers",
+        "toe",
+        "stiff",
+        "stiffness",
+        "swollen",
+        "swelling",
+        "ache",
+        "achy",
+        "sharp",
+        "burning",
+        "throbbing",
+        "aching"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Aching",
+        "Sharp",
+        "Burning",
+        "Throbbing"
+      ]
+    },
+    {
+      "id": "joint-pain-05",
+      "topic": "joint pain",
+      "category": "related symptoms",
+      "use": "interview",
+      "question": "Is the joint swollen, warm, or red?",
+      "keywords": [
+        "joint",
+        "joints",
+        "knee",
+        "knees",
+        "hip",
+        "hips",
+        "shoulder",
+        "elbow",
+        "wrist",
+        "ankle",
+        "finger",
+        "fingers",
+        "toe",
+        "stiff",
+        "stiffness",
+        "swollen",
+        "swelling",
+        "ache",
+        "achy",
+        "warm",
+        "red",
+        "redness"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Swollen",
+        "Warm",
+        "Red",
+        "None of these"
+      ]
+    },
+    {
+      "id": "joint-pain-06",
+      "topic": "joint pain",
+      "category": "timing",
+      "use": "interview",
+      "question": "Is it stiff in the morning, and if so, for how long?",
+      "keywords": [
+        "joint",
+        "joints",
+        "knee",
+        "knees",
+        "hip",
+        "hips",
+        "shoulder",
+        "elbow",
+        "wrist",
+        "ankle",
+        "finger",
+        "fingers",
+        "toe",
+        "stiff",
+        "stiffness",
+        "swollen",
+        "swelling",
+        "ache",
+        "achy",
+        "morning"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Not stiff",
+        "Less than 30 minutes",
+        "More than 30 minutes"
+      ]
+    },
+    {
+      "id": "joint-pain-07",
+      "topic": "joint pain",
+      "category": "triggers/relief",
+      "use": "interview",
+      "question": "What makes it worse: walking, stairs, kneeling, or resting?",
+      "keywords": [
+        "joint",
+        "joints",
+        "knee",
+        "knees",
+        "hip",
+        "hips",
+        "shoulder",
+        "elbow",
+        "wrist",
+        "ankle",
+        "finger",
+        "fingers",
+        "toe",
+        "stiff",
+        "stiffness",
+        "swollen",
+        "swelling",
+        "ache",
+        "achy",
+        "walking",
+        "stairs",
+        "kneeling",
+        "rest",
+        "bend"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Walking",
+        "Stairs",
+        "Kneeling or bending",
+        "Resting"
+      ]
+    },
+    {
+      "id": "joint-pain-08",
+      "topic": "joint pain",
+      "category": "triggers/relief",
+      "use": "interview",
+      "question": "Have you found anything that makes it feel better?",
+      "keywords": [
+        "joint",
+        "joints",
+        "knee",
+        "knees",
+        "hip",
+        "hips",
+        "shoulder",
+        "elbow",
+        "wrist",
+        "ankle",
+        "finger",
+        "fingers",
+        "toe",
+        "stiff",
+        "stiffness",
+        "swollen",
+        "swelling",
+        "ache",
+        "achy",
+        "better",
+        "ice",
+        "heat",
+        "rest"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Rest",
+        "Heat or ice",
+        "Moving around",
+        "Nothing helps"
+      ]
+    },
+    {
+      "id": "joint-pain-09",
+      "topic": "joint pain",
+      "category": "severity",
+      "use": "interview",
+      "question": "How bad is the pain on a normal day, and on a bad day?",
+      "keywords": [
+        "joint",
+        "joints",
+        "knee",
+        "knees",
+        "hip",
+        "hips",
+        "shoulder",
+        "elbow",
+        "wrist",
+        "ankle",
+        "finger",
+        "fingers",
+        "toe",
+        "stiff",
+        "stiffness",
+        "swollen",
+        "swelling",
+        "ache",
+        "achy"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Mild",
+        "Medium",
+        "Bad",
+        "Very bad"
+      ]
+    },
+    {
+      "id": "joint-pain-10",
+      "topic": "joint pain",
+      "category": "related symptoms",
+      "use": "interview",
+      "question": "Does the joint ever click, lock, or give way?",
+      "keywords": [
+        "joint",
+        "joints",
+        "knee",
+        "knees",
+        "hip",
+        "hips",
+        "shoulder",
+        "elbow",
+        "wrist",
+        "ankle",
+        "finger",
+        "fingers",
+        "toe",
+        "stiff",
+        "stiffness",
+        "swollen",
+        "swelling",
+        "ache",
+        "achy",
+        "click",
+        "lock",
+        "give way",
+        "buckle"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Clicks",
+        "Locks",
+        "Gives way",
+        "No"
+      ]
+    },
+    {
+      "id": "joint-pain-11",
+      "topic": "joint pain",
+      "category": "impact on daily life",
+      "use": "interview",
+      "question": "What can't you do now that you could do before the pain started?",
+      "keywords": [
+        "joint",
+        "joints",
+        "knee",
+        "knees",
+        "hip",
+        "hips",
+        "shoulder",
+        "elbow",
+        "wrist",
+        "ankle",
+        "finger",
+        "fingers",
+        "toe",
+        "stiff",
+        "stiffness",
+        "swollen",
+        "swelling",
+        "ache",
+        "achy",
+        "walk",
+        "work",
+        "sleep"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Not much",
+        "Some things are harder",
+        "I've had to stop some things"
+      ]
+    },
+    {
+      "id": "joint-pain-12",
+      "topic": "joint pain",
+      "category": "medicines",
+      "use": "interview",
+      "question": "What have you taken or used for the pain so far, and how much has it helped?",
+      "keywords": [
+        "joint",
+        "joints",
+        "knee",
+        "knees",
+        "hip",
+        "hips",
+        "shoulder",
+        "elbow",
+        "wrist",
+        "ankle",
+        "finger",
+        "fingers",
+        "toe",
+        "stiff",
+        "stiffness",
+        "swollen",
+        "swelling",
+        "ache",
+        "achy",
+        "painkiller",
+        "cream",
+        "tablet"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Nothing yet",
+        "Something from the store",
+        "A prescription",
+        "Not sure"
+      ]
+    },
+    {
+      "id": "joint-pain-13",
+      "topic": "joint pain",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "What would help you understand what is going on with my joint?",
+      "keywords": [
+        "joint",
+        "joints",
+        "knee",
+        "knees",
+        "hip",
+        "hips",
+        "shoulder",
+        "elbow",
+        "wrist",
+        "ankle",
+        "finger",
+        "fingers",
+        "toe",
+        "stiff",
+        "stiffness",
+        "swollen",
+        "swelling",
+        "ache",
+        "achy"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "joint-pain-14",
+      "topic": "joint pain",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "What are my options for managing this, and what are the pros and cons of each?",
+      "keywords": [
+        "joint",
+        "joints",
+        "knee",
+        "knees",
+        "hip",
+        "hips",
+        "shoulder",
+        "elbow",
+        "wrist",
+        "ankle",
+        "finger",
+        "fingers",
+        "toe",
+        "stiff",
+        "stiffness",
+        "swollen",
+        "swelling",
+        "ache",
+        "achy",
+        "options",
+        "pros",
+        "cons"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "joint-pain-15",
+      "topic": "joint pain",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "Is there any activity I should check with you about before doing it?",
+      "keywords": [
+        "joint",
+        "joints",
+        "knee",
+        "knees",
+        "hip",
+        "hips",
+        "shoulder",
+        "elbow",
+        "wrist",
+        "ankle",
+        "finger",
+        "fingers",
+        "toe",
+        "stiff",
+        "stiffness",
+        "swollen",
+        "swelling",
+        "ache",
+        "achy",
+        "activity",
+        "exercise"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "joint-pain-16",
+      "topic": "joint pain",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "What changes in my joint should make me call you before my next visit?",
+      "keywords": [
+        "joint",
+        "joints",
+        "knee",
+        "knees",
+        "hip",
+        "hips",
+        "shoulder",
+        "elbow",
+        "wrist",
+        "ankle",
+        "finger",
+        "fingers",
+        "toe",
+        "stiff",
+        "stiffness",
+        "swollen",
+        "swelling",
+        "ache",
+        "achy",
+        "call"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    }
+  ]
+}

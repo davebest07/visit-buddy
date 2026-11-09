@@ -1,6 +1,7 @@
 import cors from 'cors'
 import express from 'express'
 import ai from './routes/ai.js'
+import rag from './routes/rag.js'
 import visits from './routes/visits.js'
 
 const app = express()
@@ -15,6 +16,7 @@ app.get('/api/health', (req, res) => {
 
 app.use('/api/visits', visits)
 app.use('/api/ai', ai)
+app.use('/api/rag', rag)
 
 // Bad JSON and anything unexpected land here with a readable message.
 app.use((error, req, res, next) => {

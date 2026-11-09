@@ -1,0 +1,505 @@
+{
+  "topic": "dizziness",
+  "chunks": [
+    {
+      "id": "dizziness-01",
+      "topic": "dizziness",
+      "category": "onset",
+      "use": "interview",
+      "question": "When did the dizziness first start?",
+      "keywords": [
+        "dizzy",
+        "dizziness",
+        "lightheaded",
+        "light-headed",
+        "vertigo",
+        "spinning",
+        "woozy",
+        "unsteady",
+        "balance",
+        "off balance",
+        "faint",
+        "giddy"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Today",
+        "In the last few days",
+        "A few weeks ago",
+        "Months ago or longer"
+      ]
+    },
+    {
+      "id": "dizziness-02",
+      "topic": "dizziness",
+      "category": "character",
+      "use": "interview",
+      "question": "What does it feel like: the room spinning, feeling faint, or feeling off balance?",
+      "keywords": [
+        "dizzy",
+        "dizziness",
+        "lightheaded",
+        "light-headed",
+        "vertigo",
+        "spinning",
+        "woozy",
+        "unsteady",
+        "balance",
+        "off balance",
+        "faint",
+        "giddy"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "The room spins",
+        "I feel faint",
+        "I feel off balance",
+        "Hard to describe"
+      ]
+    },
+    {
+      "id": "dizziness-03",
+      "topic": "dizziness",
+      "category": "duration",
+      "use": "interview",
+      "question": "How long does each dizzy spell last?",
+      "keywords": [
+        "dizzy",
+        "dizziness",
+        "lightheaded",
+        "light-headed",
+        "vertigo",
+        "spinning",
+        "woozy",
+        "unsteady",
+        "balance",
+        "off balance",
+        "faint",
+        "giddy"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "A few seconds",
+        "A few minutes",
+        "Hours",
+        "It doesn't go away"
+      ]
+    },
+    {
+      "id": "dizziness-04",
+      "topic": "dizziness",
+      "category": "triggers/relief",
+      "use": "interview",
+      "question": "Does it happen when you stand up, turn your head, or lie down?",
+      "keywords": [
+        "dizzy",
+        "dizziness",
+        "lightheaded",
+        "light-headed",
+        "vertigo",
+        "spinning",
+        "woozy",
+        "unsteady",
+        "balance",
+        "off balance",
+        "faint",
+        "giddy",
+        "stand",
+        "standing",
+        "turn",
+        "head",
+        "lie"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "When I stand up",
+        "When I turn my head",
+        "When I lie down",
+        "Nothing I've noticed"
+      ]
+    },
+    {
+      "id": "dizziness-05",
+      "topic": "dizziness",
+      "category": "triggers/relief",
+      "use": "interview",
+      "question": "Does anything make it ease off, like sitting or lying still?",
+      "keywords": [
+        "dizzy",
+        "dizziness",
+        "lightheaded",
+        "light-headed",
+        "vertigo",
+        "spinning",
+        "woozy",
+        "unsteady",
+        "balance",
+        "off balance",
+        "faint",
+        "giddy",
+        "sit",
+        "rest",
+        "still"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Sitting down",
+        "Lying still",
+        "Nothing helps"
+      ]
+    },
+    {
+      "id": "dizziness-06",
+      "topic": "dizziness",
+      "category": "timing",
+      "use": "interview",
+      "question": "Is there a time of day when it happens more?",
+      "keywords": [
+        "dizzy",
+        "dizziness",
+        "lightheaded",
+        "light-headed",
+        "vertigo",
+        "spinning",
+        "woozy",
+        "unsteady",
+        "balance",
+        "off balance",
+        "faint",
+        "giddy"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Mornings",
+        "Evenings",
+        "At night",
+        "No pattern"
+      ]
+    },
+    {
+      "id": "dizziness-07",
+      "topic": "dizziness",
+      "category": "severity",
+      "use": "interview",
+      "question": "How strong is the dizziness at its worst?",
+      "keywords": [
+        "dizzy",
+        "dizziness",
+        "lightheaded",
+        "light-headed",
+        "vertigo",
+        "spinning",
+        "woozy",
+        "unsteady",
+        "balance",
+        "off balance",
+        "faint",
+        "giddy"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Mild",
+        "Medium",
+        "Bad",
+        "Very bad"
+      ]
+    },
+    {
+      "id": "dizziness-08",
+      "topic": "dizziness",
+      "category": "related symptoms",
+      "use": "interview",
+      "question": "Do you notice anything else with it, such as ringing in the ears, changes in hearing, or feeling sick?",
+      "keywords": [
+        "dizzy",
+        "dizziness",
+        "lightheaded",
+        "light-headed",
+        "vertigo",
+        "spinning",
+        "woozy",
+        "unsteady",
+        "balance",
+        "off balance",
+        "faint",
+        "giddy",
+        "ears",
+        "hearing",
+        "nausea",
+        "sick"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Ringing in my ears",
+        "Hearing changes",
+        "Feeling sick",
+        "No, nothing else"
+      ]
+    },
+    {
+      "id": "dizziness-09",
+      "topic": "dizziness",
+      "category": "related symptoms",
+      "use": "interview",
+      "question": "Have you been drinking and eating as usual lately?",
+      "keywords": [
+        "dizzy",
+        "dizziness",
+        "lightheaded",
+        "light-headed",
+        "vertigo",
+        "spinning",
+        "woozy",
+        "unsteady",
+        "balance",
+        "off balance",
+        "faint",
+        "giddy",
+        "eat",
+        "drink",
+        "water",
+        "fluids"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Yes, as usual",
+        "Less than usual",
+        "Not sure"
+      ]
+    },
+    {
+      "id": "dizziness-10",
+      "topic": "dizziness",
+      "category": "impact on daily life",
+      "use": "interview",
+      "question": "Has the dizziness stopped you from doing things, like driving, walking alone, or using stairs?",
+      "keywords": [
+        "dizzy",
+        "dizziness",
+        "lightheaded",
+        "light-headed",
+        "vertigo",
+        "spinning",
+        "woozy",
+        "unsteady",
+        "balance",
+        "off balance",
+        "faint",
+        "giddy",
+        "drive",
+        "driving",
+        "stairs",
+        "walk"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Not much",
+        "Some things are harder",
+        "I've had to stop some things"
+      ]
+    },
+    {
+      "id": "dizziness-11",
+      "topic": "dizziness",
+      "category": "history",
+      "use": "interview",
+      "question": "Have you had falls or near-falls because of it?",
+      "keywords": [
+        "dizzy",
+        "dizziness",
+        "lightheaded",
+        "light-headed",
+        "vertigo",
+        "spinning",
+        "woozy",
+        "unsteady",
+        "balance",
+        "off balance",
+        "faint",
+        "giddy",
+        "fall",
+        "fell",
+        "falls"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "No",
+        "A near-fall",
+        "Yes, I fell"
+      ]
+    },
+    {
+      "id": "dizziness-12",
+      "topic": "dizziness",
+      "category": "medicines",
+      "use": "interview",
+      "question": "Did you start, stop, or change any medicine around the time the dizziness began?",
+      "keywords": [
+        "dizzy",
+        "dizziness",
+        "lightheaded",
+        "light-headed",
+        "vertigo",
+        "spinning",
+        "woozy",
+        "unsteady",
+        "balance",
+        "off balance",
+        "faint",
+        "giddy",
+        "started",
+        "new",
+        "changed"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "No changes",
+        "Yes, something changed",
+        "Not sure"
+      ]
+    },
+    {
+      "id": "dizziness-13",
+      "topic": "dizziness",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "What would you most like to understand about the dizziness at this visit?",
+      "keywords": [
+        "dizzy",
+        "dizziness",
+        "lightheaded",
+        "light-headed",
+        "vertigo",
+        "spinning",
+        "woozy",
+        "unsteady",
+        "balance",
+        "off balance",
+        "faint",
+        "giddy"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "dizziness-14",
+      "topic": "dizziness",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "Are there tests that would help you understand my dizziness, and what are they for?",
+      "keywords": [
+        "dizzy",
+        "dizziness",
+        "lightheaded",
+        "light-headed",
+        "vertigo",
+        "spinning",
+        "woozy",
+        "unsteady",
+        "balance",
+        "off balance",
+        "faint",
+        "giddy",
+        "test",
+        "tests"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "dizziness-15",
+      "topic": "dizziness",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "Is there anything I should keep track of before my next visit, like when the spells happen?",
+      "keywords": [
+        "dizzy",
+        "dizziness",
+        "lightheaded",
+        "light-headed",
+        "vertigo",
+        "spinning",
+        "woozy",
+        "unsteady",
+        "balance",
+        "off balance",
+        "faint",
+        "giddy",
+        "track",
+        "diary",
+        "log"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "dizziness-16",
+      "topic": "dizziness",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "What should make me call you sooner about the dizziness?",
+      "keywords": [
+        "dizzy",
+        "dizziness",
+        "lightheaded",
+        "light-headed",
+        "vertigo",
+        "spinning",
+        "woozy",
+        "unsteady",
+        "balance",
+        "off balance",
+        "faint",
+        "giddy",
+        "call",
+        "sooner"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    }
+  ]
+}

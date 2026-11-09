@@ -1,8 +1,8 @@
 // The only place the app talks to the server.
 const BASE = '/api'
 
-async function request(path, { method = 'GET', body } = {}) {
-  const init = { method }
+async function request(path, { method = 'GET', body, signal } = {}) {
+  const init = { method, signal }
 
   if (body !== undefined) {
     init.headers = { 'Content-Type': 'application/json' }
@@ -38,3 +38,8 @@ export const updateVisit = (id, patch) =>
 export const deleteVisit = (id) => request(`/visits/${id}`, { method: 'DELETE' })
 
 export const deleteAllVisits = () => request('/visits', { method: 'DELETE' })
+
+// Finds questions in the knowledge base that fit what the person said.
+// options: { limit, use: 'interview' | 'ask-doctor', topics: [...], signal }
+export const searchKnowledge = (query, { signal, ...options } = {}) =>
+  request('/rag/search', { method: 'POST', body: { query, ...options }, signal })

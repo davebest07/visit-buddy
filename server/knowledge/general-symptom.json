@@ -1,0 +1,473 @@
+{
+  "topic": "general symptom history",
+  "chunks": [
+    {
+      "id": "general-symptom-01",
+      "topic": "general symptom history",
+      "category": "onset",
+      "use": "interview",
+      "question": "When did this first start?",
+      "keywords": [
+        "symptom",
+        "symptoms",
+        "pain",
+        "hurt",
+        "hurts",
+        "hurting",
+        "sore",
+        "ache",
+        "feel",
+        "feeling",
+        "unwell",
+        "problem",
+        "issue",
+        "worse",
+        "better"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Today",
+        "In the last few days",
+        "A few weeks ago",
+        "Months ago or longer"
+      ]
+    },
+    {
+      "id": "general-symptom-02",
+      "topic": "general symptom history",
+      "category": "onset",
+      "use": "interview",
+      "question": "Did it start suddenly or build up slowly?",
+      "keywords": [
+        "symptom",
+        "symptoms",
+        "pain",
+        "hurt",
+        "hurts",
+        "hurting",
+        "sore",
+        "ache",
+        "feel",
+        "feeling",
+        "unwell",
+        "problem",
+        "issue",
+        "worse",
+        "better",
+        "sudden",
+        "slowly"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Suddenly",
+        "Slowly",
+        "Not sure"
+      ]
+    },
+    {
+      "id": "general-symptom-03",
+      "topic": "general symptom history",
+      "category": "location",
+      "use": "interview",
+      "question": "Where do you feel it? Does it stay in one place or move around?",
+      "keywords": [
+        "symptom",
+        "symptoms",
+        "pain",
+        "hurt",
+        "hurts",
+        "hurting",
+        "sore",
+        "ache",
+        "feel",
+        "feeling",
+        "unwell",
+        "problem",
+        "issue",
+        "worse",
+        "better",
+        "where",
+        "spread"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "One place",
+        "It moves or spreads"
+      ]
+    },
+    {
+      "id": "general-symptom-04",
+      "topic": "general symptom history",
+      "category": "duration",
+      "use": "interview",
+      "question": "How long does it last when it happens?",
+      "keywords": [
+        "symptom",
+        "symptoms",
+        "pain",
+        "hurt",
+        "hurts",
+        "hurting",
+        "sore",
+        "ache",
+        "feel",
+        "feeling",
+        "unwell",
+        "problem",
+        "issue",
+        "worse",
+        "better"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "A few minutes",
+        "Hours",
+        "Days",
+        "It doesn't go away"
+      ]
+    },
+    {
+      "id": "general-symptom-05",
+      "topic": "general symptom history",
+      "category": "character",
+      "use": "interview",
+      "question": "How would you describe it in your own words?",
+      "keywords": [
+        "symptom",
+        "symptoms",
+        "pain",
+        "hurt",
+        "hurts",
+        "hurting",
+        "sore",
+        "ache",
+        "feel",
+        "feeling",
+        "unwell",
+        "problem",
+        "issue",
+        "worse",
+        "better",
+        "describe"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      }
+    },
+    {
+      "id": "general-symptom-06",
+      "topic": "general symptom history",
+      "category": "triggers/relief",
+      "use": "interview",
+      "question": "Does anything make it worse?",
+      "keywords": [
+        "symptom",
+        "symptoms",
+        "pain",
+        "hurt",
+        "hurts",
+        "hurting",
+        "sore",
+        "ache",
+        "feel",
+        "feeling",
+        "unwell",
+        "problem",
+        "issue",
+        "worse",
+        "better"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Nothing I've noticed"
+      ]
+    },
+    {
+      "id": "general-symptom-07",
+      "topic": "general symptom history",
+      "category": "triggers/relief",
+      "use": "interview",
+      "question": "Does anything make it better?",
+      "keywords": [
+        "symptom",
+        "symptoms",
+        "pain",
+        "hurt",
+        "hurts",
+        "hurting",
+        "sore",
+        "ache",
+        "feel",
+        "feeling",
+        "unwell",
+        "problem",
+        "issue",
+        "worse",
+        "better"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Nothing I've noticed"
+      ]
+    },
+    {
+      "id": "general-symptom-08",
+      "topic": "general symptom history",
+      "category": "timing",
+      "use": "interview",
+      "question": "Is it constant, or does it come and go? Is there a pattern?",
+      "keywords": [
+        "symptom",
+        "symptoms",
+        "pain",
+        "hurt",
+        "hurts",
+        "hurting",
+        "sore",
+        "ache",
+        "feel",
+        "feeling",
+        "unwell",
+        "problem",
+        "issue",
+        "worse",
+        "better",
+        "pattern",
+        "constant"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Constant",
+        "Comes and goes",
+        "No pattern"
+      ]
+    },
+    {
+      "id": "general-symptom-09",
+      "topic": "general symptom history",
+      "category": "severity",
+      "use": "interview",
+      "question": "How bad is it at its worst, and how bad is it right now?",
+      "keywords": [
+        "symptom",
+        "symptoms",
+        "pain",
+        "hurt",
+        "hurts",
+        "hurting",
+        "sore",
+        "ache",
+        "feel",
+        "feeling",
+        "unwell",
+        "problem",
+        "issue",
+        "worse",
+        "better"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Mild",
+        "Medium",
+        "Bad",
+        "Very bad"
+      ]
+    },
+    {
+      "id": "general-symptom-10",
+      "topic": "general symptom history",
+      "category": "related symptoms",
+      "use": "interview",
+      "question": "Have you noticed anything else happening at the same time?",
+      "keywords": [
+        "symptom",
+        "symptoms",
+        "pain",
+        "hurt",
+        "hurts",
+        "hurting",
+        "sore",
+        "ache",
+        "feel",
+        "feeling",
+        "unwell",
+        "problem",
+        "issue",
+        "worse",
+        "better",
+        "else"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "No, nothing else",
+        "Yes, something else too"
+      ]
+    },
+    {
+      "id": "general-symptom-11",
+      "topic": "general symptom history",
+      "category": "impact on daily life",
+      "use": "interview",
+      "question": "How is it affecting your day-to-day life?",
+      "keywords": [
+        "symptom",
+        "symptoms",
+        "pain",
+        "hurt",
+        "hurts",
+        "hurting",
+        "sore",
+        "ache",
+        "feel",
+        "feeling",
+        "unwell",
+        "problem",
+        "issue",
+        "worse",
+        "better",
+        "daily",
+        "life"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Not much",
+        "Some things are harder",
+        "I've had to stop some things"
+      ]
+    },
+    {
+      "id": "general-symptom-12",
+      "topic": "general symptom history",
+      "category": "history",
+      "use": "interview",
+      "question": "Has this happened before? What happened then?",
+      "keywords": [
+        "symptom",
+        "symptoms",
+        "pain",
+        "hurt",
+        "hurts",
+        "hurting",
+        "sore",
+        "ache",
+        "feel",
+        "feeling",
+        "unwell",
+        "problem",
+        "issue",
+        "worse",
+        "better",
+        "before"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "This is the first time",
+        "It has happened before"
+      ]
+    },
+    {
+      "id": "general-symptom-13",
+      "topic": "general symptom history",
+      "category": "medicines",
+      "use": "interview",
+      "question": "What have you tried for it so far, and did it help?",
+      "keywords": [
+        "symptom",
+        "symptoms",
+        "pain",
+        "hurt",
+        "hurts",
+        "hurting",
+        "sore",
+        "ache",
+        "feel",
+        "feeling",
+        "unwell",
+        "problem",
+        "issue",
+        "worse",
+        "better",
+        "tried"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Nothing",
+        "A prescription medicine",
+        "Something from the store",
+        "Not sure"
+      ]
+    },
+    {
+      "id": "general-symptom-14",
+      "topic": "general symptom history",
+      "category": "goals for the visit",
+      "use": "interview",
+      "question": "What worries you most about this?",
+      "keywords": [
+        "symptom",
+        "symptoms",
+        "pain",
+        "hurt",
+        "hurts",
+        "hurting",
+        "sore",
+        "ache",
+        "feel",
+        "feeling",
+        "unwell",
+        "problem",
+        "issue",
+        "worse",
+        "better",
+        "worry",
+        "worries"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      },
+      "replies": [
+        "Understand what's going on",
+        "Know what to do next",
+        "Feel better day to day"
+      ]
+    }
+  ]
+}

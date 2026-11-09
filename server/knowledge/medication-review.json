@@ -1,0 +1,546 @@
+{
+  "topic": "medication review",
+  "chunks": [
+    {
+      "id": "medication-review-01",
+      "topic": "medication review",
+      "category": "medicines",
+      "use": "interview",
+      "question": "Can you list every medicine you take, including ones from the store, vitamins, and supplements?",
+      "keywords": [
+        "medicine",
+        "medicines",
+        "medication",
+        "medications",
+        "meds",
+        "pill",
+        "pills",
+        "tablet",
+        "tablets",
+        "prescription",
+        "dose",
+        "dosage",
+        "refill",
+        "side effect",
+        "side effects",
+        "supplement",
+        "vitamin",
+        "pharmacy",
+        "list",
+        "vitamins",
+        "supplements"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Nothing",
+        "A prescription medicine",
+        "Something from the store",
+        "Not sure"
+      ]
+    },
+    {
+      "id": "medication-review-02",
+      "topic": "medication review",
+      "category": "medicines",
+      "use": "interview",
+      "question": "For each medicine, how and when do you actually take it?",
+      "keywords": [
+        "medicine",
+        "medicines",
+        "medication",
+        "medications",
+        "meds",
+        "pill",
+        "pills",
+        "tablet",
+        "tablets",
+        "prescription",
+        "dose",
+        "dosage",
+        "refill",
+        "side effect",
+        "side effects",
+        "supplement",
+        "vitamin",
+        "pharmacy",
+        "when",
+        "how"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Nothing",
+        "A prescription medicine",
+        "Something from the store",
+        "Not sure"
+      ]
+    },
+    {
+      "id": "medication-review-03",
+      "topic": "medication review",
+      "category": "medicines",
+      "use": "interview",
+      "question": "Do you ever miss doses, and if so, what usually gets in the way?",
+      "keywords": [
+        "medicine",
+        "medicines",
+        "medication",
+        "medications",
+        "meds",
+        "pill",
+        "pills",
+        "tablet",
+        "tablets",
+        "prescription",
+        "dose",
+        "dosage",
+        "refill",
+        "side effect",
+        "side effects",
+        "supplement",
+        "vitamin",
+        "pharmacy",
+        "miss",
+        "forget",
+        "doses"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Rarely",
+        "Sometimes",
+        "Often"
+      ]
+    },
+    {
+      "id": "medication-review-04",
+      "topic": "medication review",
+      "category": "related symptoms",
+      "use": "interview",
+      "question": "Have you noticed anything new since starting a medicine that you'd like to mention?",
+      "keywords": [
+        "medicine",
+        "medicines",
+        "medication",
+        "medications",
+        "meds",
+        "pill",
+        "pills",
+        "tablet",
+        "tablets",
+        "prescription",
+        "dose",
+        "dosage",
+        "refill",
+        "side effect",
+        "side effects",
+        "supplement",
+        "vitamin",
+        "pharmacy",
+        "new"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Yes",
+        "No",
+        "Not sure"
+      ]
+    },
+    {
+      "id": "medication-review-05",
+      "topic": "medication review",
+      "category": "triggers/relief",
+      "use": "interview",
+      "question": "Is any medicine hard to take, for example the cost, the size, or the timing?",
+      "keywords": [
+        "medicine",
+        "medicines",
+        "medication",
+        "medications",
+        "meds",
+        "pill",
+        "pills",
+        "tablet",
+        "tablets",
+        "prescription",
+        "dose",
+        "dosage",
+        "refill",
+        "side effect",
+        "side effects",
+        "supplement",
+        "vitamin",
+        "pharmacy",
+        "cost",
+        "price",
+        "swallow",
+        "timing"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Cost",
+        "Hard to swallow",
+        "Timing",
+        "No problems"
+      ]
+    },
+    {
+      "id": "medication-review-06",
+      "topic": "medication review",
+      "category": "history",
+      "use": "interview",
+      "question": "Has a doctor recently started, stopped, or changed any of your medicines?",
+      "keywords": [
+        "medicine",
+        "medicines",
+        "medication",
+        "medications",
+        "meds",
+        "pill",
+        "pills",
+        "tablet",
+        "tablets",
+        "prescription",
+        "dose",
+        "dosage",
+        "refill",
+        "side effect",
+        "side effects",
+        "supplement",
+        "vitamin",
+        "pharmacy",
+        "changed",
+        "stopped",
+        "started"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Yes",
+        "No",
+        "Not sure"
+      ]
+    },
+    {
+      "id": "medication-review-07",
+      "topic": "medication review",
+      "category": "history",
+      "use": "interview",
+      "question": "Have you ever had a reaction to a medicine?",
+      "keywords": [
+        "medicine",
+        "medicines",
+        "medication",
+        "medications",
+        "meds",
+        "pill",
+        "pills",
+        "tablet",
+        "tablets",
+        "prescription",
+        "dose",
+        "dosage",
+        "refill",
+        "side effect",
+        "side effects",
+        "supplement",
+        "vitamin",
+        "pharmacy",
+        "allergy",
+        "reaction"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Yes",
+        "No",
+        "Not sure"
+      ]
+    },
+    {
+      "id": "medication-review-08",
+      "topic": "medication review",
+      "category": "onset",
+      "use": "interview",
+      "question": "Is there a medicine you're unsure about, and when did that start worrying you?",
+      "keywords": [
+        "medicine",
+        "medicines",
+        "medication",
+        "medications",
+        "meds",
+        "pill",
+        "pills",
+        "tablet",
+        "tablets",
+        "prescription",
+        "dose",
+        "dosage",
+        "refill",
+        "side effect",
+        "side effects",
+        "supplement",
+        "vitamin",
+        "pharmacy",
+        "unsure",
+        "worried"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Today",
+        "In the last few days",
+        "A few weeks ago",
+        "Months ago or longer"
+      ]
+    },
+    {
+      "id": "medication-review-09",
+      "topic": "medication review",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "What is each of my medicines for?",
+      "keywords": [
+        "medicine",
+        "medicines",
+        "medication",
+        "medications",
+        "meds",
+        "pill",
+        "pills",
+        "tablet",
+        "tablets",
+        "prescription",
+        "dose",
+        "dosage",
+        "refill",
+        "side effect",
+        "side effects",
+        "supplement",
+        "vitamin",
+        "pharmacy",
+        "for",
+        "purpose"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "medication-review-10",
+      "topic": "medication review",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "How long will I need to take this medicine?",
+      "keywords": [
+        "medicine",
+        "medicines",
+        "medication",
+        "medications",
+        "meds",
+        "pill",
+        "pills",
+        "tablet",
+        "tablets",
+        "prescription",
+        "dose",
+        "dosage",
+        "refill",
+        "side effect",
+        "side effects",
+        "supplement",
+        "vitamin",
+        "pharmacy",
+        "how long"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "medication-review-11",
+      "topic": "medication review",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "What should I do if I miss a dose?",
+      "keywords": [
+        "medicine",
+        "medicines",
+        "medication",
+        "medications",
+        "meds",
+        "pill",
+        "pills",
+        "tablet",
+        "tablets",
+        "prescription",
+        "dose",
+        "dosage",
+        "refill",
+        "side effect",
+        "side effects",
+        "supplement",
+        "vitamin",
+        "pharmacy",
+        "miss"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "medication-review-12",
+      "topic": "medication review",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "Are there side effects I should tell you about?",
+      "keywords": [
+        "medicine",
+        "medicines",
+        "medication",
+        "medications",
+        "meds",
+        "pill",
+        "pills",
+        "tablet",
+        "tablets",
+        "prescription",
+        "dose",
+        "dosage",
+        "refill",
+        "side effect",
+        "side effects",
+        "supplement",
+        "vitamin",
+        "pharmacy"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "medication-review-13",
+      "topic": "medication review",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "Is my medicine still the right one for me, and how will we know if it's working?",
+      "keywords": [
+        "medicine",
+        "medicines",
+        "medication",
+        "medications",
+        "meds",
+        "pill",
+        "pills",
+        "tablet",
+        "tablets",
+        "prescription",
+        "dose",
+        "dosage",
+        "refill",
+        "side effect",
+        "side effects",
+        "supplement",
+        "vitamin",
+        "pharmacy",
+        "working",
+        "right"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "medication-review-14",
+      "topic": "medication review",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "Are there foods, drinks, or other medicines I should ask you or my pharmacist about with this one?",
+      "keywords": [
+        "medicine",
+        "medicines",
+        "medication",
+        "medications",
+        "meds",
+        "pill",
+        "pills",
+        "tablet",
+        "tablets",
+        "prescription",
+        "dose",
+        "dosage",
+        "refill",
+        "side effect",
+        "side effects",
+        "supplement",
+        "vitamin",
+        "pharmacy",
+        "interaction",
+        "food",
+        "alcohol",
+        "pharmacist"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "medication-review-15",
+      "topic": "medication review",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "Can you write down any changes to my medicines for me?",
+      "keywords": [
+        "medicine",
+        "medicines",
+        "medication",
+        "medications",
+        "meds",
+        "pill",
+        "pills",
+        "tablet",
+        "tablets",
+        "prescription",
+        "dose",
+        "dosage",
+        "refill",
+        "side effect",
+        "side effects",
+        "supplement",
+        "vitamin",
+        "pharmacy",
+        "write down",
+        "changes"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    }
+  ]
+}

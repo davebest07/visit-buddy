@@ -122,6 +122,73 @@ To connect a real model later, replace the inside of those five functions with c
 `server/routes/ai.js` and keep the shapes the same. That route is the only place a key
 would be read, from `.env`. There are no keys in this repository.
 
+## Question knowledge base (RAG)
+
+Before a visit should ask the kind of questions a clinician would ask, not generic AI
+questions. So the questions come from a small, hand-written knowledge base, found by
+retrieval (the "R" in RAG).
+
+**What is in it.** `server/knowledge/` holds one JSON file per topic: dizziness, joint pain,
+back pain, headache, stomach pain, cough, skin and rash, tiredness, sleep, mood and stress,
+medication review, plus two fallback sets, general symptom history and preparing for any
+visit. That is 193 short questions. Each one looks like this:
+
+```json
+{
+  "id": "dizziness-04",
+  "topic": "dizziness",
+  "category": "triggers/relief",
+  "use": "interview",
+  "question": "Does it happen when you stand up, turn your head, or lie down?",
+  "keywords": ["dizzy", "lightheaded", "vertigo", "stand", "head"],
+  "replies": ["When I stand up", "When I turn my head", "When I lie down", "Nothing I've noticed"],
+  "source": { "name": "Standard clinical history-taking (OLDCARTS/OPQRST)", "url": "" }
+}
+```
+
+- `category` is one of: onset, location, duration, character, triggers/relief, timing,
+  severity, related symptoms, impact on daily life, history, medicines, goals for the visit.
+  These follow the standard symptom-history structures OLDCARTS and OPQRST.
+- `use` is `interview` (something the doctor would want to know from you) or `ask-doctor`
+  (a question you can ask the doctor, in the spirit of AHRQ's *Questions Are the Answer*).
+- `replies` are optional quick answers for the interview.
+- Every question is written in plain words for Visit Buddy; nothing is copied from a source.
+  The knowledge base holds **questions only**: no diagnoses, causes, treatments or drug
+  information.
+- **Sources to verify.** Only the AHRQ link is filled in
+  (`https://www.ahrq.gov/questions/index.html`). Questions based on OLDCARTS and OPQRST are
+  credited to "Standard clinical history-taking (OLDCARTS/OPQRST)". These, and the general
+  history structure, are teaching frameworks without one official page, so their `url` is
+  left empty on purpose.
+
+**How search works.** `POST /api/rag/search` (`server/routes/rag.js`, logic in
+`server/rag/search.js`) scores every question with BM25 keyword ranking. Before scoring,
+everyday words are mapped to the knowledge base's words (`server/rag/synonyms.js`):
+"lightheaded" → dizziness, "knee" → joint pain, "tummy" → stomach. A topic only counts when
+your words hit that topic's own keywords, results take turns between topics (so "my knee
+hurts and I get dizzy" returns both), and if nothing matches you get the general set.
+No API key is needed.
+
+```
+POST /api/rag/search
+{ "query": "I get dizzy when I stand up", "limit": 8, "use": "interview" }
+
+→ { "method": "bm25", "fallback": false, "expandedWith": [...],
+    "matchedTopics": [{ "topic": "dizziness", "score": 10.9 }],
+    "results": [{ ...chunk, "score": 10.9 }] }
+```
+
+`limit` (1–50, default 12), `use` and `topics` (a list of topic names) are optional. Bad
+input gets a 400 with a readable message. `GET /api/rag/topics` lists the topics. The client
+calls it through `searchKnowledge()` in `client/src/services/api.js`.
+
+**Switching to embeddings later.** The scorer is one object with
+`score(query) → [{ id, score }]`. An embedding scorer that returns cosine similarities in
+that shape can replace `createBm25Scorer` without changing the response.
+
+**Editing the knowledge base.** Edit the JSON files and restart the server. Keep every
+entry a question, keep ids unique, and keep `topic` the same within a file.
+
 ## Project layout
 
 ```
@@ -138,7 +205,9 @@ visit-buddy/
       styles/           tokens.css (all colours, type, spacing) + base styles
   server/
     index.js            Express app on port 3001
-    routes/             visits.js (JSON storage), ai.js (Phase 4 stub)
+    routes/             visits.js (JSON storage), rag.js (question search), ai.js (stub)
+    rag/                search.js (BM25 retrieval), synonyms.js
+    knowledge/          question knowledge base, one JSON file per topic
     data/visits.json    created at runtime, never committed
 ```
 

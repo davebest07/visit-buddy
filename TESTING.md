@@ -41,6 +41,31 @@ Use Chrome or Edge on a computer (localhost counts as secure).
 - [ ] Screen reader: you hear "Listening…" when it starts and "Stopped listening…" when it
       ends, but not every word.
 
+## Question search (knowledge base)
+
+There is no screen for this yet (Phase 3 adds one). Test it from the browser:
+
+- [ ] Open `https://localhost:5173/api/rag/topics` (or `http://` with `npm run dev`). It
+      lists 13 topics and 193 chunks.
+- [ ] Open the browser console on any Visit Buddy page and run:
+      ```js
+      const find = (query, extra = {}) => fetch('/api/rag/search', { method: 'POST',
+        headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ query, ...extra }) })
+        .then((r) => r.json()).then((d) => { console.log(d.matchedTopics, d.fallback);
+          console.table(d.results.map((c) => ({ topic: c.topic, score: c.score, question: c.question }))) })
+      ```
+- [ ] `find('My knee has been hurting for two weeks, I get dizzy when I stand up')` → topics
+      joint pain and dizziness, and the questions alternate between them.
+- [ ] `find('I feel lightheaded')` → dizziness only (the synonym works, and no headache).
+- [ ] `find('my tummy cramps after meals')` → stomach pain, with the "linked to eating"
+      question first.
+- [ ] `find('I have a weird feeling')` → `fallback: true` and general questions.
+- [ ] `find('knee', { use: 'ask-doctor', limit: 3 })` → only questions to ask the doctor,
+      each with an AHRQ source.
+- [ ] `find('')` and `find('x', { limit: 99 })` → a readable 400 error message.
+- [ ] Skim a few files in `server/knowledge/`. Every entry is a question, and none names a
+      diagnosis, a cause, a treatment or a drug.
+
 ## After a visit
 
 - [ ] Open **After a visit**, tap **Use the sample conversation**, then **Check what the
