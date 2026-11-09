@@ -4,10 +4,10 @@ import AIShell, { useAICall } from '../components/AIShell.jsx'
 import Button from '../components/Button.jsx'
 import Card from '../components/Card.jsx'
 import EditableList from '../components/EditableList.jsx'
-import RecorderButton from '../components/RecorderButton.jsx'
+import LiveTranscriber from '../components/LiveTranscriber.jsx'
 import Toast from '../components/Toast.jsx'
 import useUndo from '../hooks/useUndo.js'
-import { buildQuestions, transcribe } from '../services/aiService.js'
+import { buildQuestions } from '../services/aiService.js'
 import { createVisit } from '../services/api.js'
 
 const EXAMPLES = [
@@ -22,7 +22,7 @@ export default function Before() {
   const navigate = useNavigate()
 
   const [concerns, setConcerns] = useState('')
-  const [transcribing, setTranscribing] = useState(false)
+  const [listening, setListening] = useState(false)
   const [saving, setSaving] = useState(false)
   const [toast, setToast] = useState(null)
 
@@ -47,17 +47,12 @@ export default function Before() {
     return () => clearTimeout(timer)
   }, [toast])
 
-  async function handleAudio(blob) {
-    setTranscribing(true)
-    try {
-      const text = await transcribe(blob)
-      setConcerns(text)
-      setToast('Recording turned into words. Check it before you continue.')
-    } catch {
-      setToast('That recording could not be turned into words. You can type instead.')
-    } finally {
-      setTranscribing(false)
-    }
+  // The spoken words join whatever is already typed, then the box gets focus
+  // so mistakes can be fixed before continuing.
+  function handleSpoken(text) {
+    setConcerns((current) => (current.trim() ? `${current.trim()} ${text}` : text))
+    setToast('Your words are in the box. Fix anything that is wrong before you continue.')
+    requestAnimationFrame(() => document.getElementById('concerns')?.focus())
   }
 
   function handleUndo() {
@@ -92,7 +87,7 @@ export default function Before() {
     }
   }
 
-  const busy = transcribing || status === 'loading'
+  const busy = listening || status === 'loading'
   const step = status === 'empty' ? 1 : status === 'loading' ? 2 : 3
 
   return (
@@ -134,7 +129,7 @@ export default function Before() {
               Your worries
             </label>
             <p id="concerns-help" className="mt-1 text-small text-muted">
-              Type here, or use the record button.
+              Type here, or tap the microphone and talk. Your words appear as you speak.
             </p>
 
             <textarea
@@ -147,13 +142,12 @@ export default function Before() {
               className="mt-3 w-full resize-y rounded-card border border-line bg-canvas p-4 text-body text-ink placeholder:text-muted"
             />
 
-            <div className="mt-4 flex flex-wrap items-center gap-4">
-              <RecorderButton onAudio={handleAudio} label="Record my worries" />
-              {transcribing ? (
-                <span className="text-small text-muted" aria-live="polite">
-                  Turning your recording into words…
-                </span>
-              ) : null}
+            <div className="mt-4">
+              <LiveTranscriber
+                label="Record my worries"
+                onFinish={handleSpoken}
+                onListeningChange={setListening}
+              />
             </div>
 
             <div className="mt-5">
@@ -174,7 +168,7 @@ export default function Before() {
 
             <div className="mt-6">
               <Button onClick={run} disabled={!concerns.trim() || busy} magnetic>
-                {busy ? 'Working…' : 'Get my questions'}
+                {status === 'loading' ? 'Working…' : 'Get my questions'}
               </Button>
             </div>
           </div>

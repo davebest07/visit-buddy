@@ -6,11 +6,11 @@ import Card from '../components/Card.jsx'
 import FlaggedLine from '../components/FlaggedLine.jsx'
 import MedRow from '../components/MedRow.jsx'
 import QuoteLine from '../components/QuoteLine.jsx'
-import RecorderButton from '../components/RecorderButton.jsx'
+import LiveTranscriber from '../components/LiveTranscriber.jsx'
 import Tabs from '../components/Tabs.jsx'
 import Toast from '../components/Toast.jsx'
 import useUndo from '../hooks/useUndo.js'
-import { SAMPLE_TRANSCRIPT, summarizeVisit, transcribe } from '../services/aiService.js'
+import { SAMPLE_TRANSCRIPT, summarizeVisit } from '../services/aiService.js'
 import { createVisit } from '../services/api.js'
 
 const STEPS = ['Listening', 'Writing it in plain words', 'Checking each line against what you said']
@@ -27,7 +27,7 @@ export default function After() {
   const navigate = useNavigate()
 
   const [transcript, setTranscript] = useState('')
-  const [transcribing, setTranscribing] = useState(false)
+  const [listening, setListening] = useState(false)
   const [tab, setTab] = useState('summary')
   const [saving, setSaving] = useState(false)
   const [toast, setToast] = useState(null)
@@ -60,17 +60,12 @@ export default function After() {
     return () => clearTimeout(timer)
   }, [toast])
 
-  async function handleAudio(blob) {
-    setTranscribing(true)
-    try {
-      const text = await transcribe(blob)
-      setTranscript(text)
-      setToast('Recording turned into words. Check it before you continue.')
-    } catch {
-      setToast('That recording could not be turned into words. You can type instead.')
-    } finally {
-      setTranscribing(false)
-    }
+  // The spoken words join whatever is already typed, then the box gets focus
+  // so mistakes can be fixed before continuing.
+  function handleSpoken(text) {
+    setTranscript((current) => (current.trim() ? `${current.trim()} ${text}` : text))
+    setToast('Your words are in the box. Fix anything that is wrong before you continue.')
+    requestAnimationFrame(() => document.getElementById('transcript')?.focus())
   }
 
   function handleUndo() {
@@ -136,7 +131,7 @@ export default function After() {
     }
   }
 
-  const busy = transcribing || status === 'loading'
+  const busy = listening || status === 'loading'
 
   return (
     <div className="vb-container max-w-5xl pt-10">
@@ -155,7 +150,7 @@ export default function After() {
               What the doctor said
             </label>
             <p id="transcript-help" className="mt-1 text-small text-muted">
-              Only record with permission.
+              Type what you remember, or tap the microphone and talk.
             </p>
 
             <textarea
@@ -168,22 +163,29 @@ export default function After() {
               className="mt-3 w-full resize-y rounded-card border border-line bg-canvas p-4 text-body text-ink placeholder:text-muted"
             />
 
-            <div className="mt-4 flex flex-wrap items-center gap-4">
-              <RecorderButton onAudio={handleAudio} label="Record the visit" />
-              <Button variant="quiet" size="sm" onClick={() => setTranscript(SAMPLE_TRANSCRIPT)}>
+            <div className="mt-4">
+              <LiveTranscriber
+                label="Record the visit"
+                note="Ask your doctor before recording."
+                onFinish={handleSpoken}
+                onListeningChange={setListening}
+              />
+            </div>
+
+            <div className="mt-4">
+              <Button
+                variant="quiet"
+                size="sm"
+                onClick={() => setTranscript(SAMPLE_TRANSCRIPT)}
+                disabled={listening}
+              >
                 Use the sample conversation
               </Button>
             </div>
 
-            {transcribing ? (
-              <p className="mt-2 text-small text-muted" aria-live="polite">
-                Turning your recording into words…
-              </p>
-            ) : null}
-
             <div className="mt-6">
               <Button onClick={run} disabled={!transcript.trim() || busy} magnetic>
-                {busy ? 'Working…' : 'Check what the doctor said'}
+                {status === 'loading' ? 'Working…' : 'Check what the doctor said'}
               </Button>
             </div>
           </div>

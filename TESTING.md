@@ -14,6 +14,33 @@ you should see.
 - [ ] Tap **Regenerate**. The wording or order changes.
 - [ ] Tap **Save**. You land on the saved visit, and it now appears on Home and History.
 
+## Live transcription
+
+Use Chrome or Edge on a computer (localhost counts as secure).
+
+- [ ] Open **Before a visit**, tap **Record my worries**, allow the microphone. A red
+      "Listening…" indicator and a **Stop** button appear, and focus moves to Stop.
+- [ ] Talk. Words appear while you speak: settled words in normal ink, words still being
+      worked out in grey italics.
+- [ ] Stay silent for about 10 seconds, then talk again. It keeps listening and adds the new
+      words.
+- [ ] Tap **Stop**. Everything you said is in the text box, the box has focus, and a toast
+      says to fix anything that is wrong. Edit a word by hand.
+- [ ] Record again. The new words are added after the existing text, not replacing it.
+- [ ] While listening, **Get my questions** is disabled.
+- [ ] Block the microphone in the browser's site settings and try again. A message explains
+      how to allow it.
+- [ ] Open the app in Firefox. There is no mic button, only "Live typing isn't available in
+      this browser, you can type instead."
+- [ ] Open the plain `http://<network address>:5173` on a phone. The page explains the mic
+      needs a secure (https) page.
+- [ ] Run `npm run dev:https`, open the https Network address on a phone, accept the
+      certificate warning, and record. It works.
+- [ ] Next to the mic: "Your browser turns your speech into text. In some browsers this uses
+      an online service."
+- [ ] Screen reader: you hear "Listening…" when it starts and "Stopped listening…" when it
+      ends, but not every word.
+
 ## After a visit
 
 - [ ] Open **After a visit**, tap **Use the sample conversation**, then **Check what the
@@ -24,6 +51,8 @@ you should see.
 - [ ] Add `?ai=uncertain` to the URL and repeat. More lines are highlighted, and the dose
       field is empty.
 - [ ] Tap **Approve and save**. The visit opens and nothing was saved before that point.
+- [ ] Under **Record the visit** you see "Ask your doctor before recording." Record, tap
+      **Stop**, and the words land in the "What the doctor said" box for editing.
 
 ## Failure states
 
