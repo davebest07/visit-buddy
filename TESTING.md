@@ -28,7 +28,10 @@ you should see.
       questions are left out.
 - [ ] Each line has **Quote** (your exact words) and **Why this question** / **Why this is
       here** with a source. The AHRQ source is a link.
-- [ ] Edit a line. Tap **Undo**. The toast says "Change undone" and the edit is gone.
+- [ ] Type several words into one line, click out, then tap **Undo** once. The toast says
+      "Change undone" and all the words you typed are gone (not just the last letter).
+- [ ] Edit line 1, then line 2. **Undo** once restores line 2 only; again restores line 1.
+- [ ] **Remove** a line, then **Undo**. The line comes back in its place.
 - [ ] Tap **Regenerate**. Different questions appear.
 - [ ] **Change my answers** goes back to the last question with your answers kept.
 - [ ] **Copy** gives both lists. **Print** shows only the lists, no buttons.
@@ -62,6 +65,11 @@ you should see.
 - [ ] Type "I want to kill myself". The card shows **Call 988**, **Text 988** and **Call
       911** straight away, with no "No, continue". A smaller **I'm safe right now,
       continue** carries on.
+- [ ] After **I'm safe right now, continue**, a small line "If you need to talk to someone,
+      call or text 988." with **Call 988** and **Text 988** stays at the top of Before a
+      visit through the interview, and under "Your questions" on the list. It does not
+      block anything. Reload: it is still there. Close the tab and open a new one: it is
+      gone.
 - [ ] "I hurt myself lifting a box", "my chest cold is better" and "I cough when I breathe
       cold air" do **not** show the card.
 - [ ] In the interview, answer "I passed out last week" and tap Next. The card asks about
@@ -129,6 +137,8 @@ There is no screen for this yet (Phase 3 adds one). Test it from the browser:
 - [ ] The Bellaprin row is marked as needing a check, and its dose is not guessed.
 - [ ] Add `?ai=uncertain` to the URL and repeat. More lines are highlighted, and the dose
       field is empty.
+- [ ] Type a few words into a summary line, click out, tap **Undo** once. The whole edit
+      is undone.
 - [ ] Tap **Approve and save**. The visit opens and nothing was saved before that point.
 - [ ] Under **Record the visit** you see "Ask your doctor before recording." Record, tap
       **Stop**, and the words land in the "What the doctor said" box for editing.

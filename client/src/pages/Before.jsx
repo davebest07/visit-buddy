@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import AIShell, { useAICall } from '../components/AIShell.jsx'
 import Button from '../components/Button.jsx'
 import Card from '../components/Card.jsx'
+import CrisisLineBanner from '../components/CrisisLineBanner.jsx'
 import EditableList from '../components/EditableList.jsx'
 import EmergencyCard from '../components/EmergencyCard.jsx'
 import GuidedInterview from '../components/GuidedInterview.jsx'
@@ -12,7 +13,7 @@ import Toast from '../components/Toast.jsx'
 import useUndo from '../hooks/useUndo.js'
 import { buildQuestions, interviewQuestions } from '../services/aiService.js'
 import { createVisit, findQuestionChunks } from '../services/api.js'
-import { dismissRedFlag, findRedFlag } from '../services/redFlags.js'
+import { crisisLineWanted, dismissRedFlag, findRedFlag } from '../services/redFlags.js'
 
 const EXAMPLES = [
   'My knee has been hurting for two weeks.',
@@ -52,6 +53,7 @@ export default function Before() {
   // describe -> interview -> result. A red flag stops the flow at any point.
   const [stage, setStage] = useState('describe')
   const [redFlag, setRedFlag] = useState(null)
+  const [showCrisisLine, setShowCrisisLine] = useState(crisisLineWanted)
   const [steps, setSteps] = useState([])
   const [answers, setAnswers] = useState([])
   const [interviewStart, setInterviewStart] = useState(0)
@@ -65,6 +67,7 @@ export default function Before() {
   const {
     value: result,
     setValue: setResult,
+    endGroup,
     undo,
     reset: resetResult,
     canUndo,
@@ -165,6 +168,7 @@ export default function Before() {
   // words, and carry on (the next flag, if any, is asked about first).
   function handleFlagContinue(flag) {
     dismissRedFlag(flag)
+    setShowCrisisLine(crisisLineWanted())
     handleContinue()
   }
 
@@ -220,6 +224,11 @@ export default function Before() {
 
   return (
     <div className="vb-container max-w-5xl pt-10">
+      {/* On the finished list the line sits under "Your questions" instead. */}
+      {showCrisisLine && !(stage === 'result' && result?.questions.length) ? (
+        <CrisisLineBanner className="mb-6" />
+      ) : null}
+
       <header className="print:hidden">
         <p className="vb-eyebrow text-accent">Before a visit</p>
         <h1 className="mt-4 max-w-[18ch] text-hero font-bold">What is worrying you?</h1>
@@ -374,6 +383,7 @@ export default function Before() {
             startAt={interviewStart}
             onComplete={startBuilding}
             onExit={backToDescribe}
+            onFlagContinue={() => setShowCrisisLine(crisisLineWanted())}
             scrollToId="before-steps"
           />
         </div>
@@ -405,7 +415,8 @@ export default function Before() {
             onReset={backToDescribe}
           >
             {result?.questions.length ? (
-              <>
+              // Leaving a field ends that edit, so Undo takes back the whole edit.
+              <div onBlur={endGroup}>
                 <div className="flex flex-wrap items-end justify-between gap-4">
                   <div>
                     <p className="vb-eyebrow text-accent print:hidden">Step 3</p>
@@ -422,10 +433,14 @@ export default function Before() {
                   </p>
                 </div>
 
+                {showCrisisLine ? <CrisisLineBanner className="mt-6" /> : null}
+
                 <div className="mt-6">
                   <EditableList
                     items={result.questions}
-                    onChange={(questions) => setResult((current) => ({ ...current, questions }))}
+                    onChange={(questions, edit) =>
+                      setResult((current) => ({ ...current, questions }), edit)
+                    }
                     label="Question"
                   />
                 </div>
@@ -442,8 +457,8 @@ export default function Before() {
                     <div className="mt-4">
                       <EditableList
                         items={result.tellDoctor}
-                        onChange={(tellDoctor) =>
-                          setResult((current) => ({ ...current, tellDoctor }))
+                        onChange={(tellDoctor, edit) =>
+                          setResult((current) => ({ ...current, tellDoctor }), edit)
                         }
                         label="Note"
                         whyLabel="Why this is here"
@@ -480,7 +495,7 @@ export default function Before() {
                     Start over
                   </Button>
                 </div>
-              </>
+              </div>
             ) : null}
           </AIShell>
         </div>

@@ -32,6 +32,8 @@ function GrowingText({ value, onChange, ...props }) {
 }
 
 // Editable AI lines as editorial numbered rows, not stacked cards.
+// onChange(items, { group }) — typing in one row shares a group, so the page's
+// undo treats it as one edit. Removing a row has no group: its own step.
 export default function EditableList({ items, onChange, label = 'Question', whyLabel }) {
   const prefix = useId()
 
@@ -44,7 +46,10 @@ export default function EditableList({ items, onChange, label = 'Question', whyL
   }
 
   const update = (index, patch) => {
-    onChange(items.map((item, itemIndex) => (itemIndex === index ? { ...item, ...patch } : item)))
+    onChange(
+      items.map((item, itemIndex) => (itemIndex === index ? { ...item, ...patch } : item)),
+      { group: `${prefix}:${index}` },
+    )
   }
 
   const remove = (index) => {

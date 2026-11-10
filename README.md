@@ -126,8 +126,10 @@ Three steps, shown at the top of the page: **Describe → A few questions → Yo
      "Get help now — call 911 or your doctor" card. **No, continue** carries on with their
      words kept, and that phrase is not asked about again in this browser session.
    - Thoughts of self-harm always show 988 (call or text, the US Suicide & Crisis Lifeline)
-     and 911 first, with a smaller **I'm safe right now, continue**. The Help page lists 988
-     too.
+     and 911 first, with a smaller **I'm safe right now, continue**. After that, a small,
+     calm line stays at the top of Before a visit (and under "Your questions" on the list)
+     for the rest of the browser session: "If you need to talk to someone, call or text
+     988." with Call and Text links. It never blocks anything. The Help page lists 988 too.
    - Tests: `npm run test:redflags` (42 phrases that should match, 20 that should not).
 3. **A few questions.** The worries are searched in the knowledge base (three searches at
    once: interview prompts, ask-the-doctor questions, and the general set, see
@@ -163,7 +165,9 @@ Three steps, shown at the top of the page: **Describe → A few questions → Yo
    Then comes
    **What to tell your doctor**: their own words and answers, in order. Every line has
    a **Quote** button (their exact words) and a **Why this question** line with the
-   knowledge-base source. Edit, Undo, Regenerate, Save, Print and Copy all work. Saving
+   knowledge-base source. Edit, Undo, Regenerate, Save, Print and Copy all work. Undo
+   takes back one whole edit: everything typed in a box until you leave it, or one
+   removed line (`hooks/useUndo.js`, also used on After a visit). Saving
    stores the questions, and "What to tell your doctor" in the visit's `summary`.
 
 The questions only gather information. Nothing hints at a cause, a diagnosis or a

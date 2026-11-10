@@ -35,6 +35,7 @@ export default function After() {
   const {
     value: result,
     setValue: setResult,
+    endGroup,
     undo,
     reset: resetResult,
     canUndo,
@@ -72,39 +73,50 @@ export default function After() {
     if (undo()) setToast('Change undone')
   }
 
+  // Typing passes a group (one field), so Undo takes back the whole edit.
+  // Removing a line or ticking a box is its own step.
   function updateSummary(index, patch) {
-    setResult({
-      ...result,
-      summary: result.summary.map((line, lineIndex) =>
-        lineIndex === index ? { ...line, ...patch } : line,
-      ),
-    })
+    setResult(
+      (current) => ({
+        ...current,
+        summary: current.summary.map((line, lineIndex) =>
+          lineIndex === index ? { ...line, ...patch } : line,
+        ),
+      }),
+      { group: `summary:${index}` },
+    )
   }
 
   function removeSummary(index) {
-    setResult({ ...result, summary: result.summary.filter((_, i) => i !== index) })
+    setResult((current) => ({ ...current, summary: current.summary.filter((_, i) => i !== index) }))
   }
 
-  function updateTodo(index, patch) {
-    setResult({
-      ...result,
-      todos: result.todos.map((todo, todoIndex) =>
-        todoIndex === index ? { ...todo, ...patch } : todo,
-      ),
-    })
+  function updateTodo(index, patch, group) {
+    setResult(
+      (current) => ({
+        ...current,
+        todos: current.todos.map((todo, todoIndex) =>
+          todoIndex === index ? { ...todo, ...patch } : todo,
+        ),
+      }),
+      { group },
+    )
   }
 
   function removeTodo(index) {
-    setResult({ ...result, todos: result.todos.filter((_, i) => i !== index) })
+    setResult((current) => ({ ...current, todos: current.todos.filter((_, i) => i !== index) }))
   }
 
   function updateMed(index, patch) {
-    setResult({
-      ...result,
-      meds: result.meds.map((med, medIndex) =>
-        medIndex === index ? { ...med, ...patch } : med,
-      ),
-    })
+    setResult(
+      (current) => ({
+        ...current,
+        meds: current.meds.map((med, medIndex) =>
+          medIndex === index ? { ...med, ...patch } : med,
+        ),
+      }),
+      { group: `med:${index}:${Object.keys(patch).join(',')}` },
+    )
   }
 
   async function handleApprove() {
@@ -230,176 +242,181 @@ export default function After() {
             onTypeInstead={() => document.getElementById('transcript')?.focus()}
             onReset={reset}
           >
-            <div className="flex flex-wrap items-end justify-between gap-4">
-              <div>
-                <p className="vb-eyebrow text-accent">Step 03</p>
-                <h2 className="mt-3 text-hero font-bold">Check this before you save</h2>
+            {/* Leaving a field ends that edit, so Undo takes back the whole edit. */}
+            <div onBlur={endGroup}>
+              <div className="flex flex-wrap items-end justify-between gap-4">
+                <div>
+                  <p className="vb-eyebrow text-accent">Step 03</p>
+                  <h2 className="mt-3 text-hero font-bold">Check this before you save</h2>
+                </div>
+                <p className="max-w-[32ch] text-small text-muted">
+                  Nothing is saved until you tap Approve and save.
+                </p>
               </div>
-              <p className="max-w-[32ch] text-small text-muted">
-                Nothing is saved until you tap Approve and save.
-              </p>
-            </div>
 
-            <div className="mt-6">
-              <Tabs tabs={TABS} value={tab} onChange={setTab} label="Visit result" />
-            </div>
+              <div className="mt-6">
+                <Tabs tabs={TABS} value={tab} onChange={setTab} label="Visit result" />
+              </div>
 
-            <div
-              role="tabpanel"
-              id={`panel-${tab}`}
-              aria-labelledby={`tab-${tab}`}
-              className="mt-8"
-            >
-              {tab === 'summary' ? (
-                <>
-                  {result.summary.length === 0 ? (
-                    <p className="text-body text-muted">No summary lines.</p>
+              <div
+                role="tabpanel"
+                id={`panel-${tab}`}
+                aria-labelledby={`tab-${tab}`}
+                className="mt-8"
+              >
+                {tab === 'summary' ? (
+                  <>
+                    {result.summary.length === 0 ? (
+                      <p className="text-body text-muted">No summary lines.</p>
+                    ) : (
+                      <ul className="border-t border-line">
+                        {result.summary.map((line, index) => (
+                          <li key={index} className="border-b border-line py-6">
+                            <FlaggedLine flagged={line.flagged}>
+                              <label htmlFor={`summary-${index}`} className="sr-only">
+                                Summary line {index + 1}
+                              </label>
+                              <textarea
+                                id={`summary-${index}`}
+                                value={line.text}
+                                rows={2}
+                                onChange={(event) =>
+                                  updateSummary(index, { text: event.target.value })
+                                }
+                                className="w-full resize-y border-0 bg-transparent p-0 text-subhead text-ink focus:outline-none"
+                              />
+                              <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
+                                <QuoteLine quote={line.quote} />
+                                <button
+                                  type="button"
+                                  onClick={() => removeSummary(index)}
+                                  className="min-h-tap px-2 text-small font-bold text-error underline underline-offset-4"
+                                >
+                                  Remove
+                                </button>
+                              </div>
+                            </FlaggedLine>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+
+                    {result.flags.length > 0 ? (
+                      <div className="mt-8 rounded-card bg-tint-sky p-6">
+                        <h3 className="text-subhead font-bold">Needs checking</h3>
+                        <ul className="mt-3 space-y-2">
+                          {result.flags.map((flag) => (
+                            <li key={flag.line} className="text-body">
+                              <strong>{flag.line}:</strong> {flag.reason}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : null}
+                  </>
+                ) : null}
+
+                {tab === 'todos' ? (
+                  result.todos.length === 0 ? (
+                    <p className="text-body text-muted">No to-dos.</p>
                   ) : (
-                    <ul className="border-t border-line">
-                      {result.summary.map((line, index) => (
-                        <li key={index} className="border-b border-line py-6">
-                          <FlaggedLine flagged={line.flagged}>
-                            <label htmlFor={`summary-${index}`} className="sr-only">
-                              Summary line {index + 1}
+                    <ul className="grid gap-4">
+                      {result.todos.map((todo, index) => (
+                        <li
+                          key={index}
+                          className="flex gap-4 rounded-card border border-line bg-surface p-5"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={Boolean(todo.done)}
+                            onChange={(event) => updateTodo(index, { done: event.target.checked })}
+                            id={`todo-done-${index}`}
+                            className="mt-2 h-6 w-6 shrink-0 accent-primary"
+                          />
+                          <div className="min-w-0 flex-1">
+                            <label htmlFor={`todo-text-${index}`} className="sr-only">
+                              To-do {index + 1}
                             </label>
                             <textarea
-                              id={`summary-${index}`}
-                              value={line.text}
+                              id={`todo-text-${index}`}
+                              value={todo.text}
                               rows={2}
                               onChange={(event) =>
-                                updateSummary(index, { text: event.target.value })
+                                updateTodo(index, { text: event.target.value }, `todo:${index}`)
                               }
-                              className="w-full resize-y border-0 bg-transparent p-0 text-subhead text-ink focus:outline-none"
+                              className="w-full resize-y border-0 bg-transparent p-0 text-body text-ink focus:outline-none"
                             />
-                            <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
-                              <QuoteLine quote={line.quote} />
+                            <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
+                              <QuoteLine quote={todo.quote} />
                               <button
                                 type="button"
-                                onClick={() => removeSummary(index)}
+                                onClick={() => removeTodo(index)}
                                 className="min-h-tap px-2 text-small font-bold text-error underline underline-offset-4"
                               >
                                 Remove
                               </button>
                             </div>
-                          </FlaggedLine>
+                          </div>
                         </li>
                       ))}
                     </ul>
-                  )}
+                  )
+                ) : null}
 
-                  {result.flags.length > 0 ? (
-                    <div className="mt-8 rounded-card bg-tint-sky p-6">
-                      <h3 className="text-subhead font-bold">Needs checking</h3>
-                      <ul className="mt-3 space-y-2">
-                        {result.flags.map((flag) => (
-                          <li key={flag.line} className="text-body">
-                            <strong>{flag.line}:</strong> {flag.reason}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ) : null}
-                </>
-              ) : null}
-
-              {tab === 'todos' ? (
-                result.todos.length === 0 ? (
-                  <p className="text-body text-muted">No to-dos.</p>
-                ) : (
-                  <ul className="grid gap-4">
-                    {result.todos.map((todo, index) => (
-                      <li
-                        key={index}
-                        className="flex gap-4 rounded-card border border-line bg-surface p-5"
-                      >
-                        <input
-                          type="checkbox"
-                          checked={Boolean(todo.done)}
-                          onChange={(event) => updateTodo(index, { done: event.target.checked })}
-                          id={`todo-done-${index}`}
-                          className="mt-2 h-6 w-6 shrink-0 accent-primary"
+                {tab === 'meds' ? (
+                  result.meds.length === 0 ? (
+                    <p className="text-body text-muted">No medicines were mentioned.</p>
+                  ) : (
+                    <ul className="space-y-4">
+                      {result.meds.map((med, index) => (
+                        <MedRow
+                          key={`${med.name}-${index}`}
+                          med={med}
+                          onChange={(patch) => updateMed(index, patch)}
                         />
-                        <div className="min-w-0 flex-1">
-                          <label htmlFor={`todo-text-${index}`} className="sr-only">
-                            To-do {index + 1}
-                          </label>
-                          <textarea
-                            id={`todo-text-${index}`}
-                            value={todo.text}
-                            rows={2}
-                            onChange={(event) => updateTodo(index, { text: event.target.value })}
-                            className="w-full resize-y border-0 bg-transparent p-0 text-body text-ink focus:outline-none"
-                          />
-                          <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
-                            <QuoteLine quote={todo.quote} />
-                            <button
-                              type="button"
-                              onClick={() => removeTodo(index)}
-                              className="min-h-tap px-2 text-small font-bold text-error underline underline-offset-4"
-                            >
-                              Remove
-                            </button>
-                          </div>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                )
-              ) : null}
-
-              {tab === 'meds' ? (
-                result.meds.length === 0 ? (
-                  <p className="text-body text-muted">No medicines were mentioned.</p>
-                ) : (
-                  <ul className="space-y-4">
-                    {result.meds.map((med, index) => (
-                      <MedRow
-                        key={`${med.name}-${index}`}
-                        med={med}
-                        onChange={(patch) => updateMed(index, patch)}
-                      />
-                    ))}
-                  </ul>
-                )
-              ) : null}
-            </div>
-
-            <div className="mt-10 rounded-xl bg-navy p-6 text-paper md:p-8">
-              <p className="text-small font-bold uppercase tracking-[0.14em] text-accent-bright">
-                Final step
-              </p>
-              <h3 className="mt-2 font-display text-heading font-semibold">
-                Happy with it? Save it to this visit.
-              </h3>
-              <div className="mt-5">
-                <Button onClick={handleApprove} disabled={saving} variant="onDark" magnetic>
-                  {saving ? 'Saving…' : 'Approve and save'}
-                </Button>
+                      ))}
+                    </ul>
+                  )
+                ) : null}
               </div>
 
-              <div className="mt-5 flex flex-wrap gap-4">
-                <button
-                  type="button"
-                  onClick={handleUndo}
-                  disabled={!canUndo}
-                  className="min-h-tap text-small font-bold text-paper-muted underline underline-offset-4 disabled:opacity-50"
-                >
-                  Undo
-                </button>
-                <button
-                  type="button"
-                  onClick={run}
-                  className="min-h-tap text-small font-bold text-paper-muted underline underline-offset-4"
-                >
-                  Regenerate
-                </button>
-                <button
-                  type="button"
-                  onClick={reset}
-                  className="min-h-tap text-small font-bold text-paper-muted underline underline-offset-4"
-                >
-                  Reject this result
-                </button>
+              <div className="mt-10 rounded-xl bg-navy p-6 text-paper md:p-8">
+                <p className="text-small font-bold uppercase tracking-[0.14em] text-accent-bright">
+                  Final step
+                </p>
+                <h3 className="mt-2 font-display text-heading font-semibold">
+                  Happy with it? Save it to this visit.
+                </h3>
+                <div className="mt-5">
+                  <Button onClick={handleApprove} disabled={saving} variant="onDark" magnetic>
+                    {saving ? 'Saving…' : 'Approve and save'}
+                  </Button>
+                </div>
+
+                <div className="mt-5 flex flex-wrap gap-4">
+                  <button
+                    type="button"
+                    onClick={handleUndo}
+                    disabled={!canUndo}
+                    className="min-h-tap text-small font-bold text-paper-muted underline underline-offset-4 disabled:opacity-50"
+                  >
+                    Undo
+                  </button>
+                  <button
+                    type="button"
+                    onClick={run}
+                    className="min-h-tap text-small font-bold text-paper-muted underline underline-offset-4"
+                  >
+                    Regenerate
+                  </button>
+                  <button
+                    type="button"
+                    onClick={reset}
+                    className="min-h-tap text-small font-bold text-paper-muted underline underline-offset-4"
+                  >
+                    Reject this result
+                  </button>
+                </div>
               </div>
             </div>
           </AIShell>

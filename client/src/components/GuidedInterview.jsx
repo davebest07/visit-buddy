@@ -22,6 +22,7 @@ export default function GuidedInterview({
   startAt = 0,
   onComplete,
   onExit,
+  onFlagContinue,
   scrollToId,
 }) {
   const [index, setIndex] = useState(() => Math.min(startAt, steps.length - 1))
@@ -83,6 +84,7 @@ export default function GuidedInterview({
   // "No, continue": remember the answer for this phrase and move on.
   function handleFlagContinue(dismissed) {
     dismissRedFlag(dismissed)
+    onFlagContinue?.(dismissed)
     setFlag(null)
     const found = findRedFlag(draft)
     if (found) {

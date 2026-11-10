@@ -169,8 +169,30 @@ loadDismissed()
 
 const keyOf = (flag) => `${flag.id}:${flag.words}`
 
+// After "I'm safe right now, continue", a small 988 line stays on the page for
+// the rest of the browser session (components/CrisisLineBanner.jsx).
+const CRISIS_LINE_KEY = 'visit-buddy:crisis-line'
+let crisisLine = false
+try {
+  crisisLine = window.sessionStorage.getItem(CRISIS_LINE_KEY) === '1'
+} catch {
+  // No storage: remembered in memory only.
+}
+
+export function crisisLineWanted() {
+  return crisisLine
+}
+
 export function dismissRedFlag(flag) {
   if (!flag) return
+  if (flag.id === 'self-harm') {
+    crisisLine = true
+    try {
+      window.sessionStorage.setItem(CRISIS_LINE_KEY, '1')
+    } catch {
+      // Memory only.
+    }
+  }
   dismissed.add(keyOf(flag))
   try {
     window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify([...dismissed]))
