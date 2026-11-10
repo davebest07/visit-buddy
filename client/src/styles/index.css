@@ -8,6 +8,9 @@
   html {
     font-size: 125%;
     scroll-behavior: smooth;
+    /* Keep anything scrolled to or focused clear of the sticky top bar.
+       In rem, so it grows with the text size setting. */
+    scroll-padding-top: 5.5rem;
   }
 
   html[data-text-scale='large'] {

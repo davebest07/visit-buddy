@@ -15,8 +15,9 @@ changes a medicine or a dose, and it never says something is safe.
 
 - **Landing** — what the app does, how it works, and the promise it makes.
 - **Home** — start a visit before or after, and see the last visit you saved.
-- **Before a visit** — speak or type your worries (spoken words appear live), then edit,
-  print or copy the questions.
+- **Before a visit** — speak or type your worries (spoken words appear live), answer 3–5
+  short follow-up questions, then edit, save, print or copy your questions and a "What to
+  tell your doctor" list.
 - **After a visit** — record or type what the doctor said (spoken words appear live), then
   check the summary, to-dos and medicines before approving.
 - **Visit detail** — the saved visit, with checkable to-dos, a medicine schedule, the
@@ -109,16 +110,83 @@ parameter to the URL or use the testing panel.
 
 The `?ai=` value wins over the saved setting.
 
+## Before a visit: the guided interview
+
+Three steps, shown at the top of the page: **Describe → A few questions → Your questions**.
+
+1. **Describe.** Type or say what is worrying you, then tap **Continue**.
+2. **Red-flag check.** Before anything is searched, the words are checked for signs that
+   need help now: chest pain, trouble breathing, signs of a stroke, fainting, severe
+   bleeding, or thoughts of self-harm. The check (`client/src/services/redFlags.js`, not AI)
+   looks for word pairs close together in the same part of a sentence, not exact phrases:
+   a chest word plus a pain word ("my chest is aching me"), "can't/hard to/trouble" plus a
+   breathing word, and so on. It errs on the side of asking.
+   - A match stops the flow with a card in the Help page's style: "Are you having chest pain,
+     pressure or tightness right now?", with the 911 advice. **Yes, get help** shows the full
+     "Get help now — call 911 or your doctor" card. **No, continue** carries on with their
+     words kept, and that phrase is not asked about again in this browser session.
+   - Thoughts of self-harm always show 988 (call or text, the US Suicide & Crisis Lifeline)
+     and 911 first, with a smaller **I'm safe right now, continue**. The Help page lists 988
+     too.
+   - Tests: `npm run test:redflags` (42 phrases that should match, 20 that should not).
+3. **A few questions.** The worries are searched in the knowledge base (three searches at
+   once: interview prompts, ask-the-doctor questions, and the general set, see
+   `findQuestionChunks` in `api.js`). `interviewQuestions` picks 3–5 of them in the order a
+   doctor usually asks: when it started → what it feels like → what makes it better or
+   worse → how it affects your day → medicines → what you want from the visit. Anything
+   their words already cover ("for two weeks") is skipped. When no topic fits, the general
+   history questions are made specific with their own words ("my ear feels funny" → "When
+   did the funny feeling in your ear first start?"), with at most one "preparing for any
+   visit" question at the end. One question shows at a time,
+   with quick-reply buttons, a text box, the microphone, **Skip**, **Back** and "Question 2
+   of 4". Every answer is checked for red flags too.
+4. **Your questions.** `buildQuestions` returns 4–6 questions to ask, in this order:
+   - **About their worry first:** one from each worry's topic, then questions to ask the
+     doctor in their own words ("What could be causing the funny feeling in my elbow?",
+     "Do I need any tests for my elbow?", "Is there anything I should avoid doing with my
+     elbow until it's better?", "What signs with my elbow mean I should come back
+     sooner?"). These are questions the person asks; the app never suggests a cause.
+   - **From their interview answers:** one follow-up, plus one from what they want from
+     the visit. Answers like "Nothing" or "Not much" don't produce a follow-up.
+   - **At most two general questions at the end**, such as "When should I come back…?".
+   - The same idea is never asked twice (for example two questions about tests), and the
+     general "What do you think is going on…" is left out when a "What could be causing…"
+     question is already there.
+   - Only "ask-doctor" entries can appear in this list; interview prompts never do. The
+     general ask-the-doctor entries carry a `template` with `{problem}`, `{part}` and
+     `{feels}` so they read naturally with "my elbow", "the chest ache" or "my headaches".
+     `npm run test:knowledge` checks that no ask-doctor entry is worded as a question to
+     the person, that every entry is a question, and that ids are unique.
+   - **Why this question** is honest: "You said “my elbow feels funny”." for questions
+     built from their words, "You said it started in the last few days." for ones from an
+     answer, and "A good question for any visit." for general ones, each with its source.
+   Then comes
+   **What to tell your doctor**: their own words and answers, in order. Every line has
+   a **Quote** button (their exact words) and a **Why this question** line with the
+   knowledge-base source. Edit, Undo, Regenerate, Save, Print and Copy all work. Saving
+   stores the questions, and "What to tell your doctor" in the visit's `summary`.
+
+The questions only gather information. Nothing hints at a cause, a diagnosis or a
+treatment. If the search server is down, the page skips the interview and builds questions
+from their sentences.
+
 ## How it works
 
 Everything AI lives in one file: `client/src/services/aiService.js`. Components never
-contain sample AI data. The file exports `buildQuestions`, `transcribe`, `summarizeVisit`,
-`flagUncertain` and `askAboutVisit`, all of which accept an `AbortSignal`, so Cancel really
+contain sample AI data. The file exports `interviewQuestions`, `buildQuestions`,
+`transcribe`, `summarizeVisit`, `flagUncertain` and `askAboutVisit`, all of which accept an
+`AbortSignal`, so Cancel really
 stops the request. Speech-to-text on the pages now comes from the browser (see Live
 transcription), so the `?ai=` modes apply to the AI steps, not to the microphone.
 `transcribe` stays as the shape a server-side speech model would use later.
 
-To connect a real model later, replace the inside of those five functions with calls to
+`interviewQuestions(concerns, retrievedChunks, answersSoFar, { signal })` and
+`buildQuestions(text, { chunks, answers, signal })` are grounded in the retrieved
+knowledge-base entries. A comment in `aiService.js` explains how a real model will receive
+those entries as numbered grounding passages and must return the id of the entry each
+question came from.
+
+To connect a real model later, replace the inside of those functions with calls to
 `server/routes/ai.js` and keep the shapes the same. That route is the only place a key
 would be read, from `.env`. There are no keys in this repository.
 
@@ -130,8 +198,9 @@ retrieval (the "R" in RAG).
 
 **What is in it.** `server/knowledge/` holds one JSON file per topic: dizziness, joint pain,
 back pain, headache, stomach pain, cough, skin and rash, tiredness, sleep, mood and stress,
-medication review, plus two fallback sets, general symptom history and preparing for any
-visit. That is 193 short questions. Each one looks like this:
+medication review, chest discomfort, plus two fallback sets, general symptom history and
+preparing for any visit. That is 220 short questions. Chest discomfort is only reached
+after the red-flag card's "No, continue". Each one looks like this:
 
 ```json
 {
@@ -199,7 +268,7 @@ visit-buddy/
       App.jsx           routes
       pages/            one file per screen
       components/       Button, Card, AIShell, EditableList, MedRow, navigation, ...
-      services/         aiService.js (AI) and api.js (server calls)
+      services/         aiService.js (AI), api.js (server calls), redFlags.js (safety check)
       context/          SettingsContext (text size, contrast, AI mode)
       hooks/            useUndo, useLiveTranscript
       styles/           tokens.css (all colours, type, spacing) + base styles

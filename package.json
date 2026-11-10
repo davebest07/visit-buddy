@@ -13,7 +13,9 @@
     "dev:client:https": "npm --prefix client run dev:https",
     "build": "npm --prefix client run build",
     "preview": "npm --prefix client run preview",
-    "start": "node --env-file-if-exists=.env server/index.js"
+    "start": "node --env-file-if-exists=.env server/index.js",
+    "test:redflags": "node client/src/services/redFlags.test.mjs",
+    "test:knowledge": "node server/rag/check-knowledge.mjs"
   },
   "dependencies": {
     "cors": "^2.8.5",

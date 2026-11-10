@@ -468,6 +468,324 @@
         "Know what to do next",
         "Feel better day to day"
       ]
+    },
+    {
+      "id": "general-symptom-15",
+      "topic": "general symptom history",
+      "category": "onset",
+      "use": "ask-doctor",
+      "question": "How long might this take to get better, and when should I check back with you?",
+      "keywords": [
+        "symptom",
+        "symptoms",
+        "pain",
+        "hurt",
+        "hurts",
+        "hurting",
+        "sore",
+        "ache",
+        "feel",
+        "feeling",
+        "unwell",
+        "problem",
+        "issue",
+        "worse",
+        "better"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      },
+      "template": "How long might it take for {problem} to get better, and when should I check back with you?"
+    },
+    {
+      "id": "general-symptom-16",
+      "topic": "general symptom history",
+      "category": "character",
+      "use": "ask-doctor",
+      "question": "Would it help if I kept notes about this, and what should I write down?",
+      "keywords": [
+        "symptom",
+        "symptoms",
+        "pain",
+        "hurt",
+        "hurts",
+        "hurting",
+        "sore",
+        "ache",
+        "feel",
+        "feeling",
+        "unwell",
+        "problem",
+        "issue",
+        "worse",
+        "better"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      },
+      "template": "Would it help if I kept notes about {problem}, and what should I write down?"
+    },
+    {
+      "id": "general-symptom-17",
+      "topic": "general symptom history",
+      "category": "triggers/relief",
+      "use": "ask-doctor",
+      "question": "What should I do if things get worse?",
+      "keywords": [
+        "symptom",
+        "symptoms",
+        "pain",
+        "hurt",
+        "hurts",
+        "hurting",
+        "sore",
+        "ache",
+        "feel",
+        "feeling",
+        "unwell",
+        "problem",
+        "issue",
+        "worse",
+        "better"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      },
+      "template": "What should I do if things get worse with {problem}?"
+    },
+    {
+      "id": "general-symptom-18",
+      "topic": "general symptom history",
+      "category": "impact on daily life",
+      "use": "ask-doctor",
+      "question": "What could help with the everyday things that are harder because of this?",
+      "keywords": [
+        "symptom",
+        "symptoms",
+        "pain",
+        "hurt",
+        "hurts",
+        "hurting",
+        "sore",
+        "ache",
+        "feel",
+        "feeling",
+        "unwell",
+        "problem",
+        "issue",
+        "worse",
+        "better"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      },
+      "template": "What could help with the everyday things that are harder because of {problem}?"
+    },
+    {
+      "id": "general-symptom-19",
+      "topic": "general symptom history",
+      "category": "medicines",
+      "use": "ask-doctor",
+      "question": "Can we go over what I have tried so far?",
+      "keywords": [
+        "symptom",
+        "symptoms",
+        "pain",
+        "hurt",
+        "hurts",
+        "hurting",
+        "sore",
+        "ache",
+        "feel",
+        "feeling",
+        "unwell",
+        "problem",
+        "issue",
+        "worse",
+        "better"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      },
+      "template": "Can we go over what I have tried for {problem} so far?"
+    },
+    {
+      "id": "general-symptom-20",
+      "topic": "general symptom history",
+      "category": "history",
+      "use": "ask-doctor",
+      "question": "Does it matter that this has happened to me before?",
+      "keywords": [
+        "symptom",
+        "symptoms",
+        "pain",
+        "hurt",
+        "hurts",
+        "hurting",
+        "sore",
+        "ache",
+        "feel",
+        "feeling",
+        "unwell",
+        "problem",
+        "issue",
+        "worse",
+        "better"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "general-symptom-21",
+      "topic": "general symptom history",
+      "category": "related symptoms",
+      "use": "ask-doctor",
+      "question": "Could the other things I have noticed be connected to this?",
+      "keywords": [
+        "symptom",
+        "symptoms",
+        "pain",
+        "hurt",
+        "hurts",
+        "hurting",
+        "sore",
+        "ache",
+        "feel",
+        "feeling",
+        "unwell",
+        "problem",
+        "issue",
+        "worse",
+        "better"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      },
+      "template": "Could the other things I have noticed be connected to {problem}?"
+    },
+    {
+      "id": "general-symptom-22",
+      "topic": "general symptom history",
+      "category": "about my worry",
+      "use": "ask-doctor",
+      "question": "What could be causing this?",
+      "keywords": [
+        "symptom",
+        "symptoms",
+        "pain",
+        "hurt",
+        "hurts",
+        "hurting",
+        "sore",
+        "ache",
+        "feel",
+        "feeling",
+        "unwell",
+        "problem",
+        "issue",
+        "worse",
+        "better"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      },
+      "template": "What could be causing {problem}?"
+    },
+    {
+      "id": "general-symptom-23",
+      "topic": "general symptom history",
+      "category": "about my worry",
+      "use": "ask-doctor",
+      "question": "Do I need any tests for this?",
+      "keywords": [
+        "symptom",
+        "symptoms",
+        "pain",
+        "hurt",
+        "hurts",
+        "hurting",
+        "sore",
+        "ache",
+        "feel",
+        "feeling",
+        "unwell",
+        "problem",
+        "issue",
+        "worse",
+        "better"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      },
+      "template": "Do I need any tests for {part}?"
+    },
+    {
+      "id": "general-symptom-24",
+      "topic": "general symptom history",
+      "category": "about my worry",
+      "use": "ask-doctor",
+      "question": "Is there anything I should avoid doing until this gets better?",
+      "keywords": [
+        "symptom",
+        "symptoms",
+        "pain",
+        "hurt",
+        "hurts",
+        "hurting",
+        "sore",
+        "ache",
+        "feel",
+        "feeling",
+        "unwell",
+        "problem",
+        "issue",
+        "worse",
+        "better"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      },
+      "template": "Is there anything I should avoid doing until {part} {feels} better?"
+    },
+    {
+      "id": "general-symptom-25",
+      "topic": "general symptom history",
+      "category": "about my worry",
+      "use": "ask-doctor",
+      "question": "What changes should make me come back sooner?",
+      "keywords": [
+        "symptom",
+        "symptoms",
+        "pain",
+        "hurt",
+        "hurts",
+        "hurting",
+        "sore",
+        "ache",
+        "feel",
+        "feeling",
+        "unwell",
+        "problem",
+        "issue",
+        "worse",
+        "better"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      },
+      "template": "What changes in {part} should make me come back sooner?"
     }
   ]
 }

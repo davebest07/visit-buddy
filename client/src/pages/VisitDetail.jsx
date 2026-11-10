@@ -28,7 +28,7 @@ function visitAsText(visit) {
     lines.push('')
   }
   if (visit.summary?.length) {
-    lines.push('Summary')
+    lines.push(visit.type === 'before' ? 'What to tell your doctor' : 'Summary')
     visit.summary.forEach((line) => lines.push(`- ${line.text}`))
     lines.push('')
   }
@@ -209,7 +209,7 @@ export default function VisitDetail() {
       ) : null}
 
       {visit.summary?.length ? (
-        <Section label="Summary">
+        <Section label={visit.type === 'before' ? 'What to tell your doctor' : 'Summary'}>
           <ul className="grid gap-4">
             {visit.summary.map((line, index) => (
               <li key={index} className="rounded-card border border-line bg-surface p-5">

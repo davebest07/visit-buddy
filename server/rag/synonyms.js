@@ -15,6 +15,14 @@ export const SYNONYMS = {
   giddy: 'dizziness',
   wobbly: 'dizziness unsteady',
 
+  // chest discomfort (only reached after the red-flag check says "not right now")
+  'chest ache': 'chest discomfort',
+  'chest pain': 'chest discomfort',
+  'tight chest': 'chest discomfort tightness',
+  'chest tightness': 'chest discomfort tightness',
+  'chest pressure': 'chest discomfort pressure',
+  'heart pain': 'chest discomfort',
+
   // joint pain
   knee: 'joint knee',
   knees: 'joint knee',

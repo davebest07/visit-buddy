@@ -81,6 +81,12 @@ export default function Help() {
               faint. Do not wait for an app.
             </p>
 
+            <p className="mt-4 max-w-measure text-body text-paper">
+              If you are thinking about hurting yourself, call or text{' '}
+              <strong>988</strong> (Suicide &amp; Crisis Lifeline, in the US), any time, day or
+              night.
+            </p>
+
             <p className="mt-4 max-w-measure text-body text-paper-muted">
               For anything else that is getting worse, call your doctor's office. If you are
               not sure, call your doctor or your pharmacist and ask. That list is not complete
