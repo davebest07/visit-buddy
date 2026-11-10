@@ -41,7 +41,8 @@ export default function GuidedInterview({
   // question without a second jump.
   useEffect(() => {
     if (flag) return
-    document.getElementById(scrollToId)?.scrollIntoView({ block: 'start' })
+    // Instant: the page's smooth scrolling would animate this on every question.
+    document.getElementById(scrollToId)?.scrollIntoView({ block: 'start', behavior: 'instant' })
     headingRef.current?.focus({ preventScroll: Boolean(scrollToId) })
   }, [index, flag, scrollToId])
 

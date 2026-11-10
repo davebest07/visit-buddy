@@ -129,7 +129,7 @@ export default function Before() {
   // Move focus to the list when it is ready.
   useEffect(() => {
     if (building.status === 'success' || building.status === 'uncertain') {
-      document.getElementById('before-steps')?.scrollIntoView({ block: 'start' })
+      document.getElementById('before-steps')?.scrollIntoView({ block: 'start', behavior: 'instant' })
       resultHeadingRef.current?.focus({ preventScroll: true })
     }
   }, [building.status])

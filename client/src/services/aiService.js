@@ -22,8 +22,12 @@ const DELAYS = {
   error: 600,
   transcribe: 1800,
   ask: 1800,
-  // The interview questions come back faster than a full list.
-  interview: 1200,
+  // Before a visit. These were 1200 and 2500 ms, and they were most of why the
+  // page felt slow: the work itself takes a few milliseconds. A small, fast
+  // model answers these in about this time. ?ai=slow and ?ai=timeout still use
+  // the long waits above.
+  interview: 600,
+  build: 1400,
   readDocument: 2200,
 }
 
@@ -540,7 +544,7 @@ function tellDoctorFrom(concerns, answers) {
  */
 export async function buildQuestions(text, { signal, chunks = [], answers = [] } = {}) {
   const mode = currentMode()
-  await wait(DELAYS[mode] ?? DELAYS.success, signal)
+  await wait(mode === 'success' || mode === 'uncertain' || mode === 'empty' ? DELAYS.build : DELAYS[mode], signal)
   failIfBroken(mode)
 
   if (mode === 'empty') return { status: 'empty', questions: [], tellDoctor: [] }

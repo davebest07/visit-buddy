@@ -89,7 +89,7 @@ Use Chrome or Edge on a computer (localhost counts as secure).
 - [ ] Tap **Stop**. Everything you said is in the text box, the box has focus, and a toast
       says to fix anything that is wrong. Edit a word by hand.
 - [ ] Record again. The new words are added after the existing text, not replacing it.
-- [ ] While listening, **Get my questions** is disabled.
+- [ ] While listening, **Continue** is disabled.
 - [ ] Block the microphone in the browser's site settings and try again. A message explains
       how to allow it.
 - [ ] Open the app in Firefox. There is no mic button, only "Live typing isn't available in
@@ -105,7 +105,7 @@ Use Chrome or Edge on a computer (localhost counts as secure).
 
 ## Question search (knowledge base)
 
-There is no screen for this yet (Phase 3 adds one). Test it from the browser:
+Before a visit uses this search behind the scenes. To test it directly, use the browser:
 
 - [ ] Open `https://localhost:5173/api/rag/topics` (or `http://` with `npm run dev`). It
       lists 14 topics and 220 chunks.
@@ -171,6 +171,20 @@ There is no screen for this yet (Phase 3 adds one). Test it from the browser:
       after 10 seconds, pages kept.
 - [ ] Record or type instead: the label goes back to "What the doctor said" once the box
       is cleared, and the saved visit has `"source": "recording"` or `"typed"`.
+
+## Speed
+
+- [ ] `npm run build` finishes with no "larger than 500 kB" warning.
+- [ ] Before a visit: Continue → the first question appears in under a second. Each
+      **Next question** shows the next one at once, with no scrolling animation, and the
+      step pills stay in view.
+- [ ] Last answer → your list in about 1.5 seconds. The loader's steps tick through
+      instead of sitting on step 1.
+- [ ] `?ai=slow`: the steps reach the last one, which stays "in progress"; **Cancel**
+      appears after 10 seconds and keeps your words. `?ai=timeout`: "This is taking too
+      long" after 10 seconds.
+- [ ] Switching pages fades in quickly. With reduced motion on, there is no fade.
+- [ ] Secondary buttons (Print, Copy) look the same as before in light and dark mode.
 
 ## Failure states
 

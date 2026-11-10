@@ -99,7 +99,7 @@ parameter to the URL or use the testing panel.
 
 | Parameter | Result |
 |---|---|
-| `?ai=success` | Normal answer after about 2.5 seconds |
+| `?ai=success` | Normal answer: Before a visit about 0.6 s (interview) and 1.4 s (list); After a visit about 2.5 s |
 | `?ai=slow` | Answer after about 14 seconds, so Cancel appears |
 | `?ai=uncertain` | Lines that were hard to hear (or hard to read on a scan) are highlighted |
 | `?ai=empty` | Nothing usable comes back |
@@ -221,6 +221,43 @@ question came from.
 To connect a real model later, replace the inside of those functions with calls to
 `server/routes/ai.js` and keep the shapes the same. That route is the only place a key
 would be read, from `.env`. There are no keys in this repository.
+
+## Speed
+
+Before a visit felt slow. Measured with Chrome slowed 4× (roughly a mid-range phone),
+production build:
+
+| | Before | After |
+|---|---|---|
+| Opening Before a visit | 268 ms | 233 ms |
+| Continue → first question | 1.5 s | 0.8 s |
+| Each next question (incl. scroll) | ~0.7 s smooth scroll | instant |
+| Last answer → your list | 2.6 s | 1.5 s |
+| Largest built file | 575 kB (warning) | 258 kB, no warning |
+
+What it was, and what changed:
+
+- **The mock's pretend waits** were most of it (1.2 s and 2.5 s). The real work
+  (search plus choosing questions) takes about 25 ms. Before a visit now waits 0.6 s and
+  1.4 s (`DELAYS.interview` and `DELAYS.build` in `aiService.js`). `?ai=slow` (14 s, with
+  Cancel) and `?ai=timeout` (10 s) are unchanged.
+- **Smooth scrolling.** `html { scroll-behavior: smooth }` animated the jump to the step
+  header on every interview question (~0.7 s). Those jumps are now instant; links still
+  scroll smoothly.
+- **The step loader** moved once a second at 1.9 s per step, so a quick answer looked
+  stuck on step 1. It now moves every 0.8 s on its own clock and keeps the last step "in
+  progress" until the answer arrives.
+- **Page fade** on every route went from 0.4 s to 0.18 s (still off with reduced motion).
+- **Backdrop blur** removed from secondary buttons: they sit on solid cards, so the blur
+  showed nothing (a pixel comparison found at most a 3% change in dark mode) but still
+  cost GPU time on scroll. The sticky top bar keeps its blur.
+- **The drift animation** was not running at all (its keyframes were never in the built
+  CSS) and only sits on the landing page. The dead lines were removed.
+- **Re-renders were not the problem**: typing costs under 1 ms of script per key in the
+  production build.
+- **Build size warning.** React and motion are now separate files
+  (`client/vite.config.js`), loaded in parallel with the app code. Splitting by page was
+  tried first and made opening a page ~200 ms slower, so it was not kept.
 
 ## Question knowledge base (RAG)
 
