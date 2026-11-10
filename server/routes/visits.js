@@ -48,6 +48,8 @@ async function writeVisits(visits) {
 }
 
 const TYPES = ['before', 'after']
+// How the words were added. A scan saves only the text, never the image.
+const SOURCES = ['recording', 'typed', 'scan']
 const LISTS = ['questions', 'summary', 'todos', 'meds', 'flags']
 
 function blankVisit() {
@@ -65,7 +67,7 @@ function blankVisit() {
 
 // Only these fields can come from the client. id and createdAt are always set
 // by the server, and anything else is dropped.
-const EDITABLE = ['type', 'concerns', 'transcript', 'approved', ...LISTS]
+const EDITABLE = ['type', 'source', 'concerns', 'transcript', 'approved', ...LISTS]
 
 function pickEditable(body) {
   const picked = {}
@@ -88,6 +90,9 @@ function validateVisit(body) {
   }
   if (!TYPES.includes(body.type)) {
     return 'type must be "before" or "after".'
+  }
+  if (body.source !== undefined && !SOURCES.includes(body.source)) {
+    return 'source must be "recording", "typed" or "scan".'
   }
   if (body.concerns !== undefined && typeof body.concerns !== 'string') {
     return 'concerns must be text.'

@@ -101,7 +101,7 @@ parameter to the URL or use the testing panel.
 |---|---|
 | `?ai=success` | Normal answer after about 2.5 seconds |
 | `?ai=slow` | Answer after about 14 seconds, so Cancel appears |
-| `?ai=uncertain` | Lines that were hard to hear are highlighted |
+| `?ai=uncertain` | Lines that were hard to hear (or hard to read on a scan) are highlighted |
 | `?ai=empty` | Nothing usable comes back |
 | `?ai=error` | "Visit Buddy is paused right now" |
 | `?ai=timeout` | Gives up after 10 seconds |
@@ -174,11 +174,39 @@ The questions only gather information. Nothing hints at a cause, a diagnosis or 
 treatment. If the search server is down, the page skips the interview and builds questions
 from their sentences.
 
+## After a visit: scan a paper
+
+Besides recording and typing, **After a visit** can read the paper you were given.
+
+1. **Scan a paper** opens the camera on a phone (`capture="environment"`); **Choose a photo
+   or PDF** opens the file picker. Add up to 10 pages. Each page shows a thumbnail (a
+   document icon for a PDF) with **Retake** and **Remove**. Other file types and files
+   over 25 MB are refused with a message.
+2. **Read my paper** (or **Read 2 pages**) calls `readDocument(files, { signal })` in
+   `aiService.js`. It returns plain text, the same shape as `transcribe`. It is a mock: it
+   "reads" a made-up two-page after-visit summary, one page per photo. All `?ai=` modes
+   work; with `?ai=uncertain`, words it could not make out come back as
+   `[unclear: 10 mg?]`.
+3. The text goes in the box, now labelled **From your photo**. Lines with an
+   `[unclear: …]` mark are listed in a yellow box so you can check them against the paper
+   and fix them.
+4. **Check what the doctor said** runs `summarizeVisit` on your checked text. Every line's
+   quote is a line from that text, and its **Quote** says "From your photo". A dose is
+   copied from the paper, never filled in; if it was hard to read, the dose stays blank
+   and the line goes under **Needs checking**.
+5. Saving stores the text and `source: "scan"`. Visits now record `source` as
+   `"recording"`, `"typed"` or `"scan"` (checked by `server/routes/visits.js`).
+
+**The image is never stored or uploaded.** Pages are kept only in the page's memory with
+a local preview, and dropped when you leave. `server/routes/ai.js` has a TODO describing a
+future `POST /api/ai/read-document` (a vision model that returns only text and keeps
+nothing); it is not built.
+
 ## How it works
 
 Everything AI lives in one file: `client/src/services/aiService.js`. Components never
 contain sample AI data. The file exports `interviewQuestions`, `buildQuestions`,
-`transcribe`, `summarizeVisit`, `flagUncertain` and `askAboutVisit`, all of which accept an
+`transcribe`, `readDocument`, `summarizeVisit`, `flagUncertain` and `askAboutVisit`, all of which accept an
 `AbortSignal`, so Cancel really
 stops the request. Speech-to-text on the pages now comes from the browser (see Live
 transcription), so the `?ai=` modes apply to the AI steps, not to the microphone.
@@ -271,7 +299,7 @@ visit-buddy/
     src/
       App.jsx           routes
       pages/            one file per screen
-      components/       Button, Card, AIShell, EditableList, MedRow, navigation, ...
+      components/       Button, Card, AIShell, EditableList, MedRow, ScanPaper, navigation, ...
       services/         aiService.js (AI), api.js (server calls), redFlags.js (safety check)
       context/          SettingsContext (text size, contrast, AI mode)
       hooks/            useUndo, useLiveTranscript
@@ -287,7 +315,8 @@ visit-buddy/
 ## Data
 
 Visits are saved as JSON on the computer running the app. Only text is stored. Visit
-Buddy never records, uploads or saves audio.
+Buddy never records, uploads or saves audio, and never uploads or saves photos of papers:
+only the text you checked is saved.
 
 Live transcription is done by the browser, not by Visit Buddy. In some browsers (Chrome,
 for example) that means the browser sends your speech to an online service (Google's) to

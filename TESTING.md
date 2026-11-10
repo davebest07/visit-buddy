@@ -143,6 +143,35 @@ There is no screen for this yet (Phase 3 adds one). Test it from the browser:
 - [ ] Under **Record the visit** you see "Ask your doctor before recording." Record, tap
       **Stop**, and the words land in the "What the doctor said" box for editing.
 
+## Scan a paper
+
+- [ ] On **After a visit**, tap **Scan a paper**. On a phone the camera opens; on a
+      computer a file picker opens. Add a photo. A thumbnail labelled "Page 1" appears with
+      **Retake** and **Remove**. The button now says **Add a page**.
+- [ ] Under the buttons: "If the camera shows a black screen, allow camera access for this
+      browser in your phone's settings, or use Choose a photo or PDF instead."
+- [ ] Use **Choose a photo or PDF** to add a second photo and a PDF. The PDF shows a
+      document icon and "PDF: …". Try a .txt file: "… is not a photo or a PDF."
+- [ ] **Retake** page 1 with a different photo: the thumbnail changes. **Remove** page 3:
+      "Your pages (2)", and keyboard focus goes back to **Add a page**.
+- [ ] Tap **Read 2 pages**. "Reading your paper" shows, then the text lands in the box,
+      which is now labelled **From your photo** and has focus.
+- [ ] Change "10 mg" to "20 mg" in the box, then **Check what the doctor said**. Every
+      **Quote** says "From your photo" and shows a line from your text. Medicines shows
+      Bellaprin 20 mg.
+- [ ] **Approve and save**. The visit page shows the text under "From your photo". The
+      saved visit has `"source": "scan"` and no image (check `server/data/visits.json`).
+- [ ] In DevTools → Network, the only request in this flow is the final
+      `POST /api/visits`. No image is sent.
+- [ ] `?ai=uncertain`: after reading, a yellow box lists 2 hard-to-read lines with
+      `[unclear: …]`. Checking without fixing them puts "Bellaprin dose" and the next-visit
+      line under **Needs checking**, and the Bellaprin dose stays blank.
+- [ ] `?ai=empty` → "I could not find any words on your pages." with Retry and Type it
+      instead. `?ai=error` / `?ai=ratelimit` → the usual messages. `?ai=slow` → **Cancel**
+      after 10 seconds, pages kept.
+- [ ] Record or type instead: the label goes back to "What the doctor said" once the box
+      is cleared, and the saved visit has `"source": "recording"` or `"typed"`.
+
 ## Failure states
 
 - [ ] `?ai=error` → "Visit Buddy is paused right now", with Retry and Type it instead.

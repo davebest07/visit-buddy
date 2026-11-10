@@ -4,7 +4,7 @@ const SLOTS = ['Morning', 'Noon', 'Evening', 'Night']
 
 // One medicine: a row for morning, noon, evening and navy. Missing details
 // stay blank, never guessed.
-export default function MedRow({ med, onChange }) {
+export default function MedRow({ med, onChange, quoteFrom = null }) {
   const isActive = (slot) => (med.time ?? '').toLowerCase().includes(slot.toLowerCase())
 
   return (
@@ -62,9 +62,13 @@ export default function MedRow({ med, onChange }) {
         })}
       </div>
 
-      {med.time ? <p className="mt-3 text-small text-muted">As you said it: {med.time}</p> : null}
+      {med.time ? (
+        <p className="mt-3 text-small text-muted">
+          {quoteFrom ? 'As written' : 'As you said it'}: {med.time}
+        </p>
+      ) : null}
 
-      <QuoteLine quote={med.quote} />
+      <QuoteLine quote={med.quote} from={quoteFrom} />
     </li>
   )
 }

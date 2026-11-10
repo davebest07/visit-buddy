@@ -24,6 +24,7 @@ const DELAYS = {
   ask: 1800,
   // The interview questions come back faster than a full list.
   interview: 1200,
+  readDocument: 2200,
 }
 
 const MODES = ['success', 'slow', 'uncertain', 'empty', 'error', 'timeout', 'ratelimit']
@@ -703,6 +704,90 @@ export async function transcribe(audioBlobOrText, { signal } = {}) {
 }
 
 // ---------------------------------------------------------------------------
+// AI-2b: photo or PDF of a paper -> text
+// ---------------------------------------------------------------------------
+//
+// readDocument(files) returns plain text, the same shape as transcribe(), so
+// the After page treats it like anything typed or recorded: the person checks
+// and fixes it, then it goes through summarizeVisit().
+//
+// Words the reader could not make out are wrapped like this:
+//   Bellaprin [unclear: 10 mg?]
+// The page lists those lines (findUnclear) and asks the person to check them
+// against their paper. A real vision model gets the same instruction: copy the
+// words exactly, never guess, and mark anything unreadable this way.
+//
+// The files never leave the browser. TODO(server): POST /api/ai/read-document
+// (see server/routes/ai.js) would send the image to a vision model and return
+// only the text. Nothing would be stored there either.
+
+export const UNCLEAR_PATTERN = /\[unclear:?\s*([^\]]*)\]/gi
+
+// Lines of the text that still have an [unclear: …] mark in them.
+export function findUnclear(text) {
+  return String(text ?? '')
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => new RegExp(UNCLEAR_PATTERN.source, 'i').test(line))
+}
+
+// A printed after-visit summary, one entry per page. The clinic is made up.
+const SAMPLE_DOCUMENT_PAGES = [
+  [
+    'Sample Family Clinic - After Visit Summary',
+    'Reason for visit: knee pain, dizzy when standing up.',
+    'What we talked about: Knee pain is likely from wear and tear.',
+    'Your instructions:',
+    '- Gentle knee stretches, twice a day.',
+    '- Blood work before your next visit.',
+    '- Call the clinic if the dizziness gets worse.',
+    'Next visit: in 6 weeks.',
+  ],
+  [
+    'Your medicines',
+    'Bellaprin 10 mg - 1 tablet every morning with food. (New)',
+    'Norvelan - keep taking at night, same as before.',
+  ],
+]
+
+// ?ai=uncertain: the same paper with a few words the reader could not make out.
+const UNCLEAR_WORDS = [
+  ['Bellaprin 10 mg', 'Bellaprin [unclear: 10 mg?]'],
+  ['Next visit: in 6 weeks.', 'Next visit: in [unclear: 6?] weeks.'],
+]
+
+const READABLE_FILE = /^(image\/|application\/pdf$)/
+
+export async function readDocument(files, { signal } = {}) {
+  const mode = currentMode()
+  const pages = Array.from(files ?? [])
+  if (pages.length === 0) return ''
+  if (pages.some((file) => !READABLE_FILE.test(file?.type ?? ''))) {
+    throw new AIError('unreadable')
+  }
+
+  await wait(mode === 'slow' || mode === 'timeout' ? DELAYS[mode] : DELAYS.readDocument, signal)
+  failIfBroken(mode)
+
+  if (mode === 'empty') return ''
+
+  // The mock "reads" the sample paper: page 1 of the photos is page 1 of the
+  // paper, and so on. Extra pages have no words on them.
+  return pages
+    .slice(0, SAMPLE_DOCUMENT_PAGES.length)
+    .map((_, index) => {
+      let text = SAMPLE_DOCUMENT_PAGES[index].join('\n')
+      if (mode === 'uncertain') {
+        UNCLEAR_WORDS.forEach(([clear, unclear]) => {
+          text = text.replace(clear, unclear)
+        })
+      }
+      return text
+    })
+    .join('\n\n')
+}
+
+// ---------------------------------------------------------------------------
 // AI-3: transcript -> summary, to-dos and medicines
 // ---------------------------------------------------------------------------
 
@@ -783,6 +868,100 @@ const SAMPLE_VISIT_VARIANT = {
   ],
 }
 
+// What the mock pulls out of a scanned paper. Each line is found by its key
+// words, and its quote is the person's own (checked) line of text, so every
+// Quote points at the words from their photo. A line that is not there is left
+// out rather than made up.
+const DOCUMENT_LINES = {
+  summary: [
+    { find: /wear and tear/i, text: 'Your knee pain is likely from wear and tear.' },
+    { find: /stretch/i, text: 'Gentle knee stretches, twice a day.' },
+    { find: /blood work/i, text: 'You need blood work before your next visit.' },
+    { find: /next visit:/i, text: (line) => `Your next visit: ${afterColon(line)}` },
+  ],
+  todos: [
+    { find: /stretch/i, text: 'Do gentle knee stretches twice a day' },
+    { find: /blood work/i, text: 'Get blood work before the next visit' },
+    { find: /call the clinic/i, text: 'Call the clinic if the dizziness gets worse' },
+  ],
+  meds: [
+    { find: /\bbellaprin\b/i, name: 'Bellaprin', time: 'every morning, with food' },
+    { find: /\bnorvelan\b/i, name: 'Norvelan', time: 'night', note: 'same as before' },
+  ],
+}
+
+const DOSE = /\b(\d+(?:\.\d+)?\s?(?:mg|mcg|g|ml|units?))\b/i
+
+function afterColon(line) {
+  return line.slice(line.indexOf(':') + 1).trim().replace(/\.$/, '') + '.'
+}
+
+function cleanLine(line) {
+  return line.replace(/^[-•*]\s*/, '').trim()
+}
+
+function looksLikeDocument(text) {
+  return /after visit summary/i.test(text) || (/\bbellaprin\b/i.test(text) && /\bmg\b|tablet/i.test(text) && !/\b(she|he) (said|started)\b/i.test(text))
+}
+
+function summarizeDocument(text) {
+  const lines = String(text).split('\n').map(cleanLine).filter(Boolean)
+  const lineFor = (pattern) => lines.find((line) => pattern.test(line))
+  const unclear = (line) => new RegExp(UNCLEAR_PATTERN.source, 'i').test(line)
+  const flags = []
+
+  const pick = (entries) =>
+    entries.flatMap((entry) => {
+      const line = lineFor(entry.find)
+      if (!line) return []
+      const text = typeof entry.text === 'function' ? entry.text(line) : entry.text
+      if (unclear(line)) {
+        flags.push({
+          line: text.replace(/\[unclear:?[^\]]*\]/gi, '…').replace(/\.$/, ''),
+          reason: 'Part of this was hard to read on your paper. Check the paper, or ask your doctor or pharmacist.',
+          quote: line,
+        })
+        return [{ text: text.replace(/\[unclear:?[^\]]*\]/gi, '…'), quote: line, flagged: true }]
+      }
+      return [{ text, quote: line }]
+    })
+
+  const summary = pick(DOCUMENT_LINES.summary)
+  const todos = pick(DOCUMENT_LINES.todos).map(({ flagged, ...todo }) => ({ ...todo, done: false }))
+
+  const meds = DOCUMENT_LINES.meds.flatMap((entry) => {
+    const line = lineFor(entry.find)
+    if (!line) return []
+    // The dose is copied from the paper, never filled in. Unreadable means blank.
+    const hard = unclear(line)
+    const dose = hard ? null : line.match(DOSE)?.[1] ?? null
+    if (hard) {
+      flags.push({
+        line: `${entry.name} dose`,
+        reason: 'The dose was hard to read on your paper. Check the paper, or ask your doctor or pharmacist.',
+        quote: line,
+      })
+    }
+    return [
+      {
+        name: entry.name,
+        dose,
+        time: entry.time,
+        ...(entry.note ? { note: entry.note } : {}),
+        quote: line,
+        needsCheck: hard,
+        ...(hard ? { flagged: true } : {}),
+      },
+    ]
+  })
+
+  // One flag per line is enough.
+  const seen = new Set()
+  const uniqueFlags = flags.filter((flag) => !seen.has(flag.quote) && seen.add(flag.quote))
+
+  return { status: 'success', summary, todos, meds, flags: uniqueFlags }
+}
+
 export async function summarizeVisit(transcript, { signal } = {}) {
   const mode = currentMode()
   await wait(DELAYS[mode] ?? DELAYS.success, signal)
@@ -791,6 +970,9 @@ export async function summarizeVisit(transcript, { signal } = {}) {
   if (mode === 'empty') {
     return { status: 'empty', summary: [], todos: [], meds: [], flags: [] }
   }
+
+  // Text from a scanned paper: pull the lines out of that text itself.
+  if (looksLikeDocument(transcript)) return summarizeDocument(transcript)
 
   const variant = nextVariant('summarize')
   const base = variant === 0 ? SAMPLE_VISIT : SAMPLE_VISIT_VARIANT
@@ -896,6 +1078,20 @@ export async function askAboutVisit(transcript, question, { signal } = {}) {
   const match = ANSWERS.find((entry) => entry.match.some((word) => asked.includes(word)))
 
   if (!match) return { ...NOT_FOUND }
+
+  // A scanned paper has its own words: answer with the line from it.
+  if (!String(transcript).includes(match.quote)) {
+    // Headings like "Your medicines" say nothing on their own.
+    const score = (text) => match.match.filter((word) => text.toLowerCase().includes(word)).length
+    const candidates = String(transcript)
+      .split('\n')
+      .map(cleanLine)
+      .filter((text) => text.split(/\s+/).length > 2 && score(text) > 0)
+    const best = Math.max(0, ...candidates.map(score))
+    const lines = candidates.filter((text) => score(text) === best).slice(0, 3)
+    if (!lines.length) return { ...NOT_FOUND }
+    return { found: true, answer: `Your paper says: ${lines.join(' ')}`, quote: lines.join(' / ') }
+  }
 
   const variant = nextVariant('ask')
   return {

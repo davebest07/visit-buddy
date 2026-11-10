@@ -44,7 +44,9 @@ function visitAsText(visit) {
     )
     lines.push('')
   }
-  if (visit.transcript) lines.push('What the doctor said', visit.transcript)
+  if (visit.transcript) {
+    lines.push(visit.source === 'scan' ? 'From your photo' : 'What the doctor said', visit.transcript)
+  }
   return lines.join('\n')
 }
 
@@ -157,6 +159,8 @@ export default function VisitDetail() {
     )
   }
 
+  const quoteFrom = visit.source === 'scan' ? 'From your photo' : null
+
   return (
     <div className="vb-container max-w-4xl pt-10">
       <header className="border-b border-line pb-8">
@@ -215,7 +219,7 @@ export default function VisitDetail() {
               <li key={index} className="rounded-card border border-line bg-surface p-5">
                 <FlaggedLine flagged={line.flagged}>
                   <p className="text-body">{line.text}</p>
-                  <QuoteLine quote={line.quote} />
+                  <QuoteLine quote={line.quote} from={quoteFrom} />
                 </FlaggedLine>
               </li>
             ))}
@@ -258,7 +262,7 @@ export default function VisitDetail() {
                     {med.dose ? ` · ${med.dose}` : ' · dose not clear'}
                   </p>
                   {med.time ? <p className="text-small text-muted">When: {med.time}</p> : null}
-                  <QuoteLine quote={med.quote} />
+                  <QuoteLine quote={med.quote} from={quoteFrom} />
                 </FlaggedLine>
               </li>
             ))}
@@ -267,8 +271,8 @@ export default function VisitDetail() {
       ) : null}
 
       {visit.transcript ? (
-        <Section label="What the doctor said">
-          <p className="max-w-measure rounded-card border border-line bg-surface-2 p-6 text-body text-muted">
+        <Section label={visit.source === 'scan' ? 'From your photo' : 'What the doctor said'}>
+          <p className="max-w-measure whitespace-pre-line rounded-card border border-line bg-surface-2 p-6 text-body text-muted">
             {visit.transcript}
           </p>
         </Section>

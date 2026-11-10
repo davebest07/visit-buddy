@@ -1,7 +1,8 @@
 import { useId, useState } from 'react'
 
 // Every AI line can show the exact words it came from.
-export default function QuoteLine({ quote, tone = 'light' }) {
+// `from` names where those words are, e.g. "From your photo".
+export default function QuoteLine({ quote, from = null, tone = 'light' }) {
   const [open, setOpen] = useState(false)
   const panelId = useId()
 
@@ -30,6 +31,7 @@ export default function QuoteLine({ quote, tone = 'light' }) {
             isDark ? 'border-accent-bright text-paper-muted' : 'border-accent text-muted'
           }`}
         >
+          {from ? <span className="block font-bold">{from}</span> : null}
           “{quote}”
         </blockquote>
       ) : null}

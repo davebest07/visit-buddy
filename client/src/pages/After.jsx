@@ -7,10 +7,11 @@ import FlaggedLine from '../components/FlaggedLine.jsx'
 import MedRow from '../components/MedRow.jsx'
 import QuoteLine from '../components/QuoteLine.jsx'
 import LiveTranscriber from '../components/LiveTranscriber.jsx'
+import ScanPaper from '../components/ScanPaper.jsx'
 import Tabs from '../components/Tabs.jsx'
 import Toast from '../components/Toast.jsx'
 import useUndo from '../hooks/useUndo.js'
-import { SAMPLE_TRANSCRIPT, summarizeVisit } from '../services/aiService.js'
+import { SAMPLE_TRANSCRIPT, findUnclear, summarizeVisit } from '../services/aiService.js'
 import { createVisit } from '../services/api.js'
 
 const STEPS = ['Listening', 'Writing it in plain words', 'Checking each line against what you said']
@@ -28,6 +29,9 @@ export default function After() {
 
   const [transcript, setTranscript] = useState('')
   const [listening, setListening] = useState(false)
+  const [scanning, setScanning] = useState(false)
+  // How the words got in the box: "typed", "recording" or "scan". Saved on the visit.
+  const [source, setSource] = useState('typed')
   const [tab, setTab] = useState('summary')
   const [saving, setSaving] = useState(false)
   const [toast, setToast] = useState(null)
@@ -64,10 +68,20 @@ export default function After() {
   // The spoken words join whatever is already typed, then the box gets focus
   // so mistakes can be fixed before continuing.
   function handleSpoken(text) {
+    setSource('recording')
     setTranscript((current) => (current.trim() ? `${current.trim()} ${text}` : text))
     setToast('Your words are in the box. Fix anything that is wrong before you continue.')
     requestAnimationFrame(() => document.getElementById('transcript')?.focus())
   }
+
+  // Words read from a photo go in the same box, to be checked before anything
+  // is summarized. The photo itself is never kept.
+  const handleScanned = useCallback((text) => {
+    setSource('scan')
+    setTranscript((current) => (current.trim() ? `${current.trim()}\n\n${text}` : text))
+    setToast('The words from your photo are in the box. Check them against your paper.')
+    requestAnimationFrame(() => document.getElementById('transcript')?.focus())
+  }, [])
 
   function handleUndo() {
     if (undo()) setToast('Change undone')
@@ -121,18 +135,20 @@ export default function After() {
 
   async function handleApprove() {
     // If someone taps before the result is hydrated, save the raw data.
-    const source =
+    const saved =
       result.summary.length || result.todos.length || result.meds.length ? result : data ?? result
+    const wordsFrom = source
 
     setSaving(true)
     try {
       const created = await createVisit({
         type: 'after',
         transcript,
-        summary: source.summary,
-        todos: source.todos,
-        meds: source.meds,
-        flags: source.flags,
+        source: wordsFrom,
+        summary: saved.summary,
+        todos: saved.todos,
+        meds: saved.meds,
+        flags: saved.flags,
         approved: true,
       })
       navigate(`/app/visits/${created.id}`)
@@ -143,15 +159,18 @@ export default function After() {
     }
   }
 
-  const busy = listening || status === 'loading'
+  const busy = listening || scanning || status === 'loading'
+  const fromPhoto = source === 'scan'
+  const quoteFrom = fromPhoto ? 'From your photo' : null
+  const unclearLines = fromPhoto ? findUnclear(transcript) : []
 
   return (
     <div className="vb-container max-w-5xl pt-10">
       <header>
         <h1 className="mt-4 max-w-[18ch] text-hero font-bold">What did the doctor say?</h1>
         <p className="mt-3 max-w-measure text-body text-muted">
-          Record or type what you remember. You will see a plain summary, a to-do list and a
-          medicine schedule, with the words behind each line.
+          Record or type what you remember, or scan the paper you were given. You will see a
+          plain summary, a to-do list and a medicine schedule, with the words behind each line.
         </p>
       </header>
 
@@ -159,21 +178,42 @@ export default function After() {
         <div className="grid lg:grid-cols-12">
           <div className="p-6 md:p-8 lg:col-span-7">
             <label htmlFor="transcript" className="text-subhead font-bold">
-              What the doctor said
+              {fromPhoto ? 'From your photo' : 'What the doctor said'}
             </label>
             <p id="transcript-help" className="mt-1 text-small text-muted">
-              Type what you remember, or tap the microphone and talk.
+              {fromPhoto
+                ? 'Check this against your paper and fix anything that is wrong.'
+                : 'Type what you remember, tap the microphone and talk, or scan a paper.'}
             </p>
 
             <textarea
               id="transcript"
               aria-describedby="transcript-help"
               value={transcript}
-              onChange={(event) => setTranscript(event.target.value)}
+              onChange={(event) => {
+                setTranscript(event.target.value)
+                if (!event.target.value.trim()) setSource('typed')
+              }}
               rows={7}
               placeholder="For example: the doctor said my knee pain is probably from wear…"
               className="mt-3 w-full resize-y rounded-card border border-line bg-canvas p-4 text-body text-ink placeholder:text-muted"
             />
+
+            {unclearLines.length ? (
+              <div className="mt-3 rounded-card border-2 border-uncertain bg-uncertain p-4 text-uncertain-ink">
+                <p className="text-small font-bold">
+                  {unclearLines.length === 1
+                    ? 'One line was hard to read.'
+                    : `${unclearLines.length} lines were hard to read.`}{' '}
+                  Check them against your paper, fix the words, and delete the [unclear: …] mark.
+                </p>
+                <ul className="mt-2 list-disc space-y-1 pl-5 text-small">
+                  {unclearLines.map((line) => (
+                    <li key={line}>{line}</li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
 
             <div className="mt-4">
               <LiveTranscriber
@@ -184,12 +224,24 @@ export default function After() {
               />
             </div>
 
+            <div className="mt-6 border-t border-line pt-6">
+              <ScanPaper
+                onRead={handleScanned}
+                onBusyChange={setScanning}
+                onTypeInstead={() => document.getElementById('transcript')?.focus()}
+                disabled={listening || status === 'loading'}
+              />
+            </div>
+
             <div className="mt-4">
               <Button
                 variant="quiet"
                 size="sm"
-                onClick={() => setTranscript(SAMPLE_TRANSCRIPT)}
-                disabled={listening}
+                onClick={() => {
+                  setTranscript(SAMPLE_TRANSCRIPT)
+                  setSource('typed')
+                }}
+                disabled={listening || scanning}
               >
                 Use the sample conversation
               </Button>
@@ -286,7 +338,7 @@ export default function After() {
                                 className="w-full resize-y border-0 bg-transparent p-0 text-subhead text-ink focus:outline-none"
                               />
                               <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
-                                <QuoteLine quote={line.quote} />
+                                <QuoteLine quote={line.quote} from={quoteFrom} />
                                 <button
                                   type="button"
                                   onClick={() => removeSummary(index)}
@@ -347,7 +399,7 @@ export default function After() {
                               className="w-full resize-y border-0 bg-transparent p-0 text-body text-ink focus:outline-none"
                             />
                             <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
-                              <QuoteLine quote={todo.quote} />
+                              <QuoteLine quote={todo.quote} from={quoteFrom} />
                               <button
                                 type="button"
                                 onClick={() => removeTodo(index)}
@@ -373,6 +425,7 @@ export default function After() {
                           key={`${med.name}-${index}`}
                           med={med}
                           onChange={(patch) => updateMed(index, patch)}
+                          quoteFrom={quoteFrom}
                         />
                       ))}
                     </ul>
