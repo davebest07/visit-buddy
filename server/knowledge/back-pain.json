@@ -1,0 +1,422 @@
+{
+  "topic": "back pain",
+  "chunks": [
+    {
+      "id": "back-pain-01",
+      "topic": "back pain",
+      "category": "onset",
+      "use": "interview",
+      "question": "When did your back pain start?",
+      "keywords": [
+        "back",
+        "lower back",
+        "upper back",
+        "spine",
+        "neck",
+        "sciatica",
+        "lumbar",
+        "backache"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Today",
+        "In the last few days",
+        "A few weeks ago",
+        "Months ago or longer"
+      ]
+    },
+    {
+      "id": "back-pain-02",
+      "topic": "back pain",
+      "category": "history",
+      "use": "interview",
+      "question": "Did it begin after lifting, a fall, or a sudden movement?",
+      "keywords": [
+        "back",
+        "lower back",
+        "upper back",
+        "spine",
+        "neck",
+        "sciatica",
+        "lumbar",
+        "backache",
+        "lifting",
+        "lift",
+        "fall",
+        "twist"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "After lifting",
+        "After a fall",
+        "After a sudden movement",
+        "No clear reason"
+      ]
+    },
+    {
+      "id": "back-pain-03",
+      "topic": "back pain",
+      "category": "location",
+      "use": "interview",
+      "question": "Where exactly is the pain: upper, middle, or lower back?",
+      "keywords": [
+        "back",
+        "lower back",
+        "upper back",
+        "spine",
+        "neck",
+        "sciatica",
+        "lumbar",
+        "backache",
+        "upper",
+        "middle",
+        "lower"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Upper back",
+        "Middle back",
+        "Lower back",
+        "Neck"
+      ]
+    },
+    {
+      "id": "back-pain-04",
+      "topic": "back pain",
+      "category": "location",
+      "use": "interview",
+      "question": "Does the pain spread anywhere, like into your buttock or down a leg?",
+      "keywords": [
+        "back",
+        "lower back",
+        "upper back",
+        "spine",
+        "neck",
+        "sciatica",
+        "lumbar",
+        "backache",
+        "leg",
+        "buttock",
+        "spread",
+        "radiate"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Into my buttock",
+        "Down a leg",
+        "It stays in one place"
+      ]
+    },
+    {
+      "id": "back-pain-05",
+      "topic": "back pain",
+      "category": "character",
+      "use": "interview",
+      "question": "What does it feel like: dull and aching, sharp, or burning?",
+      "keywords": [
+        "back",
+        "lower back",
+        "upper back",
+        "spine",
+        "neck",
+        "sciatica",
+        "lumbar",
+        "backache",
+        "dull",
+        "sharp",
+        "burning"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Dull and aching",
+        "Sharp",
+        "Burning",
+        "Tingling"
+      ]
+    },
+    {
+      "id": "back-pain-06",
+      "topic": "back pain",
+      "category": "triggers/relief",
+      "use": "interview",
+      "question": "Which positions make it worse or better: sitting, standing, bending, or lying down?",
+      "keywords": [
+        "back",
+        "lower back",
+        "upper back",
+        "spine",
+        "neck",
+        "sciatica",
+        "lumbar",
+        "backache",
+        "sitting",
+        "standing",
+        "bending",
+        "lying"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Sitting",
+        "Standing",
+        "Bending",
+        "Lying down"
+      ]
+    },
+    {
+      "id": "back-pain-07",
+      "topic": "back pain",
+      "category": "timing",
+      "use": "interview",
+      "question": "Is it worse at a certain time, like first thing in the morning or at night?",
+      "keywords": [
+        "back",
+        "lower back",
+        "upper back",
+        "spine",
+        "neck",
+        "sciatica",
+        "lumbar",
+        "backache",
+        "morning",
+        "night"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Mornings",
+        "Evenings",
+        "At night",
+        "No pattern"
+      ]
+    },
+    {
+      "id": "back-pain-08",
+      "topic": "back pain",
+      "category": "severity",
+      "use": "interview",
+      "question": "How strong is the pain at its worst?",
+      "keywords": [
+        "back",
+        "lower back",
+        "upper back",
+        "spine",
+        "neck",
+        "sciatica",
+        "lumbar",
+        "backache"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Mild",
+        "Medium",
+        "Bad",
+        "Very bad"
+      ]
+    },
+    {
+      "id": "back-pain-09",
+      "topic": "back pain",
+      "category": "related symptoms",
+      "use": "interview",
+      "question": "Have you noticed numbness, tingling, or weakness in your legs?",
+      "keywords": [
+        "back",
+        "lower back",
+        "upper back",
+        "spine",
+        "neck",
+        "sciatica",
+        "lumbar",
+        "backache",
+        "numbness",
+        "tingling",
+        "weakness",
+        "legs"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Numbness",
+        "Tingling",
+        "Weakness",
+        "None of these"
+      ]
+    },
+    {
+      "id": "back-pain-10",
+      "topic": "back pain",
+      "category": "impact on daily life",
+      "use": "interview",
+      "question": "Is the back pain affecting your work, sleep, or getting around?",
+      "keywords": [
+        "back",
+        "lower back",
+        "upper back",
+        "spine",
+        "neck",
+        "sciatica",
+        "lumbar",
+        "backache",
+        "work",
+        "sleep",
+        "walking"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Not much",
+        "Some things are harder",
+        "I've had to stop some things"
+      ]
+    },
+    {
+      "id": "back-pain-11",
+      "topic": "back pain",
+      "category": "history",
+      "use": "interview",
+      "question": "Have you had back pain like this before?",
+      "keywords": [
+        "back",
+        "lower back",
+        "upper back",
+        "spine",
+        "neck",
+        "sciatica",
+        "lumbar",
+        "backache"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "This is the first time",
+        "It has happened before"
+      ]
+    },
+    {
+      "id": "back-pain-12",
+      "topic": "back pain",
+      "category": "medicines",
+      "use": "interview",
+      "question": "What have you tried for it so far, and did it help?",
+      "keywords": [
+        "back",
+        "lower back",
+        "upper back",
+        "spine",
+        "neck",
+        "sciatica",
+        "lumbar",
+        "backache",
+        "tried",
+        "heat",
+        "painkiller"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Nothing yet",
+        "Medicine from the store",
+        "Heat or ice",
+        "Stretching"
+      ]
+    },
+    {
+      "id": "back-pain-13",
+      "topic": "back pain",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "What do you think is going on with my back?",
+      "keywords": [
+        "back",
+        "lower back",
+        "upper back",
+        "spine",
+        "neck",
+        "sciatica",
+        "lumbar",
+        "backache"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "back-pain-14",
+      "topic": "back pain",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "Which everyday activities should I check with you about while my back hurts?",
+      "keywords": [
+        "back",
+        "lower back",
+        "upper back",
+        "spine",
+        "neck",
+        "sciatica",
+        "lumbar",
+        "backache",
+        "activity",
+        "work",
+        "lifting"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "back-pain-15",
+      "topic": "back pain",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "What changes in my back pain should make me call you sooner?",
+      "keywords": [
+        "back",
+        "lower back",
+        "upper back",
+        "spine",
+        "neck",
+        "sciatica",
+        "lumbar",
+        "backache",
+        "call"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    }
+  ]
+}

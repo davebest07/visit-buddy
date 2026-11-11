@@ -7,12 +7,16 @@
   "scripts": {
     "install:all": "npm install && npm --prefix client install",
     "dev": "concurrently -k -n server,client -c blue,green \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:https": "concurrently -k -n server,client -c blue,green \"npm:dev:server\" \"npm:dev:client:https\"",
     "dev:server": "node --env-file-if-exists=.env --watch server/index.js",
     "dev:client": "npm --prefix client run dev",
+    "dev:client:https": "npm --prefix client run dev:https",
     "build": "npm --prefix client run build",
     "test": "node --test server/services/grounding.test.js",
     "preview": "npm --prefix client run preview",
-    "start": "node --env-file-if-exists=.env server/index.js"
+    "start": "node --env-file-if-exists=.env server/index.js",
+    "test:redflags": "node client/src/services/redFlags.test.mjs",
+    "test:knowledge": "node server/rag/check-knowledge.mjs"
   },
   "dependencies": {
     "cors": "^2.8.5",

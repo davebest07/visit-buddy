@@ -1,0 +1,493 @@
+{
+  "topic": "mood and stress",
+  "chunks": [
+    {
+      "id": "mood-stress-01",
+      "topic": "mood and stress",
+      "category": "onset",
+      "use": "interview",
+      "question": "When did you start feeling this way?",
+      "keywords": [
+        "mood",
+        "stress",
+        "stressed",
+        "anxious",
+        "anxiety",
+        "worried",
+        "worry",
+        "sad",
+        "depressed",
+        "overwhelmed",
+        "nervous",
+        "panic",
+        "irritable",
+        "lonely",
+        "crying"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Today",
+        "In the last few days",
+        "A few weeks ago",
+        "Months ago or longer"
+      ]
+    },
+    {
+      "id": "mood-stress-02",
+      "topic": "mood and stress",
+      "category": "character",
+      "use": "interview",
+      "question": "How would you describe it: low, worried, on edge, irritable, or numb?",
+      "keywords": [
+        "mood",
+        "stress",
+        "stressed",
+        "anxious",
+        "anxiety",
+        "worried",
+        "worry",
+        "sad",
+        "depressed",
+        "overwhelmed",
+        "nervous",
+        "panic",
+        "irritable",
+        "lonely",
+        "crying",
+        "low",
+        "edge",
+        "numb"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Low",
+        "Worried",
+        "On edge",
+        "Irritable"
+      ]
+    },
+    {
+      "id": "mood-stress-03",
+      "topic": "mood and stress",
+      "category": "duration",
+      "use": "interview",
+      "question": "Is it most days, or does it come and go?",
+      "keywords": [
+        "mood",
+        "stress",
+        "stressed",
+        "anxious",
+        "anxiety",
+        "worried",
+        "worry",
+        "sad",
+        "depressed",
+        "overwhelmed",
+        "nervous",
+        "panic",
+        "irritable",
+        "lonely",
+        "crying",
+        "most days"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Most days",
+        "Comes and goes",
+        "Only sometimes"
+      ]
+    },
+    {
+      "id": "mood-stress-04",
+      "topic": "mood and stress",
+      "category": "triggers/relief",
+      "use": "interview",
+      "question": "Is there something going on that makes it worse, like work, money, health, or relationships?",
+      "keywords": [
+        "mood",
+        "stress",
+        "stressed",
+        "anxious",
+        "anxiety",
+        "worried",
+        "worry",
+        "sad",
+        "depressed",
+        "overwhelmed",
+        "nervous",
+        "panic",
+        "irritable",
+        "lonely",
+        "crying",
+        "work",
+        "money",
+        "relationships",
+        "family"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Work",
+        "Money",
+        "Health",
+        "Relationships"
+      ]
+    },
+    {
+      "id": "mood-stress-05",
+      "topic": "mood and stress",
+      "category": "triggers/relief",
+      "use": "interview",
+      "question": "What helps you feel even a little better?",
+      "keywords": [
+        "mood",
+        "stress",
+        "stressed",
+        "anxious",
+        "anxiety",
+        "worried",
+        "worry",
+        "sad",
+        "depressed",
+        "overwhelmed",
+        "nervous",
+        "panic",
+        "irritable",
+        "lonely",
+        "crying",
+        "helps",
+        "better"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Talking to someone",
+        "Being active",
+        "Time alone",
+        "Nothing right now"
+      ]
+    },
+    {
+      "id": "mood-stress-06",
+      "topic": "mood and stress",
+      "category": "related symptoms",
+      "use": "interview",
+      "question": "Have your sleep, appetite, or energy changed?",
+      "keywords": [
+        "mood",
+        "stress",
+        "stressed",
+        "anxious",
+        "anxiety",
+        "worried",
+        "worry",
+        "sad",
+        "depressed",
+        "overwhelmed",
+        "nervous",
+        "panic",
+        "irritable",
+        "lonely",
+        "crying",
+        "sleep",
+        "appetite",
+        "energy"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Sleep",
+        "Appetite",
+        "Energy",
+        "No changes"
+      ]
+    },
+    {
+      "id": "mood-stress-07",
+      "topic": "mood and stress",
+      "category": "related symptoms",
+      "use": "interview",
+      "question": "Do you get physical feelings with it, like a racing heart, tight muscles, or an upset stomach?",
+      "keywords": [
+        "mood",
+        "stress",
+        "stressed",
+        "anxious",
+        "anxiety",
+        "worried",
+        "worry",
+        "sad",
+        "depressed",
+        "overwhelmed",
+        "nervous",
+        "panic",
+        "irritable",
+        "lonely",
+        "crying",
+        "racing",
+        "heart",
+        "muscles",
+        "stomach"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Racing heart",
+        "Tight muscles",
+        "Upset stomach",
+        "None of these"
+      ]
+    },
+    {
+      "id": "mood-stress-08",
+      "topic": "mood and stress",
+      "category": "impact on daily life",
+      "use": "interview",
+      "question": "Has it become harder to enjoy things or keep up with work, home, or friends?",
+      "keywords": [
+        "mood",
+        "stress",
+        "stressed",
+        "anxious",
+        "anxiety",
+        "worried",
+        "worry",
+        "sad",
+        "depressed",
+        "overwhelmed",
+        "nervous",
+        "panic",
+        "irritable",
+        "lonely",
+        "crying",
+        "enjoy",
+        "work",
+        "friends"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "A little",
+        "Quite a bit",
+        "A lot"
+      ]
+    },
+    {
+      "id": "mood-stress-09",
+      "topic": "mood and stress",
+      "category": "severity",
+      "use": "interview",
+      "question": "Overall, how much is this affecting you right now?",
+      "keywords": [
+        "mood",
+        "stress",
+        "stressed",
+        "anxious",
+        "anxiety",
+        "worried",
+        "worry",
+        "sad",
+        "depressed",
+        "overwhelmed",
+        "nervous",
+        "panic",
+        "irritable",
+        "lonely",
+        "crying"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "A little",
+        "Quite a bit",
+        "A lot"
+      ]
+    },
+    {
+      "id": "mood-stress-10",
+      "topic": "mood and stress",
+      "category": "history",
+      "use": "interview",
+      "question": "Have you felt like this before, and did anything help then?",
+      "keywords": [
+        "mood",
+        "stress",
+        "stressed",
+        "anxious",
+        "anxiety",
+        "worried",
+        "worry",
+        "sad",
+        "depressed",
+        "overwhelmed",
+        "nervous",
+        "panic",
+        "irritable",
+        "lonely",
+        "crying"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "This is the first time",
+        "It has happened before"
+      ]
+    },
+    {
+      "id": "mood-stress-11",
+      "topic": "mood and stress",
+      "category": "history",
+      "use": "interview",
+      "question": "Who do you have around you for support?",
+      "keywords": [
+        "mood",
+        "stress",
+        "stressed",
+        "anxious",
+        "anxiety",
+        "worried",
+        "worry",
+        "sad",
+        "depressed",
+        "overwhelmed",
+        "nervous",
+        "panic",
+        "irritable",
+        "lonely",
+        "crying",
+        "support",
+        "family",
+        "friends"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Family",
+        "Friends",
+        "No one right now"
+      ]
+    },
+    {
+      "id": "mood-stress-12",
+      "topic": "mood and stress",
+      "category": "medicines",
+      "use": "interview",
+      "question": "Do you take anything for mood, stress, or sleep, including supplements?",
+      "keywords": [
+        "mood",
+        "stress",
+        "stressed",
+        "anxious",
+        "anxiety",
+        "worried",
+        "worry",
+        "sad",
+        "depressed",
+        "overwhelmed",
+        "nervous",
+        "panic",
+        "irritable",
+        "lonely",
+        "crying",
+        "supplement",
+        "medicine"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Nothing",
+        "A prescription",
+        "Something from the store",
+        "Not sure"
+      ]
+    },
+    {
+      "id": "mood-stress-13",
+      "topic": "mood and stress",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "What kinds of support are available to me, and how do I get started?",
+      "keywords": [
+        "mood",
+        "stress",
+        "stressed",
+        "anxious",
+        "anxiety",
+        "worried",
+        "worry",
+        "sad",
+        "depressed",
+        "overwhelmed",
+        "nervous",
+        "panic",
+        "irritable",
+        "lonely",
+        "crying",
+        "support",
+        "counselling",
+        "therapy"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "mood-stress-14",
+      "topic": "mood and stress",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "Who can I contact between visits if things get harder?",
+      "keywords": [
+        "mood",
+        "stress",
+        "stressed",
+        "anxious",
+        "anxiety",
+        "worried",
+        "worry",
+        "sad",
+        "depressed",
+        "overwhelmed",
+        "nervous",
+        "panic",
+        "irritable",
+        "lonely",
+        "crying",
+        "contact",
+        "between visits"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    }
+  ]
+}

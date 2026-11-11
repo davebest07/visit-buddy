@@ -1,0 +1,373 @@
+{
+  "topic": "chest discomfort",
+  "chunks": [
+    {
+      "id": "chest-discomfort-01",
+      "topic": "chest discomfort",
+      "category": "onset",
+      "use": "interview",
+      "question": "When did the chest discomfort first start?",
+      "keywords": [
+        "chest",
+        "chest pain",
+        "chest ache",
+        "tightness",
+        "pressure",
+        "discomfort",
+        "heaviness"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Today",
+        "In the last few days",
+        "A few weeks ago",
+        "Months ago or longer"
+      ]
+    },
+    {
+      "id": "chest-discomfort-02",
+      "topic": "chest discomfort",
+      "category": "timing",
+      "use": "interview",
+      "question": "When does it happen: at rest, during activity, at night, or after eating?",
+      "keywords": [
+        "chest",
+        "chest pain",
+        "chest ache",
+        "tightness",
+        "pressure",
+        "discomfort",
+        "heaviness"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "At rest",
+        "When I'm active",
+        "At night",
+        "After eating"
+      ]
+    },
+    {
+      "id": "chest-discomfort-03",
+      "topic": "chest discomfort",
+      "category": "triggers/relief",
+      "use": "interview",
+      "question": "What are you usually doing when it starts?",
+      "keywords": [
+        "chest",
+        "chest pain",
+        "chest ache",
+        "tightness",
+        "pressure",
+        "discomfort",
+        "heaviness"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Walking or climbing stairs",
+        "Resting",
+        "Eating",
+        "Feeling stressed"
+      ]
+    },
+    {
+      "id": "chest-discomfort-04",
+      "topic": "chest discomfort",
+      "category": "triggers/relief",
+      "use": "interview",
+      "question": "Does activity make it worse, and does resting make it ease off?",
+      "keywords": [
+        "chest",
+        "chest pain",
+        "chest ache",
+        "tightness",
+        "pressure",
+        "discomfort",
+        "heaviness"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Activity makes it worse",
+        "Rest helps",
+        "Neither",
+        "Not sure"
+      ]
+    },
+    {
+      "id": "chest-discomfort-05",
+      "topic": "chest discomfort",
+      "category": "duration",
+      "use": "interview",
+      "question": "How long does it last each time?",
+      "keywords": [
+        "chest",
+        "chest pain",
+        "chest ache",
+        "tightness",
+        "pressure",
+        "discomfort",
+        "heaviness"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Seconds",
+        "A few minutes",
+        "Longer than 15 minutes",
+        "It doesn't go away"
+      ]
+    },
+    {
+      "id": "chest-discomfort-06",
+      "topic": "chest discomfort",
+      "category": "location",
+      "use": "interview",
+      "question": "Does it spread anywhere, like your arm, jaw, neck, or back?",
+      "keywords": [
+        "chest",
+        "chest pain",
+        "chest ache",
+        "tightness",
+        "pressure",
+        "discomfort",
+        "heaviness"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "My arm",
+        "My jaw or neck",
+        "My back",
+        "It stays in one place"
+      ]
+    },
+    {
+      "id": "chest-discomfort-07",
+      "topic": "chest discomfort",
+      "category": "related symptoms",
+      "use": "interview",
+      "question": "Does it come with other feelings, like breathlessness, sweating, or feeling sick?",
+      "keywords": [
+        "chest",
+        "chest pain",
+        "chest ache",
+        "tightness",
+        "pressure",
+        "discomfort",
+        "heaviness"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Yes, one or more of these",
+        "No",
+        "Not sure"
+      ]
+    },
+    {
+      "id": "chest-discomfort-08",
+      "topic": "chest discomfort",
+      "category": "character",
+      "use": "interview",
+      "question": "What does it feel like: pressure, tightness, aching, sharp, or burning?",
+      "keywords": [
+        "chest",
+        "chest pain",
+        "chest ache",
+        "tightness",
+        "pressure",
+        "discomfort",
+        "heaviness"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Pressure",
+        "Tightness",
+        "Aching",
+        "Sharp or burning"
+      ]
+    },
+    {
+      "id": "chest-discomfort-09",
+      "topic": "chest discomfort",
+      "category": "severity",
+      "use": "interview",
+      "question": "How bad is it at its worst?",
+      "keywords": [
+        "chest",
+        "chest pain",
+        "chest ache",
+        "tightness",
+        "pressure",
+        "discomfort",
+        "heaviness"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Mild",
+        "Medium",
+        "Bad",
+        "Very bad"
+      ]
+    },
+    {
+      "id": "chest-discomfort-10",
+      "topic": "chest discomfort",
+      "category": "history",
+      "use": "interview",
+      "question": "Has this happened before? What happened then?",
+      "keywords": [
+        "chest",
+        "chest pain",
+        "chest ache",
+        "tightness",
+        "pressure",
+        "discomfort",
+        "heaviness"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "This is the first time",
+        "It has happened before"
+      ]
+    },
+    {
+      "id": "chest-discomfort-11",
+      "topic": "chest discomfort",
+      "category": "medicines",
+      "use": "interview",
+      "question": "What have you tried for it so far, and did it help?",
+      "keywords": [
+        "chest",
+        "chest pain",
+        "chest ache",
+        "tightness",
+        "pressure",
+        "discomfort",
+        "heaviness"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Nothing",
+        "A prescription medicine",
+        "Something from the store",
+        "Not sure"
+      ]
+    },
+    {
+      "id": "chest-discomfort-12",
+      "topic": "chest discomfort",
+      "category": "impact on daily life",
+      "use": "interview",
+      "question": "Has it stopped you doing anything you normally do?",
+      "keywords": [
+        "chest",
+        "chest pain",
+        "chest ache",
+        "tightness",
+        "pressure",
+        "discomfort",
+        "heaviness"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Not much",
+        "Some things are harder",
+        "I've had to stop some things"
+      ]
+    },
+    {
+      "id": "chest-discomfort-13",
+      "topic": "chest discomfort",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "What changes in my chest symptoms should make me call 911 or get help straight away?",
+      "keywords": [
+        "chest",
+        "chest pain",
+        "chest ache",
+        "tightness",
+        "pressure",
+        "discomfort",
+        "heaviness"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "chest-discomfort-14",
+      "topic": "chest discomfort",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "Are there tests that would help you understand my chest symptoms, and what are they for?",
+      "keywords": [
+        "chest",
+        "chest pain",
+        "chest ache",
+        "tightness",
+        "pressure",
+        "discomfort",
+        "heaviness"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "chest-discomfort-15",
+      "topic": "chest discomfort",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "Which activities should I check with you about until we know more?",
+      "keywords": [
+        "chest",
+        "chest pain",
+        "chest ache",
+        "tightness",
+        "pressure",
+        "discomfort",
+        "heaviness"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    }
+  ]
+}

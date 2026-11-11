@@ -1,8 +1,40 @@
-import { useId } from 'react'
+import { useId, useLayoutEffect, useRef } from 'react'
 import QuoteLine from './QuoteLine.jsx'
+import WhyLine from './WhyLine.jsx'
+
+// A text box that is exactly as tall as its text: no resize handle, no empty area.
+function GrowingText({ value, onChange, ...props }) {
+  const ref = useRef(null)
+
+  useLayoutEffect(() => {
+    const box = ref.current
+    if (!box) return
+    box.style.height = 'auto'
+    box.style.height = `${box.scrollHeight}px`
+  }, [value])
+
+  // Text size changes and window resizes can re-wrap the text.
+  useLayoutEffect(() => {
+    const box = ref.current
+    if (!box || typeof ResizeObserver === 'undefined') return undefined
+    let width = box.clientWidth
+    const observer = new ResizeObserver(() => {
+      if (box.clientWidth === width) return
+      width = box.clientWidth
+      box.style.height = 'auto'
+      box.style.height = `${box.scrollHeight}px`
+    })
+    observer.observe(box)
+    return () => observer.disconnect()
+  }, [])
+
+  return <textarea ref={ref} rows={1} value={value} onChange={onChange} {...props} />
+}
 
 // Editable AI lines as editorial numbered rows, not stacked cards.
-export default function EditableList({ items, onChange, label = 'Question' }) {
+// onChange(items, { group }) — typing in one row shares a group, so the page's
+// undo treats it as one edit. Removing a row has no group: its own step.
+export default function EditableList({ items, onChange, label = 'Question', whyLabel }) {
   const prefix = useId()
 
   if (items.length === 0) {
@@ -14,7 +46,10 @@ export default function EditableList({ items, onChange, label = 'Question' }) {
   }
 
   const update = (index, patch) => {
-    onChange(items.map((item, itemIndex) => (itemIndex === index ? { ...item, ...patch } : item)))
+    onChange(
+      items.map((item, itemIndex) => (itemIndex === index ? { ...item, ...patch } : item)),
+      { group: `${prefix}:${index}` },
+    )
   }
 
   const remove = (index) => {
@@ -24,7 +59,7 @@ export default function EditableList({ items, onChange, label = 'Question' }) {
   return (
     <ul className="border-t border-line">
       {items.map((item, index) => (
-        <li key={`${prefix}-${index}`} className="border-b border-line py-6">
+        <li key={`${prefix}-${index}`} className="border-b border-line py-4">
           <div className="flex gap-4 md:gap-6">
             <span
               aria-hidden="true"
@@ -38,15 +73,17 @@ export default function EditableList({ items, onChange, label = 'Question' }) {
                 {label} {index + 1}
               </label>
 
-              <textarea
+              {/* Reads as plain text; a soft background on hover and focus shows it can be edited. */}
+              <GrowingText
                 id={`${prefix}-${index}`}
                 value={item.text}
                 onChange={(event) => update(index, { text: event.target.value })}
-                rows={2}
-                className="w-full resize-y border-0 bg-transparent p-0 text-subhead text-ink focus:outline-none"
+                className="-mx-2 block min-h-tap w-[calc(100%+16px)] resize-none overflow-hidden rounded border-0 bg-transparent px-2 py-1 text-subhead text-ink transition-colors duration-fast hover:bg-hover-surface focus:bg-surface-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               />
 
-              <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
+              {item.why ? <WhyLine why={item.why} label={whyLabel} /> : null}
+
+              <div className="mt-1 flex flex-wrap items-center justify-between gap-2">
                 <QuoteLine quote={item.quote} />
 
                 <button

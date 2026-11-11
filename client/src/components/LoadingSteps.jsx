@@ -1,12 +1,31 @@
-// Named steps with a check as each one finishes (brief section 6).
-const SECONDS_PER_STEP = 1.9
+import { useEffect, useState } from 'react'
 
-export default function LoadingSteps({ steps, elapsed }) {
+// Named steps with a check as each one finishes (brief section 6).
+//
+// The steps keep their own fine-grained clock (the page's `elapsed` only ticks
+// once a second), so they move steadily instead of jumping. Each step takes
+// about STEP_SECONDS; the last one stays "in progress" until the answer
+// arrives, so the list never claims to be done while it is still waiting.
+const STEP_SECONDS = 0.8
+const TICK_MS = 200
+
+export default function LoadingSteps({ steps, elapsed = 0, stepSeconds = STEP_SECONDS }) {
+  const [seconds, setSeconds] = useState(0)
+
+  useEffect(() => {
+    const start = performance.now()
+    const timer = setInterval(() => setSeconds((performance.now() - start) / 1000), TICK_MS)
+    return () => clearInterval(timer)
+  }, [])
+
+  const time = Math.max(seconds, elapsed)
+  const current = Math.min(Math.floor(time / stepSeconds), steps.length - 1)
+
   return (
     <ol className="mt-6 space-y-4">
       {steps.map((label, index) => {
-        const done = elapsed >= (index + 1) * SECONDS_PER_STEP
-        const active = !done && elapsed >= index * SECONDS_PER_STEP
+        const done = index < current
+        const active = index === current
 
         return (
           <li key={label} className="flex items-center gap-4 text-body">

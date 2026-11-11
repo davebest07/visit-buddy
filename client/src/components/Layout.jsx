@@ -38,9 +38,10 @@ export default function Layout() {
     <motion.main
       id="main"
       key={pathname}
-      initial={reduce ? false : { opacity: 0, y: 10 }}
+      initial={reduce ? false : { opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      // Short: every page waited on this fade before it could be read.
+      transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
     >
       <Outlet />
     </motion.main>

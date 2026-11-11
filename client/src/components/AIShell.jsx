@@ -17,7 +17,7 @@ function isUnusable(result) {
   if (result.status === 'empty') return true
   if (result.found === false && !result.answer) return true
 
-  const lists = [result.summary, result.todos, result.meds].filter(Array.isArray)
+  const lists = [result.questions, result.summary, result.todos, result.meds].filter(Array.isArray)
   return lists.length > 0 && lists.every((list) => list.length === 0)
 }
 

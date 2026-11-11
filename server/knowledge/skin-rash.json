@@ -1,0 +1,512 @@
+{
+  "topic": "skin and rash",
+  "chunks": [
+    {
+      "id": "skin-rash-01",
+      "topic": "skin and rash",
+      "category": "onset",
+      "use": "interview",
+      "question": "When did you first notice the rash or skin change?",
+      "keywords": [
+        "skin",
+        "rash",
+        "rashes",
+        "itch",
+        "itchy",
+        "itching",
+        "hives",
+        "spots",
+        "bumps",
+        "eczema",
+        "dry skin",
+        "patch",
+        "mole",
+        "blister"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Today",
+        "In the last few days",
+        "A few weeks ago",
+        "Months ago or longer"
+      ]
+    },
+    {
+      "id": "skin-rash-02",
+      "topic": "skin and rash",
+      "category": "location",
+      "use": "interview",
+      "question": "Where on your body is it, and has it spread?",
+      "keywords": [
+        "skin",
+        "rash",
+        "rashes",
+        "itch",
+        "itchy",
+        "itching",
+        "hives",
+        "spots",
+        "bumps",
+        "eczema",
+        "dry skin",
+        "patch",
+        "mole",
+        "blister",
+        "where",
+        "spread",
+        "arms",
+        "legs",
+        "face"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "One place",
+        "It has spread",
+        "Several places"
+      ]
+    },
+    {
+      "id": "skin-rash-03",
+      "topic": "skin and rash",
+      "category": "character",
+      "use": "interview",
+      "question": "What does it look like: red, raised, flat, scaly, or blistered?",
+      "keywords": [
+        "skin",
+        "rash",
+        "rashes",
+        "itch",
+        "itchy",
+        "itching",
+        "hives",
+        "spots",
+        "bumps",
+        "eczema",
+        "dry skin",
+        "patch",
+        "mole",
+        "blister",
+        "red",
+        "raised",
+        "flat",
+        "scaly"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Red",
+        "Raised bumps",
+        "Scaly or dry",
+        "Blisters"
+      ]
+    },
+    {
+      "id": "skin-rash-04",
+      "topic": "skin and rash",
+      "category": "character",
+      "use": "interview",
+      "question": "Is it itchy, painful, or neither?",
+      "keywords": [
+        "skin",
+        "rash",
+        "rashes",
+        "itch",
+        "itchy",
+        "itching",
+        "hives",
+        "spots",
+        "bumps",
+        "eczema",
+        "dry skin",
+        "patch",
+        "mole",
+        "blister",
+        "painful",
+        "sore"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Itchy",
+        "Painful",
+        "Both",
+        "Neither"
+      ]
+    },
+    {
+      "id": "skin-rash-05",
+      "topic": "skin and rash",
+      "category": "duration",
+      "use": "interview",
+      "question": "Does it come and go, or has it been there the whole time?",
+      "keywords": [
+        "skin",
+        "rash",
+        "rashes",
+        "itch",
+        "itchy",
+        "itching",
+        "hives",
+        "spots",
+        "bumps",
+        "eczema",
+        "dry skin",
+        "patch",
+        "mole",
+        "blister",
+        "comes and goes"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Comes and goes",
+        "There the whole time"
+      ]
+    },
+    {
+      "id": "skin-rash-06",
+      "topic": "skin and rash",
+      "category": "triggers/relief",
+      "use": "interview",
+      "question": "Have you used any new soap, lotion, laundry product, or food before it started?",
+      "keywords": [
+        "skin",
+        "rash",
+        "rashes",
+        "itch",
+        "itchy",
+        "itching",
+        "hives",
+        "spots",
+        "bumps",
+        "eczema",
+        "dry skin",
+        "patch",
+        "mole",
+        "blister",
+        "soap",
+        "lotion",
+        "detergent",
+        "new",
+        "food"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "New soap or lotion",
+        "New laundry product",
+        "New food",
+        "Nothing new"
+      ]
+    },
+    {
+      "id": "skin-rash-07",
+      "topic": "skin and rash",
+      "category": "triggers/relief",
+      "use": "interview",
+      "question": "Does anything make it better or worse, like heat, sun, or scratching?",
+      "keywords": [
+        "skin",
+        "rash",
+        "rashes",
+        "itch",
+        "itchy",
+        "itching",
+        "hives",
+        "spots",
+        "bumps",
+        "eczema",
+        "dry skin",
+        "patch",
+        "mole",
+        "blister",
+        "heat",
+        "sun",
+        "scratching"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Nothing I've noticed"
+      ]
+    },
+    {
+      "id": "skin-rash-08",
+      "topic": "skin and rash",
+      "category": "related symptoms",
+      "use": "interview",
+      "question": "Have you felt unwell otherwise, for example a fever or tiredness?",
+      "keywords": [
+        "skin",
+        "rash",
+        "rashes",
+        "itch",
+        "itchy",
+        "itching",
+        "hives",
+        "spots",
+        "bumps",
+        "eczema",
+        "dry skin",
+        "patch",
+        "mole",
+        "blister",
+        "fever",
+        "unwell",
+        "tired"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Fever",
+        "Tired",
+        "No, I feel fine"
+      ]
+    },
+    {
+      "id": "skin-rash-09",
+      "topic": "skin and rash",
+      "category": "history",
+      "use": "interview",
+      "question": "Has anyone around you had a similar rash?",
+      "keywords": [
+        "skin",
+        "rash",
+        "rashes",
+        "itch",
+        "itchy",
+        "itching",
+        "hives",
+        "spots",
+        "bumps",
+        "eczema",
+        "dry skin",
+        "patch",
+        "mole",
+        "blister",
+        "family",
+        "contact",
+        "others"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Yes",
+        "No",
+        "Not sure"
+      ]
+    },
+    {
+      "id": "skin-rash-10",
+      "topic": "skin and rash",
+      "category": "history",
+      "use": "interview",
+      "question": "Have you had skin problems like this before?",
+      "keywords": [
+        "skin",
+        "rash",
+        "rashes",
+        "itch",
+        "itchy",
+        "itching",
+        "hives",
+        "spots",
+        "bumps",
+        "eczema",
+        "dry skin",
+        "patch",
+        "mole",
+        "blister"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "This is the first time",
+        "It has happened before"
+      ]
+    },
+    {
+      "id": "skin-rash-11",
+      "topic": "skin and rash",
+      "category": "impact on daily life",
+      "use": "interview",
+      "question": "Is it affecting your sleep or how you feel about going out?",
+      "keywords": [
+        "skin",
+        "rash",
+        "rashes",
+        "itch",
+        "itchy",
+        "itching",
+        "hives",
+        "spots",
+        "bumps",
+        "eczema",
+        "dry skin",
+        "patch",
+        "mole",
+        "blister",
+        "sleep",
+        "confidence"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Not much",
+        "Some things are harder",
+        "I've had to stop some things"
+      ]
+    },
+    {
+      "id": "skin-rash-12",
+      "topic": "skin and rash",
+      "category": "medicines",
+      "use": "interview",
+      "question": "Have you put anything on it or taken anything for it so far?",
+      "keywords": [
+        "skin",
+        "rash",
+        "rashes",
+        "itch",
+        "itchy",
+        "itching",
+        "hives",
+        "spots",
+        "bumps",
+        "eczema",
+        "dry skin",
+        "patch",
+        "mole",
+        "blister",
+        "cream",
+        "ointment",
+        "antihistamine"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Nothing",
+        "A cream",
+        "A tablet",
+        "Something else"
+      ]
+    },
+    {
+      "id": "skin-rash-13",
+      "topic": "skin and rash",
+      "category": "medicines",
+      "use": "interview",
+      "question": "Did you start any new medicine shortly before the rash appeared?",
+      "keywords": [
+        "skin",
+        "rash",
+        "rashes",
+        "itch",
+        "itchy",
+        "itching",
+        "hives",
+        "spots",
+        "bumps",
+        "eczema",
+        "dry skin",
+        "patch",
+        "mole",
+        "blister",
+        "new",
+        "started"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "No",
+        "Yes",
+        "Not sure"
+      ]
+    },
+    {
+      "id": "skin-rash-14",
+      "topic": "skin and rash",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "Would a photo of how the rash changes over time be useful to you?",
+      "keywords": [
+        "skin",
+        "rash",
+        "rashes",
+        "itch",
+        "itchy",
+        "itching",
+        "hives",
+        "spots",
+        "bumps",
+        "eczema",
+        "dry skin",
+        "patch",
+        "mole",
+        "blister",
+        "photo",
+        "picture"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "skin-rash-15",
+      "topic": "skin and rash",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "What changes in my skin should make me contact you sooner?",
+      "keywords": [
+        "skin",
+        "rash",
+        "rashes",
+        "itch",
+        "itchy",
+        "itching",
+        "hives",
+        "spots",
+        "bumps",
+        "eczema",
+        "dry skin",
+        "patch",
+        "mole",
+        "blister",
+        "call"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    }
+  ]
+}

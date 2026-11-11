@@ -1,45 +1,202 @@
 # Manual test script
 
-Run `npm run dev` with `GEMINI_API_KEY` set in `.env`, open http://localhost:5173, and work
-down the list. Each line says what you should see.
+Run `npm run dev`, open http://localhost:5173, and work down the list. Each line says what
+you should see.
 
 ## Before a visit
 
-- [ ] Open **Before a visit**, type "My knee has been hurting for two weeks, I get dizzy
-      when I stand up", then tap **Get my questions**.
-- [ ] Three named steps tick over while it works.
-- [ ] Between three and six questions appear, numbered, each with a **Quote** button.
-- [ ] Tap **Quote** on one that has one. The words shown are copied from what you typed.
-- [ ] Edit a question. Tap **Undo**. The toast says "Change undone" and the edit is gone.
-- [ ] Tap **Regenerate**. The wording or order changes, because the model answers afresh.
-- [ ] Tap **Save**. You land on the saved visit, and it now appears on Home and History.
+- [ ] Open **Before a visit**. The steps read **Describe → A few questions → Your
+      questions**, with Describe filled. A "How it works" panel sits beside the text box.
+- [ ] Type "My knee has been hurting for two weeks, I get dizzy when I stand up, and I'm
+      not sure my morning pill is working." and tap **Continue**.
+- [ ] A short loading card ("Finding a few questions for you"), then "Question 1 of 5",
+      "About your knee", and a question about what the pain feels like. No question asks
+      when it started, because "for two weeks" already says so.
+- [ ] Each question has quick-reply buttons, a text box, **Answer by talking**, **Next
+      question**, **Skip** and **Back**. Tapping a quick reply fills the box; Next is
+      greyed out until there is an answer.
+- [ ] Answer, Skip and go **Back**. Your earlier answer is still there.
+- [ ] On the last question the button reads **See my questions**. Tap it.
+- [ ] "Your questions" shows 4–6 questions: ones about your worry first, then one or two
+      from your answers, then at most two general ones. Each row is one or two lines of
+      plain text; tap a row to edit it. The step pills at the top are fully visible, not
+      under the top bar.
+- [ ] "Why this question" matches where it came from: "You said “…”" with your words, "You
+      said it started …" for an answer, "A good question for any visit." for general ones.
+- [ ] Then **What to tell your doctor** with
+      your sentences and answers ("What it feels like (my knee): Aching"). Skipped
+      questions are left out.
+- [ ] Each line has **Quote** (your exact words) and **Why this question** / **Why this is
+      here** with a source. The AHRQ source is a link.
+- [ ] Type several words into one line, click out, then tap **Undo** once. The toast says
+      "Change undone" and all the words you typed are gone (not just the last letter).
+- [ ] Edit line 1, then line 2. **Undo** once restores line 2 only; again restores line 1.
+- [ ] **Remove** a line, then **Undo**. The line comes back in its place.
+- [ ] Tap **Regenerate**. Different questions appear.
+- [ ] **Change my answers** goes back to the last question with your answers kept.
+- [ ] **Copy** gives both lists. **Print** shows only the lists, no buttons.
+- [ ] Tap **Save**. The saved visit shows "Your questions" and "What to tell your doctor".
+- [ ] Type "I keep getting headaches". The questions start with when the headaches
+      started.
+- [ ] Type "my elbow feels funny". The interview asks about your elbow ("When did the funny
+      feeling in your elbow start…?"). The list includes "What do you think is going on with
+      my elbow?", "What could be causing the funny feeling in my elbow?" and "Do I need any
+      tests for my elbow?", and no general "What do you think is going on…".
+- [ ] With the knee/dizzy/pill sample, no question in the list is addressed to you (no
+      "What would you most like…"). One asks about driving while dizzy.
+- [ ] Type "my ear feels funny" (no topic for ears). The general questions use your words:
+      "When did the funny feeling in your ear first start?".
+
+## Red flags
+
+- [ ] Run `npm run test:redflags`. It ends with "62 of 62 passed."
+- [ ] Run `npm run test:knowledge`. It ends with "All checks passed."
+- [ ] Type "my chest is aching me" and tap **Continue**. Nothing is searched. A dark card
+      asks "Are you having chest pain, pressure or tightness right now?", repeats "chest is
+      aching", and gives the 911 advice. Focus moves to the question.
+- [ ] Tap **Yes, get help**. The card becomes "Get help now — call 911 or your doctor" with
+      **Call 911**. Tap **Go back**.
+- [ ] Tap **No, continue**. Your words are kept and you get chest questions ("When did the
+      chest discomfort first start?"). The result has 4–6 chest-specific questions.
+- [ ] **Start over**, tap **Continue** again with the same words. The card does not show
+      again in this browser session.
+- [ ] Try "I can't catch my breath", "pressure in my chest", "my face is drooping", "I
+      passed out", "heavy bleeding". Each shows the card.
+- [ ] Type "I want to kill myself". The card shows **Call 988**, **Text 988** and **Call
+      911** straight away, with no "No, continue". A smaller **I'm safe right now,
+      continue** carries on.
+- [ ] After **I'm safe right now, continue**, a small line "If you need to talk to someone,
+      call or text 988." with **Call 988** and **Text 988** stays at the top of Before a
+      visit through the interview, and under "Your questions" on the list. It does not
+      block anything. Reload: it is still there. Close the tab and open a new one: it is
+      gone.
+- [ ] "I hurt myself lifting a box", "my chest cold is better" and "I cough when I breathe
+      cold air" do **not** show the card.
+- [ ] In the interview, answer "I passed out last week" and tap Next. The card asks about
+      fainting. **No, continue** moves to the next question.
+- [ ] The Help page emergency box mentions 988.
+
+## Live transcription
+
+Use Chrome or Edge on a computer (localhost counts as secure).
+
+- [ ] Open **Before a visit**, tap **Record my worries**, allow the microphone. A red
+      "Listening…" indicator and a **Stop** button appear, and focus moves to Stop.
+- [ ] Talk. Words appear while you speak: settled words in normal ink, words still being
+      worked out in grey italics.
+- [ ] Stay silent for about 10 seconds, then talk again. It keeps listening and adds the new
+      words.
+- [ ] Tap **Stop**. Everything you said is in the text box, the box has focus, and a toast
+      says to fix anything that is wrong. Edit a word by hand.
+- [ ] Record again. The new words are added after the existing text, not replacing it.
+- [ ] While listening, **Continue** is disabled.
+- [ ] Block the microphone in the browser's site settings and try again. A message explains
+      how to allow it.
+- [ ] Open the app in Firefox. There is no mic button, only "Live typing isn't available in
+      this browser, you can type instead."
+- [ ] Open the plain `http://<network address>:5173` on a phone. The page explains the mic
+      needs a secure (https) page.
+- [ ] Run `npm run dev:https`, open the https Network address on a phone, accept the
+      certificate warning, and record. It works.
+- [ ] Next to the mic: "Your browser turns your speech into text. In some browsers this uses
+      an online service."
+- [ ] Screen reader: you hear "Listening…" when it starts and "Stopped listening…" when it
+      ends, but not every word.
+
+## Question search (knowledge base)
+
+Before a visit uses this search behind the scenes. To test it directly, use the browser:
+
+- [ ] Open `https://localhost:5173/api/rag/topics` (or `http://` with `npm run dev`). It
+      lists 14 topics and 220 chunks.
+- [ ] Open the browser console on any Visit Buddy page and run:
+      ```js
+      const find = (query, extra = {}) => fetch('/api/rag/search', { method: 'POST',
+        headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ query, ...extra }) })
+        .then((r) => r.json()).then((d) => { console.log(d.matchedTopics, d.fallback);
+          console.table(d.results.map((c) => ({ topic: c.topic, score: c.score, question: c.question }))) })
+      ```
+- [ ] `find('My knee has been hurting for two weeks, I get dizzy when I stand up')` → topics
+      joint pain and dizziness, and the questions alternate between them.
+- [ ] `find('I feel lightheaded')` → dizziness only (the synonym works, and no headache).
+- [ ] `find('my tummy cramps after meals')` → stomach pain, with the "linked to eating"
+      question first.
+- [ ] `find('I have a weird feeling')` → `fallback: true` and general questions.
+- [ ] `find('knee', { use: 'ask-doctor', limit: 3 })` → only questions to ask the doctor,
+      each with an AHRQ source.
+- [ ] `find('')` and `find('x', { limit: 99 })` → a readable 400 error message.
+- [ ] Skim a few files in `server/knowledge/`. Every entry is a question, and none names a
+      diagnosis, a cause, a treatment or a drug.
 
 ## After a visit
 
-- [ ] Open **After a visit** and type a short transcript that mentions a medicine with a
-      dose, one without a dose, and one instruction, for example: "She said my knee pain is
-      from wear and to stretch twice a day. She started me on Bellaprin 10 milligrams every
-      morning with food. Keep taking my night pill the same as before. Call if the dizziness
-      gets worse."
-- [ ] Tap **Check what the doctor said**. Summary, To-do and Medicines tabs all have content.
+- [ ] Open **After a visit**, tap **Use the sample conversation**, then **Check what the
+      doctor said**.
+- [ ] Summary, To-do and Medicines tabs all have content.
 - [ ] Every line has a **Quote** button that shows the words it came from.
-- [ ] The medicine with no dose has an empty dose field and is marked as needing a check.
-      No dose is invented for it.
-- [ ] Tap **Approve and save**. The visit opens, and nothing was saved before that point.
+- [ ] The Bellaprin row is marked as needing a check, and its dose is not guessed.
+- [ ] Add `?ai=uncertain` to the URL and repeat. More lines are highlighted, and the dose
+      field is empty.
+- [ ] Type a few words into a summary line, click out, tap **Undo** once. The whole edit
+      is undone.
+- [ ] Tap **Approve and save**. The visit opens and nothing was saved before that point.
+- [ ] Under **Record the visit** you see "Ask your doctor before recording." Record, tap
+      **Stop**, and the words land in the "What the doctor said" box for editing.
 
-## Quote checking
+## Scan a paper
 
-- [ ] Type a transcript, then edit one summary line to say something the doctor never said,
-      and confirm the quote shown is still only text that really appears in the transcript.
-- [ ] Any line the server could not match to the transcript appears under **Needs checking**
-      rather than silently passing.
+- [ ] On **After a visit**, tap **Scan a paper**. On a phone the camera opens; on a
+      computer a file picker opens. Add a photo. A thumbnail labelled "Page 1" appears with
+      **Retake** and **Remove**. The button now says **Add a page**.
+- [ ] Under the buttons: "If the camera shows a black screen, allow camera access for this
+      browser in your phone's settings, or use Choose a photo or PDF instead."
+- [ ] Use **Choose a photo or PDF** to add a second photo and a PDF. The PDF shows a
+      document icon and "PDF: …". Try a .txt file: "… is not a photo or a PDF."
+- [ ] **Retake** page 1 with a different photo: the thumbnail changes. **Remove** page 3:
+      "Your pages (2)", and keyboard focus goes back to **Add a page**.
+- [ ] Tap **Read 2 pages**. "Reading your paper" shows, then the text lands in the box,
+      which is now labelled **From your photo** and has focus.
+- [ ] Change "10 mg" to "20 mg" in the box, then **Check what the doctor said**. Every
+      **Quote** says "From your photo" and shows a line from your text. Medicines shows
+      Bellaprin 20 mg.
+- [ ] **Approve and save**. The visit page shows the text under "From your photo". The
+      saved visit has `"source": "scan"` and no image (check `server/data/visits.json`).
+- [ ] In DevTools → Network, the only request in this flow is the final
+      `POST /api/visits`. No image is sent.
+- [ ] `?ai=uncertain`: after reading, a yellow box lists 2 hard-to-read lines with
+      `[unclear: …]`. Checking without fixing them puts "Bellaprin dose" and the next-visit
+      line under **Needs checking**, and the Bellaprin dose stays blank.
+- [ ] `?ai=empty` → "I could not find any words on your pages." with Retry and Type it
+      instead. `?ai=error` / `?ai=ratelimit` → the usual messages. `?ai=slow` → **Cancel**
+      after 10 seconds, pages kept.
+- [ ] Record or type instead: the label goes back to "What the doctor said" once the box
+      is cleared, and the saved visit has `"source": "recording"` or `"typed"`.
 
-## Recording
+## Speed
 
-- [ ] Tap **Record the visit**, allow the microphone, say one sentence, tap **Stop**.
-- [ ] The transcript box fills in with words close to what you said.
-- [ ] Deny the microphone instead: the app says the microphone is off and you can type.
-- [ ] Make a recording under one second: it says that was too short.
+- [ ] `npm run build` finishes with no "larger than 500 kB" warning.
+- [ ] Before a visit: Continue → the first question appears in under a second. Each
+      **Next question** shows the next one at once, with no scrolling animation, and the
+      step pills stay in view.
+- [ ] Last answer → your list in about 1.5 seconds. The loader's steps tick through
+      instead of sitting on step 1.
+- [ ] `?ai=slow`: the steps reach the last one, which stays "in progress"; **Cancel**
+      appears after 10 seconds and keeps your words. `?ai=timeout`: "This is taking too
+      long" after 10 seconds.
+- [ ] Switching pages fades in quickly. With reduced motion on, there is no fade.
+- [ ] Secondary buttons (Print, Copy) look the same as before in light and dark mode.
+
+## Failure states
+
+- [ ] `?ai=error` → "Visit Buddy is paused right now", with Retry and Type it instead.
+- [ ] `?ai=timeout` → gives up after 10 seconds with "This is taking too long".
+- [ ] `?ai=ratelimit` → "Too many requests, please wait a minute".
+- [ ] `?ai=empty` → "I could not write this up reliably", with a way to start over.
+- [ ] On Before a visit these apply to both the interview step and the final list.
+      `?ai=empty` there skips the interview and ends with "I could not write this up
+      reliably".
+- [ ] `?ai=slow` → Cancel appears after 10 seconds. Tapping it stops the wait and keeps
+      your text.
 
 ## Visit detail
 
@@ -50,24 +207,10 @@ down the list. Each line says what you should see.
       buttons.
 - [ ] **Delete** asks once, then removes the visit.
 
-## Failure states
-
-Real failures are rare now, so these are checked by breaking things on purpose.
-
-- [ ] Clear `GEMINI_API_KEY` in `.env`, restart, and try any AI action: "The AI is not set up
-      yet", with the fix named, and the text you typed still there.
-- [ ] Set the key to a wrong value, restart, and try: the key was rejected, and the fix is
-      named.
-- [ ] Disconnect the network and try: it says it could not reach the server, with Retry.
-- [ ] While a request is running, wait for **Cancel** to appear and tap it. The wait stops
-      and your text is kept.
-
 ## Settings
 
 - [ ] Text size Large and Extra large grow everything, and survive a reload.
 - [ ] High contrast turns the page white with black text.
-- [ ] Appearance: System, Light and Dark all apply immediately and survive a reload. The
-      header sun/moon button switches in one tap.
 - [ ] **Delete all my data** empties History.
 
 ## Keyboard and screen reader

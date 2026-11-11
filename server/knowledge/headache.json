@@ -1,0 +1,441 @@
+{
+  "topic": "headache",
+  "chunks": [
+    {
+      "id": "headache-01",
+      "topic": "headache",
+      "category": "onset",
+      "use": "interview",
+      "question": "When did these headaches start?",
+      "keywords": [
+        "headache",
+        "headaches",
+        "head",
+        "migraine",
+        "migraines",
+        "head hurts",
+        "head pain",
+        "temples",
+        "forehead"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Today",
+        "In the last few days",
+        "A few weeks ago",
+        "Months ago or longer"
+      ]
+    },
+    {
+      "id": "headache-02",
+      "topic": "headache",
+      "category": "history",
+      "use": "interview",
+      "question": "Is this a new kind of headache for you, or one you've had before?",
+      "keywords": [
+        "headache",
+        "headaches",
+        "head",
+        "migraine",
+        "migraines",
+        "head hurts",
+        "head pain",
+        "temples",
+        "forehead",
+        "new",
+        "before"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "It's new",
+        "I've had these before",
+        "It feels different from before"
+      ]
+    },
+    {
+      "id": "headache-03",
+      "topic": "headache",
+      "category": "location",
+      "use": "interview",
+      "question": "Where on your head do you feel it: forehead, temples, back of the head, or one side?",
+      "keywords": [
+        "headache",
+        "headaches",
+        "head",
+        "migraine",
+        "migraines",
+        "head hurts",
+        "head pain",
+        "temples",
+        "forehead",
+        "back",
+        "side"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Forehead",
+        "Temples",
+        "Back of my head",
+        "One side"
+      ]
+    },
+    {
+      "id": "headache-04",
+      "topic": "headache",
+      "category": "character",
+      "use": "interview",
+      "question": "What does it feel like: pressing, throbbing, or stabbing?",
+      "keywords": [
+        "headache",
+        "headaches",
+        "head",
+        "migraine",
+        "migraines",
+        "head hurts",
+        "head pain",
+        "temples",
+        "forehead",
+        "pressing",
+        "throbbing",
+        "stabbing",
+        "tight"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Pressing or tight",
+        "Throbbing",
+        "Stabbing",
+        "Hard to describe"
+      ]
+    },
+    {
+      "id": "headache-05",
+      "topic": "headache",
+      "category": "duration",
+      "use": "interview",
+      "question": "How long does a headache usually last?",
+      "keywords": [
+        "headache",
+        "headaches",
+        "head",
+        "migraine",
+        "migraines",
+        "head hurts",
+        "head pain",
+        "temples",
+        "forehead"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Under an hour",
+        "A few hours",
+        "All day",
+        "Several days"
+      ]
+    },
+    {
+      "id": "headache-06",
+      "topic": "headache",
+      "category": "timing",
+      "use": "interview",
+      "question": "How often do you get them, and at what time of day?",
+      "keywords": [
+        "headache",
+        "headaches",
+        "head",
+        "migraine",
+        "migraines",
+        "head hurts",
+        "head pain",
+        "temples",
+        "forehead",
+        "often",
+        "how often",
+        "daily",
+        "weekly"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Every day",
+        "A few times a week",
+        "A few times a month",
+        "Rarely"
+      ]
+    },
+    {
+      "id": "headache-07",
+      "topic": "headache",
+      "category": "triggers/relief",
+      "use": "interview",
+      "question": "Have you noticed anything that sets them off, like screens, missed meals, poor sleep, or stress?",
+      "keywords": [
+        "headache",
+        "headaches",
+        "head",
+        "migraine",
+        "migraines",
+        "head hurts",
+        "head pain",
+        "temples",
+        "forehead",
+        "screens",
+        "meals",
+        "sleep",
+        "stress",
+        "trigger"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Screens",
+        "Missed meals",
+        "Poor sleep",
+        "Stress"
+      ]
+    },
+    {
+      "id": "headache-08",
+      "topic": "headache",
+      "category": "triggers/relief",
+      "use": "interview",
+      "question": "What helps when you have one: rest, a dark room, medicine, or something else?",
+      "keywords": [
+        "headache",
+        "headaches",
+        "head",
+        "migraine",
+        "migraines",
+        "head hurts",
+        "head pain",
+        "temples",
+        "forehead",
+        "rest",
+        "dark",
+        "quiet"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Rest",
+        "A dark, quiet room",
+        "Medicine",
+        "Nothing helps"
+      ]
+    },
+    {
+      "id": "headache-09",
+      "topic": "headache",
+      "category": "severity",
+      "use": "interview",
+      "question": "How bad are the headaches at their worst?",
+      "keywords": [
+        "headache",
+        "headaches",
+        "head",
+        "migraine",
+        "migraines",
+        "head hurts",
+        "head pain",
+        "temples",
+        "forehead"
+      ],
+      "source": {
+        "name": "Standard clinical history-taking (OLDCARTS/OPQRST)",
+        "url": ""
+      },
+      "replies": [
+        "Mild",
+        "Medium",
+        "Bad",
+        "Very bad"
+      ]
+    },
+    {
+      "id": "headache-10",
+      "topic": "headache",
+      "category": "related symptoms",
+      "use": "interview",
+      "question": "Do you get anything else with them, such as feeling sick or being bothered by light or noise?",
+      "keywords": [
+        "headache",
+        "headaches",
+        "head",
+        "migraine",
+        "migraines",
+        "head hurts",
+        "head pain",
+        "temples",
+        "forehead",
+        "nausea",
+        "sick",
+        "light",
+        "noise",
+        "vision"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Feeling sick",
+        "Light bothers me",
+        "Noise bothers me",
+        "No, nothing else"
+      ]
+    },
+    {
+      "id": "headache-11",
+      "topic": "headache",
+      "category": "impact on daily life",
+      "use": "interview",
+      "question": "How often do headaches make you miss work, school, or plans?",
+      "keywords": [
+        "headache",
+        "headaches",
+        "head",
+        "migraine",
+        "migraines",
+        "head hurts",
+        "head pain",
+        "temples",
+        "forehead",
+        "miss",
+        "work",
+        "school"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "Never",
+        "Sometimes",
+        "Often"
+      ]
+    },
+    {
+      "id": "headache-12",
+      "topic": "headache",
+      "category": "medicines",
+      "use": "interview",
+      "question": "How many days a week do you take something for headaches?",
+      "keywords": [
+        "headache",
+        "headaches",
+        "head",
+        "migraine",
+        "migraines",
+        "head hurts",
+        "head pain",
+        "temples",
+        "forehead",
+        "painkiller",
+        "tablet",
+        "days"
+      ],
+      "source": {
+        "name": "Standard medical history structure (associated symptoms, past history, medicines, effect on daily life)",
+        "url": ""
+      },
+      "replies": [
+        "None",
+        "1–2 days",
+        "3 or more days",
+        "Not sure"
+      ]
+    },
+    {
+      "id": "headache-13",
+      "topic": "headache",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "Would it help if I kept a headache diary, and what should I write down?",
+      "keywords": [
+        "headache",
+        "headaches",
+        "head",
+        "migraine",
+        "migraines",
+        "head hurts",
+        "head pain",
+        "temples",
+        "forehead",
+        "diary",
+        "track",
+        "log"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "headache-14",
+      "topic": "headache",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "What would you like to know about my headaches to understand them better?",
+      "keywords": [
+        "headache",
+        "headaches",
+        "head",
+        "migraine",
+        "migraines",
+        "head hurts",
+        "head pain",
+        "temples",
+        "forehead"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    },
+    {
+      "id": "headache-15",
+      "topic": "headache",
+      "category": "goals for the visit",
+      "use": "ask-doctor",
+      "question": "What kind of headache should make me get help straight away?",
+      "keywords": [
+        "headache",
+        "headaches",
+        "head",
+        "migraine",
+        "migraines",
+        "head hurts",
+        "head pain",
+        "temples",
+        "forehead",
+        "urgent",
+        "help"
+      ],
+      "source": {
+        "name": "AHRQ, Questions Are the Answer",
+        "url": "https://www.ahrq.gov/questions/index.html"
+      }
+    }
+  ]
+}
