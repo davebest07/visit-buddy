@@ -98,7 +98,7 @@ export default function LiveTranscriber({
         <button
           type="button"
           onClick={start}
-          className="flex min-h-tap items-center gap-3 rounded-full border border-primary bg-transparent px-6 py-2 text-body font-bold text-primary transition-colors duration-fast hover:bg-primary-soft"
+          className="flex min-h-tap items-center gap-3 rounded-full border border-error bg-transparent px-6 py-2 text-body font-bold text-error transition-colors duration-fast hover:bg-error hover:text-white"
         >
           <Mic aria-hidden="true" className="h-5 w-5" />
           {label}
@@ -106,7 +106,7 @@ export default function LiveTranscriber({
       )}
 
       {note ? <p className="mt-2 text-small font-bold text-ink">{note}</p> : null}
-      <p className="mt-2 text-small font-bold text-error">
+      <p className="mt-2 text-small text-muted">
         Your browser turns your speech into text. In some browsers this uses an online service.
       </p>
 
