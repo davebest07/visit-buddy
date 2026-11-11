@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import AIShell, { useAICall } from '../components/AIShell.jsx'
 import Button from '../components/Button.jsx'
@@ -67,9 +67,23 @@ export default function After() {
 
   // The spoken words join whatever is already typed, then the box gets focus
   // so mistakes can be fixed before continuing.
+  const liveBaseRef = useRef('')
+
+  function handleListeningChange(value) {
+    setListening(value)
+    if (value) liveBaseRef.current = transcript
+  }
+
+  function handleLiveText(text) {
+    const base = liveBaseRef.current.trim()
+    setTranscript(base ? `${base} ${text}` : text)
+  }
+
   function handleSpoken(text) {
     setSource('recording')
-    setTranscript((current) => (current.trim() ? `${current.trim()} ${text}` : text))
+    const base = liveBaseRef.current.trim()
+    setTranscript(base ? `${base} ${text}` : text)
+    liveBaseRef.current = ''
     setToast('Your words are in the box. Fix anything that is wrong before you continue.')
     requestAnimationFrame(() => document.getElementById('transcript')?.focus())
   }
@@ -220,7 +234,8 @@ export default function After() {
                 label="Record the visit"
                 note="Ask your doctor before recording."
                 onFinish={handleSpoken}
-                onListeningChange={setListening}
+                onText={handleLiveText}
+                onListeningChange={handleListeningChange}
               />
             </div>
 

@@ -14,11 +14,18 @@ import useLiveTranscript from '../hooks/useLiveTranscript.js'
 export default function LiveTranscriber({
   label = 'Record',
   onFinish,
+  onText,
   onListeningChange,
   note = null,
 }) {
   const [announcement, setAnnouncement] = useState('')
   const stopButtonRef = useRef(null)
+  const onTextRef = useRef(onText)
+  const lastListeningRef = useRef(null)
+
+  useEffect(() => {
+    onTextRef.current = onText
+  }, [onText])
 
   const { supported, secure, listening, finalText, interimText, errorMessage, start, stop } =
     useLiveTranscript({
@@ -31,12 +38,24 @@ export default function LiveTranscriber({
     })
 
   useEffect(() => {
+    // Tell the page once per change. Without this guard the callback identity
+    // changes every render and the page keeps re-capturing its base text.
+    if (lastListeningRef.current === listening) return
+    lastListeningRef.current = listening
     onListeningChange?.(listening)
     if (listening) {
       setAnnouncement('Listening. Speak now. Press Stop when you are finished.')
       stopButtonRef.current?.focus()
     }
   }, [listening, onListeningChange])
+
+  // Stream the words into the page's own text box while the person talks, so
+  // there is only one place the text can be.
+  useEffect(() => {
+    if (!listening) return
+    const spoken = [finalText, interimText].filter(Boolean).join(' ').trim()
+    if (spoken) onTextRef.current?.(spoken)
+  }, [finalText, interimText, listening])
 
   if (!supported) {
     return (
@@ -55,8 +74,6 @@ export default function LiveTranscriber({
       </p>
     )
   }
-
-  const hasWords = Boolean(finalText || interimText)
 
   return (
     <div className="w-full">
@@ -81,18 +98,7 @@ export default function LiveTranscriber({
             </button>
           </div>
 
-          {/* Not a live region on purpose: reading every word aloud would be noise. */}
-          <p className="mt-3 min-h-[3em] rounded-card bg-surface p-3 text-body">
-            {hasWords ? (
-              <>
-                <span className="text-ink">{finalText}</span>
-                {finalText && interimText ? ' ' : null}
-                <span className="italic text-muted">{interimText}</span>
-              </>
-            ) : (
-              <span className="italic text-muted">Your words will appear here as you talk.</span>
-            )}
-          </p>
+          <p className="mt-2 text-small text-muted">Your words go into the box as you talk.</p>
         </div>
       ) : (
         <button

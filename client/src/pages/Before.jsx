@@ -146,8 +146,22 @@ export default function Before() {
 
   // The spoken words join whatever is already typed, then the box gets focus
   // so mistakes can be fixed before continuing.
+  const liveBaseRef = useRef('')
+
+  function handleListeningChange(value) {
+    setListening(value)
+    if (value) liveBaseRef.current = concerns
+  }
+
+  function handleLiveText(text) {
+    const base = liveBaseRef.current.trim()
+    setConcerns(base ? `${base} ${text}` : text)
+  }
+
   function handleSpoken(text) {
-    setConcerns((current) => (current.trim() ? `${current.trim()} ${text}` : text))
+    const base = liveBaseRef.current.trim()
+    setConcerns(base ? `${base} ${text}` : text)
+    liveBaseRef.current = ''
     setToast('Your words are in the box. Fix anything that is wrong before you continue.')
     focusConcerns()
   }
@@ -280,7 +294,8 @@ export default function Before() {
                   <LiveTranscriber
                     label="Record my worries"
                     onFinish={handleSpoken}
-                    onListeningChange={setListening}
+                    onText={handleLiveText}
+                    onListeningChange={handleListeningChange}
                   />
                 </div>
 

@@ -110,8 +110,22 @@ export default function GuidedInterview({
     setDraft(next[index - 1]?.value ?? '')
   }
 
+  const liveBaseRef = useRef('')
+
+  function handleListeningChange(value) {
+    setListening(value)
+    if (value) liveBaseRef.current = draft
+  }
+
+  function handleLiveText(text) {
+    const base = liveBaseRef.current.trim()
+    setDraft(base ? `${base} ${text}` : text)
+  }
+
   function handleSpoken(text) {
-    setDraft((current) => (current.trim() ? `${current.trim()} ${text}` : text))
+    const base = liveBaseRef.current.trim()
+    setDraft(base ? `${base} ${text}` : text)
+    liveBaseRef.current = ''
     requestAnimationFrame(() => document.getElementById(`${ids}-answer`)?.focus())
   }
 
@@ -198,7 +212,8 @@ export default function GuidedInterview({
           key={step.id}
           label="Answer by talking"
           onFinish={handleSpoken}
-          onListeningChange={setListening}
+          onText={handleLiveText}
+          onListeningChange={handleListeningChange}
         />
       </div>
 
