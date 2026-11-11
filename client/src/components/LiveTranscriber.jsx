@@ -106,7 +106,7 @@ export default function LiveTranscriber({
       )}
 
       {note ? <p className="mt-2 text-small font-bold text-ink">{note}</p> : null}
-      <p className="mt-2 text-small text-muted">
+      <p className="mt-2 text-small font-bold text-error">
         Your browser turns your speech into text. In some browsers this uses an online service.
       </p>
 
