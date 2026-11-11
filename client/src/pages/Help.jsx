@@ -5,6 +5,7 @@ const DOES = [
   'Turns what worries you into a short list of questions to ask.',
   'Turns what the doctor said into a plain summary, a to-do list and a medicine schedule.',
   'Shows the exact words behind every line, so you can check it.',
+  'Reads a printed after-visit summary from a photo, so you can check the words it found.',
   'Lets you ask a question about one visit, and answers only from that visit.',
   'Lets you copy or print a visit for your family.',
 ]

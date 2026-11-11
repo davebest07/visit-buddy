@@ -65,6 +65,12 @@ const FAQS = [
     answer:
       'It is sent to Google\'s Gemini API to be turned into words, then it is not kept. Only the text you approve is saved on this device.',
   },
+
+  {
+    question: 'What happens to a photo I scan?',
+    answer:
+      'It is sent to our server and to Google\'s Gemini API to read the words, then it is not kept. Only the text you check and save stays on this device.',
+  },
   {
     question: 'Can I share a visit with family?',
     answer:
