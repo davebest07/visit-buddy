@@ -183,10 +183,9 @@ Besides recording and typing, **After a visit** can read the paper you were give
    document icon for a PDF) with **Retake** and **Remove**. Other file types and files
    over 25 MB are refused with a message.
 2. **Read my paper** (or **Read 2 pages**) calls `readDocument(files, { signal })` in
-   `aiService.js`. It returns plain text, the same shape as `transcribe`. It is a mock: it
-   "reads" a made-up two-page after-visit summary, one page per photo. All `?ai=` modes
-   work; with `?ai=uncertain`, words it could not make out come back as
-   `[unclear: 10 mg?]`.
+   `aiService.js`, which uploads each page to `POST /api/ai/read-document`. The server
+   sends it to the vision model and returns only the words, in the same shape as
+   `transcribe`. Words it could not make out come back as `[unclear: 10 mg?]`.
 3. The text goes in the box, now labelled **From your photo**. Lines with an
    `[unclear: …]` mark are listed in a yellow box so you can check them against the paper
    and fix them.
@@ -197,10 +196,10 @@ Besides recording and typing, **After a visit** can read the paper you were give
 5. Saving stores the text and `source: "scan"`. Visits now record `source` as
    `"recording"`, `"typed"` or `"scan"` (checked by `server/routes/visits.js`).
 
-**The image is never stored or uploaded.** Pages are kept only in the page's memory with
-a local preview, and dropped when you leave. `server/routes/ai.js` has a TODO describing a
-future `POST /api/ai/read-document` (a vision model that returns only text and keeps
-nothing); it is not built.
+**The page is uploaded to be read, then discarded.** Each photo or PDF goes to
+`POST /api/ai/read-document`, is forwarded to Google's Gemini API, and is never written to
+disk or saved with the visit. Only the text you checked is stored. We keep no copy of the
+image.
 
 ## How it works
 
@@ -352,8 +351,8 @@ visit-buddy/
 ## Data
 
 Visits are saved as JSON on the computer running the app. Only text is stored. Visit
-Buddy never records, uploads or saves audio, and never uploads or saves photos of papers:
-only the text you checked is saved.
+Buddy never records or saves audio. Photos of papers are uploaded only to be read into
+text; they are not stored, and only the text you checked is saved.
 
 Live transcription is done by the browser, not by Visit Buddy. In some browsers (Chrome,
 for example) that means the browser sends your speech to an online service (Google's) to

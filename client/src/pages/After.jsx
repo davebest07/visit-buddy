@@ -75,7 +75,7 @@ export default function After() {
   }
 
   // Words read from a photo go in the same box, to be checked before anything
-  // is summarized. The photo itself is never kept.
+  // is summarized. The page is sent to be read, then dropped.
   const handleScanned = useCallback((text) => {
     setSource('scan')
     setTranscript((current) => (current.trim() ? `${current.trim()}\n\n${text}` : text))

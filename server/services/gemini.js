@@ -285,3 +285,34 @@ export async function transcribeAudio({ base64, mimeType, prompt, signal }) {
   const text = await callGemini(body, { signal })
   return text.trim()
 }
+
+
+/**
+ * Read the words off a photographed page (or a PDF). The image is sent inline
+ * as base64 and only text comes back, so nothing but words reaches the client.
+ */
+export async function readDocument({ base64, mimeType, signal }) {
+  const body = {
+    systemInstruction: {
+      parts: [
+        {
+          text:
+            'You read printed medical papers. Copy every word exactly as it appears, in reading ' +
+            'order, keeping line breaks. Do not summarise, explain, correct spelling or add ' +
+            'anything. If a word or number cannot be made out, write it as [unclear: best guess] ' +
+            'where the guess is optional. Output plain text only.',
+        },
+      ],
+    },
+    contents: [
+      {
+        role: 'user',
+        parts: [{ text: 'Read this page.' }, { inlineData: { mimeType, data: base64 } }],
+      },
+    ],
+    generationConfig: { temperature: 0, maxOutputTokens: 4096 },
+  }
+
+  const text = await callGemini(body, { signal })
+  return text.trim()
+}

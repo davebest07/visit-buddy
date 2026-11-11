@@ -1,5 +1,5 @@
 import express, { Router } from 'express'
-import { AIError, isConfigured, modelName, transcribeAudio } from '../services/gemini.js'
+import { AIError, isConfigured, modelName, readDocument, transcribeAudio } from '../services/gemini.js'
 import {
   answerAboutVisit,
   questionsFromConcerns,
@@ -108,6 +108,41 @@ router.post('/transcribe', express.raw({ type: ['audio/*', 'video/webm'], limit:
     fail(res, error, next)
   }
 })
+
+// AI-2b — a photographed page (or a PDF) -> the words on it. Raw body again, so
+// the file never passes through JSON, and nothing is written to disk.
+const MAX_PAGE = '25mb'
+
+router.post(
+  '/read-document',
+  express.raw({ type: ['image/*', 'application/pdf'], limit: MAX_PAGE }),
+  async (req, res, next) => {
+    try {
+      if (!Buffer.isBuffer(req.body) || req.body.length === 0) {
+        throw new AIError('invalid', 'No page was received.', { status: 400 })
+      }
+
+      const header = String(req.headers['content-type'] ?? '')
+      const mimeType = header.split(';')[0].trim().toLowerCase()
+      if (!mimeType.startsWith('image/') && mimeType !== 'application/pdf') {
+        throw new AIError('invalid', 'That file is not a photo or a PDF.', { status: 415 })
+      }
+
+      const text = await readDocument({
+        base64: req.body.toString('base64'),
+        mimeType,
+      })
+
+      if (!text) {
+        throw new AIError('empty', 'No words could be read on that page.', { status: 422 })
+      }
+
+      res.json({ text })
+    } catch (error) {
+      fail(res, error, next)
+    }
+  },
+)
 
 // AI-3 — what the doctor said -> summary, to-dos, medicines, things to check
 router.post('/summarize', async (req, res, next) => {

@@ -776,60 +776,49 @@ export function findUnclear(text) {
     .filter((line) => new RegExp(UNCLEAR_PATTERN.source, 'i').test(line))
 }
 
-// A printed after-visit summary, one entry per page. The clinic is made up.
-const SAMPLE_DOCUMENT_PAGES = [
-  [
-    'Sample Family Clinic - After Visit Summary',
-    'Reason for visit: knee pain, dizzy when standing up.',
-    'What we talked about: Knee pain is likely from wear and tear.',
-    'Your instructions:',
-    '- Gentle knee stretches, twice a day.',
-    '- Blood work before your next visit.',
-    '- Call the clinic if the dizziness gets worse.',
-    'Next visit: in 6 weeks.',
-  ],
-  [
-    'Your medicines',
-    'Bellaprin 10 mg - 1 tablet every morning with food. (New)',
-    'Norvelan - keep taking at night, same as before.',
-  ],
-]
-
-// ?ai=uncertain: the same paper with a few words the reader could not make out.
-const UNCLEAR_WORDS = [
-  ['Bellaprin 10 mg', 'Bellaprin [unclear: 10 mg?]'],
-  ['Next visit: in 6 weeks.', 'Next visit: in [unclear: 6?] weeks.'],
-]
+// ---------------------------------------------------------------------------
+// AI-2b: photo or PDF of a paper -> text
+// ---------------------------------------------------------------------------
+//
+// Each page is uploaded to POST /api/ai/read-document, which forwards it to the
+// vision model and returns only the words. The file is never stored: the server
+// holds it in memory for the length of the request and then drops it. Words the
+// model could not make out come back wrapped like this:
+//   Bellaprin [unclear: 10 mg?]
+// The page lists those lines (findUnclear) and asks the person to check them
+// against their paper before anything is summarized.
 
 const READABLE_FILE = /^(image\/|application\/pdf$)/
 
 export async function readDocument(files, { signal } = {}) {
-  const mode = currentMode()
   const pages = Array.from(files ?? [])
   if (pages.length === 0) return ''
   if (pages.some((file) => !READABLE_FILE.test(file?.type ?? ''))) {
-    throw new AIError('unreadable')
+    throw new AIError('unreadable', 'That is not a photo or a PDF.')
   }
 
-  await wait(mode === 'slow' || mode === 'timeout' ? DELAYS[mode] : DELAYS.readDocument, signal)
-  failIfBroken(mode)
+  const texts = []
+  for (const page of pages) {
+    let response
+    try {
+      response = await fetch(`${BASE}/read-document`, {
+        method: 'POST',
+        headers: { 'Content-Type': page.type },
+        body: page,
+        signal,
+      })
+    } catch (error) {
+      if (error?.name === 'AbortError') throw error
+      throw new AIError('unavailable', 'Could not reach the server. Is it running?')
+    }
 
-  if (mode === 'empty') return ''
+    if (!response.ok) throw await readError(response)
 
-  // The mock "reads" the sample paper: page 1 of the photos is page 1 of the
-  // paper, and so on. Extra pages have no words on them.
-  return pages
-    .slice(0, SAMPLE_DOCUMENT_PAGES.length)
-    .map((_, index) => {
-      let text = SAMPLE_DOCUMENT_PAGES[index].join('\n')
-      if (mode === 'uncertain') {
-        UNCLEAR_WORDS.forEach(([clear, unclear]) => {
-          text = text.replace(clear, unclear)
-        })
-      }
-      return text
-    })
-    .join('\n\n')
+    const data = await response.json()
+    texts.push(typeof data?.text === 'string' ? data.text : '')
+  }
+
+  return texts.filter(Boolean).join('\n\n')
 }
 
 // ---------------------------------------------------------------------------

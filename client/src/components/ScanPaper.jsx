@@ -180,8 +180,9 @@ export default function ScanPaper({ onRead, onBusyChange, onTypeInstead, disable
         </Button>
       </div>
       <p className="mt-2 text-small text-muted">
-        Got a printed summary from the visit? Take a photo of each page. Photos stay on this
-        device. They are never saved or sent anywhere.
+        Got a printed summary from the visit? Take a photo of each page. Each page is sent to
+        our server and to the AI provider to read the words, then discarded. Only scan a paper
+        you are comfortable sharing.
       </p>
       <p className="mt-1 text-small text-muted">
         If the camera shows a black screen, allow camera access for this browser in your
