@@ -67,7 +67,7 @@ export default function Settings() {
         <Card className="p-6 md:p-8">
           <h2 className="text-subhead font-bold">Your data</h2>
           <p className="mt-2 text-body text-muted">
-            Visits are saved on this computer. Deleting is permanent.
+            Visits are saved on this device. Deleting is permanent.
           </p>
 
           {confirming ? (

@@ -5,7 +5,6 @@ import { Type } from 'lucide-react'
 import Sidebar from './Sidebar.jsx'
 import MobileNav from './MobileNav.jsx'
 import TopNav from './TopNav.jsx'
-import TestPanel from './TestPanel.jsx'
 import { ThemeToggle } from './ThemeControl.jsx'
 
 const TITLES = {
@@ -55,7 +54,6 @@ export default function Layout() {
         {skipLink}
         <TopNav />
         {content}
-        <TestPanel />
       </>
     )
   }
@@ -94,8 +92,6 @@ export default function Layout() {
 
         {content}
       </div>
-
-      <TestPanel />
     </>
   )
 }

@@ -114,9 +114,9 @@ export default function Help() {
               Your information
             </h2>
             <p className="mt-3 text-body text-muted">
-              This is a demonstration. Visits are stored on the computer running the demo, and
-              audio is never saved. You can remove everything from Settings with "Delete all my
-              data". Please do not enter real personal or medical information.
+              Visits are stored on this device only, and recordings are never saved. What you
+              type or say is sent to Google's Gemini API to be organised into questions or a
+              summary. You can remove everything from Settings with "Delete all my data".
             </p>
           </div>
         </section>

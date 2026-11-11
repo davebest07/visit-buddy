@@ -40,11 +40,42 @@ export const SAMPLE_TRANSCRIPT =
   "The doctor said my knee pain is probably from wear and to try gentle stretching twice a day. She started me on Bellaprin, one tablet every morning with food. I should keep taking my night pill, Norvelan, the same as before. She wants blood work done before the next visit in six weeks, and to call if the dizziness gets worse. I think she said ten milligrams for the Bellaprin but I didn't catch it clearly."
 
 export class AIError extends Error {
-  constructor(kind) {
-    super(kind)
+  constructor(kind, message) {
+    super(message || kind)
     this.name = 'AIError'
     this.kind = kind
   }
+}
+
+const BASE = '/api/ai'
+
+async function readError(response) {
+  try {
+    const data = await response.json()
+    if (data?.kind) return new AIError(data.kind, data.error)
+    return new AIError('unavailable', data?.error)
+  } catch {
+    return new AIError('unavailable', 'The server could not be reached.')
+  }
+}
+
+async function postJson(path, body, signal) {
+  let response
+  try {
+    response = await fetch(BASE + path, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+      signal,
+    })
+  } catch (error) {
+    // Abort is a normal outcome (the user pressed Cancel); let it through.
+    if (error?.name === 'AbortError') throw error
+    throw new AIError('unavailable', 'Could not reach the server. Is it running?')
+  }
+
+  if (!response.ok) throw await readError(response)
+  return response.json()
 }
 
 function currentMode() {
@@ -693,18 +724,28 @@ export async function buildQuestions(text, { signal, chunks = [], answers = [] }
 // AI-2: speech -> text
 // ---------------------------------------------------------------------------
 
-export async function transcribe(audioBlobOrText, { signal } = {}) {
-  const mode = currentMode()
-
-  if (typeof audioBlobOrText === 'string') {
-    return audioBlobOrText.trim()
+export async function transcribe(audio, { signal } = {}) {
+  if (!audio || typeof audio === 'string') {
+    throw new AIError('invalid', 'There is no recording to turn into words.')
   }
 
-  await wait(DELAYS.transcribe, signal)
-  failIfBroken(mode)
+  let response
+  try {
+    response = await fetch(`${BASE}/transcribe`, {
+      method: 'POST',
+      headers: { 'Content-Type': audio.type || 'audio/webm' },
+      body: audio,
+      signal,
+    })
+  } catch (error) {
+    if (error?.name === 'AbortError') throw error
+    throw new AIError('unavailable', 'Could not reach the server. Is it running?')
+  }
 
-  if (mode === 'empty') return ''
-  return SAMPLE_TRANSCRIPT
+  if (!response.ok) throw await readError(response)
+
+  const data = await response.json()
+  return typeof data?.text === 'string' ? data.text : ''
 }
 
 // ---------------------------------------------------------------------------
@@ -967,52 +1008,15 @@ function summarizeDocument(text) {
 }
 
 export async function summarizeVisit(transcript, { signal } = {}) {
-  const mode = currentMode()
-  await wait(DELAYS[mode] ?? DELAYS.success, signal)
-  failIfBroken(mode)
+  const data = await postJson('/summarize', { transcript }, signal)
 
-  if (mode === 'empty') {
-    return { status: 'empty', summary: [], todos: [], meds: [], flags: [] }
+  return {
+    status: data?.status === 'empty' ? 'empty' : 'success',
+    summary: Array.isArray(data?.summary) ? data.summary : [],
+    todos: Array.isArray(data?.todos) ? data.todos : [],
+    meds: Array.isArray(data?.meds) ? data.meds : [],
+    flags: Array.isArray(data?.flags) ? data.flags : [],
   }
-
-  // Text from a scanned paper: pull the lines out of that text itself.
-  if (looksLikeDocument(transcript)) return summarizeDocument(transcript)
-
-  const variant = nextVariant('summarize')
-  const base = variant === 0 ? SAMPLE_VISIT : SAMPLE_VISIT_VARIANT
-
-  const result = {
-    status: 'success',
-    summary: base.summary.map((line) => ({ ...line })),
-    todos: SAMPLE_VISIT.todos.map((todo) => ({ ...todo })),
-    meds: SAMPLE_VISIT.meds.map((med) => ({ ...med })),
-    flags: SAMPLE_VISIT.flags.map((flag) => ({ ...flag })),
-  }
-
-  if (mode === 'uncertain') {
-    result.meds[0] = {
-      ...result.meds[0],
-      dose: null,
-      needsCheck: true,
-      flagged: true,
-      note: 'The dose was not clear',
-    }
-    result.flags = [
-      {
-        line: 'Bellaprin dose',
-        reason: 'I could not hear the dose clearly. Ask your doctor or pharmacist.',
-        quote: "I think she said ten milligrams for the Bellaprin but I didn't catch it clearly.",
-      },
-      {
-        line: 'Knee stretching',
-        reason: 'I could not tell how long to stretch for. Ask your doctor or pharmacist.',
-        quote: 'try gentle stretching twice a day',
-      },
-    ]
-    result.summary[1] = { ...result.summary[1], flagged: true }
-  }
-
-  return result
 }
 
 // ---------------------------------------------------------------------------
@@ -1070,40 +1074,11 @@ const NOT_FOUND = {
 }
 
 export async function askAboutVisit(transcript, question, { signal } = {}) {
-  const mode = currentMode()
-  await wait(DELAYS.ask, signal)
-  failIfBroken(mode)
+  const data = await postJson('/ask', { transcript, question }, signal)
 
-  if (mode === 'empty') {
-    return { found: false, answer: '', quote: null }
-  }
-
-  const asked = String(question || '').toLowerCase()
-  const match = ANSWERS.find((entry) => entry.match.some((word) => asked.includes(word)))
-
-  if (!match) return { ...NOT_FOUND }
-
-  // A scanned paper has its own words: answer with the line from it.
-  if (!String(transcript).includes(match.quote)) {
-    // Headings like "Your medicines" say nothing on their own.
-    const score = (text) => match.match.filter((word) => text.toLowerCase().includes(word)).length
-    const candidates = String(transcript)
-      .split('\n')
-      .map(cleanLine)
-      .filter((text) => text.split(/\s+/).length > 2 && score(text) > 0)
-    const best = Math.max(0, ...candidates.map(score))
-    const lines = candidates.filter((text) => score(text) === best).slice(0, 3)
-    if (!lines.length) return { ...NOT_FOUND }
-    return { found: true, answer: `Your paper says: ${lines.join(' ')}`, quote: lines.join(' / ') }
-  }
-
-  const variant = nextVariant('ask')
   return {
-    found: true,
-    answer:
-      variant === 0
-        ? match.answer
-        : match.answer.replace('You ', 'The doctor said you ').replace('Your ', 'The doctor said your '),
-    quote: match.quote,
+    found: Boolean(data?.found),
+    answer: typeof data?.answer === 'string' ? data.answer : '',
+    quote: typeof data?.quote === 'string' && data.quote ? data.quote : null,
   }
 }

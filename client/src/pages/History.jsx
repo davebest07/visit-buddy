@@ -7,6 +7,15 @@ function oneLine(visit) {
   return visit.summary?.[0]?.text || 'A saved visit'
 }
 
+// Questions are searchable too, in either the current { text, quote } shape or
+// the plain strings saved by the earlier version.
+function questionText(visit) {
+  return (visit.questions ?? [])
+    .map((question) => (typeof question === 'string' ? question : question?.text))
+    .filter(Boolean)
+    .join(' ')
+}
+
 function formatDate(value) {
   return new Date(value).toLocaleDateString(undefined, {
     month: 'short',
@@ -40,7 +49,7 @@ export default function History() {
     const needle = search.trim().toLowerCase()
     if (!needle) return visits
     return visits.filter((visit) =>
-      [oneLine(visit), visit.transcript, visit.concerns, formatDate(visit.createdAt)]
+      [oneLine(visit), visit.transcript, visit.concerns, questionText(visit), formatDate(visit.createdAt)]
         .filter(Boolean)
         .some((value) => String(value).toLowerCase().includes(needle)),
     )

@@ -7,6 +7,8 @@ const MESSAGES = {
   timeout: 'This is taking too long.',
   ratelimit: 'Too many requests, please wait a minute.',
   empty: 'I could not write this up reliably.',
+  notconfigured: 'The AI is not set up yet.',
+  invalid: 'That request could not be sent.',
 }
 
 function isUnusable(result) {
@@ -125,16 +127,7 @@ export default function AIShell({
   children,
 }) {
   if (status === 'empty') {
-    return (
-      <section>
-        {emptyState}
-
-        <p className="mt-4 rounded-card border border-line bg-surface p-4 text-small text-muted">
-          <strong className="text-ink">Demo only.</strong> Please do not enter real personal or
-          medical information.
-        </p>
-      </section>
-    )
+    return <section>{emptyState}</section>
   }
 
   if (status === 'loading') {
@@ -174,7 +167,9 @@ export default function AIShell({
         <p className="mt-2 max-w-measure text-body text-muted">
           {kind === 'empty'
             ? 'Nothing usable came back. You can try again, record again, or write it yourself.'
-            : 'The text you entered is still here. Nothing was saved.'}
+            : kind === 'notconfigured'
+              ? 'Add GEMINI_API_KEY to the server .env file, restart the server, then try again.'
+              : 'The text you entered is still here. Nothing was saved.'}
         </p>
 
         <div className="mt-5 flex flex-wrap gap-2">

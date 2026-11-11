@@ -9,8 +9,6 @@ import Toast from '../components/Toast.jsx'
 import { askAboutVisit } from '../services/aiService.js'
 import { deleteVisit, getVisit, updateVisit } from '../services/api.js'
 
-const EXAMPLE_QUESTIONS = ['What did she say about my knee?', 'When is my next visit?']
-
 function formatDate(value) {
   return new Date(value).toLocaleDateString(undefined, {
     month: 'long',
@@ -24,7 +22,12 @@ function visitAsText(visit) {
   if (visit.concerns) lines.push(`Worries: ${visit.concerns}`, '')
   if (visit.questions?.length) {
     lines.push('Questions')
-    visit.questions.forEach((question, index) => lines.push(`${index + 1}. ${question}`))
+    // Questions are stored as { text, quote } now, but visits saved by the
+    // earlier version hold plain strings, so both shapes are read here.
+    visit.questions.forEach((question, index) => {
+      const wording = typeof question === 'string' ? question : question?.text
+      if (wording) lines.push(`${index + 1}. ${wording}`)
+    })
     lines.push('')
   }
   if (visit.summary?.length) {
@@ -205,7 +208,10 @@ export default function VisitDetail() {
                 <span className="font-display text-subhead text-accent">
                   {String(index + 1).padStart(2, '0')}
                 </span>
-                <span>{item}</span>
+                <span className="min-w-0">
+                  <span className="block">{typeof item === 'string' ? item : item?.text}</span>
+                  {typeof item === 'string' ? null : <QuoteLine quote={item?.quote} />}
+                </span>
               </li>
             ))}
           </ol>
@@ -286,19 +292,6 @@ export default function VisitDetail() {
           <h2 className="mt-3 font-display text-heading font-semibold">
             Answers only from these words.
           </h2>
-
-          <div className="mt-5 flex flex-wrap gap-2">
-            {EXAMPLE_QUESTIONS.map((example) => (
-              <button
-                key={example}
-                type="button"
-                onClick={() => setQuestion(example)}
-                className="min-h-tap rounded-full border border-white/20 px-4 py-2 text-left text-small text-paper transition-colors duration-fast hover:border-paper"
-              >
-                {example}
-              </button>
-            ))}
-          </div>
 
           <label htmlFor="ask" className="mt-5 block text-small font-bold text-paper-muted">
             Your question
