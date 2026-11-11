@@ -350,10 +350,6 @@ export default function Before() {
                   Nothing is saved until you tap Save.
                 </p>
 
-                <p className="mt-4 rounded-card border border-line bg-surface p-4 text-small text-muted">
-                  <strong className="text-ink">Demo only.</strong> Please do not enter real
-                  personal or medical information.
-                </p>
               </aside>
             </div>
           </Card>

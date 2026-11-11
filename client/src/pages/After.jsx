@@ -288,10 +288,6 @@ export default function After() {
               </li>
             </ul>
 
-            <p className="mt-6 rounded-card border border-line bg-surface p-4 text-small text-muted">
-              <strong className="text-ink">Demo only.</strong> Please do not enter real personal
-              or medical information.
-            </p>
           </aside>
         </div>
       </Card>
